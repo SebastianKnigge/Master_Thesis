@@ -73,20 +73,16 @@ by_chapter <- books %>%
   # exclude chapter 0
   filter(chapter > 0) 
 
- get_len_after <- function(by_chapter, len_before=titles$len){
-   len <- by_chapter %>% 
-     select(gutenberg_id) %>% 
-     unique() %>% 
-     nrow()
-   if(len_before!=len) warning(paste("--- ",len_before-len, " books have 0 chapters --- "))
-   len
-   }
+get_len_after <- function(by_chapter, len_before=titles$len){
+  len <- by_chapter %>% 
+    select(gutenberg_id) %>% 
+    unique() %>% 
+    nrow()
+  if(len_before!=len) warning(paste("--- ",len_before-len, " books have 0 chapters --- "))
+  len
+}
 
-<<<<<<< HEAD
-len_after <- get_len_after(by_chapter=by_chapter)
-=======
 len_after <- get_len_after(by_chapter)
->>>>>>> 6ed4319414734492c5e7a0d767d033790d2ebf3c
 
 
 by_chapter <- by_chapter %>%
@@ -108,104 +104,61 @@ word_counts <- by_chapter_word %>%
   count(document, word, sort = TRUE) %>%
   ungroup()
 
-# vocabulary
-vocab <- word_counts %>% 
-  select(word) %>%
-  unique() %>%
-  c() %>% unlist()
-
 # Term Document Matrix
 chapters_dtm <- word_counts %>%
-  # get the right format for
-  # document_term_matrix
-  rename(doc_id=document,
-         term=word,
-         freq=n) %>%
-  document_term_matrix(vocab)
-
+  cast_dtm(document, word, n)
 
 
 # use LDA to find the documents 
 # k=4 since we have 4 books
-chapters_lda <- LDA(chapters_dtm, k = len_after, control = list(seed = 1234), method="Gibbs")
+chapters_lda <- LDA(chapters_dtm, k = len_after, control = list(seed = 1234))
 chapters_lda
 
 
-<<<<<<< HEAD
-# test data split
-test_data <- word_counts %>%
-  filter(document=="18240_16") %>%
-  # get the right format for
-  # document_term_matrix
-  rename(doc_id=document,
-         term=word,
-         freq=n) %>%
-  document_term_matrix(vocab)
-
-predict(chapters_lda, type="topics", newdata=chapters_dtm)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 6ed4319414734492c5e7a0d767d033790d2ebf3c
 # most frequent terms
 {
-# exclude beta matrix
-chapter_topics <- tidy(chapters_lda, matrix = "beta")
-chapter_topics
-
-# find top 5 words for each topic
-top_terms <- chapter_topics %>%
-  group_by(topic) %>%
-  top_n(5, beta) %>%
-  ungroup() %>%
-  arrange(topic, -beta)
-
-
-# plot top frequent terms via beta matrix
-top_terms %>%
-  mutate(term = reorder(term, beta)) %>%
-  # group for topic
-  ggplot(aes(term, beta, fill = factor(topic))) +
-  geom_col(show.legend = FALSE) +
-  # plot for topics
-  facet_wrap(~ topic, scales = "free") +
-  coord_flip()
-
-
-{
-  par(mfrow=c(2,2),mar=c(2,1,1,1)+0.1)
-  chapter_topics %>%
+  # exclude beta matrix
+  chapter_topics <- tidy(chapters_lda, matrix = "beta")
+  chapter_topics
+  
+  # find top 5 words for each topic
+  top_terms <- chapter_topics %>%
     group_by(topic) %>%
-    filter(topic==1) %>%
-    with(wordcloud(term, beta, max.words = 10))
-  chapter_topics %>%
-    group_by(topic) %>%
-    filter(topic==1) %>%
-    with(wordcloud(term, beta, max.words = 10))
-  chapter_topics %>%
-    group_by(topic) %>%
-    filter(topic==3) %>%
-    with(wordcloud(term, beta, max.words = 10))
-  chapter_topics %>%
-    group_by(topic) %>%
-    filter(topic==4) %>%
-    with(wordcloud(term, beta, max.words = 10))
-}
+    top_n(5, beta) %>%
+    ungroup() %>%
+    arrange(topic, -beta)
+  
+  
+  # plot top frequent terms via beta matrix
+  top_terms %>%
+    mutate(term = reorder(term, beta)) %>%
+    # group for topic
+    ggplot(aes(term, beta, fill = factor(topic))) +
+    geom_col(show.legend = FALSE) +
+    # plot for topics
+    facet_wrap(~ topic, scales = "free") +
+    coord_flip()
+  
+  
+  {
+    par(mfrow=c(2,2),mar=c(2,1,1,1)+0.1)
+    chapter_topics %>%
+      group_by(topic) %>%
+      filter(topic==1) %>%
+      with(wordcloud(term, beta, max.words = 10))
+    chapter_topics %>%
+      group_by(topic) %>%
+      filter(topic==1) %>%
+      with(wordcloud(term, beta, max.words = 10))
+    chapter_topics %>%
+      group_by(topic) %>%
+      filter(topic==3) %>%
+      with(wordcloud(term, beta, max.words = 10))
+    chapter_topics %>%
+      group_by(topic) %>%
+      filter(topic==4) %>%
+      with(wordcloud(term, beta, max.words = 10))
+    }
 }
 
 
@@ -261,14 +214,3 @@ chapter_classifications %>%
   # missmatches
   filter(gutenberg_id != consensus)%>%
   nrow()/nrow(chapter_classifications)
-
-
-
-
-
-
-
-
-
-
-
