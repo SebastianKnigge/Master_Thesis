@@ -5,9 +5,9 @@
 
 # Chapter classificaion with books
 
-
 library(gutenbergr)
 library(stringr)
+library(devtools)
 library(dplyr)
 library(tidyr)
 library(tidytext)
@@ -15,7 +15,7 @@ library(topicmodels)
 library(ggplot2)
 library(wordcloud)
 library(withr)
-# install.packages("timeSeries")
+# install.packages("udpipe")
 library(udpipe)
 library(timeSeries)
 
@@ -23,7 +23,7 @@ library(timeSeries)
 set.seed(1278)
 books <- gutenberg_works() %>% 
   # select works with title
-  filter(!is.na(title)) %>% 
+  dplyr::filter(!is.na(title)) %>% 
   # set the sample sitze
   sample_n(50) %>%
   # set a special download link
@@ -43,7 +43,7 @@ get_titles_dict <- function(books=books){
     unique() %>% 
     unlist()
   titles <- gutenberg_works() %>% 
-    filter(gutenberg_id %in% gutenberg_ids) %>% 
+    dplyr::filter(gutenberg_id %in% gutenberg_ids) %>% 
     select(title) %>% 
     unlist() %>% 
     as.vector() 
@@ -72,7 +72,7 @@ by_chapter <- books %>%
   mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
   ungroup() %>%
   # exclude chapter 0
-  filter(chapter > 0) 
+  dplyr::filter(chapter > 0) 
 
 get_len_after <- function(by_chapter, len_before=titles$len){
   len <- by_chapter %>% 
@@ -109,25 +109,32 @@ word_counts <- by_chapter_word %>%
 chapters_dtm <- word_counts %>%
   cast_dtm(document, word, n)
 
+vocab <- word_counts %>%
+  dplyr::filter(n>3)%>%
+  select(word) %>%
+  unique()
+
+chapters_dtm2 <- word_counts %>%
+  select(doc_id=document, term=word, freq=n) %>%
+  document_term_matrix(vocabulary = vocab)
+
+chapters_new_format <- chapters_dtm2 %>%
+  dtm_remove_lowfreq(dtm, minfreq = 5)
 
 # use LDA to find the documents 
 # k=4 since we have 4 books
 chapters_lda <- LDA(chapters_dtm, k = len_after, control = list(seed = 1234))
+chapters_lda <- LDA(chapters_dtm2, k = len_after, control = list(seed = 1234))
 chapters_lda
 
-# exclude beta matrix
-chapter_topics <- tidy(chapters_lda, matrix = "beta")
-words_beta <- chapter_topics %>%
-  spread(topic, beta)
+index <- which(rownames(chapters_dtm2)=="50498_5")
+testdata<- chapters_dtm2[index,]
+dim(chapters_dtm2)
+View(testdata)
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+predict(chapters_lda, newdata=testdata, type="topic")
 
-=======
-<<<<<<< HEAD
->>>>>>> 24ba0544bdfae22d3c2214b3649f61ea2dcfcc9d
->>>>>>> f315f750ffed25e8b2aebc24562d6a540ecda4a6
+
 # classify a test data set by mapping to
 # the words in the beta matrix
 beta_predict <- word_counts %>%
@@ -136,23 +143,12 @@ beta_predict <- word_counts %>%
   left_join(words_beta,by="term")
 
 # multiply by n
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> f315f750ffed25e8b2aebc24562d6a540ecda4a6
 View(words_beta)
 beta_predict <- word_counts %>%
   filter(document=="41149_13")%>%
   rename(term=word) %>%
   left_join(words_beta,by="term")
 
-<<<<<<< HEAD
-=======
->>>>>>> 450850960b0315fcc9d71d154b52cb6d4b04114d
->>>>>>> 24ba0544bdfae22d3c2214b3649f61ea2dcfcc9d
->>>>>>> f315f750ffed25e8b2aebc24562d6a540ecda4a6
 beta_predict_weigted <- beta_predict
 for (i in 1:len_after+3) {
   beta_predict_weigted[[i]] <- beta_predict_weigted%>%
