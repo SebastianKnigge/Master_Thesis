@@ -224,7 +224,7 @@ gamma_per_chapter <- chapters_gamma %>%
 cbind(gamma_per_chapter[,1:2], round(gamma_per_chapter[,3:ncol(gamma_per_chapter)], 2))
 
 
-
+c
 
 # reorder titles in order of topic 1, topic 2, etc before plotting
 chapters_gamma %>%
