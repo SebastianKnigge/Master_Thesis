@@ -82,7 +82,11 @@ by_chapter <- books %>%
    len
    }
 
+<<<<<<< HEAD
 len_after <- get_len_after(by_chapter=by_chapter)
+=======
+len_after <- get_len_after(by_chapter)
+>>>>>>> 6ed4319414734492c5e7a0d767d033790d2ebf3c
 
 
 by_chapter <- by_chapter %>%
@@ -120,12 +124,14 @@ chapters_dtm <- word_counts %>%
   document_term_matrix(vocab)
 
 
+
 # use LDA to find the documents 
 # k=4 since we have 4 books
 chapters_lda <- LDA(chapters_dtm, k = len_after, control = list(seed = 1234), method="Gibbs")
 chapters_lda
 
 
+<<<<<<< HEAD
 # test data split
 test_data <- word_counts %>%
   filter(document=="18240_16") %>%
@@ -154,6 +160,8 @@ predict(chapters_lda, type="topics", newdata=chapters_dtm)
 
 
 
+=======
+>>>>>>> 6ed4319414734492c5e7a0d767d033790d2ebf3c
 # most frequent terms
 {
 # exclude beta matrix
