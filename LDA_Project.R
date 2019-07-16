@@ -11,9 +11,12 @@ library(stringr)
 library(dplyr)
 library(tidyr)
 library(tidytext)
+library(topicmodels)
 library(ggplot2)
 library(wordcloud)
 library(withr)
+# install.packages("udpipe")
+library(udpipe)
 
 # sample from the whole library
 set.seed(1278)
@@ -22,6 +25,7 @@ books <- gutenberg_works() %>%
   filter(!is.na(title)) %>% 
   # set the sample sitze
   sample_n(50) %>%
+  # set a special download link
   gutenberg_download(mirror = "http://mirrors.xmission.com/gutenberg/")
 
 get_titles_dict <- function(books=books){
@@ -59,7 +63,7 @@ get_titles_dict <- function(books=books){
 }
 
 titles <- get_titles_dict(books)
-titles$len
+titles$titles
 
 by_chapter <- books %>%
   group_by(gutenberg_id) %>%
@@ -78,8 +82,8 @@ by_chapter <- books %>%
    len
    }
 
-len_after <- get_len_after(by_chapter)
- 
+len_after <- get_len_after(by_chapter=by_chapter)
+
 
 by_chapter <- by_chapter %>%
   # unite chapter and document title
@@ -100,14 +104,55 @@ word_counts <- by_chapter_word %>%
   count(document, word, sort = TRUE) %>%
   ungroup()
 
+# vocabulary
+vocab <- word_counts %>% 
+  select(word) %>%
+  unique() %>%
+  c() %>% unlist()
+
 # Term Document Matrix
 chapters_dtm <- word_counts %>%
-  cast_dtm(document, word, n)
+  # get the right format for
+  # document_term_matrix
+  rename(doc_id=document,
+         term=word,
+         freq=n) %>%
+  document_term_matrix(vocab)
+
 
 # use LDA to find the documents 
 # k=4 since we have 4 books
-chapters_lda <- LDA(chapters_dtm, k = len_after, control = list(seed = 1234))
+chapters_lda <- LDA(chapters_dtm, k = len_after, control = list(seed = 1234), method="Gibbs")
 chapters_lda
+
+
+# test data split
+test_data <- word_counts %>%
+  filter(document=="18240_16") %>%
+  # get the right format for
+  # document_term_matrix
+  rename(doc_id=document,
+         term=word,
+         freq=n) %>%
+  document_term_matrix(vocab)
+
+predict(chapters_lda, type="topics", newdata=chapters_dtm)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # most frequent terms
 {
