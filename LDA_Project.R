@@ -120,7 +120,6 @@ chapter_topics <- tidy(chapters_lda, matrix = "beta")
 words_beta <- chapter_topics %>%
   spread(topic, beta)
 
-
 # classify a test data set by mapping to
 # the words in the beta matrix
 beta_predict <- word_counts %>%
@@ -129,6 +128,12 @@ beta_predict <- word_counts %>%
   left_join(words_beta,by="term")
 
 # multiply by n
+View(words_beta)
+beta_predict <- word_counts %>%
+  filter(document=="41149_13")%>%
+  rename(term=word) %>%
+  left_join(words_beta,by="term")
+
 beta_predict_weigted <- beta_predict
 for (i in 1:len_after+3) {
   beta_predict_weigted[[i]] <- beta_predict_weigted%>%
