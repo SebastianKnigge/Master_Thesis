@@ -120,6 +120,14 @@ chapter_topics <- tidy(chapters_lda, matrix = "beta")
 words_beta <- chapter_topics %>%
   spread(topic, beta)
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> 24ba0544bdfae22d3c2214b3649f61ea2dcfcc9d
+>>>>>>> f315f750ffed25e8b2aebc24562d6a540ecda4a6
 # classify a test data set by mapping to
 # the words in the beta matrix
 beta_predict <- word_counts %>%
@@ -128,12 +136,23 @@ beta_predict <- word_counts %>%
   left_join(words_beta,by="term")
 
 # multiply by n
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> f315f750ffed25e8b2aebc24562d6a540ecda4a6
 View(words_beta)
 beta_predict <- word_counts %>%
   filter(document=="41149_13")%>%
   rename(term=word) %>%
   left_join(words_beta,by="term")
 
+<<<<<<< HEAD
+=======
+>>>>>>> 450850960b0315fcc9d71d154b52cb6d4b04114d
+>>>>>>> 24ba0544bdfae22d3c2214b3649f61ea2dcfcc9d
+>>>>>>> f315f750ffed25e8b2aebc24562d6a540ecda4a6
 beta_predict_weigted <- beta_predict
 for (i in 1:len_after+3) {
   beta_predict_weigted[[i]] <- beta_predict_weigted%>%
@@ -203,6 +222,7 @@ gamma_per_chapter <- chapters_gamma %>%
   spread(topic, gamma)
 # rounded results
 cbind(gamma_per_chapter[,1:2], round(gamma_per_chapter[,3:ncol(gamma_per_chapter)], 2))
+
 
 
 
