@@ -15,8 +15,9 @@ library(topicmodels)
 library(ggplot2)
 library(wordcloud)
 library(withr)
-# install.packages("udpipe")
+# install.packages("timeSeries")
 library(udpipe)
+library(timeSeries)
 
 # sample from the whole library
 set.seed(1278)
@@ -114,6 +115,26 @@ chapters_dtm <- word_counts %>%
 chapters_lda <- LDA(chapters_dtm, k = len_after, control = list(seed = 1234))
 chapters_lda
 
+# exclude beta matrix
+chapter_topics <- tidy(chapters_lda, matrix = "beta")
+words_beta <- chapter_topics %>%
+  spread(topic, beta)
+
+# classify a test data set by mapping to
+# the words in the beta matrix
+beta_predict <- word_counts %>%
+  filter(document=="41149_8")%>%
+  rename(term=word) %>%
+  left_join(words_beta,by="term")
+
+# multiply by n
+beta_predict_weigted <- beta_predict
+for (i in 1:len_after+3) {
+  beta_predict_weigted[[i]] <- beta_predict_weigted%>%
+    transmute(weigted=n*.[[i]])
+}
+
+colSums(beta_predict_weigted[,1:len_after+3])
 
 # most frequent terms
 {
