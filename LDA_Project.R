@@ -120,6 +120,7 @@ chapter_topics <- tidy(chapters_lda, matrix = "beta")
 words_beta <- chapter_topics %>%
   spread(topic, beta)
 
+
 # classify a test data set by mapping to
 # the words in the beta matrix
 beta_predict <- word_counts %>%
