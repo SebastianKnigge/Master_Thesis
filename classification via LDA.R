@@ -89,7 +89,7 @@ titles <- get_titles(by_chapter, n_books)
 titles$titles
 
 # append the books matrix until
-# we get a certein number of books n_books
+# we get the desired number of books n_books
 n <- titles$len
 seed_index <- 1
 while (n<n_books) {
@@ -110,6 +110,7 @@ while (n<n_books) {
   n<-get_titles(by_chapter, n)$len
   seed_index <- seed_index+1
 }
+
 # get the titles of the full data set
 titles <- get_titles(by_chapter, n_books)
 titles$titles
@@ -223,10 +224,11 @@ make_prediction <- function(lda=chapters_lda, documents){
 
 # it seems like the evaluation via predict of the model is the same
 # as the gamma matrix output
-chapters_lda %>% make_prediction(c("15244_2","15244_3")) -> N
-N[,6:9] %>% round(3) %>% cbind(N[,1],.)
-rounded_gamma%>%
+chapters_lda %>% make_prediction(c("8095_13","8095_12","8095_11")) -> N
+pred <- N[,6:11] %>% round(3) %>% cbind(N[,1],.)
+gammamatrix <- rounded_gamma%>%
   unite(document, gutenberg_id, chapter) %>%
-  filter(document%in%c("15244_2","15244_3"))
+  filter(document%in%c("8095_13","8095_12","8095_11"))
+pred; gammamatrix
 
 
