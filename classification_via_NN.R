@@ -30,7 +30,7 @@ sampling_books <- function(seed=1234, n=20){
 }
 
 
-n_books <- 6
+n_books <- 5
 books <- sampling_books(n=n_books, seed=54321)
 
 by_chapter <- books %>%
@@ -161,14 +161,14 @@ splitting <- function(x=x_chapters, y=topics_categorical,
 
 
 # The whole model is set up and trained within this function
-set_up_n_fit <- function(split){
+set_up_n_fit <- function(split, books_n=5){
   # starting with 64 neurons and scaling it down to 46 in the 
   # mid layer turned out to be a well predicting model
   model <- keras_model_sequential() %>%
-    layer_dense(units=64, activation="relu", input_shape=ncol(x_chapters)) %>%
+    layer_dense(units=64, activation="relu", input_shape=ncol(split$partial_x_train)) %>%
     layer_dense(units=46, activation="relu") %>%
-    # we want to classify for 6 categories
-    layer_dense(units=6, activation="softmax")
+    # we want to classify for as many categories as books
+    layer_dense(units=books_n, activation="softmax")
   
   model %>% compile(
     optimizer="rmsprop",
@@ -207,13 +207,13 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 
 # evaluate with several test set and training sets
 # result vector is where the misspecification rate is saved
-n <- 60
+n <- 20
 results <- rep(NA,n)
 for(i in 1:n){
   # change the seed for every iteration to get different samples
   # putting all together
-  results[i] <- splitting(n_testing=15, seed=101+i*2) %>% 
-    set_up_n_fit() %>% .$model %>% 
+  split <- splitting(n_testing=15, seed=101+i*2)
+  results[i] <- set_up_n_fit(split) %>% .$model %>% 
     evaluate_model() %>% .$misspecified
 }
 

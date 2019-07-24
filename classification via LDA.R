@@ -27,8 +27,8 @@ sampling_books <- function(seed=1234, n=20){
       mirror = "http://mirrors.xmission.com/gutenberg/")
 }
 
-n_books <- 6
-books <- sampling_books(n=n_books, seed=54321)
+n_books <- 4
+books <- sampling_books(n=n_books, seed=54311)
 # good seperation for 4 topics:
 # seed=12345
 # seed=54321
@@ -225,7 +225,7 @@ make_prediction <- function(lda=chapters_lda, documents){
 # it seems like the evaluation via predict of the model is the same
 # as the gamma matrix output
 chapters_lda %>% make_prediction(c("8095_13","8095_12","8095_11")) -> N
-pred <- N[,6:11] %>% round(3) %>% cbind(N[,1],.)
+pred <- N[,6:(n_books+5)] %>% round(3) %>% cbind(N[,1],.)
 gammamatrix <- rounded_gamma%>%
   unite(document, gutenberg_id, chapter) %>%
   filter(document%in%c("8095_13","8095_12","8095_11"))
