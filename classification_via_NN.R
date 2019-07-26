@@ -30,8 +30,8 @@ sampling_books <- function(seed=1234, n=20){
 }
 
 
-n_books <- 5
-books <- sampling_books(n=n_books, seed=54321)
+n_books <- 6
+books <- sampling_books(n=n_books, seed=101)
 
 by_chapter <- books %>%
   group_by(gutenberg_id) %>%
@@ -161,7 +161,7 @@ splitting <- function(x=x_chapters, y=topics_categorical,
 
 
 # The whole model is set up and trained within this function
-set_up_n_fit <- function(split, books_n=5){
+set_up_n_fit <- function(split, books_n=n_books){
   # starting with 64 neurons and scaling it down to 46 in the 
   # mid layer turned out to be a well predicting model
   model <- keras_model_sequential() %>%
@@ -215,6 +215,7 @@ for(i in 1:n){
   split <- splitting(n_testing=15, seed=101+i*2)
   results[i] <- set_up_n_fit(split) %>% .$model %>% 
     evaluate_model() %>% .$misspecified
+  paste(i, " of ", n)
 }
 
 # getting the mean of the misspecification rate
