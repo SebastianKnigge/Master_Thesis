@@ -15,7 +15,6 @@ library(stringr)
 library(tidytext)
 library(udpipe)
 
-
 sampling_books <- function(seed=1234, n=20){
   # sample n books from the whole library
   set.seed(seed)
@@ -30,16 +29,23 @@ sampling_books <- function(seed=1234, n=20){
 }
 
 
-n_books <- 6
-books <- sampling_books(n=n_books, seed=101)
 
-by_chapter <- books %>%
-  group_by(gutenberg_id) %>%
-  # split in chapters
-  mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
-  ungroup() %>%
-  # exclude books without chapters
-  dplyr::filter(chapter > 0) 
+set_up_books <- function(n_books=4, seed=1992){
+  # initial book sample
+  books <- sampling_books(n=n_books, seed=seed)
+  by_chapter <- books %>%
+    group_by(gutenberg_id) %>%
+    # split in chapters
+    mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
+    ungroup() %>%
+    # exclude books without chapters
+    dplyr::filter(chapter > 0) 
+  return(by_chapter)
+}
+
+by_chapter <- set_up_books(n_books=5, seed=133)
+
+
 
 shorten_titles <- function(titles){
   # shorten very long book titles by setting 
@@ -57,18 +63,15 @@ get_titles <- function(x, n_books){
   unique_ids <- x %>% 
     select(gutenberg_id) %>% 
     unique() %>% unlist()
-  
   # get the titles
   titles <- gutenberg_works() %>% 
     dplyr::filter(gutenberg_id %in% unique_ids) %>% 
     select(gutenberg_id, title) %>% 
     mutate(title=shorten_titles(title))
-  
   # get the number of gutenberg ids
   len <- nrow(titles)
   if(n_books!=len) warning(paste("--- ",n_books-len, 
                                  " books have 0 chapters --- "))
-  
   # the output as a list  
   ret <- list(
     titles=titles,
@@ -77,53 +80,73 @@ get_titles <- function(x, n_books){
   return(ret)
 }
 
-titles <- get_titles(by_chapter, n_books)
-titles$titles
 
-# append the books matrix until
-# we get a certein number of books n_books
-n <- titles$len
-seed_index <- 1
-while (n<n_books) {
-  book2add <- sampling_books(n=1, seed=seed_index)
-  by_chapter_add <- book2add %>%
-    group_by(gutenberg_id) %>%
-    # split in chapters
-    mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
-    ungroup() %>%
-    # exclude books without chapters
-    dplyr::filter(chapter > 0)
-  titles2add <- get_titles(by_chapter_add, 1)
-  # adding the book to by_chapter if there are chapters in the 
-  # book plus it is not in the data already
-  if (titles2add$len==1) if(!titles2add$titles$gutenberg_id%in%titles$titles$gutenberg_id) {
-    by_chapter <- bind_rows(by_chapter, by_chapter_add)
+
+append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
+  # append the books matrix until
+  # we get the desired number of books n_books
+  
+  titles <- get_titles(x, n_books)
+  n <- titles$len
+  while (n<n_books) {
+    book2add <- sampling_books(n=1, seed=seed_index)
+    by_chapter_add <- book2add %>%
+      group_by(gutenberg_id) %>%
+      # split in chapters
+      mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
+      ungroup() %>%
+      # exclude books without chapters
+      dplyr::filter(chapter > 0)
+    titles2add <- get_titles(by_chapter_add, 1)
+    # adding the book to by_chapter if there are chapters in the 
+    # book plus it is not in the data already
+    if (titles2add$len==1) if(!titles2add$titles$gutenberg_id%in%titles$titles$gutenberg_id) {
+      x <- bind_rows(x, by_chapter_add)
+    }
+    n<-get_titles(x, n)$len
+    seed_index <- seed_index+1
   }
-  n<-get_titles(by_chapter, n)$len
-  seed_index <- seed_index+1
+  return(x)
 }
+
+appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
+
 # get the titles of the full data set
-titles <- get_titles(by_chapter, n_books)
+titles <- get_titles(appended_by_chapter, n_books)
 titles$titles
 
-# unite chapter and document title
-by_chapter <- by_chapter %>%
-  unite(document, gutenberg_id, chapter)
+exclude_stop_words <- function(x){
+  # unite chapter and document title
+  by_chapter_word <- x %>%
+    unite(document, gutenberg_id, chapter) %>%
+    # split into words
+    unnest_tokens(word, text)
+  # import tibble stop words
+  data(stop_words)
+  # find document-word counts
+  word_counts <- by_chapter_word %>%
+    # exclude stop words
+    anti_join(stop_words) %>%
+    # count each word by chapter
+    count(document, word, sort = TRUE) %>%
+    ungroup()
+  return(word_counts)
+}
 
-# split into words
-by_chapter_word <- by_chapter %>%
-  unnest_tokens(word, text)
+word_counts <- exclude_stop_words(appended_by_chapter)
 
-# import tibble stop words
-data(stop_words)
+convert_to_dtm <- function(x, n=n){
+  # get into a format lda can handle
+  chapters_dtm <- x %>%
+    select(doc_id=document, term=word, freq=n) %>%
+    document_term_matrix() %>%
+    # reduce by low frequencies
+    dtm_remove_lowfreq(minfreq = 2)
+  return(chapters_dtm)
+}
 
-# find document-word counts
-word_counts <- by_chapter_word %>%
-  # exclude stop words
-  anti_join(stop_words) %>%
-  # count each word by chapter
-  count(document, word, sort = TRUE) %>%
-  ungroup()
+chapters_dtm <- convert_to_dtm(word_counts)
+
 
 # get into a format lda can handle
 chapters_dtm <- word_counts %>%

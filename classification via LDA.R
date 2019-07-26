@@ -41,9 +41,9 @@ sampling_books <- function(seed=1234, n=20){
 
 
 
-set_up_books <- function(n_books=4){
+set_up_books <- function(n_books=4, seed=1992){
   # initial book sample
-  books <- sampling_books(n=n_books, seed=9119)
+  books <- sampling_books(n=n_books, seed=seed)
   by_chapter <- books %>%
     group_by(gutenberg_id) %>%
     # split in chapters
@@ -54,7 +54,9 @@ set_up_books <- function(n_books=4){
   return(by_chapter)
 }
 
-#by_chapter <- set_up_books(5)
+by_chapter <- set_up_books(n_books=5, seed=133)
+
+
 
 shorten_titles <- function(titles){
   # shorten very long book titles by setting 
@@ -91,13 +93,12 @@ get_titles <- function(x, n_books){
 
 
 
-append_by_chapter <- function(x=by_chapter, n_books){
+append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
   # append the books matrix until
   # we get the desired number of books n_books
 
   titles <- get_titles(x, n_books)
   n <- titles$len
-  seed_index <- 1
   while (n<n_books) {
     book2add <- sampling_books(n=1, seed=seed_index)
     by_chapter_add <- book2add %>%
@@ -147,7 +148,7 @@ word_counts <- exclude_stop_words(appended_by_chapter)
 
 convert_to_dtm <- function(x, n=n){
   # get into a format lda can handle
-  chapters_dtm <- word_counts %>%
+  chapters_dtm <- x %>%
     select(doc_id=document, term=word, freq=n) %>%
     document_term_matrix() %>%
     # reduce by low frequencies
@@ -164,7 +165,7 @@ chapters_lda
 
 ext_gamma_matrix <- function(model){
   # get gamma matrix for chapter probabilities
-  chapters_gamma <- tidy(chapters_lda, matrix = "gamma")
+  chapters_gamma <- tidy(model, matrix = "gamma")
   # split joint name of book and chapter
   chapters_gamma <- chapters_gamma %>%
     separate(document, c("gutenberg_id", "chapter"), sep = "_", convert = TRUE)
@@ -208,16 +209,22 @@ validate_LDAclassification <- function(x){
 
 validate_LDAclassification(chapters_gamma)
 
-
+# evaluation over many different book samples
 n_books <- 5
+n_sim <- 10
+ratio <- rep(NA,n_sim)
+for (i in 1:n_sim){
+  ratio[i] <- set_up_books(n_books=n_books, seed=i) %>% 
+    append_by_chapter( n_books = n_books, seed_index = i*i) %>% 
+    exclude_stop_words() %>% 
+    convert_to_dtm() %>% 
+    LDA(k = n_books, control = list(seed = 1234)) %>% 
+    ext_gamma_matrix() %>% 
+    validate_LDAclassification()
+}
 
-ratio <- set_up_books(n_books) %>% 
-  append_by_chapter( n_books = n_books) %>% 
-  exclude_stop_words() %>% 
-  convert_to_dtm() %>% 
-  LDA(k = n_books, control = list(seed = 1234)) %>% 
-  ext_gamma_matrix() %>% 
-  validate_LDAclassification()
+ratio %>% mean
+
 #-----------------------------------------------------------------
 ### Another approach ####
 # get pdfs
