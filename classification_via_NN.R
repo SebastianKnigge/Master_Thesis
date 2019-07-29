@@ -14,6 +14,7 @@ library(tidyr)
 library(stringr)
 library(tidytext)
 library(udpipe)
+library(sampling)
 
 sampling_books <- function(seed=1234, n=20){
   # sample n books from the whole library
@@ -43,7 +44,8 @@ set_up_books <- function(n_books=4, seed=1992){
   return(by_chapter)
 }
 
-by_chapter <- set_up_books(n_books=5, seed=133)
+n_books <- 5
+by_chapter <- set_up_books(n_books=n_books, seed=13999)
 
 
 
@@ -96,7 +98,7 @@ append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
       mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
       ungroup() %>%
       # exclude books without chapters
-      dplyr::filter(chapter > 0)
+      dplyr::filter(chapter > 2)
     titles2add <- get_titles(by_chapter_add, 1)
     # adding the book to by_chapter if there are chapters in the 
     # book plus it is not in the data already
@@ -109,7 +111,7 @@ append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
   return(x)
 }
 
-appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
+appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books, seed_index = 9999)
 
 # get the titles of the full data set
 titles <- get_titles(appended_by_chapter, n_books)
@@ -148,30 +150,71 @@ convert_to_dtm <- function(x, n=n){
 chapters_dtm <- convert_to_dtm(word_counts)
 
 
-# get into a format lda can handle
-chapters_dtm <- word_counts %>%
-  select(doc_id=document, term=word, freq=n) %>%
-  document_term_matrix()
+# convert x matrix into a form such that it can be used for tensorflow
+adjust_tensor_format <- function(x){
+  x_chapters <- apply(x, 1, function(x) as.matrix(x)) %>% t()
+  topics <- x %>% rownames() %>% as_tibble() %>%
+    separate(value, c("gutenberg_id", "chapter"), sep = "_", convert = TRUE) %>%
+    select(gutenberg_id) %>%
+    # split joint name of book and chapter
+    as.matrix %>% as.factor() %>% as.integer()
+  # one hot encoding for the chapters (y)
+  topics_categorical <- topics %>% -1 %>% 
+    to_categorical()
+  ret <- list(
+    x=x_chapters,
+    y=topics_categorical,
+    topics=topics
+  )
+  return(ret)
+}
 
-x_chapters <- apply(chapters_dtm, 1, function(x) as.matrix(x)) %>% t()
-
-topics_categorical <- chapters_dtm %>% rownames() %>% as_tibble() %>%
-  separate(value, c("gutenberg_id", "chapter"), sep = "_", convert = TRUE) %>%
-  select(gutenberg_id) %>%
-  # split joint name of book and chapter
-  as.matrix %>% as.factor() %>% as.integer() %>% -1 %>%
-  to_categorical()
+adjusted_format <- adjust_tensor_format((chapters_dtm))
 
 
-splitting <- function(x=x_chapters, y=topics_categorical, 
-                      n_testing=5, training_ratio=0.2, seed=1234){
+
+sample_cluster_wise <- function(data, test_ratio=0.1, val_ratio=0.2, seed=1234){
+  X <- data$x; y <- data$y
+  cluster=data$topics
+  set.seed(seed)
+  # setting the absolute number of observations for the sample of each cluster
+  n_test <- (table(cluster)*test_ratio) %>% floor() %>% 
+    # use at least one observation of each cluster
+    sapply(., function(x) max(x,1))
+  n_val <- (table(cluster)*val_ratio) %>% floor() %>% 
+    # use at least one observation of each cluster
+    sapply(., function(x) max(x,1))
+  # function to get the correct sample indices for validation and test sample
+  samp_ind <- function(i, n_list) which(cluster==i) %>% sample(n_list[i])
+  test_indices <- unique(cluster) %>% sort() %>% 
+    sapply(function(i) samp_ind(i, n_test)) %>% 
+    unlist()
+  val_indices <- unique(cluster) %>% sort() %>% 
+    sapply(function(i) samp_ind(i, n_val)) %>% 
+    unlist()
+  ret <- list(partial_x_train=X[-c(val_indices,test_indices),], 
+              partial_y_train=y[-c(val_indices,test_indices),], 
+              x_val=X[val_indices,], y_val = y[val_indices,],
+              
+              x_test=X[test_indices,], y_test = y[test_indices,])
+  return(ret)
+}
+
+
+sample_cluster_wise(adjusted_format)
+
+
+
+splitting <- function(data=adjusted_format, 
+                      n_testing=5, val_ratio=0.2, seed=1234){
+  x <- data$x; y <- data$y
   # function for splitting in train, val and test
   set.seed(seed)
   test_indices <- sample(1:nrow(y), n_testing)
   x_test <- x[test_indices,]
   y_test <- y[test_indices,]
   n_training <- nrow(y)-n_testing
-  n_val_indices <- (n_training*training_ratio) %>% round
+  n_val_indices <- (n_training*val_ratio) %>% round
   val_indices <- sample(1:nrow(y), n_val_indices)
   x_val <- x[val_indices,]
   partial_x_train <- x[-c(val_indices,test_indices),]
@@ -181,6 +224,36 @@ splitting <- function(x=x_chapters, y=topics_categorical,
               x_val=x_val, y_val=y_val, x_test=x_test, y_test=y_test)
   return(ret)
 }
+
+splitting_for_CV <- function(data=adjusted_format, 
+                      n_testing=5, val_ratio=0.2, seed=1234, CV_group){
+  N <- nrow(data$x)
+  # first check how many CV groups we need
+  n_groups <- N/n_testing %>% floor()
+  # function for splitting in train, val and test
+  set.seed(seed)
+  # set a index to shuffle the rows
+  shuffle_index <- sample(1:N, N, replace = F)
+  x <- data$x[shuffle_index,]; y <- data$y[shuffle_index,]
+  # we get the samples for the test data just by the test index
+  groups <- 1:N %% n_groups +1
+  test_indices <- groups==CV_group
+  x_test <- x[test_indices,]
+  y_test <- y[test_indices,]
+  n_training <- N-n_testing
+  n_val_indices <- (n_training*val_ratio) %>% round
+  val_indices <- sample((1:N)[-test_indices], n_val_indices)
+  x_val <- x[val_indices,]
+  partial_x_train <- x[-c(val_indices,test_indices),]
+  y_val <- y[val_indices,]
+  partial_y_train <- y[-c(val_indices,test_indices),]
+  ret <- list(partial_x_train=partial_x_train, partial_y_train=partial_y_train, 
+              x_val=x_val, y_val=y_val, x_test=x_test, y_test=y_test,
+              n_groups=n_groups)
+  return(ret)
+}
+
+splitting_for_CV(adjusted_format, n_testing = 5, CV_group = 1) %>% .$n_groups
 
 
 # The whole model is set up and trained within this function
@@ -228,23 +301,31 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 }
 
 
-# evaluate with several test set and training sets
-# result vector is where the misspecification rate is saved
-n <- 20
+## evaluate with k-fold crossvalidation - k depending on number of test examples
+#n <- splitting_for_CV(adjusted_format, n_testing = 10, CV_group = 1) %>% .$n_groups
+## result vector is where the misspecification rate is saved
+#results <- rep(NA,n)
+#for(i in 1:n){
+#  # change the crossvalidation group in each iteration
+#  split <- splitting_for_CV(n_testing=5, seed=101, CV_group=i)
+#  results[i] <- set_up_n_fit(split) %>% .$model %>% 
+#    evaluate_model() %>% .$misspecified
+#  print(paste(i, " of ", n))
+#}
+#
+## getting the mean of the misspecification rate
+#results %>% mean
+
+n <- 50
 results <- rep(NA,n)
 for(i in 1:n){
-  # change the seed for every iteration to get different samples
-  # putting all together
-  split <- splitting(n_testing=15, seed=101+i*2)
+  # change the crossvalidation group in each iteration
+  split <- sample_cluster_wise(adjusted_format, seed=1234)
   results[i] <- set_up_n_fit(split) %>% .$model %>% 
     evaluate_model() %>% .$misspecified
-  paste(i, " of ", n)
+  print(paste(i, " of ", n))
 }
 
-# getting the mean of the misspecification rate
 results %>% mean
-
-
-
 
 
