@@ -44,8 +44,8 @@ set_up_books <- function(n_books=4, seed=1992){
   return(by_chapter)
 }
 
-n_books <- 5
-by_chapter <- set_up_books(n_books=n_books, seed=13999)
+n_books <- 6
+by_chapter <- set_up_books(n_books=n_books, seed=222)
 
 
 
@@ -111,7 +111,7 @@ append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
   return(x)
 }
 
-appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books, seed_index = 9999)
+appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
 
 # get the titles of the full data set
 titles <- get_titles(appended_by_chapter, n_books)
@@ -202,6 +202,7 @@ sample_cluster_wise <- function(data, test_ratio=0.1, val_ratio=0.2, seed=1234){
 
 
 sample_cluster_wise(adjusted_format)
+
 
 
 
@@ -301,6 +302,7 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 }
 
 
+
 ## evaluate with k-fold crossvalidation - k depending on number of test examples
 #n <- splitting_for_CV(adjusted_format, n_testing = 10, CV_group = 1) %>% .$n_groups
 ## result vector is where the misspecification rate is saved
@@ -319,8 +321,7 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 n <- 50
 results <- rep(NA,n)
 for(i in 1:n){
-  # change the crossvalidation group in each iteration
-  split <- sample_cluster_wise(adjusted_format, seed=1234)
+  split <- sample_cluster_wise(adjusted_format)
   results[i] <- set_up_n_fit(split) %>% .$model %>% 
     evaluate_model() %>% .$misspecified
   print(paste(i, " of ", n))
