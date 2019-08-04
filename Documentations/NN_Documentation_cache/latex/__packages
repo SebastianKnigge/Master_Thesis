@@ -1,0 +1,11 @@
+base
+stargazer
+keras
+gutenbergr
+dplyr
+tensorflow
+tidyr
+stringr
+tidytext
+udpipe
+sampling
