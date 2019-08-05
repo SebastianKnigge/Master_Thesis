@@ -368,4 +368,4 @@ results[i] <- set_up_n_fit_lstm(split) %>% .$model %>%
   evaluate_model() %>% .$misspecified
 
 
-dataset_imdb()
+

@@ -138,6 +138,17 @@ convert_to_dtm <- function(x, n=n, minfq = 2){
   return(chapters_dtm)
 }
 
+
+convert_to_dtm_2 <- function(x, n=n, minfq = 2, top=10000){
+  # get into a format lda can handle
+  chapters_dtm <- x %>%
+    select(doc_id=document, term=word, freq=n) %>%
+    document_term_matrix() %>%
+    # reduce by low frequencies
+    dtm_remove_tfidf(top=top)
+  return(chapters_dtm)
+}
+
 # convert x matrix into a form such that it can be used for tensorflow
 adjust_tensor_format <- function(x){
   x_chapters <- apply(x, 1, function(x) as.matrix(x)) %>% t()
@@ -191,6 +202,14 @@ adjusted_format_all <- adjust_tensor_format((chapters_dtm))
 ncol(chapters_dtm_all)
 ```
 
+We also want to compare this to a reduction of the word dictionary by the tfidf. For the sake of comparison the reduction is made to the same value as used above via minfreq=2 (i.e. 10685 words).
+
+```{r, chache=TRUE, warning=FALSE}
+chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=10685)
+adjusted_format_tfidf <- adjust_tensor_format((chapters_dtm))
+ncol(chapters_dtm_tfidf)
+```
+
 # Splitting and Fitting
 
 The following function splits the sample in an manner, such that each cluster is eually to its size represented in the test data and the validation data.
@@ -200,6 +219,7 @@ sample_cluster_wise <- function(data, test_ratio=0.1, val_ratio=0.2, seed=1234){
   X <- data$x; y <- data$y
   cluster=data$topics
   set.seed(seed)
+  {
   # setting the absolute number of observations for the sample of each cluster
   n_test <- (table(cluster)*test_ratio) %>% floor() %>% 
     # use at least one observation of each cluster
@@ -215,6 +235,7 @@ sample_cluster_wise <- function(data, test_ratio=0.1, val_ratio=0.2, seed=1234){
   val_indices <- unique(cluster) %>% sort() %>% 
     sapply(function(i) samp_ind(i, n_val)) %>% 
     unlist()
+  }
   ret <- list(partial_x_train=X[-c(val_indices,test_indices),], 
               partial_y_train=y[-c(val_indices,test_indices),], 
               x_val=X[val_indices,], y_val = y[val_indices,],
@@ -276,7 +297,7 @@ Now we can start applicing the model:
 
 ```{r, cache=TRUE}
 tim1 <- Sys.time()
-n <- 49
+n <- 59
 results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format, seed=i)
@@ -303,7 +324,7 @@ We now try this procedure using the full bag of words:
 
 ```{r, cache=TRUE}
 tim1_all <- Sys.time()
-n <- 49
+n <- 59
 results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format_all, seed=i)
@@ -326,61 +347,29 @@ and the time:
 (u2 <- tim2_all-tim1_all)
 ```
 
-## recurrent NN
-
-```{r}
-# The whole model is set up and trained within this function
-set_up_n_fit_lstm <- function(split, books_n=n_books){
-  # introduce a recurrent lstm network
-  model <- keras_model_sequential() %>%
-    layer_embedding(input_dim = ncol(split$partial_x_train), output_dim = 46) %>%
-    layer_lstm(units=46) %>%
-    # we want to classify for as many categories as books
-    layer_dense(units=books_n, activation="sigmoid")
-  
-  model %>% compile(
-    optimizer="rmsprop",
-    loss="categorical_crossentropy",
-    metrics=c("accuracy"))
-  
-  history <- model %>% fit(
-    split$partial_x_train,
-    split$partial_y_train,
-    # from experience the model tends to 
-    # overfit for more than 5 epochs
-    epochs=3,
-    batch_size=512,
-    validation_data=list(split$x_val,split$y_val)
-  )
-  return(
-    list(history=history, 
-         model=model))
-}
-```
-
-The same procedure is applicated
+Now using the tfidf reduced bag of words:
 
 ```{r, cache=TRUE}
-tim1_ltsm <- Sys.time()
-n <- 49
+tim1_tfidf <- Sys.time()
+n <- 59
 results <- rep(NA,n)
 for(i in 1:n){
-  split <- sample_cluster_wise(adjusted_format_all, seed=i)
-  results[i] <- set_up_n_fit_lstm(split) %>% .$model %>% 
+  split <- sample_cluster_wise(adjusted_format_tfidf, seed=i)
+  results[i] <- set_up_n_fit(split) %>% .$model %>% 
     evaluate_model() %>% .$misspecified
 }
-tim2_ltsm <- Sys.time()
+tim2_tfidf <- Sys.time()
 ```
 
 The results of the error rate
 ```{r}
 results %>% summary
 results %>% var
-results
 ```
 
 and the time:
 
 ```{r}
 # mfreq=2
-(u2 <- tim2_ltsm-tim1_ltsm)
+(u3 <- tim2_tfidf-tim1_tfidf)
+```
