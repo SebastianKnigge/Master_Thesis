@@ -334,3 +334,38 @@ u1 <- tim2-tim1
 # mfreq=2
 u2 <- tim2-tim1
 
+
+# The whole model is set up and trained within this function
+set_up_n_fit_lstm <- function(split, books_n=n_books){
+  # introduce a recurrent lstm network
+  model <- keras_model_sequential() %>%
+    layer_embedding(input_dim = ncol(split$partial_x_train), output_dim = 46) %>%
+    layer_lstm(units=46) %>%
+    # we want to classify for as many categories as books
+    layer_dense(units=books_n, activation="sigmoid")
+  
+  model %>% compile(
+    optimizer="rmsprop",
+    loss="categorical_crossentropy",
+    metrics=c("accuracy"))
+  
+  history <- model %>% fit(
+    split$partial_x_train,
+    split$partial_y_train,
+    # from experience the model tends to 
+    # overfit for more than 5 epochs
+    epochs=5,
+    batch_size=512,
+    validation_data=list(split$x_val,split$y_val)
+  )
+  return(
+    list(history=history, 
+         model=model))
+}
+
+split <- sample_cluster_wise(adjusted_format)
+results[i] <- set_up_n_fit_lstm(split) %>% .$model %>% 
+  evaluate_model() %>% .$misspecified
+
+
+dataset_imdb()
