@@ -149,6 +149,15 @@ convert_to_dtm <- function(x, n=n, minfq = 2){
 
 chapters_dtm <- convert_to_dtm(word_counts, minfq=2)
 
+convert_to_dtm_2 <- function(x, n=n, minfq = 2, top=10000){
+  # get into a format lda can handle
+  chapters_dtm <- x %>%
+    select(doc_id=document, term=word, freq=n) %>%
+    document_term_matrix() %>%
+    # reduce by low frequencies
+    dtm_remove_tfidf(top=top)
+  return(chapters_dtm)
+}
 
 # convert x matrix into a form such that it can be used for tensorflow
 adjust_tensor_format <- function(x){
@@ -368,4 +377,4 @@ results[i] <- set_up_n_fit_lstm(split) %>% .$model %>%
   evaluate_model() %>% .$misspecified
 
 
-dataset_imdb()
+
