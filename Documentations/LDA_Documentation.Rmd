@@ -52,6 +52,19 @@ sampling_books <- function(seed=1234, n=20){
 
 
 ```{r, message=FALSE, warning=FALSE}
+sampling_books <- function(seed=1234, n=20){
+  # sample n books from the whole library
+  set.seed(seed)
+  gutenberg_works() %>% 
+    # select works with title
+    dplyr::filter(!is.na(title)) %>% 
+    # set the sample sitze
+    sample_n(n) %>%
+    # set a special download link
+    gutenberg_download(
+      mirror = "http://mirrors.xmission.com/gutenberg/")
+}
+
 set_up_books <- function(n_books=4, seed=1992){
   # initial book sample
   books <- sampling_books(n=n_books, seed=seed)
@@ -84,7 +97,7 @@ get_titles <- function(x, n_books){
   # get the titles
   titles <- gutenberg_works() %>% 
     dplyr::filter(gutenberg_id %in% unique_ids) %>% 
-    select(gutenberg_id, title) %>% 
+    select(gutenberg_id, title, author) %>% 
     mutate(title=shorten_titles(title))
   # get the number of gutenberg ids
   len <- nrow(titles)
@@ -101,7 +114,6 @@ get_titles <- function(x, n_books){
 append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
   # append the books matrix until
   # we get the desired number of books n_books
-
   titles <- get_titles(x, n_books)
   n <- titles$len
   while (n<n_books) {
@@ -112,7 +124,7 @@ append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
       mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
       ungroup() %>%
       # exclude books without chapters
-      dplyr::filter(chapter > 0)
+      dplyr::filter(chapter > 2)
     titles2add <- get_titles(by_chapter_add, 1)
     # adding the book to by_chapter if there are chapters in the 
     # book plus it is not in the data already
@@ -143,7 +155,7 @@ exclude_stop_words <- function(x){
   return(word_counts)
 }
 
-convert_to_dtm <- function(x, minfq=2){
+convert_to_dtm <- function(x, minfq = 2){
   # get into a format lda can handle
   chapters_dtm <- x %>%
     select(doc_id=document, term=word, freq=n) %>%
@@ -152,6 +164,7 @@ convert_to_dtm <- function(x, minfq=2){
     dtm_remove_lowfreq(minfreq = minfq)
   return(chapters_dtm)
 }
+
 
 convert_to_dtm_2 <- function(x, n=n, minfq = 2, top=10000){
   # get into a format lda can handle
