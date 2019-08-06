@@ -54,7 +54,8 @@ set_up_books <- function(n_books=4, seed=1992){
   return(by_chapter)
 }
 
-by_chapter <- set_up_books(n_books=5, seed=133)
+n_books <- 5
+by_chapter <- set_up_books(n_books=n_books, seed=133)
 
 
 
@@ -146,7 +147,7 @@ exclude_stop_words <- function(x){
 
 word_counts <- exclude_stop_words(appended_by_chapter)
 
-convert_to_dtm <- function(x, n=n){
+convert_to_dtm <- function(x, minfreq=2){
   # get into a format lda can handle
   chapters_dtm <- x %>%
     select(doc_id=document, term=word, freq=n) %>%
@@ -225,13 +226,67 @@ for (i in 1:n_sim){
 
 ratio %>% mean
 
+
+#### -------------------------------------
+# Splitting and setting up
+split_for_fit <- function(data, test_ratio=0.1, seed=1234){
+  set.seed(seed)
+  N <- nrow(data)
+  n_test <- (N*test_ratio) %>% ceiling
+  test_ind <- sample(1:N, n_test)
+  train_ind <- (1:N)[-train_ind]
+  ret <- list(train=data[train_ind,],
+              test=data[test_ind,])
+  return(ret)
+}
+
+split <- split_for_fit(chapters_dtm)
+
+fit_n_evaluate <- function(split, model){
+  LDA_model <- LDA(split$train, 
+                            k = n_books, control = list(seed = 1234))
+  # use the predict function of udpipe
+  # the topic predict funtion already extract the most likely topics
+  prediction <- predict(model, newdata=split$test) %>% .$topic
+  # get "consensus" via maximum likelihood
+  # first extract the gamma matrix of the model fitted on the training
+  # data
+  chapters_gamma <- ext_gamma_matrix(model)
+  spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
+  # get pdfs
+  plotm <- spreaded_gamma %>%
+    group_by(gutenberg_id) %>%
+    # note: pdfs are unnormalized
+    summarise_at(2:(titles$len+1), sum)
+  topic_link <- plotm %>% 
+    apply(1, function(x) which.max(x[2:length(x)])) %>% 
+    cbind(plotm$gutenberg_id) %>%
+    as.data.frame()
+  # exclude the 
+  consensus <- split$test %>% 
+    rownames() %>% 
+    substr(1,regexpr("_",.)-1) %>% 
+    as.numeric() %>%
+    as.data.frame() %>% 
+    # merge it to the topic
+    merge(topic_link, by.y="V2", sort=FALSE) %>%
+    select(..y)
+  # missclassification rate will be returned
+  sum(consensus!=prediction)/length(prediction)
+}
+
+
 #-----------------------------------------------------------------
 ### Another approach ####
+spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
 # get pdfs
-plotm <- rounded_gamma %>%
-  group_by(gutenberg_id)%>%
+plotm <- spreaded_gamma %>%
+  group_by(gutenberg_id) %>%
   # note: pdfs are unnormalized
   summarise_at(2:(titles$len+1), sum)
+
+topic_link <- plotm %>% apply(1, function(x) which.max(x[2:length(x)])) %>% cbind(plotm$gutenberg_id)
+
 # plot it
 par(mfrow=c(3,2))
 for (i in titles$titles$gutenberg_id) barplot(plotm%>%
@@ -259,11 +314,11 @@ make_prediction <- function(lda=chapters_lda, documents){
 
 # it seems like the evaluation via predict of the model is the same
 # as the gamma matrix output
-chapters_lda %>% make_prediction(c("8095_13","8095_12","8095_11")) -> N
+chapters_lda %>% make_prediction(c("7705_3","7705_2","7705_1")) -> N
 pred <- N[,6:(n_books+5)] %>% round(3) %>% cbind(N[,1],.)
 gammamatrix <- rounded_gamma%>%
   unite(document, gutenberg_id, chapter) %>%
-  filter(document%in%c("8095_13","8095_12","8095_11"))
+  filter(document%in%c("7705_3","7705_2","7705_1"))
 pred; gammamatrix
 
 
