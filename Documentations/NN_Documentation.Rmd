@@ -128,7 +128,7 @@ exclude_stop_words <- function(x){
   return(word_counts)
 }
 
-convert_to_dtm <- function(x, n=n, minfq = 2){
+convert_to_dtm <- function(x, minfq = 2){
   # get into a format lda can handle
   chapters_dtm <- x %>%
     select(doc_id=document, term=word, freq=n) %>%
@@ -381,4 +381,7 @@ performance_matrix <- data.frame(freq2.embedding=c(results%>%mean, u1),
 rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F)
 ```
+
+
+
 
