@@ -52,6 +52,19 @@ sampling_books <- function(seed=1234, n=20){
 
 
 ```{r, message=FALSE, warning=FALSE}
+sampling_books <- function(seed=1234, n=20){
+  # sample n books from the whole library
+  set.seed(seed)
+  gutenberg_works() %>% 
+    # select works with title
+    dplyr::filter(!is.na(title)) %>% 
+    # set the sample sitze
+    sample_n(n) %>%
+    # set a special download link
+    gutenberg_download(
+      mirror = "http://mirrors.xmission.com/gutenberg/")
+}
+
 set_up_books <- function(n_books=4, seed=1992){
   # initial book sample
   books <- sampling_books(n=n_books, seed=seed)
@@ -84,7 +97,7 @@ get_titles <- function(x, n_books){
   # get the titles
   titles <- gutenberg_works() %>% 
     dplyr::filter(gutenberg_id %in% unique_ids) %>% 
-    select(gutenberg_id, title) %>% 
+    select(gutenberg_id, title, author) %>% 
     mutate(title=shorten_titles(title))
   # get the number of gutenberg ids
   len <- nrow(titles)
@@ -101,7 +114,6 @@ get_titles <- function(x, n_books){
 append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
   # append the books matrix until
   # we get the desired number of books n_books
-
   titles <- get_titles(x, n_books)
   n <- titles$len
   while (n<n_books) {
@@ -112,7 +124,7 @@ append_by_chapter <- function(x=by_chapter, n_books, seed_index=1){
       mutate(chapter = cumsum(str_detect(text, regex("^chapter ", ignore_case = TRUE)))) %>%
       ungroup() %>%
       # exclude books without chapters
-      dplyr::filter(chapter > 0)
+      dplyr::filter(chapter > 2)
     titles2add <- get_titles(by_chapter_add, 1)
     # adding the book to by_chapter if there are chapters in the 
     # book plus it is not in the data already
@@ -143,7 +155,7 @@ exclude_stop_words <- function(x){
   return(word_counts)
 }
 
-convert_to_dtm <- function(x, minfq=2){
+convert_to_dtm <- function(x, minfq = 2){
   # get into a format lda can handle
   chapters_dtm <- x %>%
     select(doc_id=document, term=word, freq=n) %>%
@@ -152,6 +164,7 @@ convert_to_dtm <- function(x, minfq=2){
     dtm_remove_lowfreq(minfreq = minfq)
   return(chapters_dtm)
 }
+
 
 convert_to_dtm_2 <- function(x, n=n, minfq = 2, top=10000){
   # get into a format lda can handle
@@ -201,4 +214,100 @@ We also want to compare this to a reduction of the word dictionary by the tfidf.
 ```{r, chache=TRUE, warning=FALSE}
 chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=10685)
 ncol(chapters_dtm_tfidf)
+```
+
+
+# Applicate the LDA model on the full corpus
+
+```{r, cache=TRUE, warning=FALSE, message=FALSE}
+tim1 <- Sys.time()
+chapters_lda <- LDA(chapters_dtm, 
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_1 <- tim2-tim1
+```
+
+```{r, cache=TRUE, warning=FALSE, message=FALSE}
+tim1 <- Sys.time()
+chapters_lda_all <- LDA(chapters_dtm, 
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_all <- tim2-tim1
+```
+
+```{r, cache=TRUE, warning=FALSE, message=FALSE}
+tim1 <- Sys.time()
+chapters_lda_tfidf <- LDA(chapters_dtm, 
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_tfidf <- tim2-tim1
+chapters_lda
+```
+
+Now we evaluate the model all in once: 
+
+```{r, cache=TRUE}
+ext_gamma_matrix <- function(model){
+  # get gamma matrix for chapter probabilities
+  chapters_gamma <- tidy(model, matrix = "gamma")
+  # split joint name of book and chapter
+  chapters_gamma <- chapters_gamma %>%
+    separate(document, c("gutenberg_id", "chapter"), sep = "_", convert = TRUE)
+  # get matrix with probabilities for each topic per chapter
+  gamma_per_chapter <- chapters_gamma %>%
+    spread(topic, gamma)
+  return(chapters_gamma)
+}
+
+validate_LDAclassification <- function(x){
+  #First we’d find the topic that was most associated with 
+  # each chapter using top_n(), which is effectively the 
+  # “classification” of that chapter
+  chapter_classifications <- x %>%
+    group_by(gutenberg_id, chapter) %>%
+    top_n(1, gamma) %>%
+    ungroup()
+  
+  # We can then compare each to the “consensus” 
+  # topic for each book (the most common topic among its chapters), 
+  # and see which were most often misidentified.
+  book_topics <- chapter_classifications %>%
+    count(gutenberg_id, topic) %>%
+    group_by(gutenberg_id) %>%
+    # just keep the most frequent one
+    top_n(1, n) %>%
+    ungroup() %>%
+    # keep title called census and topic
+    transmute(consensus = gutenberg_id, topic)
+  
+  # check the fraction of missclassification
+  chapter_classifications %>%
+    inner_join(book_topics, by = "topic") %>%
+    # missmatches
+    dplyr::filter(gutenberg_id != consensus)%>%
+    nrow()/nrow(chapter_classifications)
+}
+```
+
+```{r, cache=TRUE}
+misc.rate_1 <- ext_gamma_matrix(chapters_lda) %>% 
+  validate_LDAclassification()
+```
+
+```{r, cache=TRUE}
+misc.rate_all <- ext_gamma_matrix(chapters_lda_all) %>% 
+  validate_LDAclassification()
+```
+
+```{r, cache=TRUE}
+misc.rate_tfidf <- ext_gamma_matrix(chapters_lda_tfidf) %>% 
+  validate_LDAclassification()
+```
+
+```{r, results="asis"}
+performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1, u_1), 
+           all.embedding=c(misc.rate_all, u_all),
+           tfidf=c(misc.rate_tfidf, u_tfidf))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix %>%  stargazer(summary=FALSE, header=F)
 ```
