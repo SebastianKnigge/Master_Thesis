@@ -41,6 +41,7 @@ sampling_books <- function(seed=1234, n=20){
 }
 ```
 
+Note:
 
   * good seperation for 4 topics:
     + seed=12345
@@ -196,8 +197,9 @@ titles <- get_titles(appended_by_chapter, n_books)
 titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", header=FALSE, title="Book-titles", rownames=FALSE)
 ```
 
+\subsection{Reduction of the dimensionality}
 
-In the set up we have another parameter to adjust. The minimum frequency for the bag of words dictionary. Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
+In the set up we have another parameter to adjust. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
 
 ```{r, chache=TRUE, warning=FALSE}
 chapters_dtm <- convert_to_dtm(word_counts, minfq=2)
@@ -211,7 +213,7 @@ chapters_dtm_all <- convert_to_dtm(word_counts, minfq=0)
 ncol(chapters_dtm_all)
 ```
 
-We also want to compare this to a reduction of the word dictionary by the tfidf. For the sake of comparison the reduction is made to the same value as used above via minfreq=2 (i.e. 10685 words).
+We also want to compare this to a reduction of the word dictionary by the tfidf. For the sake of comparison, the reduction is made to the same value as used above via minfreq=2 (i.e. 10685 words).
 
 ```{r, chache=TRUE, warning=FALSE}
 chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=10685)
@@ -223,7 +225,7 @@ ncol(chapters_dtm_tfidf)
 
 Set up the LDA model for the shrinked embedding corpus via frequency 2.
 
-```{r, cache=TRUE, warning=FALSE, message=FALSE}
+```{r, cache=T, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
 chapters_lda <- LDA(chapters_dtm, 
                     k = n_books, control = list(seed = 1234))
@@ -233,7 +235,7 @@ u_1 <- tim2-tim1
 
 In comparison set up the LDA model for the full word embedding corpus.
 
-```{r, cache=TRUE, warning=FALSE, message=FALSE}
+```{r, cache=T, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
 chapters_lda_all <- LDA(chapters_dtm, 
                     k = n_books, control = list(seed = 1234))
@@ -243,7 +245,7 @@ u_all <- tim2-tim1
 
 Third LDA setup is for the shrinkage of the dictionary by TFIDF.
 
-```{r, cache=TRUE, warning=FALSE, message=FALSE}
+```{r, cache=F, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
 chapters_lda_tfidf <- LDA(chapters_dtm, 
                     k = n_books, control = list(seed = 1234))
@@ -299,17 +301,17 @@ validate_LDAclassification <- function(x){
 
 Now we exclude 3 times the beta matrix and evaluate the most likely result with the real results. Depending on how good the LDA will seperate the books, this influences the goodness of the fit.
 
-```{r, cache=TRUE}
+```{r, cache=T}
 misc.rate_1 <- ext_gamma_matrix(chapters_lda) %>% 
   validate_LDAclassification()
 ```
 
-```{r, cache=TRUE}
+```{r, cache=T}
 misc.rate_all <- ext_gamma_matrix(chapters_lda_all) %>% 
   validate_LDAclassification()
 ```
 
-```{r, cache=TRUE}
+```{r, cache=T}
 misc.rate_tfidf <- ext_gamma_matrix(chapters_lda_tfidf) %>% 
   validate_LDAclassification()
 ```
@@ -323,6 +325,8 @@ performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1, u_1),
 rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F)
 ```
+
+Surprisingly, the run-time to fit the LDA model for the embedding using all words, does not take way longer than for the other two embeddings.
 
 # Evaluate model on testing set
 
@@ -403,8 +407,9 @@ results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages 
 parallel::stopCluster(cl)
 ```
 
+This is the output of the simulation over 59 splits and fits. The mean is the final result:
+
 ```{r}
 results %>% summary
 ```
-
 

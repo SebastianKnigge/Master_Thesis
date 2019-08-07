@@ -240,18 +240,17 @@ split_for_fit <- function(data, test_ratio=0.1, seed=1234){
   return(ret)
 }
 
-split <- split_for_fit(chapters_dtm)
 
-fit_n_evaluate <- function(split, model){
+fit_n_evaluate <- function(split, k=n_books){
   LDA_model <- LDA(split$train, 
-                            k = n_books, control = list(seed = 1234))
+                            k = k, control = list(seed = 1234))
   # use the predict function of udpipe
   # the topic predict funtion already extract the most likely topics
-  prediction <- predict(model, newdata=split$test) %>% .$topic
+  prediction <- predict(LDA_model, newdata=split$test) %>% .$topic
   # get "consensus" via maximum likelihood
   # first extract the gamma matrix of the model fitted on the training
   # data
-  chapters_gamma <- ext_gamma_matrix(model)
+  chapters_gamma <- ext_gamma_matrix(LDA_model)
   spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
   # get pdfs
   plotm <- spreaded_gamma %>%
@@ -275,6 +274,10 @@ fit_n_evaluate <- function(split, model){
   sum(consensus!=prediction)/length(prediction)
 }
 
+
+chapters_dtm %>% 
+  split_for_fit(seed=123) %>% 
+  fit_n_evaluate()
 
 #-----------------------------------------------------------------
 ### Another approach ####
