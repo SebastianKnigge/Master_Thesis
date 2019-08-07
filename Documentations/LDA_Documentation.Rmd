@@ -24,6 +24,8 @@ library(tidytext)
 library(udpipe)
 library(topicmodels)
 library(ggplot2)
+library(parallel)
+library(foreach)
 
 sampling_books <- function(seed=1234, n=20){
   # sample n books from the whole library
@@ -322,3 +324,85 @@ rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F)
 ```
 
+# Evaluate model on testing set
+
+First we split the data randomly in training and testing samples.
+
+```{r, cache=TRUE}
+split_for_fit <- function(data, test_ratio=0.1, seed=1234){
+  # function to set up the training
+  # and the testing set from the input data which
+  # is an object from the function convert_to_dtm()
+  set.seed(seed)
+  N <- nrow(data)
+  n_test <- (N*test_ratio) %>% ceiling
+  test_ind <- sample(1:N, n_test)
+  train_ind <- (1:N)[-test_ind]
+  ret <- list(train=data[train_ind,],
+              test=data[test_ind,])
+  return(ret)
+}
+```
+
+The fit_n_evaluate finction will fit the LDA model and evaluate the goodness of fit for an object of the function split_for_fit.
+
+
+```{r fitting-function, chache=TRUE}
+fit_n_evaluate <- function(split, k=n_books){
+  LDA_model <- LDA(split$train, 
+                            k = k, control = list(seed = 1234))
+  # use the predict function of udpipe
+  # the topic predict funtion already extract the most likely topics
+  prediction <- predict(LDA_model, newdata=split$test) %>% .$topic
+  # get "consensus" via maximum likelihood
+  # first extract the gamma matrix of the model fitted on the training
+  # data
+  chapters_gamma <- ext_gamma_matrix(LDA_model)
+  spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
+  # get pdfs
+  plotm <- spreaded_gamma %>%
+    group_by(gutenberg_id) %>%
+    # note: pdfs are unnormalized
+    summarise_at(2:(titles$len+1), sum)
+  topic_link <- plotm %>% 
+    apply(1, function(x) which.max(x[2:length(x)])) %>% 
+    cbind(plotm$gutenberg_id) %>%
+    as.data.frame()
+  # exclude the 
+  consensus <- split$test %>% 
+    rownames() %>% 
+    substr(1,regexpr("_",.)-1) %>% 
+    as.numeric() %>%
+    as.data.frame() %>% 
+    # merge it to the topic
+    merge(topic_link, by.y="V2", sort=FALSE) %>%
+    select(..y)
+  # missclassification rate will be returned
+  sum(consensus!=prediction)/length(prediction)
+}
+```
+
+We now can evaluate severat fits of a model for different splits.
+
+```{r, cache=TRUE, message=FALSE, warnings=FALSE}
+# setting up how many cores to be used
+useable_cores <- parallel::detectCores() - 1
+# registering cluster
+cl <- parallel::makeCluster(useable_cores)
+doParallel::registerDoParallel(cl)
+n <- 59
+results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
+  
+  
+  chapters_dtm %>% 
+    split_for_fit(seed=12*i) %>% 
+    fit_n_evaluate()
+  
+  
+}
+parallel::stopCluster(cl)
+```
+
+```{r}
+results %>% summary
+```
