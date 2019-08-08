@@ -386,7 +386,7 @@ fit_n_evaluate <- function(split, k=n_books){
 }
 ```
 
-We now can evaluate severat fits of a model for different splits.
+We now can evaluate several fits of a model for different splits.
 
 ```{r, cache=TRUE, message=FALSE, warnings=FALSE}
 # setting up how many cores to be used

@@ -169,7 +169,7 @@ adjust_tensor_format <- function(x){
 }
 ```
 
-Now we can use all these functions to get to the initial corpus sample.
+Now we can use all these functions to get the initial corpus sample.
 
 ```{r, cache=TRUE, warning=FALSE, message=FALSE}
 n_books <- 6
@@ -186,7 +186,9 @@ titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", header=FA
 ```
 
 
-In the set up we have another parameter to adjust. The minimum frequency for the bag of words dictionary. Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
+\subsection{Reduction of the dimensionality}
+
+In the set up we have another parameter to adjust. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
 
 ```{r, chache=TRUE, warning=FALSE}
 chapters_dtm <- convert_to_dtm(word_counts, minfq=2)
@@ -293,7 +295,7 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 }
 ```
 
-Now we can start applicing the model:
+Now we can start applying the model:
 
 ```{r, cache=TRUE}
 tim1 <- Sys.time()
@@ -307,7 +309,7 @@ for(i in 1:n){
 tim2 <- Sys.time()
 ```
 
-The results of the error rate
+The results of the misclassification rate over 59 splits and fits of the model are:
 ```{r}
 results %>% summary
 results %>% var
@@ -374,6 +376,8 @@ and the time:
 (u3 <- tim2_tfidf-tim1_tfidf)
 ```
 
+The following matrix summarises the results.
+
 ```{r, results="asis"}
 performance_matrix <- data.frame(freq2.embedding=c(results%>%mean, u1), 
            all.embedding=c(results_all%>%mean, u2),
@@ -382,6 +386,6 @@ rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F)
 ```
 
-
+The time for the embedding using more than frequency 2 is very short. Whereas the embedding via tfidf with the same dimensionality takes very long.
 
 
