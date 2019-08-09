@@ -36,3 +36,4 @@ read_pdf_clean <- function(document){
 
 pdf1 <- read_pdf_clean(documents[6])
 pdf1 %>% count(word) %>% arrange(desc(n))
+
