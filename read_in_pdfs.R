@@ -27,7 +27,7 @@ read_pdf_clean <- function(document){
   # load stopword library
   data(stop_words)
   # add own words to stop word library - here the numbers from 1 to 10
-  new_stop_words <- tibble(word=as.character(1:10),lexicon=rep("own",10)) %>%
+  new_stop_words <- tibble(word=as.character(0:9),lexicon=rep("own",10)) %>%
     bind_rows(stop_words)
   
   pdf1 %>% 
@@ -47,10 +47,11 @@ plot_most_freq_words <- function(pdf, n=5){
           axis.title.x=element_blank())
 }
 
-plot_most_freq_words(pdf1,6)
+read_pdf_clean(documents[19]) %>% plot_most_freq_words(6)
 
+# inital set up for the corpus
 corpus <- tibble(document=1, word=pdf1$word)
-
+# adding the documents iteratively
 for (i in 2:length(documents)){
   pdf_i <- read_pdf_clean(documents[i])
   corpus <- tibble(document=i, word=pdf_i$word) %>% bind_rows(corpus,.)
