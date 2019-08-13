@@ -1,0 +1,13 @@
+\begin{thebibliography}{}
+
+\bibitem[D.~Blei, 2003]{Blei2003}
+D.~Blei, A.~Ng, M.~J. (2003).
+\newblock Latent dirichlet allocation.
+\newblock {\em Journal of Machine Learning Research}, 3.
+
+\bibitem[K.~Hornik, 2011]{Hornik2011}
+K.~Hornik, B.~G. (2011).
+\newblock topicmodels: An r package for fitting topic models.
+\newblock {\em Journal of Statistical Software}, 40(13).
+
+\end{thebibliography}
