@@ -3,44 +3,63 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Magisterarbeit_S.Knigge.aux
 The style file: apalike.bst
 Database file #1: MagLibrary.bib
-You've used 2 entries,
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1098 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1098 of file apalike.bst
+Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
+while executing---line 1098 of file apalike.bst
+You've used 7 entries,
             1935 wiz_defined-function locations,
-            485 strings with 3947 characters,
-and the built_in function-call counts, 570 in all, are:
-= -- 54
-> -- 14
-< -- 2
-+ -- 4
-- -- 4
-* -- 39
-:= -- 113
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 12
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 26
-empty$ -- 42
-format.name$ -- 6
-if$ -- 106
+            522 strings with 4692 characters,
+and the built_in function-call counts, 2168 in all, are:
+= -- 212
+> -- 55
+< -- 7
++ -- 18
+- -- 16
+* -- 161
+:= -- 400
+add.period$ -- 21
+call.type$ -- 7
+change.case$ -- 42
+chr.to.int$ -- 7
+cite$ -- 7
+duplicate$ -- 95
+empty$ -- 167
+format.name$ -- 25
+if$ -- 415
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 2
-newline$ -- 13
-num.names$ -- 6
-pop$ -- 6
+missing$ -- 8
+newline$ -- 38
+num.names$ -- 21
+pop$ -- 29
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 43
 quote$ -- 0
-skip$ -- 25
+skip$ -- 79
 stack$ -- 0
-substring$ -- 24
-swap$ -- 2
+substring$ -- 136
+swap$ -- 7
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
+type$ -- 40
 warning$ -- 0
-while$ -- 4
+while$ -- 19
 width$ -- 0
-write$ -- 28
+write$ -- 91
+(There were 9 error messages)
