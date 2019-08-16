@@ -62,4 +62,15 @@ dtm <- corpus %>% count(document, word, sort = TRUE) %>%
   document_term_matrix()
 
 
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(tidytext)
+library(udpipe)
+library(topicmodels)
+library(ggplot2)
+
+documents_lda <- LDA(dtm, 
+                    k = 5, control = list(seed = 1234))
+
 
