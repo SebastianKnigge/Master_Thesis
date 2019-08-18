@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  17 AUG 2019 13:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  18 AUG 2019 15:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**LDA_Documentation.tex
-(./LDA_Documentation.tex
+**Reg.Docs_LDA.tex
+(./Reg.Docs_LDA.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
@@ -709,12 +709,21 @@ Package: titling 2009/09/04 v2.1d maketitle typesetting
 \thanksmarkwidth=\skip49
 \thanksmargin=\skip50
 \droptitle=\skip51
-) (./LDA_Documentation.aux
+) (./Reg.Docs_LDA.aux
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
 
 LaTeX Warning: Label `' multiply defined.
 
 )
-\openout1 = `LDA_Documentation.aux'.
+\openout1 = `Reg.Docs_LDA.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 128.
 LaTeX Font Info:    ... okay on input line 128.
@@ -803,9 +812,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 128.
 LaTeX Info: Redefining \pageref on input line 128.
 LaTeX Info: Redefining \nameref on input line 128.
-(./LDA_Documentation.out) (./LDA_Documentation.out)
+(./Reg.Docs_LDA.out) (./Reg.Docs_LDA.out)
 \@outlinefile=\write4
-\openout4 = `LDA_Documentation.out'.
+\openout4 = `Reg.Docs_LDA.out'.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -833,127 +842,105 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 137.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 136.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 139.
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 170.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [1
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 137.
+[1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \vbox (badness 10000) detected at line 327
- []
-
-
-Underfull \vbox (badness 10000) detected at line 327
- []
-
-[2]
-Underfull \vbox (badness 10000) detected at line 327
- []
-
-
-Underfull \vbox (badness 10000) detected at line 327
- []
-
-[3]
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 344.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 250.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 344.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 250.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 344
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 250
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 344
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 250
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 344.
+(Font)              <10> on input line 250.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 344.
+(Font)              <7> on input line 250.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 344.
-LaTeX Font Info:    Try loading font information for U+msa on input line 344.
+(Font)              <5> on input line 250.
+LaTeX Font Info:    Try loading font information for U+msa on input line 250.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 344.
+LaTeX Font Info:    Try loading font information for U+msb on input line 250.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 357.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 357.
-
-Overfull \hbox (53.09727pt too wide) in paragraph at lines 357--370
- [][] 
- []
-
-[4] [5] [6] [7]
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 639
-.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 678.
-[8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 678.
-(./LDA_Documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 678.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 678.
-Package rerunfilecheck Info: File `LDA_Documentation.out' has not changed.
-(rerunfilecheck)             Checksum: D5237E88D3566FF4D61F217053F59173;806.
+) [2] [3]
+<Reg.Docs_LDA_files/figure-latex/unnamed-chunk-9-1.pdf, id=42, 429.605pt x 312.
+16624pt>
+File: Reg.Docs_LDA_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type 
+pdf)
+<use Reg.Docs_LDA_files/figure-latex/unnamed-chunk-9-1.pdf>
+Package pdftex.def Info: Reg.Docs_LDA_files/figure-latex/unnamed-chunk-9-1.pdf 
+used on input line 394.
+(pdftex.def)             Requested size: 429.61049pt x 312.17024pt.
+[4]
+<Reg.Docs_LDA_files/figure-latex/unnamed-chunk-10-1.pdf, id=47, 405.515pt x 280
+.04625pt>
+File: Reg.Docs_LDA_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type
+ pdf)
+<use Reg.Docs_LDA_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: Reg.Docs_LDA_files/figure-latex/unnamed-chunk-10-1.pdf
+ used on input line 410.
+(pdftex.def)             Requested size: 405.52637pt x 280.0541pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 413.
+[5 <./Reg.Docs_LDA_files/figure-latex/unnamed-chunk-9-1.pdf>] [6 <./Reg.Docs_LD
+A_files/figure-latex/unnamed-chunk-10-1.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 413.
+(./Reg.Docs_LDA.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 413.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 413.
+Package rerunfilecheck Info: File `Reg.Docs_LDA.out' has not changed.
+(rerunfilecheck)             Checksum: 8FABDF2B41202B134C9ED2326DCBC78A;265.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 678.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 413.
  ) 
 Here is how much of TeX's memory you used:
- 12751 strings out of 493089
- 186125 string characters out of 6134841
- 300339 words of memory out of 5000000
- 15995 multiletter control sequences out of 15000+600000
- 60508 words of font info for 74 fonts, out of 8000000 for 9000
+ 12630 strings out of 493089
+ 184154 string characters out of 6134841
+ 292977 words of memory out of 5000000
+ 15909 multiletter control sequences out of 15000+600000
+ 37732 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,9n,35p,634b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local
-/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2
-015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2015/texmf-dist
-/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/p
-ublic/lm/lmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/l
-mbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi10.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015/texmf-dis
-t/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
-pe1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/lm/lmtk10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10
-.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on LDA_Documentation.pdf (8 pages, 241766 bytes).
+ 31i,9n,35p,319b,373s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
+texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2015/t
+exmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2015/texmf-dist/
+fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
+/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/
+lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on Reg.Docs_LDA.pdf (6 pages, 188447 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 97 compressed objects within 1 object stream
+ 102 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  15 named destinations out of 1000 (max. 500000)
- 14369 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 8227 words of extra memory for PDF output out of 10000 (max. 10000000)
 

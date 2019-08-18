@@ -386,7 +386,7 @@ fit_n_evaluate <- function(split, k=n_books){
 }
 ```
 
-We now can evaluate several fits of a model for different splits.
+We now can evaluate several fits of a model for different splits. Here is a parallelization for the individual for loops applied.
 
 ```{r, cache=TRUE, message=FALSE, warnings=FALSE}
 # setting up how many cores to be used
