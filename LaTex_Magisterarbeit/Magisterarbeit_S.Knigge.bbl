@@ -20,15 +20,25 @@ D.~Blei, A.~Ng, M.~J. (2003).
 \newblock Latent dirichlet allocation.
 \newblock {\em Journal of Machine Learning Research}, 3.
 
-\bibitem[et~al., 1999]{Jordan1999}
-et~al., M.~J. (1999).
-\newblock An introduction to variational methods for graphical models.
-\newblock {\em Kluwer Academic Publishers - Machine Learning}, 37:183--233.
-
 \bibitem[K.~Hornik, 2011]{Hornik2011}
 K.~Hornik, B.~G. (2011).
 \newblock topicmodels: An r package for fitting topic models.
 \newblock {\em Journal of Statistical Software}, 40(13).
+
+\bibitem[M.~Jordan, 1999]{Jordan1999}
+M.~Jordan, e.~a. (1999).
+\newblock An introduction to variational methods for graphical models.
+\newblock {\em Kluwer Academic Publishers - Machine Learning}, 37:183--233.
+
+\bibitem[M.~Steyvers, 2006]{Griffiths2006}
+M.~Steyvers, T.~G. (2006).
+\newblock Probabilistic topic models.
+\newblock {\em Latent Semantic Analysis: A Road to Meaning}.
+
+\bibitem[Silge and Robinson, 2017]{Silge2017}
+Silge, J. and Robinson, D. (2017).
+\newblock {\em Text Mining with R: A Tidy Approach}.
+\newblock O`Reilly Media.
 
 \bibitem[Wainwright and Jordan, 2008]{Wainwright2008}
 Wainwright, M.~J. and Jordan, M.~I. (2008).

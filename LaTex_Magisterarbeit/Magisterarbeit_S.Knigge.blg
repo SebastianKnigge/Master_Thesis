@@ -21,45 +21,45 @@ Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Veht
 while executing---line 1098 of file apalike.bst
 Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
 while executing---line 1098 of file apalike.bst
-You've used 7 entries,
+You've used 9 entries,
             1935 wiz_defined-function locations,
-            522 strings with 4692 characters,
-and the built_in function-call counts, 2168 in all, are:
-= -- 212
-> -- 55
-< -- 7
-+ -- 18
-- -- 16
-* -- 161
-:= -- 400
-add.period$ -- 21
-call.type$ -- 7
-change.case$ -- 42
-chr.to.int$ -- 7
-cite$ -- 7
-duplicate$ -- 95
-empty$ -- 167
-format.name$ -- 25
-if$ -- 415
+            533 strings with 4887 characters,
+and the built_in function-call counts, 2754 in all, are:
+= -- 267
+> -- 75
+< -- 9
++ -- 24
+- -- 22
+* -- 201
+:= -- 509
+add.period$ -- 27
+call.type$ -- 9
+change.case$ -- 54
+chr.to.int$ -- 9
+cite$ -- 9
+duplicate$ -- 122
+empty$ -- 210
+format.name$ -- 35
+if$ -- 528
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 8
-newline$ -- 38
-num.names$ -- 21
-pop$ -- 29
+missing$ -- 11
+newline$ -- 48
+num.names$ -- 27
+pop$ -- 43
 preamble$ -- 1
-purify$ -- 43
+purify$ -- 56
 quote$ -- 0
-skip$ -- 79
+skip$ -- 100
 stack$ -- 0
-substring$ -- 136
-swap$ -- 7
+substring$ -- 160
+swap$ -- 9
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 40
+type$ -- 50
 warning$ -- 0
-while$ -- 19
+while$ -- 23
 width$ -- 0
-write$ -- 91
+write$ -- 115
 (There were 9 error messages)

@@ -93,12 +93,12 @@ The right hand side $L(\gamma,\phi,\alpha, \beta):=\mathbb{E}_q[\log p(\theta,\t
 \begin{align}\label{equality}
 \log p(\textbf{w}|\alpha, \beta)= D_{KL}(q(\theta,\textbf{z}|\gamma,\phi)||p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)) + L(\gamma,\phi,\alpha, \beta)
 \end{align}
-Since the marginal is fixed, we conclude, that minimizing the KL-divergence is equivalent to maximizing the lower bound.\footnote{Cf. \cite{Jordan1999} and \cite{Wainwright2008}, for details of the derivation of the lower bound see \cite{Blei2003}}
+Since the marginal is fixed, we conclude, that minimizing the KL-divergence is equivalent to maximizing the lower bound.\footnote{See \cite{Jordan1999} and \cite{Wainwright2008}, for details of the derivation of the lower bound see \cite{Blei2003}}
 \begin{align}
 (\gamma^*, \phi^*) &= \argmin_{\gamma, \phi}D_{KL}(q(\theta,\textbf{z}|\gamma,\phi)||p(\theta,\textbf{z},\textbf{w}|\alpha,\beta))\\
 &= \argmax_{\gamma, \phi} L(\gamma,\phi,\alpha, \beta)
-\end{align}
-\\
+\end{align}\\
+
 The variation of the EM algorithm thus is to use the variational distribution $q(\theta,\textbf{z}|\gamma^*(\textbf{w}), \phi^*(\textbf{w}))$ instead the posterior distribution $p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)$. Now the two steps of the VEM algorithm are:
 \begin{itemize}
 	\item [(1)]\textbf{E step} Optimize the variational parameters $\theta$ and $\phi$ for every document in the corpus. This can be done analytically by deriving the derivatives of the KL divergence. And set them to zero.
@@ -107,6 +107,37 @@ The variation of the EM algorithm thus is to use the variational distribution $q
 
 
 \subsubsection{Gibbs sampling}
+
+The second method to approximate the posterior distribution is Gibbs sampling, a so-called monte Carlo method. Instead of calculating the distributions for $\beta$ and $\theta$, the primary task is to find the posterior distribution over $\textbf{z}$ given the document $\textbf{w}$. Gibbs sampling is also known as a Markov Chain Monte Carlo method. The name refers to the simulation process by which a chain of values is simulated whose limiting distribution desirably converges against the true distribution. (\ref{Gibbs}) shows the distribution, which is sampled from iteratively.\footnote{Cf. \cite{Griffiths2006}}
+\begin{align}\label{Gibbs}
+	p(z_i=j|z_{-i},w)\propto \frac{n_{-i,j}^{(l)}+\delta}{\sum_t n_{-i,j}^{(t)}+V\delta}
+	\frac{n_{-i,j}^{(d_i)+\alpha}}{n_{-i}^{(d_i)}+k\alpha}
+\end{align}
+	\makebox[1cm][l]{$z_{i}=j$} 		... \makebox[5cm][l]{word-topic assignment of word $i$ to topic $j$}\\
+	\makebox[1cm][l]{$z_{-i}$}   		... \makebox[4cm][l]{vector of word-topic assignments without the entry for word $i$}\\
+	\makebox[1cm][l]{$n_{-i,j}^{(l)}$}	... \makebox[4cm][l]{number of times the $l$th word in the vocabulary is assigned to }\\
+	\makebox[1cm][l]{}						\makebox[4cm][l]{\ \ \ \ topic $j$, not including the assignment for word $i$}\\
+	\makebox[1cm][l]{$d_i$}				... \makebox[4cm][l]{document in the corpus which includes word $i$}\\
+	\makebox[1cm][l]{$\delta,\alpha$} 	... \makebox[4cm][l]{parameters of the prior distributions for $\beta$ and $\theta$}\\
+
+Usually the word-topic distributions $\beta_{j}^{(l)}$ for the words $l=1,...,V$ and topics $j=1,..,k$ and topic-document distributions $\theta_j^{(d)}$ for the documents $d=1,...,D$ and the topics $j=1,...,k$ will be of interest. (\ref{Gibbs:beta}) and (\ref{Gibbs:theta}) shows the predictive distributions denoted as "estimators".\footnote{For derivation and more details regarding the Gibbs sampling procedure see \cite{Griffiths2006}}
+\begin{align}
+	\hat\beta_{j}^{(l)}&=\frac{n_{-i,j}^{(l)}+\delta}{\sum_t n_{-i,j}^{(t)}+V\delta} \label{Gibbs:beta} \\
+	\hat\theta_j^{(d)}&= \frac{n_{-i,j}^{(d_i)+\alpha}}{n_{-i}^{(d_i)}+k\alpha} \label{Gibbs:theta}
+\end{align}
+
+\subsubsection{Implementation}
+
+In this thesis, the implementation of the LDA model and its estimation is mainly based on using the package \textit{topicmodels}\footnote{See \cite{Hornik2011}} of Kurt Hornik. The package \textit{topicmodels} can apply both the VEM algorithm as well as Gibbs sampling in order to fit the model. In addition, the package \textit{tidytext}\footnote{See \cite{Silge2017}} is being used for text structuring and embedding. Whereby there are other packages besides this implementation of the LDA model, topicmodels is particularly convenient, because tidytext was designed by its developers to work perfectly in combination with topicmodels.
+
+
+
+
+
+
+
+
+
 	
   \bibliographystyle{apalike}
   \bibliography{MagLibrary}
