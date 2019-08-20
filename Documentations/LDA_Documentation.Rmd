@@ -429,9 +429,6 @@ Since the LDA algorithm just clusters into $k$ topics, it is necessary to evalua
 ```{r, chache=TRUE}
 LDA_model <- LDA(chapters_dtm_all, 
                             k = n_books, control = list(seed = 1234))
-  # use the predict function of udpipe
-  # the topic predict funtion already extract the most likely topics
-prediction <- predict(LDA_model, newdata=chapters_dtm_all) %>% .$topic
   # get "consensus" via maximum likelihood
   # first extract the gamma matrix of the model fitted on the training
   # data
@@ -485,8 +482,6 @@ chapters_dtm_all2 <- convert_to_dtm(word_counts2, minfq=0)
 The same code as for Example 1 is used to evaluate the model. 
 
 ```{r, cache=TRUE, message=FALSE, warnings=FALSE}
-# setting up how many cores to be used
-useable_cores <- parallel::detectCores() - 1
 # registering cluster
 cl <- parallel::makeCluster(useable_cores)
 doParallel::registerDoParallel(cl)
@@ -494,7 +489,7 @@ n <- 59
 results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
   
   
-  chapters_dtm2 %>% 
+  chapters_dtm_all2 %>% 
     split_for_fit(seed=12*i) %>% 
     fit_n_evaluate()
   
@@ -510,27 +505,24 @@ results %>% summary
 ```
 
 ```{r}
-LDA_model <- LDA(chapters_dtm2, 
+LDA_model2 <- LDA(chapters_dtm_all2, 
                             k = n_books, control = list(seed = 1234))
-  # use the predict function of udpipe
-  # the topic predict funtion already extract the most likely topics
-prediction <- predict(LDA_model, newdata=chapters_dtm) %>% .$topic
   # get "consensus" via maximum likelihood
   # first extract the gamma matrix of the model fitted on the training
   # data
-chapters_gamma <- ext_gamma_matrix(LDA_model)
+chapters_gamma <- ext_gamma_matrix(LDA_model2)
 spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
   # get pdfs
 plotm <- spreaded_gamma %>%
     group_by(gutenberg_id) %>%
     # note: pdfs are unnormalized
     summarise_at(2:(titles$len+1), sum)
-  topic_link <- plotm %>% 
+topic_link <- plotm %>% 
     apply(1, function(x) which.max(x[2:length(x)])) %>% 
     cbind(plotm$gutenberg_id) %>%
     as.data.frame()
   
-par(mfrow=c(2,3))
+par(mfrow=c(2,2))
 for (i in 1:n_books){
   vec <- plotm[i,2:n_books] %>% unlist() 
   barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))

@@ -2,14 +2,17 @@
 title: "Regulatory documents via LDA"
 author: "Sebastian Knigge"
 date: "18 8 2019"
-output: pdf_document
+output: 
+  pdf_document:
+    number_sections: true
 ---
+
+# Setup
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(stargazer)
 ```
-
-# Initial Setup
 
 Following libraries are used in the code:
 
@@ -30,6 +33,8 @@ library(RColorBrewer)
 library(RCurl)
 library(XML)
 ```
+
+# Import data
 
 In this code reulatory documents are red in and processed via LDA. This first part focusses on reading in the pdf documents.
 
@@ -92,35 +97,64 @@ for (i in 2:length(documents)){
 
 # LDA
 
-The LDA model is applied. First the document term matrix has to be set up.
+The LDA model is applied. First the document term matrix has to be set up. 
 
 ```{r, message=FALSE, warning=FALSE}
 dtm <- corpus %>% count(document, word, sort = TRUE) %>%
   select(doc_id=document, term=word, freq=n) %>%
   document_term_matrix()
+dim(dtm)
 ```
 
-Using the function LDA sets up the model and prediction/evaluation is done via predict(). The tables below summarize which document refers to which topic, according to the LDA model.
+Using the function LDA sets up the model and prediction/evaluation is done via predict(). But first of all it shall be verified whether the Predict function actually delivers the same classification as the export of the gamma matrix directly from the LDA model. Therefore both gamma matrices of the single functions are compared. Table \ref{predict} displays the output of the gamma matrix received by the predict() function and Table \ref{extract} displays the gamma matrix returned by the LDA model itself.
 
-```{r, message=FALSE, warning=FALSE, chache=TRUE}
+```{r LDA, message=FALSE, warning=FALSE, chache=TRUE, results="asis"}
 set.seed(123)
 documents_lda <- LDA(dtm, 
                     k = 5, control = list(seed = 1234))
-prediction5 <- predict(documents_lda, newdata=dtm, type="topic")$topic
 ```
+
+```{r, message=FALSE, warning=FALSE, chache=TRUE, results="asis"}
+prediction5 <- predict(documents_lda, newdata=dtm, type="topic")
+
+prediction5 %>% 
+  select(doc_id,topic_001,topic_002,topic_003,topic_004,topic_005) %>% 
+  mutate_each(funs(as.numeric), doc_id,topic_001,topic_002,topic_003,topic_004,topic_005) %>%
+  arrange(desc(-doc_id)) %>%
+  round(2) %>%
+  stargazer(summary=F, rownames = F, header = F, title="Gamma matrix for predict function", label="predict")
+```
+
+```{r, message=FALSE, warning=FALSE, chache=TRUE, results="asis"}
+ext_gamma_matrix <- function(model=documents_lda){
+  # get gamma matrix for chapter probabilities
+  chapters_gamma <- tidy(model, matrix = "gamma")
+  # get matrix with probabilities for each topic per chapter
+  spreaded_gamma <- chapters_gamma %>% spread(topic, gamma)
+  spreaded_gamma %>% 
+    mutate_each(funs(as.numeric), document,1,2,3,4,5) %>%
+  arrange(desc(-document))
+}
+
+ext_gamma_matrix(documents_lda) %>%
+  round(2) %>% 
+  stargazer(summary=F, rownames = F, header=F, title="Gamma matrix extracted from model", label="extract")
+
+```
+
+The tables below summarize which document refers to which topic, according to the LDA model.
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
 library(stargazer)
-ind1 <- which(prediction5==1)
-ind2 <- which(prediction5==2)
-ind3 <- which(prediction5==3)
-ind4 <- which(prediction5==4)
-ind5 <- which(prediction5==5)
+ind1 <- which(prediction5$topic==1)
+ind2 <- which(prediction5$topic==2)
+ind3 <- which(prediction5$topic==3)
+ind4 <- which(prediction5$topic==4)
+ind5 <- which(prediction5$topic==5)
 for (i in 1:5){
   data.frame(Group=i, Doc=get(paste0("ind",i))) %>%
   stargazer(summary=FALSE, header = F, rownames=FALSE, title=paste("Documents for Topic", i))
 }
-
 ```
 
 
@@ -160,14 +194,18 @@ plot_wordcloud <- function(corpus, selection="ALL", max.words=25, i, freq="tfidf
 
 For getting specific and more individual words for each cloud, we use the TFIDF in the first step.
 
-```{r, message=FALSE, warning=FALSE, cache=TRUE}
+```{r indices, message=FALSE, warning=FALSE}
 # compare topic 1 with topic 2, 3, 4 and 5
-ind1 <- which(prediction5==1)
-ind2 <- which(prediction5==2)
-ind3 <- which(prediction5==3)
-ind4 <- which(prediction5==4)
-ind5 <- which(prediction5==5)
+ind1 <- which(prediction5$topic==1)
+ind2 <- which(prediction5$topic==2)
+ind3 <- which(prediction5$topic==3)
+ind4 <- which(prediction5$topic==4)
+ind5 <- which(prediction5$topic==5)
+```
 
+## Wordclouds using tfidf
+
+```{r wordcloud_tfidf, message=FALSE, warning=FALSE, cache=TRUE}
 par(mfrow=c(2,3))
 par(mar=c(1,1,0.5,1))
 plot_wordcloud(corpus, selection=ind1, i=1)
@@ -177,9 +215,11 @@ plot_wordcloud(corpus, selection=ind4, i=4)
 plot_wordcloud(corpus, selection=ind5, i=5)           
 ```
 
+## Wordclouds using tf
+
 The same can be done using the regular term frequency.
 
-```{r, message=FALSE, warning=FALSE, cache=TRUE}
+```{r wordcloud_tf, message=FALSE, warning=FALSE, cache=TRUE}
 par(mfrow=c(2,3))
 par(mar=c(1,1,0.5,1))
 plot_wordcloud(corpus, selection=ind1, i=1, freq="tf")
@@ -189,9 +229,48 @@ plot_wordcloud(corpus, selection=ind4, i=4, freq="tf")
 plot_wordcloud(corpus, selection=ind5, i=5, freq="tf")          
 ```
 
+# Embedding via tfidf
 
+Now it's interesting to see if embedding with tfidf will cluster other groups or the same. So we will reduce the Document Term Matrix to 10000 words which is a reduction by approx. 20\%.
 
+```{r}
+dtm_50 <- dtm %>% dtm_remove_tfidf(top=10000)
+set.seed(123)
+documents_lda_2 <- LDA(dtm_50, 
+                    k = 5, control = list(seed = 1234))
+```
 
+```{r}
+prediction5_2 <- predict(documents_lda_2, newdata=dtm_50, type="topic")
+# compare topic 1 with topic 2, 3, 4 and 5
+ind1_2 <- which(prediction5_2$topic==1)
+ind2_2 <- which(prediction5_2$topic==2)
+ind3_2 <- which(prediction5_2$topic==3)
+ind4_2 <- which(prediction5_2$topic==4)
+ind5_2 <- which(prediction5_2$topic==5)
+```
 
+```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
+for (i in 1:5){
+  data.frame(Group=i, Doc_embedding_0.5=get(paste0("ind",i,"_2"))) %>%
+  stargazer(summary=FALSE, header = F, rownames=FALSE, title=paste("Documents for Topic", i))
+}
+```
 
+```{r, message=FALSE, warning=FALSE, chache=TRUE, results="asis"}
+ext_gamma_matrix(documents_lda_2) %>%
+  round(2) %>% 
+  stargazer(summary=F, rownames = F, header=F, title="Gamma matrix extracted from model for embedding with tfidf", label="extract2")
+```
 
+## Wordclouds
+
+```{r wordcloud_tfidf2, message=FALSE, warning=FALSE, cache=TRUE}
+par(mfrow=c(2,3))
+par(mar=c(1,1,0.5,1))
+plot_wordcloud(corpus, selection=ind1_2, i=1)
+plot_wordcloud(corpus, selection=ind2_2, i=2)
+plot_wordcloud(corpus, selection=ind3_2, i=3)
+plot_wordcloud(corpus, selection=ind4_2, i=4)
+plot_wordcloud(corpus, selection=ind5_2, i=5)           
+```

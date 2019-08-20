@@ -1,4 +1,5 @@
 base
+stargazer
 dplyr
 tidytext
 pdftools
@@ -16,4 +17,3 @@ bitops
 RCurl
 XML
 here
-stargazer
