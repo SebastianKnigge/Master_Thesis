@@ -2,7 +2,9 @@
 title: "LDA Documentation"
 author: "Sebastian Knigge"
 date: "6 8 2019"
-output: pdf_document
+output: 
+  pdf_document:
+    number_sections: true
 ---
 
 # Setup
@@ -28,9 +30,11 @@ library(parallel)
 library(foreach)
 ```
 
-# Get data
+# Example 1 (6 Books)
 
-\subsection{Definition of functions}
+## Get data
+
+### Definition of functions
 
 This is the essential step for setting up the LDA model. These functions include the sampling procedure from the *gutenbergr* library.
 
@@ -173,7 +177,7 @@ Note:
     + seed=123456
 
 
-\subsection{Sample corpus}
+### Sample corpus
 
 Now we can use all these functions to get to the initial corpus sample. In this example $6$ books are choosen.
 
@@ -202,7 +206,7 @@ titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize",
 
 
 
-\subsection{Reduction of the dimensionality}
+#### Reduction of the dimensionality
 
 In the set up we have another parameter to adjust. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
 
@@ -226,7 +230,7 @@ ncol(chapters_dtm_tfidf)
 ```
 
 
-\subsection{Apply the LDA model on the full corpus}
+#### Apply the LDA model on the full corpus
 
 Set up the LDA model for the shrinked embedding corpus via frequency 2.
 
@@ -333,7 +337,7 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F)
 
 Surprisingly, the run-time to fit the LDA model for the embedding using all words, does not take way longer than the embedding using a lower frequency. The fitting of the reduced bag of words via ftidf takes even longer. Thus from here on the full embedding is used.
 
-# Evaluate model on testing set
+## Evaluate model on testing set 
 
 First we split the data randomly in training and testing samples.
 
@@ -422,12 +426,12 @@ results %>% summary
 Since the LDA algorithm just clusters into $k$ topics, it is necessary to evaluate which "topic" refers to which book, in order to calculate a missclassification rate. For each of the books we naively derive a distribution of the assignment to the topics. This is done by accumulating the distributions for each chapter of the book. The most likely assignment of the LDA model is choosen as the "correct" topic. Now calculating the missclassification rate is basically the fraction of those chapters/documents not coinciding with the most likely assignment.
 
 
-```{r}
-LDA_model <- LDA(chapters_dtm, 
+```{r, chache=TRUE}
+LDA_model <- LDA(chapters_dtm_all, 
                             k = n_books, control = list(seed = 1234))
   # use the predict function of udpipe
   # the topic predict funtion already extract the most likely topics
-prediction <- predict(LDA_model, newdata=chapters_dtm) %>% .$topic
+prediction <- predict(LDA_model, newdata=chapters_dtm_all) %>% .$topic
   # get "consensus" via maximum likelihood
   # first extract the gamma matrix of the model fitted on the training
   # data
@@ -452,4 +456,84 @@ for (i in 1:n_books){
 ```
 
 This does not exclude the fact that two books are assigned to the same topic. But still, from each of the plots of the "distributions" you can obtain how good the chapters of a single book are classified. The more of the mass of the distribution is on a single topic, the better the chapters of this topic are predicted.
+
+# Example 2 (10 books)
+
+First we will sample to books again as done in the example 1.
+
+```{r Sampling10books, chache=TRUE, warning=FALSE}
+n_books <- 10
+by_chapter2 <- set_up_books(n_books=n_books, seed=123456)
+appended_by_chapter2 <- append_by_chapter(x=by_chapter2, n_books = n_books)
+word_counts2 <- exclude_stop_words(appended_by_chapter2)
+
+```
+
+```{r, results="asis"}
+titles <- get_titles(appended_by_chapter2, n_books)
+titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", 
+                            header=FALSE, title="Book-titles Example 2", rownames=FALSE,
+                            label="titles:6books")
+```
+
+```{r, chache=TRUE}
+chapters_dtm_all2 <- convert_to_dtm(word_counts2, minfq=0)
+```
+
+## Evaluate model
+
+The same code as for Example 1 is used to evaluate the model. 
+
+```{r, cache=TRUE, message=FALSE, warnings=FALSE}
+# setting up how many cores to be used
+useable_cores <- parallel::detectCores() - 1
+# registering cluster
+cl <- parallel::makeCluster(useable_cores)
+doParallel::registerDoParallel(cl)
+n <- 59
+results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
+  
+  
+  chapters_dtm2 %>% 
+    split_for_fit(seed=12*i) %>% 
+    fit_n_evaluate()
+  
+  
+}
+parallel::stopCluster(cl)
+```
+
+This is the output of the simulation over 59 splits and fits. The mean is the final result:
+
+```{r}
+results %>% summary
+```
+
+```{r}
+LDA_model <- LDA(chapters_dtm2, 
+                            k = n_books, control = list(seed = 1234))
+  # use the predict function of udpipe
+  # the topic predict funtion already extract the most likely topics
+prediction <- predict(LDA_model, newdata=chapters_dtm) %>% .$topic
+  # get "consensus" via maximum likelihood
+  # first extract the gamma matrix of the model fitted on the training
+  # data
+chapters_gamma <- ext_gamma_matrix(LDA_model)
+spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
+  # get pdfs
+plotm <- spreaded_gamma %>%
+    group_by(gutenberg_id) %>%
+    # note: pdfs are unnormalized
+    summarise_at(2:(titles$len+1), sum)
+  topic_link <- plotm %>% 
+    apply(1, function(x) which.max(x[2:length(x)])) %>% 
+    cbind(plotm$gutenberg_id) %>%
+    as.data.frame()
+  
+par(mfrow=c(2,3))
+for (i in 1:n_books){
+  vec <- plotm[i,2:n_books] %>% unlist() 
+  barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))
+}
+```
 

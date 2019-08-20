@@ -28,7 +28,9 @@ library(sampling)
 
 ```
 
-# Get data
+# Example 1 (6 books)
+
+## Get data
 
 This is the essential step for setting up the neural net. These functions include the sampling procedure from the *gutenbergr* library 
 
@@ -177,11 +179,11 @@ adjust_tensor_format <- function(x){
 }
 ```
 
-\subsection{Sample corpus}
+### Sample corpus
 
 Now we can use all these functions to get to the initial corpus sample. In this example $6$ books are choosen.
 
-```{r, chache=TRUE, warning=TRUE}
+```{r initial_sample_forNN, chache=TRUE, warning=TRUE}
 n_books <- 6
 by_chapter <- set_up_books(n_books=n_books, seed=222)
 get_titles(by_chapter, n_books)
@@ -189,7 +191,7 @@ get_titles(by_chapter, n_books)
 
 The function set_up_books() returns a warning that one book seems to consist of only one chapter. In order to get a copus consisting out of $6$ books, the function append_by_chaper() is used, which fills up the corpus to the desired number of books.
 
-```{r, chache=TRUE, warning=FALSE}
+```{r append_sample, chache=TRUE, warning=FALSE}
 appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
 word_counts <- exclude_stop_words(appended_by_chapter)
 ```
@@ -205,7 +207,7 @@ titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize",
 ```
 
 
-\subsection{Reduction of the dimensionality}
+### Reduction of the dimensionality
 
 In the set up we have another parameter to adjust. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
 
@@ -231,7 +233,7 @@ adjusted_format_tfidf <- adjust_tensor_format((chapters_dtm))
 ncol(chapters_dtm_tfidf)
 ```
 
-\subsection{Splitting and Fitting}
+### Splitting and Fitting
 
 The following function splits the sample in an manner, such that each cluster is eually to its size represented in the test data and the validation data.
 
@@ -365,7 +367,7 @@ and the time:
 
 ```{r}
 # mfreq=2
-(u2 <- tim2_all-tim1_all)
+(u2 <- tim2_all-(tim1_all))
 ```
 
 Now using the tfidf reduced bag of words:
@@ -392,19 +394,21 @@ and the time:
 
 ```{r}
 # mfreq=2
-(u3 <- tim2_tfidf-tim1_tfidf)
+(u3 <- tim2_tfidf-(tim1_tfidf))
 ```
 
-The following matrix summarises the results.
+Table \ref{performancematrix} summarises the results.
 
 ```{r, results="asis"}
 performance_matrix <- data.frame(freq2.embedding=c(results%>%mean, u1), 
            all.embedding=c(results_all%>%mean, u2),
            tfidf=c(results_tfidf%>%mean, u3))
 rownames(performance_matrix) <- c("missc. rate", "time")
-performance_matrix %>%  stargazer(summary=FALSE, header=F)
+performance_matrix %>%  stargazer(summary=FALSE, header=F,
+                                  title="Performance of embeddings",
+                                  label="performancematrix")
 ```
 
-The time for the embedding using more than frequency 2 is very short. Whereas the embedding via tfidf with the same dimensionality takes very long.
+The time for the embedding using more than frequency 2 is very short. Whereas the embedding via tfidf with the same dimensionality takes very long. It certainly makes sense that the missclassification rate is better for embedding with the full vocabulary than for the other two embeddings.
 
 
