@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  19 AUG 2019 15:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  20 AUG 2019 15:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -581,13 +581,13 @@ pling pro-ce-dure see
 
 [4] (./Magisterarbeit_S.Knigge.bbl [5]) [6] (./Magisterarbeit_S.Knigge.aux) ) 
 Here is how much of TeX's memory you used:
- 4170 strings out of 493089
- 60438 string characters out of 6134841
- 129190 words of memory out of 5000000
- 7561 multiletter control sequences out of 15000+600000
+ 4171 strings out of 493089
+ 60452 string characters out of 6134841
+ 129207 words of memory out of 5000000
+ 7562 multiletter control sequences out of 15000+600000
  60021 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,11n,38p,692b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,38p,894b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/
 usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texl
 ive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/t
@@ -605,7 +605,7 @@ fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/l
 ocal/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2015/tex
 mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Magisterarbeit_S.Knigge.pdf (6 pages, 267366 bytes).
+Output written on Magisterarbeit_S.Knigge.pdf (6 pages, 262050 bytes).
 PDF statistics:
  86 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream

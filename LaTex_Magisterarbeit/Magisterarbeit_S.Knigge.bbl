@@ -35,6 +35,11 @@ M.~Steyvers, T.~G. (2006).
 \newblock Probabilistic topic models.
 \newblock {\em Latent Semantic Analysis: A Road to Meaning}.
 
+\bibitem[Powieser, 2012]{Powieser2012}
+Powieser, M. (2012).
+\newblock Latent dirichlet allocation in r.
+\newblock Master's thesis, Vienna University of Economics and Business.
+
 \bibitem[Silge and Robinson, 2017]{Silge2017}
 Silge, J. and Robinson, D. (2017).
 \newblock {\em Text Mining with R: A Tidy Approach}.

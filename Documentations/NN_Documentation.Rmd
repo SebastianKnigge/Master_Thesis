@@ -5,14 +5,15 @@ date: "5 8 2019"
 output: pdf_document
 ---
 
+# Setup
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(stargazer)
 ```
 
-# Initial Setup
+Following packages were used in this script:
 
-This is the essential step for setting up the neural net. These functions include the sampling procedure from the *gutenbergr* library 
 ```{r, message=FALSE, warning=FALSE}
 # loading packages
 library(keras)
@@ -25,6 +26,13 @@ library(tidytext)
 library(udpipe)
 library(sampling)
 
+```
+
+# Get data
+
+This is the essential step for setting up the neural net. These functions include the sampling procedure from the *gutenbergr* library 
+
+```{r functions, message=FALSE, warning=FALSE, chache=TRUE}
 sampling_books <- function(seed=1234, n=20){
   # sample n books from the whole library
   set.seed(seed)
@@ -169,20 +177,31 @@ adjust_tensor_format <- function(x){
 }
 ```
 
-Now we can use all these functions to get the initial corpus sample.
+\subsection{Sample corpus}
 
-```{r, cache=TRUE, warning=FALSE, message=FALSE}
+Now we can use all these functions to get to the initial corpus sample. In this example $6$ books are choosen.
+
+```{r, chache=TRUE, warning=TRUE}
 n_books <- 6
 by_chapter <- set_up_books(n_books=n_books, seed=222)
+get_titles(by_chapter, n_books)
+```
+
+The function set_up_books() returns a warning that one book seems to consist of only one chapter. In order to get a copus consisting out of $6$ books, the function append_by_chaper() is used, which fills up the corpus to the desired number of books.
+
+```{r, chache=TRUE, warning=FALSE}
 appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
 word_counts <- exclude_stop_words(appended_by_chapter)
 ```
 
-These are the sampled titles for the book sample with the seed $222$.
+In table \ref{titles:6books} the sampled titles for the book sample with the seed $222$ are displayed. It appears through the function append_by:chapter() one book was added, called "My Novel" — Volume 04".
+
 
 ```{r, results="asis"}
 titles <- get_titles(appended_by_chapter, n_books)
-titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", header=FALSE, title="Book-titles", rownames=FALSE)
+titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", 
+                            header=FALSE, title="Book-titles", rownames=FALSE,
+                            label="titles:6books")
 ```
 
 
@@ -212,11 +231,11 @@ adjusted_format_tfidf <- adjust_tensor_format((chapters_dtm))
 ncol(chapters_dtm_tfidf)
 ```
 
-# Splitting and Fitting
+\subsection{Splitting and Fitting}
 
 The following function splits the sample in an manner, such that each cluster is eually to its size represented in the test data and the validation data.
 
-```{r, cache=TRUE}
+```{r sampling, cache=TRUE}
 sample_cluster_wise <- function(data, test_ratio=0.1, val_ratio=0.2, seed=1234){
   X <- data$x; y <- data$y
   cluster=data$topics
@@ -297,7 +316,7 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 
 Now we can start applying the model:
 
-```{r, cache=TRUE}
+```{r epply_n_evaluate, cache=TRUE}
 tim1 <- Sys.time()
 n <- 59
 results <- rep(NA,n)
@@ -324,7 +343,7 @@ and the time:
 
 We now try this procedure using the full bag of words:
 
-```{r, cache=TRUE}
+```{r apply_n_evaluate_all, cache=TRUE}
 tim1_all <- Sys.time()
 n <- 59
 results_all <- rep(NA,n)
@@ -351,7 +370,7 @@ and the time:
 
 Now using the tfidf reduced bag of words:
 
-```{r, cache=TRUE}
+```{r apply_n_evaluate_tfidf, cache=TRUE}
 tim1_tfidf <- Sys.time()
 n <- 59
 results_tfidf <- rep(NA,n)

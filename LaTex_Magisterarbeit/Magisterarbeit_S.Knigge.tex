@@ -69,7 +69,7 @@ One can obtain the marginal distribution of a document $\textbf{w}$, by integrat
 p(\textbf{w}|\alpha, \beta)=\int p(\theta|\alpha) \left( \prod_{i=1}^{N} \sum_{z_i}p(z_i|\theta)p(w_n|z_i,\beta) \right) d\theta
 \end{align}
 \ \\
-According to the current state of research, there are two feasible approaches to calculating the posterior density.\footnote{Cf. eg. \cite{Blei2012}} One approach is to simulate the posterior density by iteratively sampling - the so-called Gibbs sampling. The second approach is a deterministic method, a modified version of the well-known EM algorithm \cite{Dempster1977}: the Variational EM algorithm (VEM algorithm) \cite{Wainwright2008}. In the following two sections the both approaches are roughly outlined to give the reader some insight into the Bayesian inference underlying the algorithms.
+The literature divides the approaches to calculating posterior distribution into two main categories.\cite{Blei2012} distinguishes between sampling based algorithms and variational algorithms. \cite{Powieser2012} lists a total of 6 algorithms that can be used to estimate parameters in the LDA model. This thesis will be confined to the two most cited and most used members of the two main groups. One approach is to simulate the posterior density by iteratively sampling - the so-called Gibbs sampling. The second approach is a deterministic method, a modified version of the well-known EM algorithm \cite{Dempster1977}: the Variational EM algorithm (VEM algorithm) \cite{Wainwright2008}. In the following two sections the both approaches are roughly outlined to give the reader some insight into the Bayesian inference underlying the algorithms.
 
 \subsubsection{Variational EM algorithm}
 
@@ -128,7 +128,7 @@ Usually the word-topic distributions $\beta_{j}^{(l)}$ for the words $l=1,...,V$
 
 \subsubsection{Implementation}
 
-In this thesis, the implementation of the LDA model and its estimation is mainly based on using the package \textit{topicmodels}\footnote{See \cite{Hornik2011}} of Kurt Hornik. The package \textit{topicmodels} can apply both the VEM algorithm as well as Gibbs sampling in order to fit the model. In addition, the package \textit{tidytext}\footnote{See \cite{Silge2017}} is being used for text structuring and embedding. Whereby there are other packages besides this implementation of the LDA model, topicmodels is particularly convenient, because tidytext was designed by its developers to work perfectly in combination with topicmodels.
+In this thesis, the implementation of the LDA model and its estimation is mainly based on using the package \textit{topicmodels} of Kurt Hornik. The package \textit{topicmodels} can apply both the VEM algorithm as well as Gibbs sampling in order to fit the model. In addition, the package \textit{tidytext} is being used for text structuring and embedding. Whereby there are other packages besides this implementation of the LDA model, topicmodels is particularly convenient, because tidytext was designed by its developers to work perfectly in combination with topicmodels.\footnote{See \cite[p. 89]{Silge2017}}
 
 
 
