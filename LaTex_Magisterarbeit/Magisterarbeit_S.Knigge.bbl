@@ -3,7 +3,7 @@
 \bibitem[A.~Gelman, 2014]{Gelman2014}
 A.~Gelman, J.~Carlin, H. S. D. D. A. V. D.~R. (2014).
 \newblock {\em Bayesian Data Analysis}.
-\newblock Chapman \& Hall/CRC.
+\newblock Chapman and Hall/CRC.
 
 \bibitem[AP~Dempster, 1977]{Dempster1977}
 AP~Dempster, NM~Laird, D.~R. (1977).
@@ -15,8 +15,8 @@ Blei, D. (2012).
 \newblock Probabilistic topic models.
 \newblock {\em Communications of the ACM}, 55(4):77.
 
-\bibitem[D.~Blei, 2003]{Blei2003}
-D.~Blei, A.~Ng, M.~J. (2003).
+\bibitem[Blei, 2003]{Blei2003}
+Blei, D., N. N. J.~M. (2003).
 \newblock Latent dirichlet allocation.
 \newblock {\em Journal of Machine Learning Research}, 3.
 
@@ -35,10 +35,21 @@ M.~Steyvers, T.~G. (2006).
 \newblock Probabilistic topic models.
 \newblock {\em Latent Semantic Analysis: A Road to Meaning}.
 
+\bibitem[McCulloch and Pitts, 1943]{McCulloch1943}
+McCulloch, W. and Pitts, W. (1943).
+\newblock A logical calculus of the ideas immanent in nervous activity.
+\newblock {\em The bulletin of mathematical biophysics}.
+
 \bibitem[Powieser, 2012]{Powieser2012}
 Powieser, M. (2012).
 \newblock Latent dirichlet allocation in r.
 \newblock Master's thesis, Vienna University of Economics and Business.
+
+\bibitem[Rosenblatt, 1958]{Rb1958}
+Rosenblatt, F. (1958).
+\newblock The perceptron, a probabilistic model for information storage and
+  organization in the brain.
+\newblock {\em The Psychological Review}.
 
 \bibitem[Silge and Robinson, 2017]{Silge2017}
 Silge, J. and Robinson, D. (2017).

@@ -203,6 +203,10 @@ ind4 <- which(prediction5$topic==4)
 ind5 <- which(prediction5$topic==5)
 ```
 
+
+
+
+
 ## Wordclouds using tfidf
 
 ```{r wordcloud_tfidf, message=FALSE, warning=FALSE, cache=TRUE}
@@ -273,4 +277,22 @@ plot_wordcloud(corpus, selection=ind2_2, i=2)
 plot_wordcloud(corpus, selection=ind3_2, i=3)
 plot_wordcloud(corpus, selection=ind4_2, i=4)
 plot_wordcloud(corpus, selection=ind5_2, i=5)           
+```
+
+
+# Explorative Analysis for ANN
+
+```{r freq_words, message=FALSE, warning=FALSE, cache=TRUE, results="asis"}
+# number of words
+l <- 10
+
+tf_idf_matrix <- corpus %>% 
+  count(document, word, sort = TRUE) %>% 
+  bind_tf_idf(word, document, n) 
+# return the l most frequent words per document
+freq_words <- lapply(1:28, function(x) tf_idf_matrix %>% filter(document==x) %>% arrange(desc(tf_idf)) %>% 
+                       .[1:l,2]) %>% 
+                        do.call("cbind",.)
+
+colnames(freq_words) <- paste0("doc_",1:28)
 ```

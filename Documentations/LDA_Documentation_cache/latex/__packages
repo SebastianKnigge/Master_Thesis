@@ -1,0 +1,11 @@
+base
+stargazer
+gutenbergr
+dplyr
+tidyr
+stringr
+tidytext
+udpipe
+topicmodels
+ggplot2
+foreach

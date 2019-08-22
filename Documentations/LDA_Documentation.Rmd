@@ -44,7 +44,7 @@ sampling_books <- function(seed=1234, n=20){
   set.seed(seed)
   gutenberg_works() %>% 
     # select works with title
-    dplyr::filter(!is.na(title)) %>% 
+    dplyr::filter(!is.na(title)&!is.na(gutenberg_bookshelf)) %>% 
     # set the sample sitze
     sample_n(n) %>%
     # set a special download link
@@ -72,6 +72,7 @@ shorten_titles <- function(titles){
   sub_inds <- titles %>% 
     regexpr(pattern="\\n|\\r")-1
   sub_inds[sub_inds<0] <- nchar(titles)[sub_inds<0]
+  sub_inds <- pmin(sub_inds, 45)
   titles %>% 
     substr(1,sub_inds)
 }
@@ -187,7 +188,7 @@ by_chapter <- set_up_books(n_books=n_books, seed=222)
 get_titles(by_chapter, n_books)
 ```
 
-The function set_up_books() returns a warning that one book seems to consist of only one chapter. In order to get a copus consisting out of $6$ books, the function append_by_chaper() is used, which fills up the corpus to the desired number of books.
+The function set_up_books() returns a warning that several books seem to consist of only one chapter. In order to get a copus consisting out of $6$ books, the function append_by_chaper() is used, which fills up the corpus to the desired number of books.
 
 ```{r, chache=TRUE, warning=FALSE}
 appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
@@ -202,6 +203,17 @@ titles <- get_titles(appended_by_chapter, n_books)
 titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", 
                             header=FALSE, title="Book-titles", rownames=FALSE,
                             label="titles:6books")
+```
+
+We also want to check if the book categories are different. See Table (\ref{categories:6books}) for comparison.
+```{r, results="asis"}
+gbids <- titles$titles$gutenberg_id 
+categories <- gutenberg_works() %>% 
+  filter(gutenberg_id %in% gbids) %>% 
+  select(gutenberg_id, gutenberg_bookshelf)
+categories %>% stargazer(summary=FALSE, font.size = "footnotesize", 
+                            header=FALSE, title="Book-categories", rownames=FALSE,
+                            label="categories:6books")
 ```
 
 

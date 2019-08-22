@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  21 AUG 2019 18:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  22 AUG 2019 15:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -905,7 +905,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [3] [4] [5]
-<Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf-1.pdf, id=75, 429.605pt x 312.
+<Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf-1.pdf, id=79, 429.605pt x 312.
 16624pt>
 File: Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf-1.pdf Graphic file (type 
 pdf)
@@ -914,7 +914,7 @@ Package pdftex.def Info: Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf-1.pdf
 used on input line 525.
 (pdftex.def)             Requested size: 429.61049pt x 312.17024pt.
 [6]
-<Reg.Docs_LDA_files/figure-latex/wordcloud_tf-1.pdf, id=80, 405.515pt x 280.046
+<Reg.Docs_LDA_files/figure-latex/wordcloud_tf-1.pdf, id=84, 405.515pt x 280.046
 25pt>
 File: Reg.Docs_LDA_files/figure-latex/wordcloud_tf-1.pdf Graphic file (type pdf
 )
@@ -924,7 +924,7 @@ d on input line 543.
 (pdftex.def)             Requested size: 405.52637pt x 280.0541pt.
 [7 <./Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf-1.pdf>] [8 <./Reg.Docs_LD
 A_files/figure-latex/wordcloud_tf-1.pdf>] [9] [10]
-<Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf2-1.pdf, id=118, 429.605pt x 31
+<Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf2-1.pdf, id=122, 429.605pt x 31
 2.16624pt>
 File: Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf2-1.pdf Graphic file (type
  pdf)
@@ -932,27 +932,27 @@ File: Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf2-1.pdf Graphic file (type
 Package pdftex.def Info: Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf2-1.pdf
  used on input line 722.
 (pdftex.def)             Requested size: 429.61049pt x 312.17024pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 725.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 745.
 [11 <./Reg.Docs_LDA_files/figure-latex/wordcloud_tfidf2-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 725.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 745.
 (./Reg.Docs_LDA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 725.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 725.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 745.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 745.
 Package rerunfilecheck Info: File `Reg.Docs_LDA.out' has not changed.
-(rerunfilecheck)             Checksum: ABBC391DEECECC5A81167CC6AC995E0D;902.
+(rerunfilecheck)             Checksum: EE724FC448ACA338C284788CFDC338AA;1094.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 725.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 745.
  ) 
 Here is how much of TeX's memory you used:
- 12673 strings out of 493089
- 184807 string characters out of 6134841
- 308384 words of memory out of 5000000
- 15928 multiletter control sequences out of 15000+600000
+ 12676 strings out of 493089
+ 184857 string characters out of 6134841
+ 308437 words of memory out of 5000000
+ 15930 multiletter control sequences out of 15000+600000
  40979 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,9n,35p,367b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 31i,9n,35p,458b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
 cal/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/20
 15/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2015/texmf-dist/
@@ -963,10 +963,10 @@ m/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb
 al/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2015/texm
 f-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Reg.Docs_LDA.pdf (11 pages, 208962 bytes).
+Output written on Reg.Docs_LDA.pdf (11 pages, 210462 bytes).
 PDF statistics:
- 171 PDF objects out of 1000 (max. 8388607)
- 139 compressed objects within 2 object streams
- 33 named destinations out of 1000 (max. 500000)
- 8272 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 175 PDF objects out of 1000 (max. 8388607)
+ 143 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 8280 words of extra memory for PDF output out of 10000 (max. 10000000)
 
