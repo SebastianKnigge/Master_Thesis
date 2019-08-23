@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  23 AUG 2019 10:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  23 AUG 2019 11:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -899,7 +899,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 387.
 [4] [5] [6] [7]
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 711
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 715
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -910,63 +910,73 @@ File: LDA_Documentation_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-20-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-20-
-1.pdf used on input line 787.
+1.pdf used on input line 791.
 (pdftex.def)             Requested size: 427.59645pt x 279.04181pt.
-[9] [10 <./LDA_Documentation_files/figure-latex/unnamed-chunk-20-1.pdf>] [11]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-25-1.pdf, id=117, 412.54124
-pt x 266.9975pt>
-File: LDA_Documentation_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file 
+[9]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-21-1.pdf, id=101, 427.5975p
+t x 279.0425pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file 
 (type pdf)
-<use LDA_Documentation_files/figure-latex/unnamed-chunk-25-1.pdf>
-Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-25-
-1.pdf used on input line 925.
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-21-
+1.pdf used on input line 820.
+(pdftex.def)             Requested size: 427.59645pt x 279.04181pt.
+[10 <./LDA_Documentation_files/figure-latex/unnamed-chunk-20-1.pdf>] [11 <./LDA
+_Documentation_files/figure-latex/unnamed-chunk-21-1.pdf>] [12]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-26-1.pdf, id=130, 412.54124
+pt x 266.9975pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file 
+(type pdf)
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-26-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-26-
+1.pdf used on input line 958.
 (pdftex.def)             Requested size: 412.54652pt x 267.00089pt.
 
-<LDA_Documentation_files/figure-latex/unnamed-chunk-25-2.pdf, id=118, 412.54124
+<LDA_Documentation_files/figure-latex/unnamed-chunk-26-2.pdf, id=131, 412.54124
 pt x 266.9975pt>
-File: LDA_Documentation_files/figure-latex/unnamed-chunk-25-2.pdf Graphic file 
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-26-2.pdf Graphic file 
 (type pdf)
-<use LDA_Documentation_files/figure-latex/unnamed-chunk-25-2.pdf>
-Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-25-
-2.pdf used on input line 926.
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-26-2.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-26-
+2.pdf used on input line 959.
 (pdftex.def)             Requested size: 412.54652pt x 267.00089pt.
 
-<LDA_Documentation_files/figure-latex/unnamed-chunk-25-3.pdf, id=119, 412.54124
+<LDA_Documentation_files/figure-latex/unnamed-chunk-26-3.pdf, id=132, 412.54124
 pt x 104.39pt>
-File: LDA_Documentation_files/figure-latex/unnamed-chunk-25-3.pdf Graphic file 
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-26-3.pdf Graphic file 
 (type pdf)
-<use LDA_Documentation_files/figure-latex/unnamed-chunk-25-3.pdf>
-Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-25-
-3.pdf used on input line 927.
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-26-3.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-26-
+3.pdf used on input line 960.
 (pdftex.def)             Requested size: 412.54652pt x 104.39131pt.
 
-Overfull \hbox (357.56024pt too wide) in paragraph at lines 925--928
+Overfull \hbox (357.56024pt too wide) in paragraph at lines 958--961
 [][] []
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 930.
-[12 <./LDA_Documentation_files/figure-latex/unnamed-chunk-25-1.pdf> <./LDA_Docu
-mentation_files/figure-latex/unnamed-chunk-25-2.pdf> <./LDA_Documentation_files
-/figure-latex/unnamed-chunk-25-3.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 930.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 963.
+[13 <./LDA_Documentation_files/figure-latex/unnamed-chunk-26-1.pdf> <./LDA_Docu
+mentation_files/figure-latex/unnamed-chunk-26-2.pdf> <./LDA_Documentation_files
+/figure-latex/unnamed-chunk-26-3.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 963.
 (./LDA_Documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 930.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 930.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 963.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 963.
 Package rerunfilecheck Info: File `LDA_Documentation.out' has not changed.
 (rerunfilecheck)             Checksum: 989AEEC14B09E2E6B153EABDBCCCE1A9;1239.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 930.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 963.
  ) 
 Here is how much of TeX's memory you used:
- 12813 strings out of 493089
- 187752 string characters out of 6134841
+ 12818 strings out of 493089
+ 188018 string characters out of 6134841
  298488 words of memory out of 5000000
- 16026 multiletter control sequences out of 15000+600000
+ 16030 multiletter control sequences out of 15000+600000
  61255 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,9n,35p,634b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 31i,9n,35p,634b,431s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local
 /texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2
 015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2015/texmf-dist
@@ -980,10 +990,10 @@ t/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
 pe1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
 /lm/lmtk10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10
 .pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on LDA_Documentation.pdf (12 pages, 296785 bytes).
+Output written on LDA_Documentation.pdf (13 pages, 303344 bytes).
 PDF statistics:
- 200 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 14429 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 214 PDF objects out of 1000 (max. 8388607)
+ 171 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 14434 words of extra memory for PDF output out of 17280 (max. 10000000)
 

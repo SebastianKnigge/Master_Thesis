@@ -285,16 +285,20 @@ ext_gamma_matrix <- function(model){
   chapters_gamma <- chapters_gamma %>%
     separate(document, c("gutenberg_id", "chapter"), sep = "_", convert = TRUE)
   # get matrix with probabilities for each topic per chapter
+  # this matrix is just information and will in this form of the function 
+  # not be returned
   gamma_per_chapter <- chapters_gamma %>%
     spread(topic, gamma)
   return(chapters_gamma)
 }
 
-validate_LDAclassification <- function(x){
+validate_LDAclassification <- function(gamma_matrix){
+  # gamma_matrix is an object of the function ext_gamma_matrix()
+  
   #First we’d find the topic that was most associated with 
   # each chapter using top_n(), which is effectively the 
   # “classification” of that chapter
-  chapter_classifications <- x %>%
+  chapter_classifications <- gamma_matrix %>%
     group_by(gutenberg_id, chapter) %>%
     top_n(1, gamma) %>%
     ungroup()
@@ -439,19 +443,44 @@ Since the LDA algorithm just clusters into $k$ topics, it is necessary to evalua
 
 
 ```{r, chache=TRUE}
-LDA_model <- LDA(chapters_dtm_all, 
+LDA_model <- LDA(chapters_dtm, 
                             k = n_books, control = list(seed = 1234))
-  # get "consensus" via maximum likelihood
-  # first extract the gamma matrix of the model fitted on the training
-  # data
-chapters_gamma <- ext_gamma_matrix(LDA_model)
+# get gamma matrix for chapter probabilities
+chapters_gamma <- tidy(LDA_model, matrix = "gamma") %>%
+    # split joint name of book and chapter
+    separate(document, c("gutenberg_id", "chapter"), sep = "_", convert = TRUE)
 spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
   # get pdfs
 plotm <- spreaded_gamma %>%
     group_by(gutenberg_id) %>%
     # note: pdfs are unnormalized
     summarise_at(2:(titles$len+1), sum)
-  topic_link <- plotm %>% 
+topic_link <- plotm %>% 
+    apply(1, function(x) which.max(x[2:length(x)])) %>% 
+    cbind(plotm$gutenberg_id) %>%
+    as.data.frame()
+  
+par(mfrow=c(2,3))
+for (i in 1:n_books){
+  vec <- plotm[i,2:n_books] %>% unlist() 
+  barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))
+}
+```
+
+```{r, chache=TRUE}
+LDA_model <- LDA(chapters_dtm_all, 
+                            k = n_books, control = list(seed = 1234))
+# get gamma matrix for chapter probabilities
+chapters_gamma <- tidy(LDA_model, matrix = "gamma") %>%
+  # split joint name of book and chapter
+    separate(document, c("gutenberg_id", "chapter"), sep = "_", convert = TRUE)
+spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
+  # get pdfs
+plotm <- spreaded_gamma %>%
+    group_by(gutenberg_id) %>%
+    # note: pdfs are unnormalized
+    summarise_at(2:(titles$len+1), sum)
+topic_link <- plotm %>% 
     apply(1, function(x) which.max(x[2:length(x)])) %>% 
     cbind(plotm$gutenberg_id) %>%
     as.data.frame()
