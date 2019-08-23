@@ -40,6 +40,11 @@ McCulloch, W. and Pitts, W. (1943).
 \newblock A logical calculus of the ideas immanent in nervous activity.
 \newblock {\em The bulletin of mathematical biophysics}.
 
+\bibitem[Mukherjee, 2019]{Mekherjee2019}
+Mukherjee, S. (2019).
+\newblock Lecture notes for probabilistic machine learning.
+\newblock Duke University.
+
 \bibitem[Powieser, 2012]{Powieser2012}
 Powieser, M. (2012).
 \newblock Latent dirichlet allocation in r.
