@@ -137,7 +137,7 @@ In this thesis, the implementation of the LDA model and its estimation is mainly
 \subsection{Artifical Neural Networks}
 
 Artificial neural networks (ANN) are much more versatile than the LDA model. There are not only various forms of artificial neural networks, but also a very large number of application areas. Quite as machine learning procedures in general, also deep learning algorithms are divided into two broad categories: supervised learning, where a superset instance provides the algorithm with the output required to learn, and unsupervised procedures that internally train predefined models to find patterns in the input signals. In this chapter we will focus heavily on the former group of ANNs. Also, this chapter is intended to give the reader an overview of the research on neural networks as well as the background of their development. \\
-\\
+\subsubsection{Development}
 Research on ANNs dates back to the 1940s, when \cite{McCulloch1943} introduced the so called “M-P neuron”. Whereby this neuron had only a bivariate input and output, Rosenblatt later extended this idea to a network of M-P neurons, which allowed to set up a simple classification algorithm \cite{Rb1958}. A perceptron in its basic form (single perceptron) is a binary classifier. \\
 \\
 Imagine input data of a simple perceptron in the form of a matrix. 
@@ -163,13 +163,55 @@ The matrix $X$ is passed vector by vector to the percepron and the output is com
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.3]{simple_perceptron.pdf}
+	\includegraphics[scale=0.4]{simple_perceptron.pdf}
 	\caption{Schematic diagram of a simple perceptron by \cite{Rb1958}}
 	\label{simple_perceptron}
 \end{figure}
 \ \\
-The algorithm of the simple perceptron is schematically shown in Figure \ref{simple_perceptron}. This diagram corresponds to the common representation in education \cite{Mekherjee2019}, although a horizontal perspective is often chosen.
-	
+The algorithm of the simple perceptron is schematically shown in Figure \ref{simple_perceptron}. This diagram corresponds to the common representation in education \cite{Mekherjee2019}, although a horizontal perspective is often chosen.\\
+\\
+If this basic perceptron is used in a clever way, designs can be developed that have variable application possibilities with this approach only. For example, a sigmoid function can be used as an activation function instead of the step function. So the output layer will not project into the $\{0,1\}$ space, but into a probability space. If you add several nodes with the sigmoid activation function rather than a single output, you basically obtain the architecture that is also called multivariate logistic regression \cite{Bahjat2006}. In that case the model can be estimated by an individual calculation of logistic regressions for each node in the output layer. This allows to classify not only two classes, but an arbitrary number (see the network architecture of Figure \ref{adaption_perceptron}). \footnote{Note that in this setting the dependent variable must be one-hot encoded.}\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{adaption_perceptron.pdf}
+	\caption{Schematic diagram of an adapted Rosenblatt-perceptron network}
+	\label{adaption_perceptron}
+\end{figure}
+\ \\
+Shortly following the publication of these results, which would lay the foundation for later neural networks, ANN research had to suffer a severe setback after Minsky and Papert \cite{Minsky1969} were able to prove that perceptrons cannot provide a suitable solution in certain basic scenarios. It is possible to separate two clusters by a hyperplane with the perceptron, however, if the two groups could not be separated completely, the perceptron failed. For instance, it was impossible to find a solution for data generated with an \textit{x-or} function (also called "exclusive or" function).\\
+\ \\
+Although the researchers Minsky and Papert showed that the perceptron in this form cannot solve the “xor problem”, they argued that extending the simple perceptron to a multi layer perceptron is an approach to solve this problem, if it was feasible to train this model. Instead of just one input layer and one output layer, an MLP may include an arbitrary number of hidden layers in between. Figure \ref{figure:MLP} shows the structure of such an network. However, with the naive optimizing algorithm of the perceptron as it was designed by Rosenblatt, it was not feasible training a model with an architecture of that kind.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{MLP.pdf}
+	\caption{Schematic diagram of an multi layer perceptron (MLP)}
+	\label{figure:MLP}
+\end{figure}
+\ \\
+\subsubsection{Backpropagation}
+The procedure used to optimize the weights of a multilayer perceptron is called backpropagation. This method was first applied to neural networks by Webos - as part of his dissertation \cite{Werbos1974}- and still works the same way to this day. It is important to use a sigmoid function instead of the step function which is used in the perceptron, as this function is differentiable.  Assume a random initial distribution of the weights $w_1,\dots,w_d$ for a network with $d$ layers, which are the starting values for the update procedure. Let $\tau_i$ be the number of units in layer $i$. So layer $i$ can be denoted as function $f_{w_i}$ and the whole network as a chain of functions.
+\begin{align}\label{network_chain}
+	\hat{y_i}=f_{w_d}(f_{w_{d-1}}(...(f_{w_1}(x_i))))=f_{w_d}\circ f_{w_{d-1}} \circ \dots \circ f_{w_1}(x_i)
+\end{align}
+The goal is to update the weights of each layer in sucha way as to minimise a selected loss function $L(w_1,\dots,w_d)$. A common loss function is for example quadratic loss: $L=\frac{1}{2}\sum_{i=1}^n(\hat{y_i}-y_i)^2$\\
+The backpropagation algorithm consist of the 3 following roughly outlined steps.
+\begin{enumerate}
+	\item \textbf{forward pass:} Calculation of the result $y_i$ for all units at the set weights
+	\item \textbf{backward-sweep:} Each layer's derivatives are now calculated using the chain rule, step by step - starting with the output layer. For the output layer this is:
+	\[\frac{\partial L}{\partial w_d}=\frac{\partial L}{\partial f_d(x_i)}\frac{\partial f_d(x_i)}{\partial w_d}	\]
+	\item \textbf{updating:} Update the weights by an arbitrary optimization algorithm. E.g. steepest descent:
+	$\Delta w_d=\alpha \frac{\partial L}{\partial w_d}$
+	,where $\alpha$ is the learning rate
+\end{enumerate}
+Thanks to current software, the derivatives no longer have to be calculated for each node by hand, but the standard packages are capable of "symbolic differentiation" for certain network structures, which makes training neural networks comfortable \cite[p. 47]{Chollet2018}.\\
+\ \\
+Note: While Rosenblatt for the perceptron was actually inspired by the biological structure of the neurons in the brain, more complex “networks used by engineers are only loosely based upon biology”\cite{Hecht-Nielsen1988}.
+
+\subsubsection{Implementation}
+This work uses the Keras R package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for R by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
+
+\newpage 
+.
 \newpage
 \appendix
 \section{Appendix}

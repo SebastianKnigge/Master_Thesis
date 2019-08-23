@@ -10,6 +10,11 @@ AP~Dempster, NM~Laird, D.~R. (1977).
 \newblock Maximum likelihood from incomplete data via the em algorithm.
 \newblock {\em Journal of the Rojal Statistical Society}.
 
+\bibitem[Bahjat, 2006]{Bahjat2006}
+Bahjat, F., e.~a. (2006).
+\newblock Multivariate logistic models.
+\newblock {\em Biometrika Trust}, 93(4):1011--1017.
+
 \bibitem[Blei, 2012]{Blei2012}
 Blei, D. (2012).
 \newblock Probabilistic topic models.
@@ -20,13 +25,23 @@ Blei, D., N. N. J.~M. (2003).
 \newblock Latent dirichlet allocation.
 \newblock {\em Journal of Machine Learning Research}, 3.
 
-\bibitem[K.~Hornik, 2011]{Hornik2011}
-K.~Hornik, B.~G. (2011).
+\bibitem[Chollet, 2018]{Chollet2018}
+Chollet, F., A.~W. (2018).
+\newblock {\em Deep Learning with R}.
+\newblock Manning.
+
+\bibitem[Hecht-Nielsen, 1988]{Hecht-Nielsen1988}
+Hecht-Nielsen, R. (1988).
+\newblock Neurocomputing: picking the human brain.
+\newblock {\em IEEE Spectrum}, 25(3):36--41.
+
+\bibitem[Hornik, 2011]{Hornik2011}
+Hornik, K., B.~G. (2011).
 \newblock topicmodels: An r package for fitting topic models.
 \newblock {\em Journal of Statistical Software}, 40(13).
 
-\bibitem[M.~Jordan, 1999]{Jordan1999}
-M.~Jordan, e.~a. (1999).
+\bibitem[Jordan, 1999]{Jordan1999}
+Jordan, M., e.~a. (1999).
 \newblock An introduction to variational methods for graphical models.
 \newblock {\em Kluwer Academic Publishers - Machine Learning}, 37:183--233.
 
@@ -39,6 +54,11 @@ M.~Steyvers, T.~G. (2006).
 McCulloch, W. and Pitts, W. (1943).
 \newblock A logical calculus of the ideas immanent in nervous activity.
 \newblock {\em The bulletin of mathematical biophysics}.
+
+\bibitem[Minsky and Papert, 1969]{Minsky1969}
+Minsky, M. and Papert, S. (1969).
+\newblock {\em Perceptrons: An Introduction to Computational Geometry}.
+\newblock MIT press.
 
 \bibitem[Mukherjee, 2019]{Mekherjee2019}
 Mukherjee, S. (2019).
@@ -65,5 +85,11 @@ Silge, J. and Robinson, D. (2017).
 Wainwright, M.~J. and Jordan, M.~I. (2008).
 \newblock Graphical models, exponential families, and variational inference.
 \newblock {\em Foundations and Trends in Machine Learning}, 1(1--2):1--305.
+
+\bibitem[Werbos, 1974]{Werbos1974}
+Werbos, P. (1974).
+\newblock {\em Beyond Regression: New Tools for Prediction and Analysis in the
+  Behavioral Sciences}.
+\newblock PhD thesis, Harvard University.
 
 \end{thebibliography}

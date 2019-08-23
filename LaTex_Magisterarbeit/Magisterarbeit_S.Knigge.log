@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  23 AUG 2019 16:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  2 SEP 2019 16:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -554,7 +554,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2 <./Graphics/LDA_Plate_Diagram.png>] [3]
+[2 <./Graphics/LDA_Plate_Diagram.png>]
+Overfull \hbox (109.87549pt too wide) in paragraph at lines 97--99
+\OT1/lmr/m/n/10.95 is equiv-a-lent to max-i-miz-ing the lower bound (see [[]] a
+nd [[]],
+ []
+
+[3]
 Underfull \hbox (badness 10000) in paragraph at lines 102--105
 
  []
@@ -565,17 +571,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--126
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 139--144
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
 
 
-Overfull \hbox (5.5779pt too wide) in paragraph at lines 139--144
+Overfull \hbox (5.5779pt too wide) in paragraph at lines 141--144
 \OT1/lmr/m/n/10.95 Research on ANNs dates back to the 1940s, when [[]]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 139--144
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
 
  []
 
@@ -592,28 +598,67 @@ File: Graphics/simple_perceptron.pdf Graphic file (type pdf)
 <use Graphics/simple_perceptron.pdf>
 Package pdftex.def Info: Graphics/simple_perceptron.pdf used on input line 166.
 
-(pdftex.def)             Requested size: 188.64693pt x 265.71716pt.
+(pdftex.def)             Requested size: 251.52284pt x 354.28055pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] (./Magisterarbeit_S.Knigge.bbl [7 <./Graphics/simple_perceptron.pdf>])
-(./Magisterarbeit_S.Knigge.lof)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 173.
+<Graphics/adaption_perceptron.pdf, id=34, 454.72084pt x 304.22658pt>
+File: Graphics/adaption_perceptron.pdf Graphic file (type pdf)
+
+<use Graphics/adaption_perceptron.pdf>
+Package pdftex.def Info: Graphics/adaption_perceptron.pdf used on input line 17
+6.
+(pdftex.def)             Requested size: 227.35986pt x 152.11292pt.
+
+<Graphics/MLP.pdf, id=35, 316.93808pt x 338.61005pt>
+File: Graphics/MLP.pdf Graphic file (type pdf)
+ <use Graphics/MLP.pdf>
+Package pdftex.def Info: Graphics/MLP.pdf used on input line 186.
+(pdftex.def)             Requested size: 190.1643pt x 203.16759pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--191
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--191
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--191
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6] [7 <./Graphics/simple_perceptron.pdf>] [8 <./Graphics/adaption_perceptron.p
+df> <./Graphics/MLP.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 206--209
+
+ []
+
+[9] [10] (./Magisterarbeit_S.Knigge.bbl [11]) (./Magisterarbeit_S.Knigge.lof)
 \tf@lof=\write3
 \openout3 = `Magisterarbeit_S.Knigge.lof'.
 
- [8] (./Magisterarbeit_S.Knigge.aux) ) 
+
+[12] (./Magisterarbeit_S.Knigge.aux) ) 
 Here is how much of TeX's memory you used:
- 4175 strings out of 493089
- 60651 string characters out of 6134841
- 128277 words of memory out of 5000000
- 7565 multiletter control sequences out of 15000+600000
- 56007 words of font info for 55 fonts, out of 8000000 for 9000
+ 4202 strings out of 493089
+ 61121 string characters out of 6134841
+ 130390 words of memory out of 5000000
+ 7587 multiletter control sequences out of 15000+600000
+ 60021 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,11n,38p,894b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,38p,943b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts
-/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/
-lm-mathsy.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.
+/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips
+/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.
 enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/
 local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2015/t
@@ -621,15 +666,18 @@ exmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2015/texmf-dist/
 fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
 1/public/lm/lmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm
 /lmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015/texmf-d
-ist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
-ype1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Magisterarbeit_S.Knigge.pdf (8 pages, 261629 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015
+/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2015/texmf-dist/
+fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
+1/public/lm/lmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/l
+m/lmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
+.pfb>
+Output written on Magisterarbeit_S.Knigge.pdf (12 pages, 367257 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 144 PDF objects out of 1000 (max. 8388607)
+ 101 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
