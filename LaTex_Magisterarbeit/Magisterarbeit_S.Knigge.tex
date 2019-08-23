@@ -54,7 +54,7 @@ You can summarize this setup in a plate diagram as shown in figure \ref{fig:Plat
 	\caption{The well-established plate diagram for the standard LDA model extended by the parameter $\delta$. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite{Blei2003}  for comparisons.}
 	\label{fig:PlateDiagram}
 \end{figure}
-
+\ \\
 In order to estimate the model parameters, the first task is to calculate the posterior distribution, which consists of the joint distribution in the numerator and the marginal distribution in the denominator.
 
 \begin{align}\label{posterior}
@@ -121,7 +121,7 @@ p(z_i=j|z_{-i},w)\propto \frac{n_{-i,j}^{(l)}+\delta}{\sum_t n_{-i,j}^{(t)}+V\de
 \makebox[1cm][l]{}						\makebox[4cm][l]{\ \ \ \ topic $j$, not including the assignment for word $i$}\\
 \makebox[1cm][l]{$d_i$}				... \makebox[4cm][l]{document in the corpus which includes word $i$}\\
 \makebox[1cm][l]{$\delta,\alpha$} 	... \makebox[4cm][l]{parameters of the prior distributions for $\beta$ and $\theta$}\\
-
+\\
 Usually the word-topic distributions $\beta_{j}^{(l)}$ for the words $l=1,...,V$ and topics $j=1,..,k$ and topic-document distributions $\theta_j^{(d)}$ for the documents $d=1,...,D$ and the topics $j=1,...,k$ will be of interest. (\ref{Gibbs:beta}) and (\ref{Gibbs:theta}) shows the predictive distributions denoted as "estimators". 
 \begin{align}
 \hat\beta_{j}^{(l)}&=\frac{n_{-i,j}^{(l)}+\delta}{\sum_t n_{-i,j}^{(t)}+V\delta} \label{Gibbs:beta} \\
@@ -136,8 +136,8 @@ In this thesis, the implementation of the LDA model and its estimation is mainly
 \subsection{Artifical Neural Networks}
 
 Artificial neural networks (ANNs) are much more versatile than the LDA model. There are not only various forms of artificial neural networks, but also a very large number of application areas. For this reason, the following is intended to give the reader an overview of the research on ANNs as well as the background of their development. \\
-mixture of distributions. Given that documents $\textbf{w}$ and words $w_i$ in each document - both considered as random variables in this setting - are exchangeable in such a way, a mixed model such as the LDA model is appropriate \cite{Blei2003}.
-
+mixture of distributions. Given that documents $\textbf{w}$ and words $w_i$ in each document - both considered as random variables in this setting - are exchangeable in such a way, a mixed model such as the LDA model is appropriate \cite{Blei2003}.\\
+\\
 The following notation is used in conjunction with the LDA model. Let $z_j$ be the topics with $j\in\{1,\dots,k\}$. In the LDA setting we assume for  every topic $z_j$ there is a term distribution
 $$\beta_j \sim Dir(\delta)$$
 We further assume each document w has a distribution of topics.
@@ -159,7 +159,7 @@ You can summarize this setup in a plate diagram as shown in figure \ref{fig:Plat
 	\caption{The well-established plate diagram for the standard LDA model extended by the parameter $\delta$. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite{Blei2003}  for comparisons.}
 	\label{fig:PlateDiagram}
 \end{figure}
-
+\ \\
 In order to estimate the model parameters, the first task is to calculate the posterior distribution, which consists of the joint distribution in the numerator and the marginal distribution in the denominator.
 
 \begin{align}\label{posterior}
@@ -240,6 +240,8 @@ In this thesis, the implementation of the LDA model and its estimation is mainly
 
 \subsection{Artifical Neural Networks}
 
+Artificial neural networks (ANN) are much more versatile than the LDA model. There are not only various forms of artificial neural networks, but also a very large number of application areas. For this reason, the following is intended to give the reader an overview of the research on neural networks as well as the background of their development.\\
+\\
 Research on ANNs dates back to the 1940s, when \cite{McCulloch1943} introduced the so called “M-P neuron”. Whereby this neuron had only a bivariate input and output, Rosenblatt later extended this idea to a network of M-P neurons, which allowed to set up a simple classification algorithm \cite{Rb1958}.
 
 

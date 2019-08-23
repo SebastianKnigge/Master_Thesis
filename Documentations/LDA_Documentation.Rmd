@@ -206,7 +206,7 @@ titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize",
 ```
 
 We also want to check if the book categories are different. See Table (\ref{categories:6books}) for comparison.
-```{r, results="asis"}
+```{r categories, results="asis"}
 gbids <- titles$titles$gutenberg_id 
 categories <- gutenberg_works() %>% 
   filter(gutenberg_id %in% gbids) %>% 
@@ -216,7 +216,7 @@ categories %>% stargazer(summary=FALSE, font.size = "footnotesize",
                             label="categories:6books")
 ```
 
-
+Obviously the corpus is very diverse. LDA should not have problems to cluster the chapters of the books.
 
 #### Reduction of the dimensionality
 
@@ -234,10 +234,10 @@ chapters_dtm_all <- convert_to_dtm(word_counts, minfq=0)
 ncol(chapters_dtm_all)
 ```
 
-We also want to compare this to a reduction of the word dictionary by the tfidf. For the sake of comparison, the reduction is made to the same value as used above via minfreq=2 (i.e. 10685 words).
+We also want to compare this to a reduction of the word dictionary by the tfidf. For the sake of comparison, the reduction is made to the same value as used above via minfreq=2 (i.e. 8597 words).
 
 ```{r, chache=TRUE, warning=FALSE}
-chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=10685)
+chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=8597)
 ncol(chapters_dtm_tfidf)
 ```
 
