@@ -131,7 +131,7 @@ For derivation and more details regarding the Gibbs sampling procedure see \cite
 
 \subsubsection{Implementation}
 
-In this thesis, the implementation of the LDA model and its estimation is mainly based on using the package \textit{topicmodels} of Kurt Hornik. The package \textit{topicmodels} can apply both the VEM algorithm as well as Gibbs sampling in order to fit the model. In addition, the package \textit{tidytext} is being used for text structuring and embedding. Whereby there are other packages besides this implementation of the LDA model, topicmodels is particularly convenient, because tidytext was designed by its developers to work perfectly in combination with topicmodels \cite[p. 89]{Silge2017}.
+In this thesis, the implementation of the LDA model and its estimation is mainly based on using the package \texttt{topicmodels} of Kurt Hornik. The package \texttt{topicmodels} can apply both the VEM algorithm as well as Gibbs sampling in order to fit the model. In addition, the package \texttt{tidytext} is being used for text structuring and embedding. Whereby there are other packages besides this implementation of the LDA model, \texttt{topicmodels} is particularly convenient, because \texttt{tidytext} was designed by its developers to work perfectly in combination with \texttt{topicmodels} \cite[p. 89]{Silge2017}.
 
 
 \subsection{Artifical Neural Networks}
@@ -157,7 +157,7 @@ x_{n1} & \dots & x_{nn} \\
 $$ 
 The dependent variable thus is a vector $\textbf{y}=y_1,…,y_n$, with $y_i\in \{0,1\}$. Consider the lines of the X mtrix as vectors $\textbf{x}_1,…,\textbf{x}_n$, with $\textbf{x}_i\in\mathbb{R}^k$. The entries of each of the vectors are weighted with $\textbf{w}=w_1,\dots,w_k$ with $w_j \in \mathbb{R}$ and aggregated in a function $h$ e.g. a sum.
 $$h(\textbf{x},\textbf{w})=\sum_{j=1}^kx_jw_j$$
-Using a so called \textit{activation function} $h$ is mapped to the output space, which is in this case $O=\{0,1\}$. At this point a step function serves as activation function.
+Using a so called "activation function" $h$ is mapped to the output space, which is in this case $O=\{0,1\}$. At this point a step function serves as activation function.
 $$a \circ h(\textbf{x},\textbf{w}) = \begin{cases} 0 \text{ if } h(\textbf{x},\textbf{w}) \leq 0 \\ 1 \text{ else}\end{cases}$$
 The matrix $X$ is passed vector by vector to the percepron and the output is compared with the values for $\textbf{y}$. During this procedure the weights are iteratively tuned by a simple updating algorithm using the pairs $\textbf{x}_i$ and $y_i.$
 
@@ -208,7 +208,7 @@ Thanks to current software, the derivatives no longer have to be calculated for 
 Note: While Rosenblatt for the perceptron was actually inspired by the biological structure of the neurons in the brain, more complex “networks used by engineers are only loosely based upon biology”\cite{Hecht-Nielsen1988}.
 
 \subsubsection{Implementation}
-This work uses the Keras R package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for R by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
+This work uses the \texttt{Keras R} package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for \texttt{R} by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
 
 \newpage 
 .

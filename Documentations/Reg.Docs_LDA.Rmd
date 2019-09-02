@@ -71,7 +71,7 @@ read_pdf_clean <- function(document){
     anti_join(new_stop_words)
 }
 
-plot_most_freq_words <- function(pdf, n=5){
+plot_most_freq_words <- function(pdf, n=7){
   # plots a bar plot via ggplot
   pdf %>% count(word) %>% arrange(desc(n)) %>% head(n) %>% 
     ggplot(aes(x=word,y=n)) + 
@@ -111,15 +111,15 @@ Using the function LDA sets up the model and prediction/evaluation is done via p
 ```{r LDA, message=FALSE, warning=FALSE, chache=TRUE, results="asis"}
 set.seed(123)
 documents_lda <- LDA(dtm, 
-                    k = 5, control = list(seed = 1234))
+                    k = 7, control = list(seed = 1234))
 ```
 
 ```{r, message=FALSE, warning=FALSE, chache=TRUE, results="asis"}
 prediction5 <- predict(documents_lda, newdata=dtm, type="topic")
 
 prediction5 %>% 
-  select(doc_id,topic_001,topic_002,topic_003,topic_004,topic_005) %>% 
-  mutate_each(funs(as.numeric), doc_id,topic_001,topic_002,topic_003,topic_004,topic_005) %>%
+  select(doc_id,topic_001,topic_002,topic_003,topic_004,topic_005, topic_006, topic_007) %>% 
+  mutate_each(funs(as.numeric), doc_id,topic_001,topic_002,topic_003,topic_004,topic_005, topic_006, topic_007) %>%
   arrange(desc(-doc_id)) %>%
   round(2) %>%
   stargazer(summary=F, rownames = F, header = F, title="Gamma matrix for predict function", label="predict")
@@ -132,7 +132,7 @@ ext_gamma_matrix <- function(model=documents_lda){
   # get matrix with probabilities for each topic per chapter
   spreaded_gamma <- chapters_gamma %>% spread(topic, gamma)
   spreaded_gamma %>% 
-    mutate_each(funs(as.numeric), document,1,2,3,4,5) %>%
+    mutate_each(funs(as.numeric), document,1,2,3,4,5,6,7) %>%
   arrange(desc(-document))
 }
 
@@ -146,12 +146,14 @@ The tables below summarize which document refers to which topic, according to th
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
 library(stargazer)
-ind1 <- which(prediction5$topic==1)
-ind2 <- which(prediction5$topic==2)
-ind3 <- which(prediction5$topic==3)
-ind4 <- which(prediction5$topic==4)
-ind5 <- which(prediction5$topic==5)
-for (i in 1:5){
+ind1 <- prediction5 %>% filter(topic==1) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind2 <- prediction5 %>% filter(topic==2) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind3 <- prediction5 %>% filter(topic==3) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind4 <- prediction5 %>% filter(topic==4) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind5 <- prediction5 %>% filter(topic==5) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind6 <- prediction5 %>% filter(topic==6) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind7 <- prediction5 %>% filter(topic==7) %>% select(doc_id) %>% unlist() %>% as.integer()
+for (i in 1:7){
   data.frame(Group=i, Doc=get(paste0("ind",i))) %>%
   stargazer(summary=FALSE, header = F, rownames=FALSE, title=paste("Documents for Topic", i))
 }
@@ -196,11 +198,13 @@ For getting specific and more individual words for each cloud, we use the TFIDF 
 
 ```{r indices, message=FALSE, warning=FALSE}
 # compare topic 1 with topic 2, 3, 4 and 5
-ind1 <- which(prediction5$topic==1)
-ind2 <- which(prediction5$topic==2)
-ind3 <- which(prediction5$topic==3)
-ind4 <- which(prediction5$topic==4)
-ind5 <- which(prediction5$topic==5)
+ind1 <- prediction5 %>% filter(topic==1) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind2 <- prediction5 %>% filter(topic==2) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind3 <- prediction5 %>% filter(topic==3) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind4 <- prediction5 %>% filter(topic==4) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind5 <- prediction5 %>% filter(topic==5) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind6 <- prediction5 %>% filter(topic==6) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind7 <- prediction5 %>% filter(topic==7) %>% select(doc_id) %>% unlist() %>% as.integer()
 ```
 
 
@@ -210,13 +214,15 @@ ind5 <- which(prediction5$topic==5)
 ## Wordclouds using tfidf
 
 ```{r wordcloud_tfidf, message=FALSE, warning=FALSE, cache=TRUE}
-par(mfrow=c(2,3))
+par(mfrow=c(2,4))
 par(mar=c(1,1,0.5,1))
-plot_wordcloud(corpus, selection=ind1, i=1)
-plot_wordcloud(corpus, selection=ind2, i=2)
-plot_wordcloud(corpus, selection=ind3, i=3)
-plot_wordcloud(corpus, selection=ind4, i=4)
-plot_wordcloud(corpus, selection=ind5, i=5)           
+plot_wordcloud(corpus, selection=ind1, i=1) %>% unlist() %>% as.integer()
+plot_wordcloud(corpus, selection=ind2, i=2) %>% unlist() %>% as.integer()
+plot_wordcloud(corpus, selection=ind3, i=3) %>% unlist() %>% as.integer()
+plot_wordcloud(corpus, selection=ind4, i=4) %>% unlist() %>% as.integer()
+plot_wordcloud(corpus, selection=ind5, i=5) %>% unlist() %>% as.integer()
+plot_wordcloud(corpus, selection=ind5, i=6) %>% unlist() %>% as.integer()
+plot_wordcloud(corpus, selection=ind5, i=7) %>% unlist() %>% as.integer()  
 ```
 
 ## Wordclouds using tf
@@ -224,13 +230,15 @@ plot_wordcloud(corpus, selection=ind5, i=5)
 The same can be done using the regular term frequency.
 
 ```{r wordcloud_tf, message=FALSE, warning=FALSE, cache=TRUE}
-par(mfrow=c(2,3))
+par(mfrow=c(2,4))
 par(mar=c(1,1,0.5,1))
 plot_wordcloud(corpus, selection=ind1, i=1, freq="tf")
 plot_wordcloud(corpus, selection=ind2, i=2, freq="tf")
 plot_wordcloud(corpus, selection=ind3, i=3, freq="tf")
 plot_wordcloud(corpus, selection=ind4, i=4, freq="tf")
-plot_wordcloud(corpus, selection=ind5, i=5, freq="tf")          
+plot_wordcloud(corpus, selection=ind5, i=5, freq="tf") 
+plot_wordcloud(corpus, selection=ind5, i=6, freq="tf") 
+plot_wordcloud(corpus, selection=ind5, i=7, freq="tf")  
 ```
 
 # Embedding via tfidf
@@ -241,21 +249,23 @@ Now it's interesting to see if embedding with tfidf will cluster other groups or
 dtm_50 <- dtm %>% dtm_remove_tfidf(top=10000)
 set.seed(123)
 documents_lda_2 <- LDA(dtm_50, 
-                    k = 5, control = list(seed = 1234))
+                    k = 7, control = list(seed = 1234))
 ```
 
 ```{r}
 prediction5_2 <- predict(documents_lda_2, newdata=dtm_50, type="topic")
 # compare topic 1 with topic 2, 3, 4 and 5
-ind1_2 <- which(prediction5_2$topic==1)
-ind2_2 <- which(prediction5_2$topic==2)
-ind3_2 <- which(prediction5_2$topic==3)
-ind4_2 <- which(prediction5_2$topic==4)
-ind5_2 <- which(prediction5_2$topic==5)
+ind1_2 <- prediction5_2 %>% filter(topic==1) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind2_2 <- prediction5_2 %>% filter(topic==2) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind3_2 <- prediction5_2 %>% filter(topic==3) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind4_2 <- prediction5_2 %>% filter(topic==4) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind5_2 <- prediction5_2 %>% filter(topic==5) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind6_2 <- prediction5_2 %>% filter(topic==6) %>% select(doc_id) %>% unlist() %>% as.integer()
+ind7_2 <- prediction5_2 %>% filter(topic==7) %>% select(doc_id) %>% unlist() %>% as.integer()
 ```
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
-for (i in 1:5){
+for (i in 1:7){
   data.frame(Group=i, Doc_embedding_0.5=get(paste0("ind",i,"_2"))) %>%
   stargazer(summary=FALSE, header = F, rownames=FALSE, title=paste("Documents for Topic", i))
 }
@@ -269,20 +279,22 @@ ext_gamma_matrix(documents_lda_2) %>%
 
 ## Wordclouds
 
-```{r wordcloud_tfidf2, message=FALSE, warning=FALSE, cache=TRUE}
-par(mfrow=c(2,3))
+```{r wordcloud_tfidf2, message=FALSE, warning=FALSE}
+par(mfrow=c(2,4))
 par(mar=c(1,1,0.5,1))
 plot_wordcloud(corpus, selection=ind1_2, i=1)
 plot_wordcloud(corpus, selection=ind2_2, i=2)
 plot_wordcloud(corpus, selection=ind3_2, i=3)
 plot_wordcloud(corpus, selection=ind4_2, i=4)
-plot_wordcloud(corpus, selection=ind5_2, i=5)           
+plot_wordcloud(corpus, selection=ind5_2, i=5) 
+plot_wordcloud(corpus, selection=ind4_2, i=6)
+plot_wordcloud(corpus, selection=ind5_2, i=7) 
 ```
 
 
 # Explorative Analysis for ANN
 
-```{r freq_words, message=FALSE, warning=FALSE, cache=TRUE, results="asis"}
+```{r freq_words, message=FALSE, warning=FALSE, results="asis"}
 # number of words
 l <- 10
 
@@ -295,4 +307,5 @@ freq_words <- lapply(1:28, function(x) tf_idf_matrix %>% filter(document==x) %>%
                         do.call("cbind",.)
 
 colnames(freq_words) <- paste0("doc_",1:28)
+
 ```

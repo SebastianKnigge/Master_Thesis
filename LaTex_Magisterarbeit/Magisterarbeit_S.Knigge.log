@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  2 SEP 2019 16:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  3 SEP 2019 15:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -571,6 +571,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--126
  []
 
 [4]
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 134
+.
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
 Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
@@ -649,35 +654,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 206--209
 
 [12] (./Magisterarbeit_S.Knigge.aux) ) 
 Here is how much of TeX's memory you used:
- 4202 strings out of 493089
- 61121 string characters out of 6134841
+ 4241 strings out of 493089
+ 61780 string characters out of 6134841
  130390 words of memory out of 5000000
- 7587 multiletter control sequences out of 15000+600000
- 60021 words of font info for 60 fonts, out of 8000000 for 9000
+ 7622 multiletter control sequences out of 15000+600000
+ 60332 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,11n,38p,943b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts
 /enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips
-/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.
-enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2015/t
-exmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2015/texmf-dist/
-fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/lm/lmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm
-/lmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015
-/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2015/texmf-dist/
-fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/lm/lmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/l
-m/lmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
-.pfb>
-Output written on Magisterarbeit_S.Knigge.pdf (12 pages, 367257 bytes).
+/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.en
+c}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
+cal/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2015/tex
+mf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2015/texmf-dist/fo
+nts/type1/public/lm/lmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
+public/lm/lmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/
+lmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2015
+/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015/texmf-dist/
+fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
+public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/
+lmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy6.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Magisterarbeit_S.Knigge.pdf (12 pages, 389478 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
- 101 compressed objects within 2 object streams
+ 149 PDF objects out of 1000 (max. 8388607)
+ 105 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
