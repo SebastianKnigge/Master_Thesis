@@ -210,6 +210,80 @@ Note: While Rosenblatt for the perceptron was actually inspired by the biologica
 \subsubsection{Implementation}
 This work uses the \texttt{Keras R} package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for \texttt{R} by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
 
+\section{Analysis of textbook chapters}
+
+In this first example, the chapters of individual books are classified, all of which sourced from the freely distributed Project Gutenberg. Project Gutenberg is a provider of over 60,000 free electronic books with the primary aim to “encourage the creation and distribution of eBooks”\cite{ProjectGutenberg}. The package \texttt{gutenbergr} \cite{gutenbergr} preprocesses the ebooks text data and downloads it. This convenient package in combination with the free repository allows the analysis of a large number of large text documents with a secure source and a big amount of meta information. For this analysis interesting information is e.g. Gutenberg id as key variable for fast identification of books, title, author and more importantly the categorization of project Gutenberg, the so-called Gutenberg bookshelf. Table \ref{titles:5books} lists all this information for a random sample of books downloaded from the Project Gutenberg.
+
+\begin{table}[!htbp] \centering 
+	\caption{Example book corpus} 
+	\label{titles:5books} 
+	\tiny
+	\begin{tabular}{@{\extracolsep{2pt}} c|c|c|c} 
+		\hline 
+		\hline \\[-1.8ex] 
+		gutenb. id & title & author & gutenberg bookshelf \\ 
+		\hline \\[-1.8ex] 
+		$2095$ & Clotelle: A Tale of the Southern States & Brown, William & African American Writers \\ 
+		$6315$ & The Awakening of Helena Richie & Deland, Margaret & Bestsellers, American\\ 
+		$6971$ & Judaism & Abrahams, Israel & Judaism \\ 
+		$7635$ & The Disowned — Volume 05 & Lytton, Edward and Baron & Historical Fiction \\ 
+		$10319$ & Dave Darrin's Third Year at Annapolis & Hancock, Harrie Irving & Children's Book Series \\
+		\hline 
+	\end{tabular} 
+\end{table} 
+\ \\
+In order to test NLP models, two questions can be examined on the basis of these simple text documents. Firstly, does a clustering model cluster text documents similar to a human-driven classification? In this case, this could be validated by the categorization into Gutenberg bookshelves. And secondly, how good is such a classification reproducible using a classification model? \\
+Since very large amounts of data have to be processed and analyzed in order to model the bookshelf classification for a big collection of books, a somewhat reduced approach will be used here. One breaks down a collection of books of different categories into chapters in order to cluster respectively classify these chapters as independent documents. Similarly, you could give an example, assuming $N$ books and separate their chapters and shuffle them, is it possible to use models to reassemble the chapters into stacks that can be assigned to individual books?\\
+\ \\
+The raw text record is now transformed into the tidy format of tidytext (i.e. one word per row). Now it is possible to remove unnecessary stop-words. These words are predefined and can be modified for the appropriate use case if necessary. The words stem from 3 sources, "onix", "SMART" and "snowball", whereas the latter two are pulled from the \texttt{tm} package \cite{tidytext}. An example of stop words can be found in Table \ref{stopwords}. 
+\begin{table}[!htbp] \centering 
+	\footnotesize
+	\caption{Example of stop words from tidytext package} 
+	\label{stopwords} 
+	\begin{tabular}{@{\extracolsep{5pt}} cc} 
+		\\[-1.8ex]\hline 
+		\hline \\[-1.8ex] 
+		word & lexicon \\ 
+		\hline \\[-1.8ex] 
+		many & SMART \\ 
+		mrs & onix \\ 
+		was & snowball \\ 
+		sure & onix \\ 
+		you're & snowball \\ 
+		go & onix \\ 
+		c & SMART \\  
+		where & snowball \\ 
+		then & SMART \\ 
+		\hline \\[-1.8ex] 
+	\end{tabular} 
+\end{table} 
+\\
+Both models use a bag of words data set as input data. This means a matrix with the documents in the $M$ lines and the frequencies of the $V$ used words in the entries of the columns. The dimension - i.e. the number of words in this "dictionary" $V$ - may be reduced for two reasons. For one thing, a dimension reduction can reduce the fitting time of the model, for another thing, the diversity of the documents can be increased by skilfully reducing certain words, which occur equally frequently in all documents. Now this requires a special measure on which we decide which words to exclude. One can call this reduction of the bag of words dimensionality "embedding". In the course of this work 3 different embedding methods were tested. 
+\begin{enumerate}
+	 \item The reduction by the words that occur with a low frequency. 
+	\item No dimension reduction, i.e. use of the full dictionary of all occurring words. 
+	\item The reduction with the aid of the measure \textit{tf-idf}.
+\end{enumerate}
+
+\textit{tf-idf} is a combination of the term frequency and the inverse document frequency, defined as follows.
+$$\text{\textit{tf-idf}}(t,d):=tf(t,d)\times idf(t)$$
+$$tf(t,d):=\frac{f_{t,d}}{\sum_{t_i=1}^V f_{t_i,d}}$$
+$$idf(t):=\ln\left(\frac{M}{n_{d'\in t}}\right)$$
+\\
+\makebox[1cm][l]{$t$} 		... \makebox[5cm][l]{term (word)}\\
+\makebox[1cm][l]{$d$}   	... \makebox[4cm][l]{document}\\
+\makebox[1cm][l]{$f_{t,d}$} ... \makebox[4cm][l]{frequency of term $t$ in document $d$}\\
+\makebox[1cm][l]{$M$} 		... \makebox[5cm][l]{number of documents}\\
+\makebox[1cm][l]{$n_{d'\in t}$}   	... \makebox[4cm][l]{number of documents containing term $t$}\\
+Even if “its theoretical foundations are considered less than firm by information theory experts”, \textit{tf-idf} “has proved useful in text mining” \cite{Silge2017}.
+
+
+
+
+
+
+
+
 \newpage 
 .
 \newpage
@@ -221,6 +295,7 @@ This work uses the \texttt{Keras R} package to create neural networks, a deep le
 
 
 \listoffigures
+\listoftables
 
 	
 	

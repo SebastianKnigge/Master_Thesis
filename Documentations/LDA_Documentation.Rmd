@@ -414,7 +414,7 @@ Apparently Gibbs Sampling takes a bit longer than the VEM algorithm, but its res
 First we split the data randomly in training and testing samples.
 
 ```{r split_for_fit_function, cache=TRUE}
-split_for_fit <- function(data, test_ratio=0.1, seed=1234){
+split_for_fit <- function(data, test_ratio=0.03, seed=1234){
   # function to set up the training
   # and the testing set from the input data which
   # is an object from the function convert_to_dtm()
@@ -552,6 +552,63 @@ chapters_dtm_all2 <- convert_to_dtm(word_counts2, minfq=0)
 
 ## Evaluate model
 
+First we try the in-model-validation procedures first, using the 3 embeddings.
+
+```{r chapters_dtm2_Gibbs, cache=TRUE, warning=FALSE, message=FALSE}
+chapters_dtm2 <- convert_to_dtm(word_counts2, minfq=2)
+tim1 <- Sys.time()
+chapters_lda_Gibbs2 <- LDA(chapters_dtm2, method="Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_1_Gibbs2 <- tim2-tim1
+ncol(chapters_dtm2)
+```
+
+```{r chapters_lda_all_Gibbs2, cache=TRUE, warning=FALSE, message=FALSE}
+chapters_dtm_all2 <- convert_to_dtm(word_counts2, minfq=0)
+tim1 <- Sys.time()
+chapters_lda_all_Gibbs2 <- LDA(chapters_dtm_all2, method = "Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_all_Gibbs2 <- tim2-tim1
+ncol(chapters_dtm_all2 )
+```
+
+```{r chapters_lda_tfidf_Gibbs2, cache=TRUE, warning=FALSE, message=FALSE}
+chapters_dtm_tfidf2 <- convert_to_dtm_2(word_counts2, top=16415)
+tim1 <- Sys.time()
+chapters_lda_tfidf_Gibbs2 <- LDA(chapters_dtm_tfidf2,  method="Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_tfidf_Gibbs2 <- tim2-tim1
+ncol(chapters_dtm_tfidf)
+```
+
+```{r misc.rate_1_Gibbs2, cache=TRUE}
+misc.rate_1_Gibbs2 <- ext_gamma_matrix(chapters_lda_Gibbs2) %>% 
+  validate_LDAclassification()
+```
+
+```{r misc.rate_all_Gibbs2, cache=TRUE}
+misc.rate_all_Gibbs2 <- ext_gamma_matrix(chapters_lda_all_Gibbs2) %>% 
+  validate_LDAclassification()
+```
+
+```{r misc.rate_tfidf_Gibbs2, cache=TRUE}
+misc.rate_tfidf_Gibbs2 <- ext_gamma_matrix(chapters_lda_tfidf_Gibbs2) %>% 
+  validate_LDAclassification()
+```
+
+```{r Gibbs2_overview, results="asis", cache=TRUE}
+performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1_Gibbs2, u_1_Gibbs2), 
+           all.embedding=c(misc.rate_all_Gibbs2, u_all_Gibbs2),
+           tfidf=c(misc.rate_tfidf_Gibbs2, u_tfidf_Gibbs2))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix %>%  stargazer(summary=FALSE, header=F)
+```
+
+
+
 The same code as for Example 1 is used to evaluate the model. 
 
 ```{r parallel_fitting_2, cache=TRUE, message=FALSE, warnings=FALSE}
@@ -596,9 +653,15 @@ topic_link <- plotm %>%
     as.data.frame()
   
 par(mfrow=c(2,2))
-for (i in 1:n_books){
+for (i in 1:4){
   vec <- plotm[i,2:n_books] %>% unlist() 
   barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))
 }
+for (i in 5:9){
+  vec <- plotm[i,2:n_books] %>% unlist() 
+  barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))
+}
+  vec <- plotm[10,2:n_books] %>% unlist() 
+  barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[10,1]))
 ```
 

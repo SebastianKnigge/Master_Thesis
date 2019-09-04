@@ -30,6 +30,10 @@ Chollet, F., A.~W. (2018).
 \newblock {\em Deep Learning with R}.
 \newblock Manning.
 
+\bibitem[Hart, ]{ProjectGutenberg}
+Hart, M.
+\newblock Project gutenberg.
+
 \bibitem[Hecht-Nielsen, 1988]{Hecht-Nielsen1988}
 Hecht-Nielsen, R. (1988).
 \newblock Neurocomputing: picking the human brain.
@@ -70,6 +74,10 @@ Powieser, M. (2012).
 \newblock Latent dirichlet allocation in r.
 \newblock Master's thesis, Vienna University of Economics and Business.
 
+\bibitem[Robinson, 2018]{gutenbergr}
+Robinson, D. (2018).
+\newblock {\em Package 'gutenbergr'}.
+
 \bibitem[Rosenblatt, 1958]{Rb1958}
 Rosenblatt, F. (1958).
 \newblock The perceptron, a probabilistic model for information storage and
@@ -80,6 +88,10 @@ Rosenblatt, F. (1958).
 Silge, J. and Robinson, D. (2017).
 \newblock {\em Text Mining with R: A Tidy Approach}.
 \newblock O`Reilly Media.
+
+\bibitem[Silge, 2019]{tidytext}
+Silge, J. e.~a. (2019).
+\newblock {\em Package 'itdytext'}.
 
 \bibitem[Wainwright and Jordan, 2008]{Wainwright2008}
 Wainwright, M.~J. and Jordan, M.~I. (2008).
