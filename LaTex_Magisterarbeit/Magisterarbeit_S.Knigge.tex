@@ -3,6 +3,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{nameref}
 \graphicspath{{Graphics/}} %Setting the graphicspath
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -28,7 +29,9 @@ This section will introduce the reader into the two Topic modeling approaches wh
 A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists out of M documents $\textbf{w}=(w_1,\dots, w_N)$ which are itself separated in words $w_i$. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary.
 This notation may indeed be extended through the addition of indices for documents, but this is not done here or in the standard literature on topic models due to its unnecessary complexity.
 
-\subsection{LDA model}
+
+% MODEL LDA Introduction
+\subsection{LDA model}\label{sec:LDA}
 
 Latent Dirichlet Allocation is a Bayesian approach and is often associated with the class of hierarchical models \cite{Gelman2014}. The idea is based on the representation of exchangeable random variables (acc. to de Finetti) as 
 mixture of distributions. Given that documents $\textbf{w}$ and words $w_i$ in each document - both considered as random variables in this setting - are exchangeable in such a way, a mixed model such as the LDA model is appropriate \cite{Blei2003}.
@@ -210,7 +213,8 @@ Note: While Rosenblatt for the perceptron was actually inspired by the biologica
 \subsubsection{Implementation}
 This work uses the \texttt{Keras R} package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for \texttt{R} by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
 
-\section{Analysis of textbook chapters}
+% ANALYSIS OF TEXTBOOK CHAPTERS
+\section{Analysis of textbook chapters}\label{sec:analysis}
 
 In this first example, the chapters of individual books are classified, all of which sourced from the freely distributed Project Gutenberg. Project Gutenberg is a provider of over 60,000 free electronic books with the primary aim to “encourage the creation and distribution of eBooks”\cite{ProjectGutenberg}. The package \texttt{gutenbergr} \cite{gutenbergr} preprocesses the ebooks text data and downloads it. This convenient package in combination with the free repository allows the analysis of a large number of large text documents with a secure source and a big amount of meta information. For this analysis interesting information is e.g. Gutenberg id as key variable for fast identification of books, title, author and more importantly the categorization of project Gutenberg, the so-called Gutenberg bookshelf. Table \ref{titles:5books} lists all this information for a random sample of books downloaded from the Project Gutenberg.
 
@@ -232,10 +236,11 @@ In this first example, the chapters of individual books are classified, all of w
 	\end{tabular} 
 \end{table} 
 \ \\
-In order to test NLP models, two questions can be examined on the basis of these simple text documents. Firstly, does a clustering model cluster text documents similar to a human-driven classification? In this case, this could be validated by the categorization into Gutenberg bookshelves. And secondly, how good is such a classification reproducible using a classification model? \\
+In order to test NLP models, two questions can be examined on the basis of these simple text documents. 
+\textbf{Firstly (Q1), does a clustering model cluster text documents similar to a human-driven classification?} In this case, this could be validated by the categorization into Gutenberg bookshelves. \textbf{And secondly (Q2), how good is such a classification reproducible using a classification model?} \\
 Since very large amounts of data have to be processed and analyzed in order to model the bookshelf classification for a big collection of books, a somewhat reduced approach will be used here. One breaks down a collection of books of different categories into chapters in order to cluster respectively classify these chapters as independent documents. Similarly, you could give an example, assuming $N$ books and separate their chapters and shuffle them, is it possible to use models to reassemble the chapters into stacks that can be assigned to individual books?\\
 \ \\
-The raw text record is now transformed into the tidy format of tidytext (i.e. one word per row). Now it is possible to remove unnecessary stop-words. These words are predefined and can be modified for the appropriate use case if necessary. The words stem from 3 sources, "onix", "SMART" and "snowball", whereas the latter two are pulled from the \texttt{tm} package \cite{tidytext}. An example of stop words can be found in Table \ref{stopwords}. 
+The raw text record is now transformed into the tidy format of tidytext (i.e. one word per row). Now it is possible to remove unnecessary stop-words. These words are predefined and can be modified for the appropriate use case if necessary. The words stem from 3 sources, "onix", "SMART" and "snowball", whereas the latter two are pulled from the \texttt{tm} package \cite{tidytext}.  And the Onix stop words are taken from the publicly accessible site lextec.com. An example of stop words can be found in Table \ref{stopwords}.
 \begin{table}[!htbp] \centering 
 	\footnotesize
 	\caption{Example of stop words from tidytext package} 
@@ -258,7 +263,7 @@ The raw text record is now transformed into the tidy format of tidytext (i.e. on
 	\end{tabular} 
 \end{table} 
 \\
-Both models use a bag of words data set as input data. This means a matrix with the documents in the $M$ lines and the frequencies of the $V$ used words in the entries of the columns. The dimension - i.e. the number of words in this "dictionary" $V$ - may be reduced for two reasons. For one thing, a dimension reduction can reduce the fitting time of the model, for another thing, the diversity of the documents can be increased by skilfully reducing certain words, which occur equally frequently in all documents. Now this requires a special measure on which we decide which words to exclude. One can call this reduction of the bag of words dimensionality "embedding". In the course of this work 3 different embedding methods were tested. 
+Both models that are studied in this thesis, use a bag of words data set as input data. This means a matrix with the documents in the $M$ lines and the frequencies of the $V$ used words in the entries of the columns. The dimension - i.e. the number of words in this "dictionary" $V$ - may be reduced for two reasons. For one thing, a dimension reduction can reduce the fitting time of the model, for another thing, the diversity of the documents can be increased by skilfully reducing certain words, which occur equally frequently in all documents. Now this requires a special measure on which we decide which words to exclude. One can call this reduction of the bag of words dimensionality "embedding". In the course of this work 3 different embedding methods were tested. 
 \begin{enumerate}
 	 \item The reduction by the words that occur with a low frequency. 
 	\item No dimension reduction, i.e. use of the full dictionary of all occurring words. 
@@ -274,8 +279,29 @@ $$idf(t):=\ln\left(\frac{M}{n_{d'\in t}}\right)$$
 \makebox[1cm][l]{$d$}   	... \makebox[4cm][l]{document}\\
 \makebox[1cm][l]{$f_{t,d}$} ... \makebox[4cm][l]{frequency of term $t$ in document $d$}\\
 \makebox[1cm][l]{$M$} 		... \makebox[5cm][l]{number of documents}\\
-\makebox[1cm][l]{$n_{d'\in t}$}   	... \makebox[4cm][l]{number of documents containing term $t$}\\
-Even if “its theoretical foundations are considered less than firm by information theory experts”, \textit{tf-idf} “has proved useful in text mining” \cite{Silge2017}.
+\makebox[1cm][l]{$n_{d'\in t}$}   	... \makebox[4cm][l]{number of documents containing term $t$}
+
+\ \\
+Even if “its theoretical foundations are considered less than firm by information theory experts”, \textit{tf-idf} “has proved useful in text mining” \cite{Silge2017}. In this thesis the term frequency and the \textit{tf-idf} are not to be used directly for the analysis of the texts but mainly for setting up the bag-of-words datasets. It shall be investigated whether the use of different embeddings has an influence on the text analysis itself.
+
+% SUBSECTION
+% Lda applied on Gutenberg Data
+\subsection{LDA applied on Gutenberg data}
+
+As LDA is a classification algorithm, the research question Q1 should be addressed first. I.e. to what extent does the clustering of the LDA model correspond to the mapping of chapters to books? In the first attempt only 6 books are sampled. That is, there are 6 categories, because as mentioned in \ref{sec:analysis} all these 6 books were taken from different bookshelves.\\
+\ \\
+As described in Chapter \ref{sec:LDA}, it is possible to calculate the LDA model by means of two different algorithms. These are the VEM algorithm and Gibbs sampling. In this study we examined both methods. Clearly, the algorithms may differ in the speed of the calculation. However, it does not have to be the case that both calculation methods deliver the same results.\\
+\ \\
+Three fundamentally different approaches should be distinguished for embedding:
+\begin{enumerate}
+	\item the entire dictionary, i.e. all words occurring in the corpus are used for the bag of words.	
+	\item for the bag of words only words are used which occur at least 2 times in the whole corpus. This reduces the number of used words and therefore the dimension of the data by nearly 50\%.
+	\item the bag of words is reduced by the same amount as in case two, but not according to absolute frequency, but according to \textit{tf-idf}.
+\end{enumerate}
+These approaches are reviewed with regard to the goodness of the fit and the speed of the computation. One intuitively may assume that the calculation takes longer for data with higher dimensionality.
+
+
+
 
 
 
