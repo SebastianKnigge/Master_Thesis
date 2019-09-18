@@ -351,8 +351,70 @@ performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1, u_1),
            all.embedding=c(misc.rate_all, u_all),
            tfidf=c(misc.rate_tfidf, u_tfidf))
 rownames(performance_matrix) <- c("missc. rate", "time")
-performance_matrix %>%  stargazer(summary=FALSE, header=F)
+performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM")
 ```
+
+We run the same calculations for a different sample.
+
+```{r second_example, chache=TRUE, warning=FALSE, results="asis"}
+n_books_sec <- 6
+by_chapter_sec <- set_up_books(n_books=n_books_sec, seed=101)
+appended_by_chapter_sec <- append_by_chapter(x=by_chapter_sec, n_books = n_books_sec)
+word_counts_sec <- exclude_stop_words(appended_by_chapter_sec)
+titles_sec <- get_titles(appended_by_chapter_sec, n_books)
+gbids_sec <- titles_sec$titles$gutenberg_id 
+categories_sec <- gutenberg_works() %>% 
+  filter(gutenberg_id %in% gbids_sec) %>% 
+  select(gutenberg_id, gutenberg_bookshelf)
+
+# embedding 1
+chapters_dtm_sec <- convert_to_dtm(word_counts_sec, minfq=2)
+# embedding 2
+chapters_dtm_all_sec <- convert_to_dtm(word_counts_sec, minfq=0)
+# embedding 3
+chapters_dtm_tfidf_sec <- convert_to_dtm_2(word_counts_sec, top=8565)
+
+# embedding 1
+tim1 <- Sys.time()
+chapters_lda_sec <- LDA(chapters_dtm_sec, 
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_1 <- tim2-tim1
+
+# embedding 2
+tim1 <- Sys.time()
+chapters_lda_all_sec <- LDA(chapters_dtm_all_sec, 
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_all <- tim2-tim1
+
+# embedding 3
+tim1 <- Sys.time()
+chapters_lda_tfidf_sec <- LDA(chapters_dtm_tfidf_sec, 
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_tfidf <- tim2-tim1
+
+# embedding 1
+misc.rate_1_sec <- ext_gamma_matrix(chapters_lda_sec) %>% 
+  validate_LDAclassification()
+
+# embedding 2
+misc.rate_all_sec <- ext_gamma_matrix(chapters_lda_all_sec) %>% 
+  validate_LDAclassification()
+
+# embedding 3
+misc.rate_tfidf_sec <- ext_gamma_matrix(chapters_lda_tfidf_sec) %>% 
+  validate_LDAclassification()
+
+# overview
+performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1_sec, u_1), 
+           all.embedding=c(misc.rate_all_sec, u_all),
+           tfidf=c(misc.rate_tfidf_sec, u_tfidf))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM second sample")
+```
+
 
 Surprisingly, the run-time to fit the LDA model for the embedding using all words, does not take way longer than the embedding using a lower frequency. The fit of the model with the reduced bag of words via tfidf takes slightly less time.
 
@@ -404,10 +466,48 @@ performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1_Gibbs, u_1_Gibbs)
            all.embedding=c(misc.rate_all_Gibbs, u_all_Gibbs),
            tfidf=c(misc.rate_tfidf_Gibbs, u_tfidf_Gibbs))
 rownames(performance_matrix) <- c("missc. rate", "time")
-performance_matrix %>%  stargazer(summary=FALSE, header=F)
+performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via Gibbs sampling")
 ```
 
 Apparently Gibbs Sampling takes a bit longer than the VEM algorithm, but its results with regards to the correct "classification" (missclassification rate) are way better.
+
+Again we try a second sample:
+
+```{r Gibbs_overview_sec, results="asis", cache=TRUE}
+tim1 <- Sys.time()
+chapters_lda_Gibbs_sec <- LDA(chapters_dtm_sec, method="Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_1_Gibbs <- tim2-tim1
+
+tim1 <- Sys.time()
+chapters_lda_all_Gibbs_sec <- LDA(chapters_dtm_all_sec, method = "Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_all_Gibbs <- tim2-tim1
+
+tim1 <- Sys.time()
+chapters_lda_tfidf_Gibbs_sec <- LDA(chapters_dtm_tfidf_sec,  method="Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_tfidf_Gibbs <- tim2-tim1
+
+misc.rate_1_Gibbs_sec <- ext_gamma_matrix(chapters_lda_Gibbs_sec) %>% 
+  validate_LDAclassification()
+
+misc.rate_all_Gibbs_sec <- ext_gamma_matrix(chapters_lda_all_Gibbs_sec) %>% 
+  validate_LDAclassification()
+
+misc.rate_tfidf_Gibbs_sec <- ext_gamma_matrix(chapters_lda_tfidf_Gibbs_sec) %>% 
+  validate_LDAclassification()
+
+# performance matrix
+performance_matrix_sec <- data.frame(freq2.embedding=c(misc.rate_1_Gibbs_sec, u_1_Gibbs), 
+           all.embedding=c(misc.rate_all_Gibbs_sec, u_all_Gibbs),
+           tfidf=c(misc.rate_tfidf_Gibbs_sec, u_tfidf_Gibbs))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix_sec %>%  stargazer(summary=FALSE, header=F, title = "Gibbs second sample")
+```
 
 ## Evaluate model on testing set 
 

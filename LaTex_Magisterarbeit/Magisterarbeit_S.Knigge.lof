@@ -1,5 +1,5 @@
 \select@language {english}
-\contentsline {figure}{\numberline {1}{\ignorespaces The well-established plate diagram for the standard LDA model extended by the parameter $\delta $. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite {Blei2003} for comparisons.\relax }}{2}
-\contentsline {figure}{\numberline {2}{\ignorespaces Schematic diagram of a simple perceptron by \cite {Rb1958}\relax }}{7}
-\contentsline {figure}{\numberline {3}{\ignorespaces Schematic diagram of an adapted Rosenblatt-perceptron network\relax }}{8}
-\contentsline {figure}{\numberline {4}{\ignorespaces Schematic diagram of an multi layer perceptron (MLP)\relax }}{8}
+\contentsline {figure}{\numberline {1}{\ignorespaces The well-established plate diagram for the standard LDA model extended by the parameter $\delta $. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite {Blei2003} for comparisons.\relax }}{2}{figure.caption.1}
+\contentsline {figure}{\numberline {2}{\ignorespaces Schematic diagram of a simple perceptron by \cite {Rb1958}\relax }}{7}{figure.caption.2}
+\contentsline {figure}{\numberline {3}{\ignorespaces Schematic diagram of an adapted Rosenblatt-perceptron network\relax }}{8}{figure.caption.3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Schematic diagram of an multi layer perceptron (MLP)\relax }}{8}{figure.caption.4}
