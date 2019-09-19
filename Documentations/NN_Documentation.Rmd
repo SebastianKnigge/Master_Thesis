@@ -338,7 +338,11 @@ results %>% summary
 results %>% var
 ```
 
-and the time:
+```{r hist_results}
+hist(results, breaks = 20)
+```
+
+... and the time:
 
 ```{r}
 # mfreq=2
@@ -363,6 +367,10 @@ The results of the error rate
 ```{r}
 results_all %>% summary
 results_all %>% var
+```
+
+```{r hist_results_all}
+hist(results_all, breaks = 20)
 ```
 
 and the time:
@@ -392,6 +400,9 @@ results_tfidf %>% summary
 results_tfidf %>% var
 ```
 
+```{r hist_results_tfidf}
+hist(results_tfidf, breaks = 20)
+```
 and the time:
 
 ```{r}

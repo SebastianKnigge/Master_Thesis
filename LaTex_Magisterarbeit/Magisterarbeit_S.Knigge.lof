@@ -3,3 +3,5 @@
 \contentsline {figure}{\numberline {2}{\ignorespaces Schematic diagram of a simple perceptron by \cite {Rb1958}\relax }}{7}{figure.caption.2}
 \contentsline {figure}{\numberline {3}{\ignorespaces Schematic diagram of an adapted Rosenblatt-perceptron network\relax }}{8}{figure.caption.3}
 \contentsline {figure}{\numberline {4}{\ignorespaces Schematic diagram of an multi layer perceptron (MLP)\relax }}{8}{figure.caption.4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling)\relax }}{14}{figure.caption.7}
+\contentsline {figure}{\numberline {6}{\ignorespaces The network contains 3 layers. The input data is the the bag of words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.\relax }}{15}{figure.caption.8}

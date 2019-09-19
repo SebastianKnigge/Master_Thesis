@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  18 SEP 2019 16:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  24 SEP 2019 13:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -640,7 +640,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 51--53
 
  []
 
-<Graphics/LDA_Plate_Diagram.png, id=56, 572.8602pt x 314.1336pt>
+<Graphics/LDA_Plate_Diagram.png, id=64, 572.8602pt x 314.1336pt>
 File: Graphics/LDA_Plate_Diagram.png Graphic file (type png)
 
 <use Graphics/LDA_Plate_Diagram.png>
@@ -702,7 +702,7 @@ LaTeX Warning: Command \textellipsis invalid in math mode on input line 162.
 
 LaTeX Warning: Command \textellipsis invalid in math mode on input line 162.
 
-<Graphics/simple_perceptron.pdf, id=140, 628.81825pt x 885.71706pt>
+<Graphics/simple_perceptron.pdf, id=148, 628.81825pt x 885.71706pt>
 File: Graphics/simple_perceptron.pdf Graphic file (type pdf)
 
 <use Graphics/simple_perceptron.pdf>
@@ -715,15 +715,15 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 177.
-<Graphics/adaption_perceptron.pdf, id=147, 454.72084pt x 304.22658pt>
-File: Graphics/adaption_perceptron.pdf Graphic file (type pdf)
+<Graphics/adaption_perceptron2.pdf, id=155, 454.72084pt x 304.22658pt>
+File: Graphics/adaption_perceptron2.pdf Graphic file (type pdf)
 
-<use Graphics/adaption_perceptron.pdf>
-Package pdftex.def Info: Graphics/adaption_perceptron.pdf used on input line 18
-0.
+<use Graphics/adaption_perceptron2.pdf>
+Package pdftex.def Info: Graphics/adaption_perceptron2.pdf used on input line 1
+80.
 (pdftex.def)             Requested size: 227.35986pt x 152.11292pt.
 
-<Graphics/MLP.pdf, id=150, 316.93808pt x 338.61005pt>
+<Graphics/MLP.pdf, id=158, 316.93808pt x 338.61005pt>
 File: Graphics/MLP.pdf Graphic file (type pdf)
  <use Graphics/MLP.pdf>
 Package pdftex.def Info: Graphics/MLP.pdf used on input line 190.
@@ -746,8 +746,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 174--195
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6] [7 <./Graphics/simple_perceptron.pdf>] [8 <./Graphics/adaption_perceptron.p
-df> <./Graphics/MLP.pdf>]
+[6] [7 <./Graphics/simple_perceptron.pdf>] [8 <./Graphics/adaption_perceptron2.
+pdf> <./Graphics/MLP.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 210--213
 
  []
@@ -785,73 +785,135 @@ Thesis / tree / master /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 302--309
+Underfull \hbox (badness 10000) in paragraph at lines 302--313
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 302--309
+Underfull \hbox (badness 10000) in paragraph at lines 302--313
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 302--309
+Underfull \hbox (badness 10000) in paragraph at lines 302--313
 
  []
 
-[12] [13] [14] (./Magisterarbeit_S.Knigge.bbl [15])
+
+Underfull \hbox (badness 10000) in paragraph at lines 302--313
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 302--313
+
+ []
+
+[12] [13] <Graphics/comparison_boxplot.pdf, id=271, 505.89pt x 361.35pt>
+File: Graphics/comparison_boxplot.pdf Graphic file (type pdf)
+
+<use Graphics/comparison_boxplot.pdf>
+Package pdftex.def Info: Graphics/comparison_boxplot.pdf used on input line 315
+.
+(pdftex.def)             Requested size: 360.0pt x 257.14474pt.
+
+<Graphics/network_structure.pdf, id=273, 781.9433pt x 560.77303pt>
+File: Graphics/network_structure.pdf Graphic file (type pdf)
+
+<use Graphics/network_structure.pdf>
+Package pdftex.def Info: Graphics/network_structure.pdf used on input line 328.
+
+(pdftex.def)             Requested size: 360.0pt x 258.17264pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 324--335
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 324--335
+
+ []
+
+[14 <./Graphics/comparison_boxplot.pdf>] [15 <./Graphics/network_structure.pdf>
+]
+Underfull \hbox (badness 10000) in paragraph at lines 337--345
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 337--345
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 337--345
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 337--345
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--352
+
+ []
+
+[16] [17] [18] (./Magisterarbeit_S.Knigge.bbl [19])
 (./Magisterarbeit_S.Knigge.lof)
 \tf@lof=\write4
 \openout4 = `Magisterarbeit_S.Knigge.lof'.
 
- (./Magisterarbeit_S.Knigge.lot)
+ (./Magisterarbeit_S.Knigge.lot [20])
 \tf@lot=\write5
 \openout5 = `Magisterarbeit_S.Knigge.lot'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 333.
- [16]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 333.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 371.
+ [21]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 371.
 
 (./Magisterarbeit_S.Knigge.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 333.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 333.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 371.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 371.
 Package rerunfilecheck Info: File `Magisterarbeit_S.Knigge.out' has not changed
 .
-(rerunfilecheck)             Checksum: D5FCE7D0FB41EFD3F3F559D6521E5436;818.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 333.
+(rerunfilecheck)             Checksum: A52EF34515721A27192C23A3AD874D57;963.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 371.
  ) 
 Here is how much of TeX's memory you used:
- 7849 strings out of 493089
- 116546 string characters out of 6134841
- 212571 words of memory out of 5000000
- 11112 multiletter control sequences out of 15000+600000
+ 7876 strings out of 493089
+ 117110 string characters out of 6134841
+ 214191 words of memory out of 5000000
+ 11126 multiletter control sequences out of 15000+600000
  69085 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,11n,40p,996b,432s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/loca
-l/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/
-2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dis
+ 36i,12n,40p,996b,432s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
+texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2015
+/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/texmf-dis
 t/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2015/texmf-dist/fonts/en
 c/dvips/lm/lm-mathex.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public
 /lm/lmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx12
-.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2015/t
-exmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2015/texmf-dist/f
-onts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-public/lm/lmr6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lm
-r8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/tex
-live/2015/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2015/texmf-dist/
-fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
-/public/lm/lmtt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm
-/lmtt9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb>
-Output written on Magisterarbeit_S.Knigge.pdf (16 pages, 450620 bytes).
+.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015/t
+exmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2015/texmf-dist/f
+onts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
+public/lm/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/l
+mr6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/t
+exmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015/texmf-dist/
+fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
+/public/lm/lmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/
+lmtt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
+pfb>
+Output written on Magisterarbeit_S.Knigge.pdf (21 pages, 539369 bytes).
 PDF statistics:
- 374 PDF objects out of 1000 (max. 8388607)
- 323 compressed objects within 4 object streams
- 88 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 448 PDF objects out of 1000 (max. 8388607)
+ 384 compressed objects within 4 object streams
+ 99 named destinations out of 1000 (max. 500000)
+ 143 words of extra memory for PDF output out of 10000 (max. 10000000)
 

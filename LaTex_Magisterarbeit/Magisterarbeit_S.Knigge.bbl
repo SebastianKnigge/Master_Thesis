@@ -1,8 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[Lex, ]{Lextec}
-
-
 \bibitem[A.~Gelman, 2014]{Gelman2014}
 A.~Gelman, J.~Carlin, H. S. D. D. A. V. D.~R. (2014).
 \newblock {\em Bayesian Data Analysis}.
@@ -18,6 +15,11 @@ Bahjat, F., e.~a. (2006).
 \newblock Multivariate logistic models.
 \newblock {\em Biometrika Trust}, 93(4):1011--1017.
 
+\bibitem[Bishop, 2006]{Bishop2006}
+Bishop, C.~M. (2006).
+\newblock {\em Pattern Recognition and Machine Learning}.
+\newblock Springer.
+
 \bibitem[Blei, 2012]{Blei2012}
 Blei, D. (2012).
 \newblock Probabilistic topic models.
@@ -32,6 +34,10 @@ Blei, D., N. N. J.~M. (2003).
 Chollet, F., A.~W. (2018).
 \newblock {\em Deep Learning with R}.
 \newblock Manning.
+
+\bibitem[Eurostat, 2019]{ESSVision2020}
+Eurostat (2019).
+\newblock Ess vision 2020 admin (administrative data sources).
 
 \bibitem[Hart, ]{ProjectGutenberg}
 Hart, M.

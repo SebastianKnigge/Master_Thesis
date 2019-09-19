@@ -632,22 +632,139 @@ This does not exclude the fact that two books are assigned to the same topic (in
 First we will sample to books again as done in the example 1.
 
 ```{r Sampling10books, chache=TRUE, warning=FALSE}
-n_books <- 10
-by_chapter2 <- set_up_books(n_books=n_books, seed=123456)
-appended_by_chapter2 <- append_by_chapter(x=by_chapter2, n_books = n_books)
-word_counts2 <- exclude_stop_words(appended_by_chapter2)
-
+n_books_10 <- 10
+by_chapter10 <- set_up_books(n_books=n_books_10, seed=54321)
+appended_by_chapter10 <- append_by_chapter(x=by_chapter10, n_books = n_books_10)
+word_counts10 <- exclude_stop_words(appended_by_chapter10)
 ```
 
 ```{r, results="asis"}
-titles <- get_titles(appended_by_chapter2, n_books)
+titles <- get_titles(appended_by_chapter10, n_books)
 titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", 
-                            header=FALSE, title="Book-titles Example 2", rownames=FALSE,
+                            header=FALSE, title="Book-titles Example with 10 Books", rownames=FALSE,
                             label="titles:6books")
 ```
 
-```{r, chache=TRUE}
-chapters_dtm_all2 <- convert_to_dtm(word_counts2, minfq=0)
+```{r categories10_books, results="asis"}
+gbids <- titles$titles$gutenberg_id 
+categories <- gutenberg_works() %>% 
+  filter(gutenberg_id %in% gbids) %>% 
+  select(gutenberg_id, gutenberg_bookshelf)
+categories %>% stargazer(summary=FALSE, font.size = "footnotesize", 
+                            header=FALSE, title="Book-categories", rownames=FALSE,
+                            label="categories:10books")
+```
+
+
+
+```{r 10_books_example, chache=TRUE, warning=FALSE, results="asis"}
+# embedding 1
+chapters_dtm_10 <- convert_to_dtm(word_counts10, minfq=2)
+dim(chapters_dtm_10)
+# embedding 2
+chapters_dtm_all_10 <- convert_to_dtm(word_counts10, minfq=0)
+# embedding 3
+chapters_dtm_tfidf_10 <- convert_to_dtm_2(word_counts10, top=17742)
+
+# embedding 1
+tim1 <- Sys.time()
+chapters_lda_10 <- LDA(chapters_dtm_10,  method="Gibbs", 
+                    k = n_books_10, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_1 <- tim2-tim1
+
+# embedding 2
+tim1 <- Sys.time()
+chapters_lda_all_10 <- LDA(chapters_dtm_all_10,  method="Gibbs", 
+                    k = n_books_10, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_all <- tim2-tim1
+
+# embedding 3
+tim1 <- Sys.time()
+chapters_lda_tfidf_10 <- LDA(chapters_dtm_tfidf_10,  method="Gibbs", 
+                    k = n_books_10, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_tfidf <- tim2-tim1
+
+# embedding 1
+misc.rate_1_10 <- ext_gamma_matrix(chapters_lda_10) %>% 
+  validate_LDAclassification()
+
+# embedding 2
+misc.rate_all_10 <- ext_gamma_matrix(chapters_lda_all_10) %>% 
+  validate_LDAclassification()
+
+# embedding 3
+misc.rate_tfidf_10 <- ext_gamma_matrix(chapters_lda_tfidf_10) %>% 
+  validate_LDAclassification()
+
+# overview
+performance_matrix_10_Gibbs <- data.frame(freq2.embedding=c(misc.rate_1_10, u_1), 
+           all.embedding=c(misc.rate_all_10, u_all),
+           tfidf=c(misc.rate_tfidf_10, u_tfidf))
+rownames(performance_matrix_10_Gibbs) <- c("missc. rate", "time")
+performance_matrix_10_Gibbs %>%  stargazer(summary=FALSE, header=F, title = "LDA via Gibbs 10 books example")
+```
+
+```{r 10_books_example_VEM, chache=TRUE, warning=FALSE, results="asis"}
+# embedding 1
+tim1 <- Sys.time()
+chapters_lda_10_VEM <- LDA(chapters_dtm_10,  method="VEM", 
+                    k = n_books_10, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_1 <- tim2-tim1
+
+# embedding 2
+tim1 <- Sys.time()
+chapters_lda_all_10_VEM <- LDA(chapters_dtm_all_10,  method="VEM", 
+                    k = n_books_10, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_all <- tim2-tim1
+
+# embedding 3
+tim1 <- Sys.time()
+chapters_lda_tfidf_10_VEM <- LDA(chapters_dtm_tfidf_10,  method="VEM", 
+                    k = n_books_10, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_tfidf <- tim2-tim1
+
+# embedding 1
+misc.rate_1_10_VEM <- ext_gamma_matrix(chapters_lda_10_VEM) %>% 
+  validate_LDAclassification()
+
+# embedding 2
+misc.rate_all_10_VEM <- ext_gamma_matrix(chapters_lda_all_10_VEM) %>% 
+  validate_LDAclassification()
+
+# embedding 3
+misc.rate_tfidf_10_VEM <- ext_gamma_matrix(chapters_lda_tfidf_10_VEM) %>% 
+  validate_LDAclassification()
+
+# overview
+performance_matrix_10_VEM <- data.frame(freq2.embedding=c(misc.rate_1_10_VEM, u_1), 
+           all.embedding=c(misc.rate_all_10_VEM, u_all),
+           tfidf=c(misc.rate_tfidf_10_VEM, u_tfidf))
+rownames(performance_matrix_10_VEM) <- c("missc. rate", "time")
+performance_matrix_10_VEM %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM 10 books example")
+```
+
+the following box plot should illustrate the missclassification rate of the LDA algorithm in the different use cases.
+
+```{r}
+plot_DF <- data.frame(VEM=c(misc.rate_1_10_VEM, misc.rate_all_10_VEM, misc.rate_tfidf_10_VEM,
+                 misc.rate_1, misc.rate_all, misc.rate_tfidf,
+                 misc.rate_1_sec, misc.rate_all_sec, misc.rate_tfidf_sec),
+           Gibbs=c(misc.rate_1_10, misc.rate_all_10, misc.rate_tfidf_10,
+                   misc.rate_1_Gibbs, misc.rate_all_Gibbs, misc.rate_tfidf_Gibbs,
+                   misc.rate_1_Gibbs_sec, misc.rate_all_Gibbs_sec, misc.rate_tfidf_Gibbs_sec),
+           Use_Case=c(rep("10 books",3), 
+                      rep("6 books",3),
+                      rep("6 books",3)))
+plot_DF2 <- gather(plot_DF, key="Procedure", value="accuracy", VEM, Gibbs)
+
+plot_DF2 %>% ggplot(aes(x=Use_Case, y=accuracy, fill=Procedure))+
+      geom_boxplot() + xlab("") + ylab("missclassification rate")
 ```
 
 ## Evaluate model

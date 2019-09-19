@@ -25,10 +25,10 @@
 
 \section{Discussed models}
 
-This section will introduce the reader into the two Topic modeling approaches which will be compared in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of the respective model. The basic structural notation of the data consists of the following variables.
+This section will introduce the reader into the two Topic modeling approaches which will be compared in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of each model. The basic structural notation of the data consists of the following variables.
 
-A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists out of M documents $\textbf{w}=(w_1,\dots, w_N)$ which are itself separated in words $w_i$. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary.
-This notation may indeed be extended through the addition of indices for documents, but this is not done here or in the standard literature on topic models due to its unnecessary complexity.
+A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists out of M documents $\textbf{w}=(w_1,\dots, w_N)$ which are itself separated into $N$ words $w_i$. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary.
+This notation may indeed be extended through the addition of indices for documents, but this is neither done here nor in the standard literature on topic models due to its unnecessary complexity.
 
 
 % MODEL LDA Introduction
@@ -177,7 +177,7 @@ The algorithm of the simple perceptron is schematically shown in Figure \ref{sim
 If this basic perceptron is used in a clever way, designs can be developed that have variable application possibilities with this approach only. For example, a sigmoid function can be used as an activation function instead of the step function. So the output layer will not project into the $\{0,1\}$ space, but into a probability space. If you add several nodes with the sigmoid activation function rather than a single output, you basically obtain the architecture that is also called multivariate logistic regression \cite{Bahjat2006}. In that case the model can be estimated by an individual calculation of logistic regressions for each node in the output layer. This allows to classify not only two classes, but an arbitrary number (see the network architecture of Figure \ref{adaption_perceptron}). \footnote{Note that in this setting the dependent variable must be one-hot encoded.}\\
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{adaption_perceptron.pdf}
+	\includegraphics[scale=0.5]{adaption_perceptron2.pdf}
 	\caption{Schematic diagram of an adapted Rosenblatt-perceptron network}
 	\label{adaption_perceptron}
 \end{figure}
@@ -287,7 +287,7 @@ Even if “its theoretical foundations are considered less than firm by informat
 
 % SUBSECTION
 % Lda applied on Gutenberg Data
-\subsection{LDA applied on Gutenberg data}
+\subsection{LDA applied on Gutenberg data} /label{Example1}
 
 As LDA is a classification algorithm, the research question Q1 should be addressed first. I.e. to what extent does the clustering of the LDA model correspond to the mapping of chapters to books? In the first attempt only 6 books are sampled. That is, there are 6 categories, because as mentioned in \ref{sec:analysis} all these 6 books were taken from different bookshelves.\\
 \ \\
@@ -305,12 +305,50 @@ For a clustering model there are two useful methods to evaluate the fit. On the 
 \ \\
 The findings of this study relating to the LDA model are documented in detail. You will find the documentation regarding the LDA model as well as the other models in the appendix. For the sake of clarity, a separate document with the corresponding results was created for each analyzed example and each model respectively. To ensure reproducibility, the entire code is attached to the work by means of these documentations, and will be published on GitHub as well.\footnote{\url{https://github.com/SebastianKnigge/Master_Thesis/tree/master/Documentations} }\\
 \ \\
-The computation of the LDA model via VEM takes a somewhat longer time in the two samples evaluated. In all cases investigated, i.e. across the two samples taken and for both VEM and Gibbs sampling, the calculation for the tf-idf embedding appeared to be the fastest. The calculation time for embedding according to term frequency and full embedding differs less and the calculation of the term frequency embedding is not faster in every case. While a reduction via term frequency only cuts the most rarely used words, a reduction via tf-idf also cuts out frequent words as long as they occur frequently in all documents. Thus the tf-idf reduction has more impact on the distribution within each document compared to the effect of the term frequency reduction, which only affects the tails of the marginal distribution. This supports the assumption that a higher degree of difference in the documents has a positive effect on the calculation speed. 
+The computation of the LDA model via VEM takes a somewhat longer time in the two samples evaluated. In all cases investigated, i.e. across the two samples taken and for both VEM and Gibbs sampling, the calculation for the tf-idf embedding appeared to be the fastest. The calculation time for embedding according to term frequency and full embedding differs less and the calculation of the term frequency embedding is not faster in every case. While a reduction via term frequency only cuts the most rarely used words, a reduction via tf-idf also cuts out frequent words as long as they occur frequently in all documents. Thus the tf-idf reduction has more impact on the distribution within each document compared to the effect of the term frequency reduction, which only affects the tails of the marginal distribution. This supports the assumption that a higher degree of difference in the documents has a positive effect on the calculation speed.\\
+\ \\
+With regard to the quality of the fit, it is apparent that Gibbs sampling performs much better than models fitted by VEM. The best fit using VEM still shows a higher misclassification rate than the poorest fit using Gibbs sampling in the examples examined. Surprisingly, the models with the tf-idf embedding do not perform significantly better than the other approaches, as one might expect that more differentiated word distributions of the documents not only allow a faster calculation, but also result in a higher accuracy. In fact, frequency 2 embedding provides better accuracy results throughout the studied examples.\\
+\ \\
+It was also analyzed how the accuracy will change when using more categories. For this purpose the number of books was increased to 10. The fit via VEM was still much worse than the fit via Gibbs sampling. The model fitted with VEM showed a missclassification rate almost twice as high as the one fitted with Gibbs sampling. For both methods the accuracy deteriorated for more topics used. This sounds intuitive since the clustering algorithm now has to distinguish between more topics. The box plot in Figure \ref{fig:comparison_boxplot} illustrates the LDA algorithm in the different use cases. Here we are comparing the investigated cases. Clearly the difference in the misclassification rate between the examples with 10 and 6 categories becomes apparent. It also illustrates how different the two calculation methods - Gibbs sampling and VEM - are.
 
+\begin{figure}[h]
+	\centering\includegraphics[width=1\textwidth]{comparison_boxplot.pdf}
+	\caption{Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling)}
+	\label{fig:comparison_boxplot}
+\end{figure}
+\ \\
+The classical method to evaluate the model is to split the data set into a training set and a test set, in order to fit the model on the training data and to evaluate it on the test data. To calculate valid results 59 random clustered samples were used with splits of 90\% training sample and 10\% test sample applied. The results for those models that were only fitted to a subset of the data are significantly worse than the comparable models that were trained and tested on the entire dataset. However, since here a clustering model is discussed that does not rely on training data, such as a classification model, it is technical correct to evaluate the model using training data.
 
+\subsection{ANN applied to Gutenberg data}
 
+In what context is it now possible to apply an artificial neural network to this data? Obviously neural networks are a very versatile tool, but here we focus on the reproduction of a known classification of the documents (chapters) by a suitable model. With the help of such networks in the sense of a classification algorithm, research question 2 will be addressed in this chapter. Again, for the shake of reproducibility the entire code including outputs of the computations will be found in the documentation in the appendix.\\
+\ \\
+Primarily the question shall be addressed whether a neural network is suitable as a classification algorithm for NLP with bag of words data. First of all, the architecture of the network used will be explained (see Figure \ref{fig:network_structure} for comparison).
+\begin{figure}[h]
+	\centering\includegraphics[width=1\textwidth]{network_structure.pdf}
+	\caption{The network contains 3 layers. The input data is the the bag of words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.}
+	\label{fig:network_structure}
+\end{figure}
+The network essentially consists of three layers. The lowest $V$ neurons represent the dimension of the input, i.e. the dimension of the bag of words input vectors rather than an actual layer. The network contains two hidden layers, each containing 64 and 46 neurons. The last output layer contains $k$ neurons, which is the number of topics - in this case books - to classify. Note that the architecture of the network was arbitrarily chosen and that there may be room for improvement.\\
+\ \\
+Whether a network is a classification system or e.g. a regression system depends almost exclusively on the activation function in the last so-called output layer. The "softmax function", also known as the "normalized exponential function" \cite[p. 115]{Bishop2006}, is commonly used for a classification network. The softmax function maps to a $(0,1)$ space, where the sum of the vector in the image space corresponds to 1. Thus, the output corresponds to a discrete distribution over the different classes. The classification is made using the maximum probability within this distribution per instance.
+\begin{align}
+	P(y=i|\textbf{x})=\frac{e^{\textbf{x}^t\textbf{w}_i}}{\sum_{j=1}^ke^{\textbf{x}^t\textbf{w}_j}}
+\end{align}
+Where $\textbf{x}$ is the vector of the output of the second hidden layer, and $\textbf{w}_i$ are the weights of the $i$-th neuron in the output layer.\\
+\ \\
+Considering the computing power of the used machine and the limited computing time combined with overfitting, a training using 5 epochs and a batch size of 512 turned out to be suitable. In contrast to the LDA model, however, this procedure must be fitted using training data and evaluated using test data. For this purpose, a proportion of $10\%$ test data, $70\%$ training data and $20\%$ validation data for learning has been used.\\
+\ \\
+Considering the computing power of the used machine and the required computing time combined with overfitting, a training using 5 epochs and a batch size of 512 turned out to be suitable. In contrast to the LDA model, however, this procedure must be fitted using training data and evaluated using test data. For this purpose, a proportion of $10\%$ test data, $70\%$ training data and $20\%$ validation data for learning has been used. Note that in a deep learning setting a validation set is essential to prevent overfitting during learning. The test set is then used to evaluate the model via repeated sampling with $59$ iterations.\\
+\ \\
+The results of the repeated sampling show that a large part of the classifications by the ANN exactly match the true values of the test data set. In very few samples the classification was incorrect for 10-20\% of the test sample. Therefore misclassification rate of the investigated samples was in the range of $1$-$2\%$ with a very small variance of $0.1$-$0.2\%$. These results in this rather small sample support the claim that classification via ANN with bag of words data works very well.\\
 
+% ANALYSIS OF REGULATORY DOCUMENTS
+\section{Analysis of EUROSTAT Documents}\label{sec:example2}
 
+In another example, we would like to focus on the classification of technical, regulatory documents and guidelines. The ESS Vision 2020 ADMIN (Administrative data sources) project aims at “guarantee the quality of the output produced using administrative sources, in particular the comparability of the statistics required for European purposes”\cite{ESSVision2020}. This project contains a collection of 28 official Eurostat documents, i.e. guidelines, methodological definitions, and manuals, e.g. on data access.\\
+\ \\
+Only a very small amount of preprocessing was necessary for the documents that were taken directly from the website. Solely for a few documents the table of contents had to be removed, as the same table appeared several times for different documents. The same stop words were excluded as in Chapter \ref{sec:analysis}. Only the numbers $0$-$9$ were added to this list.
 
 
 
