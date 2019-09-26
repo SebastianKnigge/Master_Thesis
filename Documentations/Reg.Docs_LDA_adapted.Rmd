@@ -181,7 +181,7 @@ for (i in 1:7){
 To check what topics tackle which context, we produce wordclouds using the TFIDF and the TF itself.
 
 ```{r, message=FALSE, warning=FALSE}
-plot_wordcloud <- function(corpus, selection="ALL", max.words=25, i, freq="tfidf"){
+plot_wordcloud <- function(corpus, selection="ALL", max.words=50, i, freq="tfidf", scale=c(3,0.2)){
   # setting up a tibble which returns tfidf and tf and frequency for 
   # the whole corpus
   tfidf <- corpus %>% count(document, word, sort = TRUE) %>% 
@@ -204,7 +204,7 @@ plot_wordcloud <- function(corpus, selection="ALL", max.words=25, i, freq="tfidf
   }
   wordcloud(words = dtm_selected$word, freq = dtm_selected$n, min.freq = 1,
             max.words=max.words, random.order=FALSE, 
-            colors=brewer.pal(8, "Dark2"), scale=c(3,0.2), 
+            colors=brewer.pal(8, "Dark2"), scale=scale, 
             main="Title", use.r.layout = TRUE)
   text(x=0.5, y=1, paste("Topic", i))
 }
@@ -223,13 +223,13 @@ For getting specific and more individual words for each cloud, we use the TFIDF 
 ```{r wordcloud_tfidf, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
 par(mar=c(1,1,0.5,1))
-plot_wordcloud(corpus, selection=ind1[,1], i=1) %>% unlist() %>% as.integer()
-plot_wordcloud(corpus, selection=ind2[,1], i=2) %>% unlist() %>% as.integer()
-plot_wordcloud(corpus, selection=ind3[,1], i=3) %>% unlist() %>% as.integer()
-plot_wordcloud(corpus, selection=ind4[,1], i=4) %>% unlist() %>% as.integer()
-plot_wordcloud(corpus, selection=ind5[,1], i=5) %>% unlist() %>% as.integer()
-plot_wordcloud(corpus, selection=ind5[,1], i=6) %>% unlist() %>% as.integer()
-plot_wordcloud(corpus, selection=ind5[,1], i=7) %>% unlist() %>% as.integer()  
+plot_wordcloud(corpus, selection=ind1[,1], i=1)
+plot_wordcloud(corpus, selection=ind2[,1], i=2)
+plot_wordcloud(corpus, selection=ind3[,1], i=3)
+plot_wordcloud(corpus, selection=ind4[,1], i=4) 
+plot_wordcloud(corpus, selection=ind5[,1], i=5, scale=c(2.5,0.1))
+plot_wordcloud(corpus, selection=ind5[,1], i=6, scale=c(2.5,0.1))
+plot_wordcloud(corpus, selection=ind5[,1], i=7, scale=c(2.5,0.1)) 
 ```
 
 ## Wordclouds using tf
@@ -239,13 +239,13 @@ The same can be done using the regular term frequency.
 ```{r wordcloud_tf, message=FALSE, warning=FALSE, cache=TRUE}
 par(mfrow=c(2,4))
 par(mar=c(1,1,0.5,1))
-plot_wordcloud(corpus, selection=ind1[,1], i=1, freq="tf")
-plot_wordcloud(corpus, selection=ind2[,1], i=2, freq="tf")
-plot_wordcloud(corpus, selection=ind3[,1], i=3, freq="tf")
-plot_wordcloud(corpus, selection=ind4[,1], i=4, freq="tf")
-plot_wordcloud(corpus, selection=ind5[,1], i=5, freq="tf") 
+plot_wordcloud(corpus, selection=ind1[,1], i=1, freq="tf", scale=c(2.5,0.1))
+plot_wordcloud(corpus, selection=ind2[,1], i=2, freq="tf", scale=c(3,0.1))
+plot_wordcloud(corpus, selection=ind3[,1], i=3, freq="tf", scale=c(2,0.03), max.words = 40)
+plot_wordcloud(corpus, selection=ind4[,1], i=4, freq="tf", scale=c(2,0.03))
+plot_wordcloud(corpus, selection=ind5[,1], i=5, freq="tf", scale=c(2.5,0.03)) 
 plot_wordcloud(corpus, selection=ind5[,1], i=6, freq="tf") 
-plot_wordcloud(corpus, selection=ind5[,1], i=7, freq="tf")  
+plot_wordcloud(corpus, selection=ind5[,1], i=7, freq="tf", scale=c(2.5,0.03), max.words = 40)  
 ```
 
 # Embedding via tfidf
@@ -290,13 +290,13 @@ ext_gamma_matrix(documents_lda_2) %>%
 ```{r wordcloud_tfidf2, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
 par(mar=c(1,1,0.5,1))
-plot_wordcloud(corpus, selection=ind1_2[,1], i=1)
-plot_wordcloud(corpus, selection=ind2_2[,1], i=2)
-plot_wordcloud(corpus, selection=ind3_2[,1], i=3)
-plot_wordcloud(corpus, selection=ind4_2[,1], i=4)
-plot_wordcloud(corpus, selection=ind5_2[,1], i=5) 
-plot_wordcloud(corpus, selection=ind4_2[,1], i=6)
-plot_wordcloud(corpus, selection=ind5_2[,1], i=7) 
+plot_wordcloud(corpus, selection=ind1_2[,1], i=1, scale=c(2.5,0.2))
+plot_wordcloud(corpus, selection=ind2_2[,1], i=2, scale=c(2.5,0.1))
+plot_wordcloud(corpus, selection=ind3_2[,1], i=3, scale=c(1.5,0.001), max.words = 30)
+plot_wordcloud(corpus, selection=ind4_2[,1], i=4, scale=c(2,0.1))
+plot_wordcloud(corpus, selection=ind5_2[,1], i=5, scale=c(2.5,0.1), max.words = 40) 
+plot_wordcloud(corpus, selection=ind4_2[,1], i=6, scale=c(2,0.1), max.words = 40)
+plot_wordcloud(corpus, selection=ind5_2[,1], i=7, scale=c(2.5,0.05), max.words = 35) 
 ```
 
 We want to give an overview over the clustered documents with the respective wordclouds.
@@ -342,4 +342,8 @@ predict_table2 <- prediction5_2 %>% select(doc_id, topic) %>%
 
 validate_LDAclassification(predict_table2)
 ```
+# coherence cloud
 
+```{r}
+dtm_50 %>% as.matrix() %>% t() %>% comparison.cloud(scale=c(2,.05), max.words=50, title.size = 1)
+```
