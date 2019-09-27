@@ -23,9 +23,32 @@
 \author{Sebastian Knigge}
 \begin{document}
 
+\section{Natural Language Processing and Information Retrival}
+
+The reason for the current relevance of the topic NLP is obvious. But what does the concept of natural language processing actually cover and into which research field is it to be classified? It is worth looking at how NLP has evolved over the years and where it originated, in order to better understand what this area encompasses and what it does not. Since the origins of NLP lie in computer science, especially in Artificial Intelligence, NLP and AI shares the same approaches. For an short review of the motivations of AI, see also Chapter \ref{ANN_development}.  \\
+\ \\
+“Between about 1960 and 1985, most of linguistics, psychology, artificial intelligence, and natural language processing was completely dominated by a \textbf{\textit{rationalist}} approach” \cite[p. 4]{Manning1999}. In other words, procedures for NLP were completely static, fix-programmed solutions for processing text data. Books like \cite{Noble1988} followed this approach until the late 80s. Whereby the enthusiasm gradually, just like for artificial intelligence itself, decreased and arose cyclical.\\
+\ \\
+The second school of thought mentioned by Manning and Schütz is the \textit{\textbf{empiristic}} approach.
+This is based upon the assumption, that one “can learn the structure of language by specifying a general model and then learning the values of the parameters by applying statistical modeling and machine learning methods to large amount of observed language” \cite[p. 253]{Martinez2010}. What finally led to the breakthrough of NLP in its current form is what Manning defines as statistical NLP. I.e. all quantitative approaches for automatization NLP, which includes probabilistic modeling, as well as information theory, and linear algebra. This thesis will focus on methods from this approach.\\
+Some of this work could even in fact fall a step further. Deep learning (see Chapter \ref{ANN_development}) was indeed invented already in 1999 at the time of the division of the definition Mannings in its basic outlines, but received still far less attention than today. One could therefore call NLP via deep learning a subcategory of the empirical approach in its own right, and possibly even list "deep NLP” alongside Statistical NLP.\\
+\ \\
+Statistical NLP considers recurring patterns and structures always in the context of certain texts and does not examine the whole language as such. This approach is no new invention by NLP researchers, but has been used by linguists even prior to computer science (see \cite{Harris1951}). A collection or body of texts is called \textbf{\textit{corpus}}, which means "body" in Latin. In the course of this work we will also speak of several corpora, which refers to several collections of texts.\\
+\ \\
+In this thesis so called topic models are studied and applied. David M. Blei defines topic models “as algorithms for discovering the main themes that pervade a large and otherwise unstructured collection of documents. Topic models can organize the collection according to the discovered themes”\cite{Blei2012}. This definition may therefore apply to both clustering and classification algorithms, even if many authors will refer to clustering algorithms in the context of topicmodels. You will find a brief introduction to clustering and classification models in the use case in Chapter \ref{sec:analysis}.\\
+\ \\
+Another important term in the research area of this thesis is information retrieval (IR). IR means to access information. This field deals with computer-aided searches for complex contents and belongs to the fields of information science, computer science and computational linguistics. According to David Grossmann et al. IR refers to a search that might cover information of any kind, e.g. text data as well as video-, image-, sound data, or even DNA sequences. The field where LDA and IR overlap is document retrieval \cite{Grossmann2004}. Thus, most procedures we are discussing in this thesis might not solely fall into the topic NLP but also IR. This small excursion in this direction is intended to give the reader a better understanding of how linked this topic is and in which intersection it is located.  
+
+
+
+
+
+
+
+
 \section{Discussed models}
 
-This section will introduce the reader into the two Topic modeling approaches which will be compared in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of each model. The basic structural notation of the data consists of the following variables.
+This section will introduce the reader into the two Topic modeling approaches which will be studied in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of each model. The basic structural notation of the data consists of the following variables.
 
 A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists out of M documents $\textbf{w}=(w_1,\dots, w_N)$ which are itself separated into $N$ words $w_i$. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary.
 This notation may indeed be extended through the addition of indices for documents, but this is neither done here nor in the standard literature on topic models due to its unnecessary complexity.
@@ -141,7 +164,7 @@ In this thesis, the implementation of the LDA model and its estimation is mainly
 \subsection{Artifical Neural Networks}
 
 Artificial neural networks (ANN) are much more versatile than the LDA model. There are not only various forms of artificial neural networks, but also a very large number of application areas. Quite as machine learning procedures in general, also deep learning algorithms are divided into two broad categories: supervised learning, where a superset instance provides the algorithm with the output required to learn, and unsupervised procedures that internally train predefined models to find patterns in the input signals. In this chapter we will focus heavily on the former group of ANNs. Also, this chapter is intended to give the reader an overview of the research on neural networks as well as the background of their development. \\
-\subsubsection{Development}
+\subsubsection{Development} \label{ANN_development}
 Research on ANNs dates back to the 1940s, when \cite{McCulloch1943} introduced the so called “M-P neuron”. Whereby this neuron had only a bivariate input and output, Rosenblatt later extended this idea to a network of M-P neurons, which allowed to set up a simple classification algorithm \cite{Rb1958}. A perceptron in its basic form (single perceptron) is a binary classifier. \\
 \\
 Imagine input data of a simple perceptron in the form of a matrix. 

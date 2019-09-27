@@ -36,7 +36,7 @@ library(foreach)
 
 ### Definition of functions
 
-This is the essential step for setting up the LDA model. These functions include the sampling procedure from the *gutenbergr* library.
+This is the essential step for setting up the LDA model. These functions include the sampling procedure of the *gutenbergr* library.
 
 ```{r, message=FALSE, warning=FALSE}
 sampling_books <- function(seed=1234, n=20){
@@ -165,22 +165,11 @@ convert_to_dtm_2 <- function(x, n=n, minfq = 2, top=10000){
 }
 ```
 
-Note:
-
-  * good seperation for 4 topics:
-    + seed=12345
-    + seed=54321
-  * for 6 books:
-    + seed=222
-    + seed 101
-  * for 10 books:
-    + seed=54321
-    + seed=123456
 
 
 ### Sample corpus
 
-Now we can use all these functions to get to the initial corpus sample. In this example $6$ books are choosen.
+Now we can use these functions to get to the initial corpus sample. In this example $6$ books are choosen.
 
 ```{r setup_books, chache=TRUE, warning=TRUE}
 n_books <- 6
@@ -195,7 +184,7 @@ appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
 word_counts <- exclude_stop_words(appended_by_chapter)
 ```
 
-In table \ref{titles:6books} the sampled titles for the book sample with the seed $222$ are displayed. It appears through the function *append_by:chapter(9)* one book was added, called "Clotelle: A Tale of the Southern States".
+In table \ref{titles:6books} the sampled titles for the book sample with the seed $222$ are displayed. It appears through the function *append_by:chapter()* one book was added, called "Clotelle: A Tale of the Southern States".
 
 
 ```{r, results="asis"}
@@ -205,7 +194,7 @@ titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize",
                             label="titles:6books")
 ```
 
-We also want to check if the book categories are different. See Table (\ref{categories:6books}) for comparison.
+We also want to check if the book categories (i.e. gutenberg bookshelfes) are different. See Table (\ref{categories:6books}) for comparison.
 ```{r categories, results="asis"}
 gbids <- titles$titles$gutenberg_id 
 categories <- gutenberg_works() %>% 
@@ -216,9 +205,9 @@ categories %>% stargazer(summary=FALSE, font.size = "footnotesize",
                             label="categories:6books")
 ```
 
-Obviously the corpus is very diverse. LDA should not have problems to cluster the chapters of the books.
+Obviously the corpus is very diverse. It is a good sample in order to try to cluster the chapters of the books with the taid of LDA.
 
-#### Reduction of the dimensionality
+## Reduction of the dimensionality
 
 In the set up we have another parameter to adjust. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
 
@@ -242,11 +231,11 @@ ncol(chapters_dtm_tfidf)
 ```
 
 
-#### Apply the LDA model on the full corpus
+## Apply the LDA model on the full corpus
 
-##### Fitting via VEM
+### Fitting via VEM
 
-Set up the LDA model for the shrinked embedding corpus via frequency 2. Using the default "VEM-Algorithm"
+Set up the LDA model for the shrinked embedding corpus via frequency=2. I a first try we are using the default "VEM-Algorithm" to fit the model.
 
 ```{r chapters_lda, cache=TRUE, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
@@ -256,7 +245,7 @@ tim2 <- Sys.time()
 u_1 <- tim2-tim1
 ```
 
-In comparison set up the LDA model for the full word embedding corpus.
+In comparison we will set up the LDA model for the full word embedding corpus.
 
 ```{r chapters_lda_all, cache=TRUE, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
@@ -266,7 +255,7 @@ tim2 <- Sys.time()
 u_all <- tim2-tim1
 ```
 
-Third LDA setup is for the shrinkage of the dictionary by TFIDF.
+The third LDA fit is for the shrinkage of the dictionary/bag of words by TFIDF.
 
 ```{r chapters_lda_tfidf, cache=TRUE, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
@@ -278,7 +267,7 @@ chapters_lda
 ```
 
 
-Now we evaluate the model all in once: 
+Now we evaluate the model all in once, that is, we analyze the clustering on the entire data set.
 
 ```{r, cache=TRUE}
 ext_gamma_matrix <- function(model){
@@ -327,7 +316,7 @@ validate_LDAclassification <- function(gamma_matrix){
 }
 ```
 
-Now we exclude 3 times the beta matrix and evaluate the most likely result with the real results. Depending on how good the LDA will seperate the books, this influences the goodness of the fit.
+Now we exclude for each fir of the 3 embedings embedding the - so called - beta matrix and evaluate the most likely result with the real results. Depending on how good the LDA will seperate the books, this influences the goodness of the fit.
 
 ```{r misc.rate_1, cache=TRUE}
 misc.rate_1 <- ext_gamma_matrix(chapters_lda) %>% 
@@ -344,7 +333,7 @@ misc.rate_tfidf <- ext_gamma_matrix(chapters_lda_tfidf) %>%
   validate_LDAclassification()
 ```
 
-Following matrix gives an overview:
+The following matrix gives an overview of the fitting time and the results of the 3 different fits.
 
 ```{r, results="asis"}
 performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1, u_1), 
@@ -354,7 +343,7 @@ rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM")
 ```
 
-We run the same calculations for a different sample.
+We run the same calculations for a different sample. This means that we set up a new random sample from the Gutenberg books by again using the sample function with another randomness factor (seed). Again, it has to be a sample that is as diverse as possible, i.e. contains books from different categories. In the following we set up again three bag of words, each using the three embeding methods mentioned above. Lastly, we perform the same evaluation method as just seen to evaluate the method for this sample as well.
 
 ```{r second_example, chache=TRUE, warning=FALSE, results="asis"}
 n_books_sec <- 6
@@ -369,6 +358,7 @@ categories_sec <- gutenberg_works() %>%
 
 # embedding 1
 chapters_dtm_sec <- convert_to_dtm(word_counts_sec, minfq=2)
+nrow(chapters_dtm_sec)
 # embedding 2
 chapters_dtm_all_sec <- convert_to_dtm(word_counts_sec, minfq=0)
 # embedding 3
@@ -418,7 +408,7 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM 
 
 Surprisingly, the run-time to fit the LDA model for the embedding using all words, does not take way longer than the embedding using a lower frequency. The fit of the model with the reduced bag of words via tfidf takes slightly less time.
 
-##### Comparison to fitting via Gibbs Sampling
+### Comparison to fitting via Gibbs Sampling
 
 For comparison, we will check the results and the run time for the fit via Gibbs Sampling.
 

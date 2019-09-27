@@ -4,9 +4,17 @@ The top-level auxiliary file: Magisterarbeit_S.Knigge.aux
 The style file: apalike.bst
 Database file #1: MagLibrary.bib
 Warning--entry type for "ESSVision2020" isn't style-file defined
---line 12 of file MagLibrary.bib
-Warning--entry type for "ProjectGutenberg" isn't style-file defined
 --line 57 of file MagLibrary.bib
+Warning--entry type for "ProjectGutenberg" isn't style-file defined
+--line 104 of file MagLibrary.bib
+Too many commas in name 1 of "Manning, C., Sch{\"u}tze, H." for entry Manning1999
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "Manning, C., Sch{\"u}tze, H." for entry Manning1999
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "Grossmann, D., Frieder, O." for entry Grossmann2004
+while executing---line 1023 of file apalike.bst
+Too many commas in name 1 of "Grossmann, D., Frieder, O." for entry Grossmann2004
+while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
 while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "A. Gelman, J. Carlin, H. Stern, D. Dunson, A. Vehtari, D. Rubin" for entry Gelman2014
@@ -42,47 +50,51 @@ while executing---line 1098 of file apalike.bst
 Too many commas in name 1 of "Blei, D. , Ng, Ng., Jordan, M." for entry Blei2003
 while executing---line 1098 of file apalike.bst
 Too many commas in name 1 of "Blei, D. , Ng, Ng., Jordan, M." for entry Blei2003
+while executing---line 1098 of file apalike.bst
+Too many commas in name 1 of "Grossmann, D., Frieder, O." for entry Grossmann2004
 while executing---line 1098 of file apalike.bst
 Warning--empty year in ProjectGutenberg
-You've used 23 entries,
+Too many commas in name 1 of "Manning, C., Sch{\"u}tze, H." for entry Manning1999
+while executing---line 1098 of file apalike.bst
+You've used 28 entries,
             1935 wiz_defined-function locations,
-            608 strings with 6266 characters,
-and the built_in function-call counts, 6667 in all, are:
-= -- 648
-> -- 185
-< -- 23
-+ -- 60
-- -- 54
-* -- 470
-:= -- 1245
-add.period$ -- 65
-call.type$ -- 23
-change.case$ -- 134
-chr.to.int$ -- 23
-cite$ -- 24
-duplicate$ -- 296
-empty$ -- 497
-format.name$ -- 85
-if$ -- 1269
+            635 strings with 6744 characters,
+and the built_in function-call counts, 8118 in all, are:
+= -- 786
+> -- 220
+< -- 28
++ -- 70
+- -- 64
+* -- 567
+:= -- 1512
+add.period$ -- 80
+call.type$ -- 28
+change.case$ -- 162
+chr.to.int$ -- 28
+cite$ -- 29
+duplicate$ -- 365
+empty$ -- 615
+format.name$ -- 100
+if$ -- 1554
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 21
-newline$ -- 114
-num.names$ -- 69
-pop$ -- 117
+missing$ -- 29
+newline$ -- 139
+num.names$ -- 84
+pop$ -- 148
 preamble$ -- 1
-purify$ -- 142
+purify$ -- 172
 quote$ -- 0
-skip$ -- 241
+skip$ -- 293
 stack$ -- 0
-substring$ -- 378
-swap$ -- 21
+substring$ -- 459
+swap$ -- 26
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 128
+type$ -- 152
 warning$ -- 1
-while$ -- 54
+while$ -- 65
 width$ -- 0
-write$ -- 278
-(There were 18 error messages)
+write$ -- 340
+(There were 24 error messages)

@@ -39,6 +39,16 @@ Chollet, F., A.~W. (2018).
 Eurostat (2019).
 \newblock Ess vision 2020 admin (administrative data sources).
 
+\bibitem[Grossmann, 2004]{Grossmann2004}
+Grossmann, D., F.~O. (2004).
+\newblock {\em Information Retrival - Algorithms and Heuristics}.
+\newblock Springer, 2 edition.
+
+\bibitem[Harris, 1951]{Harris1951}
+Harris, Z. (1951).
+\newblock Methods in structural linguistics.
+\newblock {\em Linguistic Society of America}.
+
 \bibitem[Hart, ]{ProjectGutenberg}
 Hart, M.
 \newblock Project gutenberg.
@@ -63,6 +73,16 @@ M.~Steyvers, T.~G. (2006).
 \newblock Probabilistic topic models.
 \newblock {\em Latent Semantic Analysis: A Road to Meaning}.
 
+\bibitem[Manning, 1999]{Manning1999}
+Manning, C., S.~H. (1999).
+\newblock {\em Foundations of Natural Language Processing}.
+\newblock MIT press.
+
+\bibitem[Martinez, 2010]{Martinez2010}
+Martinez, A. (2010).
+\newblock Natural language processing.
+\newblock {\em John Wiley and Sons, Inc.}, 2:253--257.
+
 \bibitem[McCulloch and Pitts, 1943]{McCulloch1943}
 McCulloch, W. and Pitts, W. (1943).
 \newblock A logical calculus of the ideas immanent in nervous activity.
@@ -77,6 +97,11 @@ Minsky, M. and Papert, S. (1969).
 Mukherjee, S. (2019).
 \newblock Lecture notes for probabilistic machine learning.
 \newblock Duke University.
+
+\bibitem[Noble, 1988]{Noble1988}
+Noble, H. (1988).
+\newblock {\em Natural LAnguage Processing}.
+\newblock Blackwell Scientific Publications.
 
 \bibitem[Powieser, 2012]{Powieser2012}
 Powieser, M. (2012).
