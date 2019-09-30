@@ -1,5 +1,5 @@
 ---
-title: "Regulatory documents via LDA (adapted documents)"
+title: "Regulatory Documents via LDA - Documentation"
 author: "Sebastian Knigge"
 date: "18 8 2019"
 output: 

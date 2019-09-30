@@ -1,5 +1,5 @@
 ---
-title: "LDA Documentation"
+title: "Gutenberg Data via LDA - Documentation"
 author: "Sebastian Knigge"
 date: "6 8 2019"
 output: 
