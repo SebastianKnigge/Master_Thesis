@@ -22,8 +22,16 @@
 
 \author{Sebastian Knigge}
 \begin{document}
+	
+\section{Motivation and Organization of the Thesis}
+	
+Even if the amount of data increases inexorably due to the permanent collection of online data, and there are always new and better methods to derive good forecasts from big data, it is still difficult for algorithms to extract information from unstructured data. The amount of text data does not increase as quickly as the amount of structured user data. However, it should not be ignored that the written word still has an immensely high -if not the highest - information density for the human mind. Text is the primary and most accurate way to transfer and store complex information. In a nutshell: while a machine and algorithms think in numbers, humans still think in words and text. A major challenge of machine learning will be to extract and link information from unstructured data such as text.\\
+\ \\
+A whole field of computer science is already addressing the topic of text data. This is Natural Language processing and Information Retrieval (see chapter \ref{sec:NLP}). In the recent past, especially probabilistic approaches have been considered promising by researchers (see e.g. \cite{Manning1999}). However, the success of methods depends greatly on the text data to which they are applied and on the desired output. It is therefore equally important to address the methods and models used, as well as describing the use case in detail, when conducting research in this area. Winter et al. for example used regulatory documents and guidelines to characterized them via KNN \cite{Winter2017}. In this work, I want to follow Winter's work thematically. I will examine related as well as new, completely different methods and approaches to characterize regulatory documents.\footnote{When comparing the two works, however, note the difference in the topic of the documents analyzed.}
+	
+	
 
-\section{Natural Language Processing and Information Retrival}
+\section{Natural Language Processing and Information Retrival} \label{sec:NLP}
 
 The reason for the current relevance of the topic NLP is obvious. But what does the concept of natural language processing actually cover and into which research field is it to be classified? It is worth looking at how NLP has evolved over the years and where it originated, in order to better understand what this area encompasses and what it does not. Since the origins of NLP lie in computer science, especially in Artificial Intelligence, NLP and AI shares the same approaches. For an short review of the motivations of AI, see also Chapter \ref{ANN_development}.  \\
 \ \\
@@ -46,7 +54,7 @@ Another important term in the research area of this thesis is information retrie
 
 
 
-\section{Discussed models}
+\section{Discussed Models}
 
 This section will introduce the reader into the two Topic modeling approaches which will be studied in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of each model. The basic structural notation of the data consists of the following variables.
 
@@ -55,7 +63,7 @@ This notation may indeed be extended through the addition of indices for documen
 
 
 % MODEL LDA Introduction
-\subsection{LDA model}\label{sec:LDA}
+\subsection{LDA Model}\label{sec:LDA}
 
 Latent Dirichlet Allocation is a Bayesian approach and is often associated with the class of hierarchical models \cite{Gelman2014}. The idea is based on the representation of exchangeable random variables (acc. to de Finetti) as 
 mixture of distributions. Given that documents $\textbf{w}$ and words $w_i$ in each document - both considered as random variables in this setting - are exchangeable in such a way, a mixed model such as the LDA model is appropriate \cite{Blei2003}.
@@ -100,7 +108,7 @@ p(\textbf{w}|\alpha, \beta)=\int p(\theta|\alpha) \left( \prod_{i=1}^{N} \sum_{z
 \ \\
 The literature divides the approaches to calculating posterior distribution into two main categories.\cite{Blei2012} distinguishes between sampling based algorithms and variational algorithms. \cite{Powieser2012} lists a total of 6 algorithms that can be used to estimate parameters in the LDA model. This thesis will be confined to the two most cited and most used members of the two main groups. One approach is to simulate the posterior density by iteratively sampling - the so-called Gibbs sampling. The second approach is a deterministic method, a modified version of the well-known EM algorithm \cite{Dempster1977}: the Variational EM algorithm (VEM algorithm) \cite{Wainwright2008}. In the following two sections the both approaches are roughly outlined to give the reader some insight into the Bayesian inference underlying the algorithms.
 
-\subsubsection{Variational EM algorithm}
+\subsubsection{Variational EM Algorithm}
 
 In the VEM algorithm for the LDA model is a mean field approach which varies the steps E and M of the EM algorithm in a way such that this algorithm becomes solvable. Note that the main problem of calculating the marginal distribution is, to derive the conditional probability of some hidden variables given some observed values ("evidence"). The variation of the EM algorithms consists mainly in approximating the directly intractable E step.  Rewriting the log of the border density of $\textbf{w}$ as follows in (\ref{marginal2}), results in the fact that the marginal density can be estimated downwards with the aid of Jensen's inequality.
 \begin{align}\label{marginal2}
@@ -135,7 +143,7 @@ The variation of the EM algorithm thus is to use the variational distribution $q
 \end{itemize}
 
 
-\subsubsection{Gibbs sampling}
+\subsubsection{Gibbs Sampling}
 
 The second method to approximate the posterior distribution is Gibbs sampling, a so-called monte Carlo method. Instead of calculating the distributions for $\beta$ and $\theta$, the primary task is to find the posterior distribution over $\textbf{z}$ given the document $\textbf{w}$. Gibbs sampling is also known as a Markov Chain Monte Carlo method. The name refers to the simulation process by which a chain of values is simulated whose limiting distribution desirably converges against the true distribution \cite{Griffiths2006}. (\ref{Gibbs}) shows the distribution, which is sampled from iteratively.
 \begin{align}\label{Gibbs}
@@ -238,7 +246,7 @@ Note: While Rosenblatt for the perceptron was actually inspired by the biologica
 This work uses the \texttt{Keras R} package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for \texttt{R} by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
 
 % ANALYSIS OF TEXTBOOK CHAPTERS
-\section{Analysis of textbook chapters}\label{sec:analysis}
+\section{Analysis of Gutenberg Data}\label{sec:analysis}
 
 In this first example, the chapters of individual books are classified, all of which sourced from the freely distributed Project Gutenberg. Project Gutenberg is a provider of over 60,000 free electronic books with the primary aim to “encourage the creation and distribution of eBooks”\cite{ProjectGutenberg}. The package \texttt{gutenbergr} \cite{gutenbergr} preprocesses the ebooks text data and downloads it. This convenient package in combination with the free repository allows the analysis of a large number of large text documents with a secure source and a big amount of meta information. For this analysis interesting information is e.g. Gutenberg id as key variable for fast identification of books, title, author and more importantly the categorization of project Gutenberg, the so-called Gutenberg bookshelf. Table \ref{titles:5books} lists all this information for a random sample of books downloaded from the Project Gutenberg.
 
@@ -261,7 +269,7 @@ In this first example, the chapters of individual books are classified, all of w
 \end{table} 
 \ \\
 In order to test NLP models, two questions can be examined on the basis of these simple text documents. 
-\textbf{Firstly (Q1), does a clustering model cluster text documents similar to a human-driven classification?} In this case, this could be validated by the categorization into Gutenberg bookshelves. \textbf{And secondly (Q2), how good is such a classification reproducible using a classification model?} \\
+\textbf{Firstly (Q1), does a LDA cluster text documents similar to a human-driven classification?} In this case, this could be validated by the categorization into Gutenberg bookshelves. \textbf{And secondly (Q2), what is the best approach to reproduce such a classification using an ANN as a classification model?} \\
 Since very large amounts of data have to be processed and analyzed in order to model the bookshelf classification for a big collection of books, a somewhat reduced approach will be used here. One breaks down a collection of books of different categories into chapters in order to cluster respectively classify these chapters as independent documents. Similarly, you could give an example, assuming $N$ books and separate their chapters and shuffle them, is it possible to use models to reassemble the chapters into stacks that can be assigned to individual books?\\
 \ \\
 The raw text record is now transformed into the tidy format of tidytext (i.e. one word per row). Now it is possible to remove unnecessary stop-words. These words are predefined and can be modified for the appropriate use case if necessary. The words stem from 3 sources, "onix", "SMART" and "snowball", whereas the latter two are pulled from the \texttt{tm} package \cite{tidytext}.  And the Onix stop words are taken from the publicly accessible site lextec.com. An example of stop words can be found in Table \ref{stopwords}.
@@ -310,7 +318,7 @@ Even if “its theoretical foundations are considered less than firm by informat
 
 % SUBSECTION
 % Lda applied on Gutenberg Data
-\subsection{LDA applied on Gutenberg data} /label{Example1}
+\subsection{LDA applied to Textbook Chapters} \label{Example1}
 
 As LDA is a classification algorithm, the research question Q1 should be addressed first. I.e. to what extent does the clustering of the LDA model correspond to the mapping of chapters to books? In the first attempt only 6 books are sampled. That is, there are 6 categories, because as mentioned in \ref{sec:analysis} all these 6 books were taken from different bookshelves.\\
 \ \\
@@ -342,7 +350,7 @@ It was also analyzed how the accuracy will change when using more categories. Fo
 \ \\
 The classical method to evaluate the model is to split the data set into a training set and a test set, in order to fit the model on the training data and to evaluate it on the test data. To calculate valid results 59 random clustered samples were used with splits of 90\% training sample and 10\% test sample applied. The results for those models that were only fitted to a subset of the data are significantly worse than the comparable models that were trained and tested on the entire dataset. However, since here a clustering model is discussed that does not rely on training data, such as a classification model, it is technical correct to evaluate the model using training data.
 
-\subsection{ANN applied to Gutenberg data}
+\subsection{ANN applied to Textbook Chapters} \label{sec:ANN.example}
 
 In what context is it now possible to apply an artificial neural network to this data? Obviously neural networks are a very versatile tool, but here we focus on the reproduction of a known classification of the documents (chapters) by a suitable model. With the help of such networks in the sense of a classification algorithm, research question 2 will be addressed in this chapter. Again, for the shake of reproducibility the entire code including outputs of the computations will be found in the documentation in the appendix.\\
 \ \\
@@ -369,10 +377,10 @@ The results of the repeated sampling show that a large part of the classificatio
 % ANALYSIS OF REGULATORY DOCUMENTS
 \section{Analysis of EUROSTAT Documents}\label{sec:example2}
 
-In this application, we would like to focus on the classification of technical, regulatory documents and guidelines. The ESS Vision 2020 ADMIN (Administrative data sources) project aims at “guarantee the quality of the output produced using administrative sources, in particular the comparability of the statistics required for European purposes”\cite{ESSVision2020}. This project contains a collection of 28 official Eurostat documents, i.e. guidelines, methodological definitions, and manuals, e.g. on data access.\\
+In this application, we would like to focus on the classification of technical, regulatory documents and guidelines. The ESS Vision 2020 ADMIN (Administrative data sources) project aims at “guarantee the quality of the output produced using administrative sources, in particular the comparability of the statistics required for European purposes”\cite{ESSVision2020}. This project contains a collection of 28 official Eurostat documents, i.e. guidelines, methodological definitions, and manuals, e.g. on data access. Table \ref{document_list} displays the full corpus including all documents.\\
 \begin{table}[!htbp] \centering 
 	\caption{Entire list of documents} 
-	\label{} 
+	\label{document_list} 
 	\begin{tabular}{@{\extracolsep{5pt}} cc} 
 		\\[-1.8ex]\hline 
 		\hline \\[-1.8ex] 
@@ -410,7 +418,44 @@ In this application, we would like to focus on the classification of technical, 
 	\end{tabular} 
 \end{table} 
 \ \\
-Only a very small amount of preprocessing was necessary for the documents that were taken directly from the website. Solely for a few documents the table of contents had to be removed, as the same table appeared several times for different documents. The same stop words were excluded as in Chapter \ref{sec:analysis}. Only the numbers $0$-$9$ were added to this list.
+This chapter will examine how the two methodologies investigated so far can be efficiently applied to the type of documents described above, in order to gain informational value. The research questions in this case are slightly modified and aim at a more specific problem solving approach in the context of the evaluated data. \textbf{Q3: To what extent can the LDA algorithm support a decision maker in clustering the ESS Vision 2020 ADMIN documents?} Question Q4 builds directly on question Q2, differs however regarding the documents examined. \textbf{Q4: How well may the classification of ESS Vision 2020 ADMIN documents be reproduced using an ANN?} In this case, we particularly focus on the setups of the two methods we already optimized for the application to the Gutenberg text data. This means that the same hyper-parameters and fitting methods are used as those tested and proven in chapter \ref{sec:analysis}, because the aim of that example was to find an optimal generic architecture for problems of this kind.\\
+\ \\
+Only a very small amount of preprocessing was necessary for the documents that were taken directly from the website. Solely for a few documents the table of contents had to be removed, as the same table of contents appeared several times for different documents. The same stop words were excluded as in Chapter \ref{sec:analysis}.\footnote{The stop word dictionaries ”onix”, ”SMART” and ”snow- ball” are used, as they are provided by the \texttt{tm} package \cite{Silge2017}.} Consideration must be given to further circumstances of the regulatory documents. Remember that there are many formulas and technical abbreviations in the documents, so each variable, each estimator, and each index is included as a single word in the bag of words. These terms sometimes have a big influence on the documents, because they are very specific for individual documents and occur quite often. To avoid this, all mixed words which include characters and numeric attributes, and all terms with special characters (e.g. Greek letters) are also excluded.
+
+% SUBSECTION
+% Lda applied on Gutenberg Data
+\subsection{LDA applied to EUROSTAT Documents} \label{Example2}
+
+A fundamental problem when clustering text documents is that for certain corpora there may not be a unique grouping of the documents, even if the number of clusters is fixed. Logical, thematic clustering always has a certain uncertainty depending on the aspects according to which it is clustered. For this reason, it is reasonable to compare the statistical clustering to a human-made grouping. This corresponds to the procedure of chapter \ref{Example1}, where the clustering of books by the LDA algorithm was compared with the man-made classification of Gutenberg bookshelves (due to the long computing time – in fact - the approach was adopted for comparing chapters with the allocation to books of different bookshelves).\\
+\ \\
+\textit{Note: The terminology used in this chapter refers to the expert assessment when mentioning \textbf{groups} and to the clusters of the LDA model when discussing \textbf{topics}.}\\
+\ \\
+In this case it is reasonable to consult an expert to get a suitable initial thematic grouping. Univ.-Prof. Dr. Wilfried Grossmann from the Faculty of Computer Science at University of Vienna is an accredited expert in this field and based on his expertise he established a grouping for 7 groups for the documents described here. He proposed the grouping into the following thematic clusters: 
+\begin{enumerate}
+	\item Legal documents
+	\item Methods
+	\item Examples
+	\item Details
+	\item Quality
+	\item Tests
+	\item Frames
+\end{enumerate}
+\ \\
+The model already known from the example in chapter \ref{Example1} with the same specifications was used. This means that 7 categories were used, and Gibbs sampling was chosen for the fit, after it turned out that the LDA model clustered better when used with the Gutenberg data. Also the embedding via minimum term frequency 2 was used, since in the course of the work for the LDA model it appeared to be a robust method in terms of accuracy. Once again, for clustering, the comparison to a man-made grouping is not trivial, because the algorithm can recognize patterns other than those assigned by humans in a certain context. Instead of evaluating the fit using a very strict measure, such as accuracy or misclassification ratio, a logical comparison of the two classifications seems to be more appropriate.\\
+\ \\
+In a first step, it makes sense to find out according to which aspects the algorithm has clustered, i.e. which topics are dominant in the found clusters. I am using word clouds to illustrate the contents of the individual clusters. In this case I made use of the package wordcloud which automatically renders wordclouds based on a frequency distribution which is passed to the $wordcloud()$ function along with the terms. Analogous to \cite{Winter2017} here the \textit{tfidf} measure is used instead of the absolute term frequency. This is advantageous as the wordclouds do not resemble each other so much when deploying \textit{tfidf}, especially since the documents all originate from the underlying topic statistics.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[page=9, trim=68 220 10 284,clip,width=1.2\textwidth]{Docs_LDA_adapted.pdf}
+	\caption{Wordclouds for the clustered topics via LDA – using tfidf word proportions}
+	\label{Wordclouds_tfidf}
+\end{figure}
+\ \\
+Some groups can be recognized very well in the clusters detected by the LDA. For example, the group "legal documents" corresponds exactly to one cluster. The group “Frames” can also be identified from the wordclouds as a separate topic. Group 4 is also extracted relatively well, but due to the wordcloud it may rather be viewed as topic “documents on Bayesian statistics”, rather than “Details”. Other groups such as "Quality" and "Tests" are mixed together and divided into two new clusters. Obviously, the model sticks in this case much more to the individual words than to the latent groups as they were assessed by the Expert.\\
+\ \\
+The descriptive results of this example mainly concern embedding. Due to the number of documents (28 documents), the dimension of the bag of words is smaller. It amounts to almost 8,600 words, for the full embedding compared to 15,000 words for the analogous dictionary of the Gutenberg data. However, the pruning of the bag of words by the frequency 2 embedding is less in comparison. While the dimension of the full bag of words to the frequency 2 bag of words decreased by about 40\% for the Gutenberg data, the dimension for the Eurostat data decreased by only 30\%. In this application, I chose embedding via term frequency 2. This is - as mentioned above - because it demonstrated to be the best alternative in combination with the LDA model in the previous analysis. For comparison, however, the tfidf embedding with the same dimensions as the \textit{tf-2} bag of words was also tested. Again, the model fitted slightly faster for the \textit{tfidf} embedding compared to the frequency 2 embedding.\\
+Numerical results regarding the fit may also be given, even if they do not guarantee good comparability due to the very specific application. The accuracy ratio using the same calculation as in chapter \ref{Example1}, was material better for the frequency 2 embedding than for the \textit{tfidf} embedding (misclassification rates: 0.5 compared to 0.79). Still, these results are way worse than what experienced in the Gutenberg data example. It should be noted that the use case differs considerably from the first example, and that there are considerably fewer documents involved.
+
 
 
 

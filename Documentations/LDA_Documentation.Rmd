@@ -650,9 +650,10 @@ categories %>% stargazer(summary=FALSE, font.size = "footnotesize",
 ```{r 10_books_example, chache=TRUE, warning=FALSE, results="asis"}
 # embedding 1
 chapters_dtm_10 <- convert_to_dtm(word_counts10, minfq=2)
-dim(chapters_dtm_10)
+ncol(chapters_dtm_10)
 # embedding 2
 chapters_dtm_all_10 <- convert_to_dtm(word_counts10, minfq=0)
+ncol(chapters_dtm_all_10)
 # embedding 3
 chapters_dtm_tfidf_10 <- convert_to_dtm_2(word_counts10, top=17742)
 

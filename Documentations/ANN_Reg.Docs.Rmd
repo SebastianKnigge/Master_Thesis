@@ -51,6 +51,16 @@ documents <- paste0(documents,".pdf")
 
 
 Following functions are used to set up and analyze the pdfs.
+```{r, message=FALSE, warning=FALSE}
+# getting the right directory
+library(here)
+setwd("../")
+path <- getwd() %>% 
+  file.path("TextDocs")
+setwd(path)
+```
+
+When cleaning up data, we have to take into account certain circumstances of the regulatory documents. For example, there are many formulas and technical abbreviations in the documents. Every variable, every estimator, and every index is included as a single word in the bag of words. These terms sometimes have a big influence on the documents, because they are very specific for individual documents and occur quite often. To avoid this, we exclude all mixed words with characters and numeric values, as well as all terms with special characters (e.g. Greek letters).
 
 ```{r, message=FALSE, warning=FALSE}
 read_pdf_clean <- function(document){
@@ -98,7 +108,7 @@ for (i in 2:length(documents)){
 }
 ```
 
-# apply ANN
+# Apply ANN
 
 ```{r, message=FALSE, warning=FALSE}
 dtm <- corpus %>% count(document, word, sort = TRUE) %>%
@@ -178,7 +188,7 @@ sample_cluster_wise <- function(data, test_ratio=0.2, val_ratio=0.2, seed=1234){
 }
 ```
 
-The following two functions are setting up the model and evaluate the goodness of fit.
+The following two functions are setting up the model and evaluate the goodness of fit. 
 
 ```{r fitting-function, chache=TRUE}
 # The whole model is set up and trained within this function
@@ -201,8 +211,8 @@ set_up_n_fit <- function(split, books_n=n_books){
     split$partial_y_train,
     # from experience the model tends to 
     # overfit for more than 5 epochs
-    epochs=7,
-    batch_size=2^6,
+    epochs=5,
+    batch_size=2^9,
     validation_data=list(split$x_val,split$y_val)
   )
   return(
@@ -226,11 +236,11 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 }
 ```
 
-Now we can start applying the model:
+Now we can start applying the model. Here we use a split of 20\% validation-, 17\% test- and 63\% training-set. All 3 embeddings are evaluated. We use 35 simulations to test each embedding. 
 
 ```{r epply_n_evaluate, cache=TRUE, results='hide'}
 tim1 <- Sys.time()
-n <- 25
+n <- 35
 results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(dtm_tensor_2, seed=i*201, test_ratio = 0.17)
@@ -241,13 +251,14 @@ tim2 <- Sys.time()
 ```
 
 ```{r}
+u_2 <- tim2-tim1
 results_2 <- results
-results_2 %>% mean
+misc.rate_2 <- results_2 %>% mean
 ```
 
-```{r epply_n_evaluate, cache=TRUE, results='hide'}
+```{r epply_n_evaluate_all, cache=TRUE, results='hide'}
 tim1 <- Sys.time()
-n <- 25
+n <- 35
 results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(dtm_tensor_2, seed=i*201, test_ratio = 0.17)
@@ -256,14 +267,16 @@ for(i in 1:n){
 }
 tim2 <- Sys.time()
 ```
+
 ```{r}
+u_all <- tim2-tim1
 results_all <- results
-results_all %>% mean
+misc.rate_all <- results_all %>% mean
 ```
 
-```{r epply_n_evaluate, cache=TRUE, results='hide'}
+```{r epply_n_evaluate_tfidf, cache=TRUE, results='hide'}
 tim1 <- Sys.time()
-n <- 25
+n <- 35
 results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(dtm_tensor_tfidf, seed=i*201, test_ratio = 0.17)
@@ -272,10 +285,19 @@ for(i in 1:n){
 }
 tim2 <- Sys.time()
 ```
+
 ```{r}
+u_tfidf <- tim2-tim1
 results_tfidf <- results
-results_tfidf %>% mean
+misc.rate_tfidf <- results_tfidf %>% mean
 ```
 
-
+```{r, results='asis', cache=FALSE}
+# overview
+performance_matrix <- data.frame(freq2.embedding=c(misc.rate_2, u_2), 
+           all.embedding=c(misc.rate_all, u_all),
+           tfidf=c(misc.rate_tfidf, u_tfidf))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "ANN for Reg. Docs.")
+```
 

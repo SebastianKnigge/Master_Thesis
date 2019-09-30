@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  30 SEP 2019 11:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  2 OCT 2019 12:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -941,10 +941,10 @@ File: LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-10-
-1.pdf used on input line 1260.
+1.pdf used on input line 1268.
 (pdftex.def)             Requested size: 456.71208pt x 303.13638pt.
 [16]
-Overfull \vbox (1.91208pt too high) detected at line 1309
+Overfull \vbox (1.91208pt too high) detected at line 1317
  []
 
 [17 <./LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf>] [18]
@@ -953,7 +953,7 @@ Overfull \vbox (1.91208pt too high) detected at line 1309
 File: LDA_Documentation_files/figure-latex/Plot-1.pdf Graphic file (type pdf)
 <use LDA_Documentation_files/figure-latex/Plot-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/Plot-1.pdf used o
-n input line 1433.
+n input line 1441.
 (pdftex.def)             Requested size: 412.54652pt x 267.00089pt.
 
 <LDA_Documentation_files/figure-latex/Plot-2.pdf, id=176, 412.54124pt x 266.997
@@ -961,7 +961,7 @@ n input line 1433.
 File: LDA_Documentation_files/figure-latex/Plot-2.pdf Graphic file (type pdf)
 <use LDA_Documentation_files/figure-latex/Plot-2.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/Plot-2.pdf used o
-n input line 1444.
+n input line 1452.
 (pdftex.def)             Requested size: 412.54652pt x 267.00089pt.
 [19 <./LDA_Documentation_files/figure-latex/Plot-1.pdf>]
 <LDA_Documentation_files/figure-latex/Plot-3.pdf, id=190, 412.54124pt x 104.39p
@@ -969,27 +969,27 @@ t>
 File: LDA_Documentation_files/figure-latex/Plot-3.pdf Graphic file (type pdf)
 <use LDA_Documentation_files/figure-latex/Plot-3.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/Plot-3.pdf used o
-n input line 1453.
+n input line 1461.
 (pdftex.def)             Requested size: 412.54652pt x 104.39131pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1456.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1464.
 [20 <./LDA_Documentation_files/figure-latex/Plot-2.pdf> <./LDA_Documentation_fi
 les/figure-latex/Plot-3.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1456.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1464.
 (./LDA_Documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1456.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1456.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1464.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1464.
 
 Package rerunfilecheck Info: File `LDA_Documentation.out' has not changed.
 (rerunfilecheck)             Checksum: ABBC1B2399EB0B140DDB377D5A811E3A;2162.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1456.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1464.
  ) 
 Here is how much of TeX's memory you used:
  12823 strings out of 493089
  187452 string characters out of 6134841
- 298925 words of memory out of 5000000
+ 298951 words of memory out of 5000000
  16009 multiletter control sequences out of 15000+600000
  61565 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1007,7 +1007,7 @@ t/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
 pe1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
 /lm/lmtk10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10
 .pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on LDA_Documentation.pdf (20 pages, 324148 bytes).
+Output written on LDA_Documentation.pdf (20 pages, 324040 bytes).
 PDF statistics:
  267 PDF objects out of 1000 (max. 8388607)
  216 compressed objects within 3 object streams

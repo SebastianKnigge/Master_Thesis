@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  30 SEP 2019 10:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  3 OCT 2019 12:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -773,6 +773,9 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `' multiply defined.
+
 )
 \openout1 = `Reg.Docs_LDA_adapted.aux'.
 
@@ -905,39 +908,39 @@ LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 169
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 180.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 182.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 180.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 182.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 180
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 182
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 180
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 182
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 180.
+(Font)              <10> on input line 182.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 180.
+(Font)              <7> on input line 182.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 180.
-LaTeX Font Info:    Try loading font information for U+msa on input line 180.
+(Font)              <5> on input line 182.
+LaTeX Font Info:    Try loading font information for U+msa on input line 182.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 180.
+LaTeX Font Info:    Try loading font information for U+msb on input line 182.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -946,152 +949,101 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
 [4] [5] [6] [7]
-<Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf-1.pdf, id=92, 452.6912
-5pt x 275.0275pt>
+Underfull \vbox (badness 5637) detected at line 657
+ []
+
+[8]
+<Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf-1.pdf, id=96, 448.6762
+5pt x 265.99374pt>
 File: Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf-1.pdf Graphic fil
 e (type pdf)
 <use Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf-1.pdf>
 Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfid
-f-1.pdf used on input line 596.
-(pdftex.def)             Requested size: 452.69014pt x 275.02682pt.
-
-<Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tf-1.pdf, id=93, 437.635pt x
- 268.00125pt>
+f-1.pdf used on input line 686.
+(pdftex.def)             Requested size: 448.68884pt x 266.00119pt.
+[9]
+<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-13-1.pdf, id=101, 441.65
+pt x 262.9825pt>
+File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-13-1.pdf Graphic fi
+le (type pdf)
+<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
+13-1.pdf used on input line 710.
+(pdftex.def)             Requested size: 441.66911pt x 262.99387pt.
+[10 <./Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf-1.pdf>]
+<Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tf-1.pdf, id=113, 439.6425pt
+ x 261.97874pt>
 File: Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tf-1.pdf Graphic file (
 type pdf)
 <use Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tf-1.pdf>
 Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tf-1
-.pdf used on input line 616.
-(pdftex.def)             Requested size: 437.63393pt x 268.00058pt.
-[8 <./Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf-1.pdf>] [9 <./Reg
-.Docs_LDA_adapted_files/figure-latex/wordcloud_tf-1.pdf>] [10] [11]
-<Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf2-1.pdf, id=132, 437.63
-5pt x 263.98625pt>
+.pdf used on input line 733.
+(pdftex.def)             Requested size: 439.65483pt x 261.98608pt.
+[11 <./Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-13-1.pdf>] [12 <./
+Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tf-1.pdf>] [13] [14]
+<Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf2-1.pdf, id=155, 437.63
+5pt x 273.02pt>
 File: Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf2-1.pdf Graphic fi
 le (type pdf)
 <use Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf2-1.pdf>
 Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfid
-f2-1.pdf used on input line 824.
-(pdftex.def)             Requested size: 437.6406pt x 263.98961pt.
-
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-1.pdf, id=133, 139.52
-126pt x 228.855pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-1.pdf Graphic fi
-le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-1.pdf>
-Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-15-1.pdf used on input line 844.
-(pdftex.def)             Requested size: 139.52516pt x 228.8614pt.
-[12 <./Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf2-1.pdf>]
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-2.pdf, id=146, 166.62
-25pt x 158.5925pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-2.pdf Graphic fi
-le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-2.pdf>
-Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-15-2.pdf used on input line 859.
-(pdftex.def)             Requested size: 166.63225pt x 158.60176pt.
-
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-3.pdf, id=147, 297.11
-pt x 192.72pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-3.pdf Graphic fi
-le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-3.pdf>
-Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-15-3.pdf used on input line 881.
-(pdftex.def)             Requested size: 297.10927pt x 192.71951pt.
-[13 <./Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-1.pdf> <./Reg.D
-ocs_LDA_adapted_files/figure-latex/unnamed-chunk-15-2.pdf>]
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-4.pdf, id=170, 166.62
-25pt x 159.59625pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-4.pdf Graphic fi
-le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-4.pdf>
-Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-15-4.pdf used on input line 897.
-(pdftex.def)             Requested size: 166.62209pt x 159.59584pt.
-
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-5.pdf, id=171, 183.68
-625pt x 183.68625pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-5.pdf Graphic fi
-le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-5.pdf>
-Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-15-5.pdf used on input line 915.
-(pdftex.def)             Requested size: 183.69698pt x 183.69698pt.
-[14 <./Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-3.pdf> <./Reg.D
-ocs_LDA_adapted_files/figure-latex/unnamed-chunk-15-4.pdf>]
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-6.pdf, id=192, 142.53
-25pt x 133.49875pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-6.pdf Graphic fi
-le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-6.pdf>
-Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-15-6.pdf used on input line 931.
-(pdftex.def)             Requested size: 142.53214pt x 133.4984pt.
-
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-7.pdf, id=193, 296.10
-625pt x 192.72pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-7.pdf Graphic fi
-le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-7.pdf>
-Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-15-7.pdf used on input line 953.
-(pdftex.def)             Requested size: 296.10551pt x 192.71951pt.
-[15 <./Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-15-5.pdf> <./Reg.D
-ocs_LDA_adapted_files/figure-latex/unnamed-chunk-15-6.pdf>] [16 <./Reg.Docs_LDA
-_adapted_files/figure-latex/unnamed-chunk-15-7.pdf>]
-Overfull \hbox (123.49326pt too wide) in paragraph at lines 1017--1017
+f2-1.pdf used on input line 951.
+(pdftex.def)             Requested size: 437.6406pt x 273.0235pt.
+[15 <./Reg.Docs_LDA_adapted_files/figure-latex/wordcloud_tfidf2-1.pdf>] [16] [1
+7]
+Overfull \hbox (123.49326pt too wide) in paragraph at lines 1154--1154
 []\T1/lmtt/m/n/10 ## Warning in brewer.pal(max(3, ncol(term.matrix)), "Dark2"):
  n too large, allowed maximum for palette Dark2 is 8[] 
  []
 
 
-<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-18-1.pdf, id=225, 287.07
-25pt x 281.05pt>
-File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-18-1.pdf Graphic fi
+<Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-23-1.pdf, id=183, 290.08
+376pt x 281.05pt>
+File: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-23-1.pdf Graphic fi
 le (type pdf)
-<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-18-1.pdf>
+<use Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-23-1.pdf>
 Package pdftex.def Info: Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-
-18-1.pdf used on input line 1019.
-(pdftex.def)             Requested size: 287.08055pt x 281.05788pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1022.
-[17 <./Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-18-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1022.
+23-1.pdf used on input line 1156.
+(pdftex.def)             Requested size: 290.10074pt x 281.06645pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1159.
+[18 <./Reg.Docs_LDA_adapted_files/figure-latex/unnamed-chunk-23-1.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1159.
 (./Reg.Docs_LDA_adapted.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1022.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1022.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1159.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1159.
 
 Package rerunfilecheck Info: File `Reg.Docs_LDA_adapted.out' has not changed.
 (rerunfilecheck)             Checksum: 01E4EFE0F1D0380D8BE337E90E62DFAD;1023.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1022.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1159.
  ) 
 Here is how much of TeX's memory you used:
- 12763 strings out of 493089
- 187993 string characters out of 6134841
- 302618 words of memory out of 5000000
- 15995 multiletter control sequences out of 15000+600000
- 41284 words of font info for 54 fonts, out of 8000000 for 9000
+ 12757 strings out of 493089
+ 186570 string characters out of 6134841
+ 305587 words of memory out of 5000000
+ 15975 multiletter control sequences out of 15000+600000
+ 47672 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,9n,35p,489b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
-cal/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/20
-15/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2015/texmf-dist
-/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/p
-ublic/lm/lmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/l
-mmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2015/texmf-d
-ist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/
-type1/public/lm/lmtti10.pfb>
-Output written on Reg.Docs_LDA_adapted.pdf (17 pages, 266881 bytes).
+ 31i,9n,35p,384b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/lo
+cal/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texliv
+e/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-d
+ist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc
+/dvips/lm/lm-ec.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/l
+mbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi10.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-d
+ist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/
+type1/public/lm/lmtk10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/lm/lmtt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt
+i10.pfb>
+Output written on Reg.Docs_LDA_adapted.pdf (18 pages, 250886 bytes).
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
- 52 named destinations out of 1000 (max. 500000)
- 8320 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 246 PDF objects out of 1000 (max. 8388607)
+ 200 compressed objects within 2 object streams
+ 54 named destinations out of 1000 (max. 500000)
+ 8290 words of extra memory for PDF output out of 10000 (max. 10000000)
 
