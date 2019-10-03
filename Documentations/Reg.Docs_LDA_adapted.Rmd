@@ -7,6 +7,8 @@ output:
     number_sections: true
 ---
 
+\tableofcontents
+
 # Setup
 
 ```{r setup, include=FALSE}
@@ -67,23 +69,19 @@ Following functions are used to set up and analyze the pdfs. When cleaning up da
 ```{r, message=FALSE, warning=FALSE}
 read_pdf_clean <- function(document){
   # This function loads the document given per name
-  # and excludes the stop words inclusive numbers
+  # and excludes the stop words 
   pdf1 <- pdf_text(file.path(path, document)) %>% 
     strsplit(split = "\n") %>% 
     do.call("c",.) %>% 
     as_tibble() %>%
     unnest_tokens(word,value) %>%
-    # also exclude all words including numbers and special characters
+    # also exclude all words which include numbers and special characters
     filter(grepl("^[a-z]+$", word))
   # load stopword library
   data(stop_words)
-  # add own words to stop word library - here the numbers from 1 to 10
-  new_stop_words <- tibble(word=as.character(0:9),
-                           lexicon=rep("own",10)) %>%
-                           bind_rows(stop_words)
   # stop words are excluded via anti_join
   pdf1 %>% 
-    anti_join(new_stop_words)
+    anti_join(stop_words)
 }
 
 plot_most_freq_words <- function(pdf, n=7){
@@ -97,7 +95,7 @@ plot_most_freq_words <- function(pdf, n=7){
 }
 ```
 
-Now we can read in all documents in a for loop:
+Now we can read in all documents using a for loop:
 
 ```{r, message=FALSE, warning=FALSE}
 setwd(path)
@@ -119,11 +117,12 @@ The LDA model is applied. First the document term matrix has to be set up.
 dtm <- corpus %>% count(document, word, sort = TRUE) %>%
   select(doc_id=document, term=word, freq=n) %>%
   document_term_matrix()
+# dimensions
 c(N,M) %<-% dim(dtm)
 N; M
 ```
 
-We use term frequency 2 embedding because in the example with the Gutenberg Data it turned out to be advantageous with regard to the "predictive power" of the LDA algorithm.
+We use term frequency 2 embedding because in the example with the Gutenberg Data, it turned out to be advantageous with regard to the "predictive power" of the LDA algorithm.
 
 ```{r}
 dtm_tf2 <- dtm %>%
@@ -132,7 +131,7 @@ dtm_tf2 <- dtm %>%
 ncol(dtm_tf2 )
 ```
 
-Using the function LDA sets up the model and prediction/evaluation is done via predict(). But first of all it shall be verified whether the Predict function actually delivers the same classification as the export of the gamma matrix directly from the LDA model. Therefore both gamma matrices of the single functions are compared. Table \ref{predict} displays the output of the gamma matrix received by the predict() function and Table \ref{extract} displays the gamma matrix returned by the LDA model itself.
+Using the function LDA sets up the model and prediction/evaluation is done via $predict()$. But first of all it shall be verified whether the Predict function actually delivers the same classification as the export of the gamma matrix directly from the LDA model. Therefore both gamma matrices of the single functions are compared. Table \ref{predict} displays the output of the gamma matrix received by the $predict()$ function and Table \ref{extract} displays the gamma matrix returned by the LDA model itself.
 
 ```{r LDA., message=FALSE, warning=FALSE, results="asis"}
 tim1 <- Sys.time()
@@ -179,7 +178,7 @@ ext_gamma_matrix(documents_lda) %>%
 
 ```
 
-The tables below summarize which document refers to which topic, according to the LDA model.
+The tables below summarize which document refers to which topic, according to the LDA model (term frequency 2 embedding).
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
 library(stargazer)
@@ -199,7 +198,7 @@ for (i in 1:7){
 ```
 
 
-# Wordclouds
+## Wordclouds
 
 To check what topics tackle which context, we produce wordclouds using the TFIDF and the TF itself.
 
@@ -237,7 +236,7 @@ plot_wordcloud <- function(corpus, selection="ALL",
 }
 ```
 
-A second possibility is to extract the tfidfs of the whole topics. First you have to map the topics to the documents within the tidytext format. Only then can the tfidf_tf matrix be set up for the individual topics.
+A second possibility is to extract the TFIDFs of the words linked to the topics directly. First you have to map the topics to the documents within the tidytext format. This is the only way the tfidf_tf matrix can be set up for the individual topics.
 
 ```{r, message=FALSE, warning=FALSE}
 plot_wordcloud_topic <- function(corpus, topic_select=1, prediction=prediction5,
@@ -269,43 +268,41 @@ plot_wordcloud_topic <- function(corpus, topic_select=1, prediction=prediction5,
 
 
 
-
-
-## Wordclouds using tfidf
+### Wordclouds using TFIDF
 
 For getting specific and more individual words for each cloud, we use the TFIDF in the first step.
-Now there are two methods to create the word clouds for the tfidf measure. once by aggregating the individual tfidfs of the documents, as it is done in the following. 
+Now there are two methods to create the word clouds for the TFIDF measure. once by aggregating the individual TFIDFs of the documents, as it is done in the following. 
 
 ```{r wordcloud_tfidf, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
 par(mar=c(1,1,1,1))
 set.seed(123)
-plot_wordcloud(corpus, selection=ind1[,1], i=1, scale=c(2.1,0.05), 
-               max.words = 45)
+plot_wordcloud(corpus, selection=ind1[,1], i=1, scale=c(1.9,0.005), 
+               max.words = 50)
 plot_wordcloud(corpus, selection=ind2[,1], i=2)
 plot_wordcloud(corpus, selection=ind3[,1], i=3, scale=c(1.6,0.005), 
-               max.words = 40)
+               max.words = 45)
 plot_wordcloud(corpus, selection=ind4[,1], i=4) 
 plot_wordcloud(corpus, selection=ind5[,1], i=5, scale=c(1.8,0.001), 
                max.words = 40)
 plot_wordcloud(corpus, selection=ind6[,1], i=6, scale=c(1.8,0.001), 
                max.words = 40)
-plot_wordcloud(corpus, selection=ind7[,1], i=7, scale=c(2,0.2), 
+plot_wordcloud(corpus, selection=ind7[,1], i=7, scale=c(2.1,0.3), 
                max.words = 45) 
 ```
 
-Now using the second approach.
+Now using the second approach, when applying the TFIDF measure to the mapped corpus.
 
 ```{r}
 par(mfrow=c(2,4))
 par(mar=c(1,1,1,1))
 set.seed(123)
 plot_wordcloud_topic(corpus, topic_select=1, scale=c(1.9,0.0006), 
-               max.words = 35)
+               max.words = 40)
 plot_wordcloud_topic(corpus, topic_select=2)
 plot_wordcloud_topic(corpus, topic_select=3, scale=c(1.6,0.005), 
                max.words = 40)
-plot_wordcloud_topic(corpus, topic_select=4, max.words = 45, scale=c(2.2, 0.3))
+plot_wordcloud_topic(corpus, topic_select=4, max.words = 50, scale=c(2.3, 0.2))
 plot_wordcloud_topic(corpus, topic_select=5, scale=c(1.8,0.01), 
                max.words = 40)
 plot_wordcloud_topic(corpus, topic_select=6, scale=c(2,0.1), 
@@ -314,8 +311,9 @@ plot_wordcloud_topic(corpus, topic_select=7, scale=c(2.5,0.5),
                max.words = 50) 
 ```
 
+Although the second procedure, using TFIDF distributions for the individual topics, seems to be more intuitive, the two figures are surprisingly similar. 
 
-## Wordclouds using tf
+### Wordclouds using TF
 
 The same can be done using the regular term frequency.
 
@@ -334,9 +332,9 @@ plot_wordcloud(corpus, selection=ind7[,1], i=7, freq="tf", scale=c(2.5,0.2),
                max.words = 45)  
 ```
 
-# Embedding via tfidf
+## Embedding via TFIDF
 
-Now it's interesting to see if embedding with tfidf will cluster other groups or the same. So we will reduce the Document Term Matrix to $0.8*\text{M}$ words, which amounts to a reduction by 20\%
+Now it's interesting to see if embedding via TFIDF will cluster other groups or the same. So we will reduce the Document Term Matrix to $0.8*M$ words, which amounts to a reduction by 20\%
 
 ```{r, cache=TRUE}
 tim1 <- Sys.time()
@@ -378,7 +376,19 @@ ext_gamma_matrix(documents_lda_2) %>%
             label="extract2")
 ```
 
-## Wordclouds
+We want to give an overview over the clustered documents using the TFIDF embedding.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
+for (i in 1:7){
+  cbind(data.frame(Topic=rep(i,nrow(get(paste0("ind",i,"_2"))))), 
+        get(paste0("ind",i,"_2"))) %>%
+  stargazer(summary=FALSE, header = F, rownames=FALSE, 
+            title=paste("Documents for Topic", i))
+}
+```
+
+We want to produce wordclouds again.
+This time using the tfidf embedding for clustering via LDA. The first plot shows the aggregated TFIDFs.
 
 ```{r wordcloud_tfidf2, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
@@ -397,23 +407,36 @@ plot_wordcloud(corpus, selection=ind7_2[,1], i=7, scale=c(2,0.03),
                max.words = 35) 
 ```
 
-We want to give an overview over the clustered documents using the tfidf embedding.
+The second plot shows the TFIDFs for each individual topic.
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
-for (i in 1:7){
-  cbind(data.frame(Topic=rep(i,nrow(get(paste0("ind",i,"_2"))))), 
-        get(paste0("ind",i,"_2"))) %>%
-  stargazer(summary=FALSE, header = F, rownames=FALSE, 
-            title=paste("Documents for Topic", i))
-}
+```{r, message=FALSE, warning=FALSE}
+par(mfrow=c(2,4))
+par(mar=c(1,1,1,1))
+set.seed(123)
+plot_wordcloud_topic(corpus, topic_select=1, scale=c(1.9,0.0006), 
+               max.words = 40, prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=2, prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=3, scale=c(1.6,0.005), 
+               max.words = 40, prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=4, max.words = 50, 
+                     scale=c(2.3, 0.2), prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=5, scale=c(1.8,0.01), 
+               max.words = 40, prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=6, scale=c(2,0.1), 
+               max.words = 45, prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=7, scale=c(2.5,0.5), 
+               max.words = 50, prediction=prediction5_2)
 ```
 
-Now we use the validation measure we used for the Example 1. 
+
+
+## Missclassification Rates
+
+Now we use the validation measure we used for Example 1. 
 
 ```{r}
 validate_LDAclassification <- function(predict_table){
-  # gamma_matrix is an object of the function ext_gamma_matrix()
-  
+  # gamma_matrix ... an object of the function ext_gamma_matrix()
   # First we’d find the topic that was most associated with 
   # each chapter 
   conversion <- predict_table %>%
@@ -429,7 +452,7 @@ validate_LDAclassification <- function(predict_table){
 }
 ```
 
-On both full bag of words and 80\% embedding via Tfidf
+On both full bag of words and 80\% embedding via TFIDF
 ```{r}
 predict_table <- prediction5 %>% select(doc_id, topic) %>% 
   merge( y=classes, by.x=1, by.y=1)
@@ -450,9 +473,10 @@ performance_matrix <- data.frame(freq2.embedding=c(misc.rate_embedding2, u1),
 rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via Gibbs Sampling")
 ```
-# coherence cloud
 
-```{r}
+# Coherence Cloud
+
+```{r, warnings=FALSE, message=FALSE}
 dtm_50 %>% as.matrix() %>% t() %>% comparison.cloud(scale=c(2,.05), 
                                                     max.words=50, title.size = 1)
 ```

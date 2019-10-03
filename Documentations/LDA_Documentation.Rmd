@@ -7,6 +7,8 @@ output:
     number_sections: true
 ---
 
+\tableofcontents
+
 # Setup
 
 ```{r setup, include=FALSE}
@@ -32,11 +34,9 @@ library(foreach)
 
 # Example 1 (6 Books)
 
-## Get data
+## Get Data (Sampling)
 
-### Definition of functions
-
-This is the essential step for setting up the LDA model. These functions include the sampling procedure of the *gutenbergr* library.
+Sampling of the books and converting it to the $tidytext$-format is the essential step for setting up the LDA model. Following functions include the sampling procedure of the *gutenbergr* library.
 
 ```{r, message=FALSE, warning=FALSE}
 sampling_books <- function(seed=1234, n=20){
@@ -166,9 +166,6 @@ convert_to_dtm_2 <- function(x, n=n, minfq = 2, top=10000){
 ```
 
 
-
-### Sample corpus
-
 Now we can use these functions to get to the initial corpus sample. In this example $6$ books are choosen.
 
 ```{r setup_books, chache=TRUE, warning=TRUE}
@@ -205,9 +202,9 @@ categories %>% stargazer(summary=FALSE, font.size = "footnotesize",
                             label="categories:6books")
 ```
 
-Obviously the corpus is very diverse. It is a good sample in order to try to cluster the chapters of the books with the taid of LDA.
+Obviously the corpus is very diverse. It is a good sample, in order to try to cluster the chapters of the books with the aid of LDA.
 
-## Reduction of the dimensionality
+## Reduction of Dimensionality
 
 In the set up we have another parameter to adjust. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
 
@@ -231,11 +228,11 @@ ncol(chapters_dtm_tfidf)
 ```
 
 
-## Apply the LDA model on the full corpus
+## Application of LDA Model to Full Corpus
 
 ### Fitting via VEM
 
-Set up the LDA model for the shrinked embedding corpus via frequency=2. I a first try we are using the default "VEM-Algorithm" to fit the model.
+We set up the LDA model for the shrinked embedding corpus via frequency=2. In a first try we are using the default "VEM-Algorithm" to fit the model.
 
 ```{r chapters_lda, cache=TRUE, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
@@ -255,7 +252,7 @@ tim2 <- Sys.time()
 u_all <- tim2-tim1
 ```
 
-The third LDA fit is for the shrinkage of the dictionary/bag of words by TFIDF.
+The third LDA fit builds up on data from the shrinked dictionary/bag of words by TFIDF.
 
 ```{r chapters_lda_tfidf, cache=TRUE, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
@@ -267,7 +264,7 @@ chapters_lda
 ```
 
 
-Now we evaluate the model all in once, that is, we analyze the clustering on the entire data set.
+Now we evaluate the model all in once - that is - we analyze the clustering on the entire data set.
 
 ```{r, cache=TRUE}
 ext_gamma_matrix <- function(model){
@@ -316,7 +313,7 @@ validate_LDAclassification <- function(gamma_matrix){
 }
 ```
 
-Now we exclude for each fir of the 3 embedings embedding the - so called - beta matrix and evaluate the most likely result with the real results. Depending on how good the LDA will seperate the books, this influences the goodness of the fit.
+Now we exclude for each of the 3 embedings the - so called - beta matrix and compare the most likely result with the real results. Depending on how good the LDA will seperate the books, this influences the goodness of the fit.
 
 ```{r misc.rate_1, cache=TRUE}
 misc.rate_1 <- ext_gamma_matrix(chapters_lda) %>% 
@@ -408,9 +405,9 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM 
 
 Surprisingly, the run-time to fit the LDA model for the embedding using all words, does not take way longer than the embedding using a lower frequency. The fit of the model with the reduced bag of words via tfidf takes slightly less time.
 
-### Comparison to fitting via Gibbs Sampling
+### Comparison to Fit via Gibbs Sampling
 
-For comparison, we will check the results and the run time for the fit via Gibbs Sampling.
+For comparison, we will check the results and the run-time for the fit via Gibbs Sampling.
 
 ```{r, cache=TRUE, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
@@ -461,7 +458,93 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via Gibb
 
 Apparently Gibbs Sampling takes a bit longer than the VEM algorithm, but its results with regards to the correct "classification" (missclassification rate) are way better.
 
-Again we try a second sample:
+## Evaluate Model on Test Set 
+
+First we split the data randomly into training- and test-sample.
+
+```{r split_for_fit_function, cache=TRUE}
+split_for_fit <- function(data, test_ratio=0.03, seed=1234){
+  # function to set up the training
+  # and the testing set from the input data which
+  # is an object from the function convert_to_dtm()
+  set.seed(seed)
+  N <- nrow(data)
+  n_test <- (N*test_ratio) %>% ceiling
+  test_ind <- sample(1:N, n_test)
+  train_ind <- (1:N)[-test_ind]
+  ret <- list(train=data[train_ind,],
+              test=data[test_ind,])
+  return(ret)
+}
+```
+
+The *fit_n_evaluate()* function will fit the LDA model and evaluate the goodness of fit for an object of the function *split_for_fit*. The section Validation gives insights in the procedure of how the "consensus" is set up.
+
+```{r fitting-function, chache=TRUE}
+fit_n_evaluate <- function(split, k=n_books){
+  LDA_model <- LDA(split$train, method="Gibbs",
+                            k = k, control = list(seed = 1234))
+  # use the predict function of udpipe
+  # the topic predict funtion already extract the most likely topics
+  prediction <- predict(LDA_model, newdata=split$test) %>% .$topic
+  # get "consensus" via maximum likelihood
+  # first extract the gamma matrix of the model fitted on the training
+  # data
+  chapters_gamma <- ext_gamma_matrix(LDA_model)
+  spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
+  # get pdfs
+  plotm <- spreaded_gamma %>%
+    group_by(gutenberg_id) %>%
+    # note: pdfs are unnormalized
+    summarise_at(2:(titles$len+1), sum)
+  topic_link <- plotm %>% 
+    apply(1, function(x) which.max(x[2:length(x)])) %>% 
+    cbind(plotm$gutenberg_id) %>%
+    as.data.frame()
+  # exclude the 
+  consensus <- split$test %>% 
+    rownames() %>% 
+    substr(1,regexpr("_",.)-1) %>% 
+    as.numeric() %>%
+    as.data.frame() %>% 
+    # merge it to the topic
+    merge(topic_link, by.y="V2", sort=FALSE) %>%
+    select(..y)
+  # missclassification rate will be returned
+  sum(consensus!=prediction)/length(prediction)
+}
+```
+
+We now can evaluate several fits of a model for different splits. Here is a parallelization for the individual for loops applied. In this case only embeding via TF2 is used.
+
+```{r parallel_fitting_1, cache=TRUE, message=FALSE, warnings=FALSE}
+# setting up how many cores to be used
+useable_cores <- parallel::detectCores() - 1
+# registering cluster
+cl <- parallel::makeCluster(useable_cores)
+doParallel::registerDoParallel(cl)
+n <- 59
+results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
+  
+  
+  chapters_dtm %>% 
+    split_for_fit(seed=12*i) %>% 
+    fit_n_evaluate()
+  
+  
+}
+parallel::stopCluster(cl)
+```
+
+This is the output of the simulation over 59 splits and fits. The mean is the final result:
+
+```{r}
+results %>% summary
+```
+
+# Example 2 (6 Books)
+
+Again we try a second sample, using a different seed. 
 
 ```{r Gibbs_overview_sec, results="asis", cache=TRUE}
 tim1 <- Sys.time()
@@ -499,91 +582,9 @@ rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix_sec %>%  stargazer(summary=FALSE, header=F, title = "Gibbs second sample")
 ```
 
-## Evaluate model on testing set 
 
-First we split the data randomly in training and testing samples.
 
-```{r split_for_fit_function, cache=TRUE}
-split_for_fit <- function(data, test_ratio=0.03, seed=1234){
-  # function to set up the training
-  # and the testing set from the input data which
-  # is an object from the function convert_to_dtm()
-  set.seed(seed)
-  N <- nrow(data)
-  n_test <- (N*test_ratio) %>% ceiling
-  test_ind <- sample(1:N, n_test)
-  train_ind <- (1:N)[-test_ind]
-  ret <- list(train=data[train_ind,],
-              test=data[test_ind,])
-  return(ret)
-}
-```
-
-The fit_n_evaluate() function will fit the LDA model and evaluate the goodness of fit for an object of the function split_for_fit. The section Validation gives insights in the procedure of how the "consensus"" is set up.
-
-```{r fitting-function, chache=TRUE}
-fit_n_evaluate <- function(split, k=n_books){
-  LDA_model <- LDA(split$train, method="Gibbs",
-                            k = k, control = list(seed = 1234))
-  # use the predict function of udpipe
-  # the topic predict funtion already extract the most likely topics
-  prediction <- predict(LDA_model, newdata=split$test) %>% .$topic
-  # get "consensus" via maximum likelihood
-  # first extract the gamma matrix of the model fitted on the training
-  # data
-  chapters_gamma <- ext_gamma_matrix(LDA_model)
-  spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
-  # get pdfs
-  plotm <- spreaded_gamma %>%
-    group_by(gutenberg_id) %>%
-    # note: pdfs are unnormalized
-    summarise_at(2:(titles$len+1), sum)
-  topic_link <- plotm %>% 
-    apply(1, function(x) which.max(x[2:length(x)])) %>% 
-    cbind(plotm$gutenberg_id) %>%
-    as.data.frame()
-  # exclude the 
-  consensus <- split$test %>% 
-    rownames() %>% 
-    substr(1,regexpr("_",.)-1) %>% 
-    as.numeric() %>%
-    as.data.frame() %>% 
-    # merge it to the topic
-    merge(topic_link, by.y="V2", sort=FALSE) %>%
-    select(..y)
-  # missclassification rate will be returned
-  sum(consensus!=prediction)/length(prediction)
-}
-```
-
-We now can evaluate several fits of a model for different splits. Here is a parallelization for the individual for loops applied.
-
-```{r parallel_fitting_1, cache=TRUE, message=FALSE, warnings=FALSE}
-# setting up how many cores to be used
-useable_cores <- parallel::detectCores() - 1
-# registering cluster
-cl <- parallel::makeCluster(useable_cores)
-doParallel::registerDoParallel(cl)
-n <- 59
-results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
-  
-  
-  chapters_dtm %>% 
-    split_for_fit(seed=12*i) %>% 
-    fit_n_evaluate()
-  
-  
-}
-parallel::stopCluster(cl)
-```
-
-This is the output of the simulation over 59 splits and fits. The mean is the final result:
-
-```{r}
-results %>% summary
-```
-
-# Validation
+# Definition of Validation
 
 Since the LDA algorithm just clusters into $k$ topics, it is necessary to evaluate which "topic" refers to which book, in order to calculate a missclassification rate. For each of the books we naively derive a distribution of the assignment to the topics. This is done by accumulating the distributions for each chapter of the book. The most likely assignment of the LDA model is choosen as the "correct" topic. Now calculating the missclassification rate is basically the fraction of those chapters/documents not coinciding with the most likely assignment.
 
@@ -617,9 +618,9 @@ for (i in 1:n_books){
 
 This does not exclude the fact that two books are assigned to the same topic (in this case e.g. 2 books are assigned to chapter 1 and none to chapter 6). But still, from each of the plots of the "distributions" you can obtain how good the chapters of a single book are classified. The more of the mass of the distribution is on a single topic, the better the chapters of this topic are predicted.
 
-# Example 2 (10 books)
+# Example 3 (10 books)
 
-First we will sample to books again as done in the example 1.
+First we will sample the books, the same way as is was done in Example 1.
 
 ```{r Sampling10books, chache=TRUE, warning=FALSE}
 n_books_10 <- 10
@@ -740,7 +741,7 @@ rownames(performance_matrix_10_VEM) <- c("missc. rate", "time")
 performance_matrix_10_VEM %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM 10 books example")
 ```
 
-the following box plot should illustrate the missclassification rate of the LDA algorithm in the different use cases.
+The following box-plot should illustrate the missclassification rate of the LDA algorithm in the different use cases.
 
 ```{r}
 plot_DF <- data.frame(VEM=c(misc.rate_1_10_VEM, misc.rate_all_10_VEM, misc.rate_tfidf_10_VEM,
@@ -758,9 +759,9 @@ plot_DF2 %>% ggplot(aes(x=Use_Case, y=accuracy, fill=Procedure))+
       geom_boxplot() + xlab("") + ylab("missclassification rate")
 ```
 
-## Evaluate model
+## Evaluation
 
-First we try the in-model-validation procedures first, using the 3 embeddings.
+In the first place, we try the in-model-validation procedure, foch each of the 3 embeddings. Table \ref{in-model_val} displays the results of each validation.
 
 ```{r chapters_dtm2_Gibbs, cache=TRUE, warning=FALSE, message=FALSE}
 chapters_dtm2 <- convert_to_dtm(word_counts2, minfq=2)
@@ -812,7 +813,7 @@ performance_matrix <- data.frame(freq2.embedding=c(misc.rate_1_Gibbs2, u_1_Gibbs
            all.embedding=c(misc.rate_all_Gibbs2, u_all_Gibbs2),
            tfidf=c(misc.rate_tfidf_Gibbs2, u_tfidf_Gibbs2))
 rownames(performance_matrix) <- c("missc. rate", "time")
-performance_matrix %>%  stargazer(summary=FALSE, header=F)
+performance_matrix %>%  stargazer(summary=FALSE, header=F, title="In-Model-Validation for the 3 embeddings", label = "in-model_val")
 ```
 
 
@@ -836,7 +837,7 @@ results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages 
 parallel::stopCluster(cl)
 ```
 
-This is the output of the simulation over 59 splits and fits. The mean is the final result:
+This is the output of the simulation over 59 splits and fits. Consider the mean as the final result:
 
 ```{r}
 results %>% summary
