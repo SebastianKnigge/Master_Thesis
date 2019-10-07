@@ -35,6 +35,12 @@ Chollet, F., A.~W. (2018).
 \newblock {\em Deep Learning with R}.
 \newblock Manning.
 
+\bibitem[DeJong, 1979]{DeJong1979}
+DeJong, G. (1979).
+\newblock Prediction and substantiation: a new approach to natural language
+  processing.
+\newblock {\em Cogn. Sci.}, 3(3):251--271.
+
 \bibitem[Eurostat, 2019]{ESSVision2020}
 Eurostat (2019).
 \newblock Ess vision 2020 admin (administrative data sources).
@@ -62,6 +68,11 @@ Hecht-Nielsen, R. (1988).
 Hornik, K., B.~G. (2011).
 \newblock topicmodels: An r package for fitting topic models.
 \newblock {\em Journal of Statistical Software}, 40(13).
+
+\bibitem[Jacobs, 1993]{Jacobs1993}
+Jacobs, P., R.~L. (1993).
+\newblock Innovations in text interpretation.
+\newblock {\em Artificial Intelligence}, 63:143--191.
 
 \bibitem[Jordan, 1999]{Jordan1999}
 Jordan, M., e.~a. (1999).

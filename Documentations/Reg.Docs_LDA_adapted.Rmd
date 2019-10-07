@@ -271,7 +271,7 @@ plot_wordcloud_topic <- function(corpus, topic_select=1, prediction=prediction5,
 ### Wordclouds using TFIDF
 
 For getting specific and more individual words for each cloud, we use the TFIDF in the first step.
-Now there are two methods to create the word clouds for the TFIDF measure. once by aggregating the individual TFIDFs of the documents, as it is done in the following. 
+Now there are two methods to create the word clouds for the TFIDF measure. Once by aggregating the individual TFIDFs of the documents, as it is done in the following. 
 
 ```{r wordcloud_tfidf, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
@@ -334,7 +334,7 @@ plot_wordcloud(corpus, selection=ind7[,1], i=7, freq="tf", scale=c(2.5,0.2),
 
 ## Embedding via TFIDF
 
-Now it's interesting to see if embedding via TFIDF will cluster other groups or the same. So we will reduce the Document Term Matrix to $0.8*M$ words, which amounts to a reduction by 20\%
+Now it is interesting to see if embedding via TFIDF will cluster other groups or the same. So we will reduce the Document Term Matrix to $0.8*M$ words, which amounts to a reduction by 20\%.
 
 ```{r, cache=TRUE}
 tim1 <- Sys.time()
@@ -388,7 +388,7 @@ for (i in 1:7){
 ```
 
 We want to produce wordclouds again.
-This time using the tfidf embedding for clustering via LDA. The first plot shows the aggregated TFIDFs.
+This time using the TFIDF embedding for clustering via LDA. The first plot shows the aggregated TFIDFs.
 
 ```{r wordcloud_tfidf2, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
@@ -476,7 +476,7 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via Gibb
 
 # Coherence Cloud
 
-```{r, warnings=FALSE, message=FALSE}
+```{r, warnings=FALSE, message=FALSE, results='hide'}
 dtm_50 %>% as.matrix() %>% t() %>% comparison.cloud(scale=c(2,.05), 
                                                     max.words=50, title.size = 1)
 ```

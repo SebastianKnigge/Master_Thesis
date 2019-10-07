@@ -27,7 +27,9 @@
 	
 Even if the amount of data increases inexorably due to the permanent collection of online data, and there are always new and better methods to derive good forecasts from big data, it is still difficult for algorithms to extract information from unstructured data. The amount of text data does not increase as quickly as the amount of structured user data. However, it should not be ignored that the written word still has an immensely high -if not the highest - information density for the human mind. Text is the primary and most accurate way to transfer and store complex information. In a nutshell: while a machine and algorithms think in numbers, humans still think in words and text. A major challenge of machine learning will be to extract and link information from unstructured data such as text.\\
 \ \\
-A whole field of computer science is already addressing the topic of text data. This is Natural Language processing and Information Retrieval (see chapter \ref{sec:NLP}). In the recent past, especially probabilistic approaches have been considered promising by researchers (see e.g. \cite{Manning1999}). However, the success of methods depends greatly on the text data to which they are applied and on the desired output. It is therefore equally important to address the methods and models used, as well as describing the use case in detail, when conducting research in this area. Winter et al. for example used regulatory documents and guidelines to characterized them via KNN \cite{Winter2017}. In this work, I want to follow Winter's work thematically. I will examine related as well as new, completely different methods and approaches to characterize regulatory documents.\footnote{When comparing the two works, however, note the difference in the topic of the documents analyzed.}
+A whole field of computer science is already addressing the topic of text data. This is Natural Language processing and Information Retrieval (see chapter \ref{sec:NLP}). In the recent past, especially probabilistic approaches have been considered promising by researchers (see e.g. \cite{Manning1999}). However, the success of methods depends greatly on the text data to which they are applied and on the desired output. It is therefore equally important to address the methods and models used, as well as describing the use case in detail, when conducting research in this area. Winter et al. for example used regulatory documents and guidelines to characterized them via KNN \cite{Winter2017}. In this work, I want to follow Winter's work thematically. I will examine related as well as new, completely different methods and approaches to characterize regulatory documents.\footnote{When comparing the two works, however, note the difference in the topic of the documents analyzed.}\\
+\ \\
+In this work I adhere to the paradigms of Dejong's 1979 work in the field of natural language processing. He was the first researcher in this area to move away from the story-specific approach by testing the accuracy of his program to develop a more robust model \cite{DeJong1979}. I even go one step further and optimize my model on completely different data than those it will be tested on later. By doing so I try to reduce the overfitting of the model to the chosen topic and develop a universal tool for text classification. Specifically, I will train my approach for classifying text documents on a relatively large set of textbook chapters. I will optimize the models and their hyperparameters and test the optimized models with a smaller set of regulatory documents from EUROSTAT.
 	
 	
 
@@ -45,7 +47,20 @@ Statistical NLP considers recurring patterns and structures always in the contex
 \ \\
 In this thesis so called topic models are studied and applied. David M. Blei defines topic models “as algorithms for discovering the main themes that pervade a large and otherwise unstructured collection of documents. Topic models can organize the collection according to the discovered themes”\cite{Blei2012}. This definition may therefore apply to both clustering and classification algorithms, even if many authors will refer to clustering algorithms in the context of topicmodels. You will find a brief introduction to clustering and classification models in the use case in Chapter \ref{sec:analysis}.\\
 \ \\
-Another important term in the research area of this thesis is information retrieval (IR). IR means to access information. This field deals with computer-aided searches for complex contents and belongs to the fields of information science, computer science and computational linguistics. According to David Grossmann et al. IR refers to a search that might cover information of any kind, e.g. text data as well as video-, image-, sound data, or even DNA sequences. The field where LDA and IR overlap is document retrieval \cite{Grossmann2004}. Thus, most procedures we are discussing in this thesis might not solely fall into the topic NLP but also IR. This small excursion in this direction is intended to give the reader a better understanding of how linked this topic is and in which intersection it is located.  
+Another important term in the research area of this thesis is information retrieval (IR). IR means to give access to a subset of documents of a corpus, which are relevant to an user’s query. This field deals with computer-aided searches for complex contents and belongs to the fields of information science, computer science and computational linguistics. According to David Grossmann et al. IR refers to a search that might cover information of any kind, e.g. text data as well as video-, image-, sound data, or even DNA sequences. The field where LDA and IR overlap is document retrieval \cite{Grossmann2004}. Thus, most procedures we are discussing in this thesis might not solely fall into the topic NLP but also IR. This small excursion in this direction is intended to give the reader a better understanding of how linked this topic is and in which intersection it is located. \\
+\ \\
+In addition, there is a further differentiation of methods concerning natural language processing. One can also distinguish text interpretation with regard to the tasks one intends to accomplish with it. \cite{Jacobs1993} distinguishes between three common tasks:
+\begin{enumerate}
+	\item \textit{Information Retrieval}: The task to find a subset of a corpus, which contains information concerning a user’s query.
+
+	\item \textit{Data extraction}: The task to bring texts of a corpus of a particular domain into a pre-defined key structure, suitable for use in a traditional database.
+
+	\item \textit{Text categorization}: Separating documents of a corpus into meaningful groups.
+\end{enumerate}
+The tasks dealt with in this paper can perhaps best be assigned to the last area. On the one hand, I specifically target the task text categorization by dividing a corpus of documents into a predefined number of groups. On the other hand, I try to assign new documents to these groups.\\
+\ \\
+In Chapter \ref{sec:NLP} I will discuss the evolution of natural language processing. The different approaches and methods will be summarized and the reader will be given a general overview over the context of this work.\\
+Chapter \ref{sec:Models} presents the models used and describes the form of application in detail. The two methods used here do not only differ in terms of their underlying models, but also have different tasks.
 
 
 
@@ -54,19 +69,22 @@ Another important term in the research area of this thesis is information retrie
 
 
 
-\section{Discussed Models}
 
-This section will introduce the reader into the two Topic modeling approaches which will be studied in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of each model. The basic structural notation of the data consists of the following variables.
 
-A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists out of M documents $\textbf{w}=(w_1,\dots, w_N)$ which are itself separated into $N$ words $w_i$. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary.
-This notation may indeed be extended through the addition of indices for documents, but this is neither done here nor in the standard literature on topic models due to its unnecessary complexity.
+
+
+\section{Discussed Models} \label{sec:Models}
+
+This section will discuss the two Topic modeling approaches which will be studied in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of each model. The basic structural notation of the data consists of the following variables.
+
+A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists of $M$ documents $\textbf{w}=(w_1,\dots, w_N)$ which represents each of the $N$ words $w_i$ in the vocabulary. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary.
+This notation may be extended through the addition of indices for documents, but this is done neither here nor in the standard literature on topic models due to its unnecessary complexity.
 
 
 % MODEL LDA Introduction
 \subsection{LDA Model}\label{sec:LDA}
 
-Latent Dirichlet Allocation is a Bayesian approach and is often associated with the class of hierarchical models \cite{Gelman2014}. The idea is based on the representation of exchangeable random variables (acc. to de Finetti) as 
-mixture of distributions. Given that documents $\textbf{w}$ and words $w_i$ in each document - both considered as random variables in this setting - are exchangeable in such a way, a mixed model such as the LDA model is appropriate \cite{Blei2003}.
+Latent Dirichlet Allocation is a Bayesian approach and is often associated with hierarchical models \cite{Gelman2014}. This idea is based on the representation of exchangeable random variable as mixtures of distributions as discussed by de Finetti.  Given that documents $\textbf{w}$ and words $w_i$ in each document - both considered as random variables in this setting - are exchangeable in such a way, a mixed model such as the LDA model is appropriate \cite{Blei2003}.
 
 The following notation is used in conjunction with the LDA model. Let $z_j$ be the topics with $j\in\{1,\dots,k\}$. In the LDA setting we assume for  every topic $z_j$ there is a term distribution
 $$\beta_j \sim Dir(\delta)$$
@@ -90,27 +108,27 @@ You can summarize this setup in a plate diagram as shown in figure \ref{fig:Plat
 	\label{fig:PlateDiagram}
 \end{figure}
 \ \\
-In order to estimate the model parameters, the first task is to calculate the posterior distribution, which consists of the joint distribution in the numerator and the marginal distribution in the denominator.
+In order to estimate the model's parameters, the first step is to calculate posterior distribution, which can be done by dividing the joint distribution by the marginal distribution.
 
 \begin{align}\label{posterior}
 p(\theta,\textbf{z}|\textbf{w},\alpha,\beta)= \frac{p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)}
 {p(\textbf{w}|\alpha, \beta)}
 \end{align}
-The joint distribution numerator can be derived straight forward.
+The joint distribution numerator can be derived with the following calculation:
 
 \begin{align}\label{joint}
 p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)=p(\theta|\alpha)\prod_{i=1}^{N}p(w_i|z_i,\beta)\ p(z_i|\theta)
 \end{align}
-One can obtain the marginal distribution of a document $\textbf{w}$, by integrating out the parameter $\theta$ and summing over the topics $z_j$. Nevertheless, this expression is intractable.
+One can obtain the marginal distribution of a document $\textbf{w}$, by integrating out the parameter $\theta$ and summing up the topics $z_j$. Nevertheless, this expression is intractable.
 \begin{align}\label{marginal}
 p(\textbf{w}|\alpha, \beta)=\int p(\theta|\alpha) \left( \prod_{i=1}^{N} \sum_{z_i}p(z_i|\theta)p(w_n|z_i,\beta) \right) d\theta
 \end{align}
 \ \\
-The literature divides the approaches to calculating posterior distribution into two main categories.\cite{Blei2012} distinguishes between sampling based algorithms and variational algorithms. \cite{Powieser2012} lists a total of 6 algorithms that can be used to estimate parameters in the LDA model. This thesis will be confined to the two most cited and most used members of the two main groups. One approach is to simulate the posterior density by iteratively sampling - the so-called Gibbs sampling. The second approach is a deterministic method, a modified version of the well-known EM algorithm \cite{Dempster1977}: the Variational EM algorithm (VEM algorithm) \cite{Wainwright2008}. In the following two sections the both approaches are roughly outlined to give the reader some insight into the Bayesian inference underlying the algorithms.
+The literature divides the approaches to calculating posterior distribution into two main categories.\cite{Blei2012} distinguishes between-sampling based algorithms and variational algorithms. \cite{Powieser2012} lists a total of 6 algorithms that can be used to estimate parameters in the LDA model. This thesis will be confined to the two most cited and most used members of the two main groups. One approach is to simulate the posterior density by iteratively sampling - the so-called Gibbs Sampling method. The second approach is a deterministic method, a modified version of the well-known EM algorithm \cite{Dempster1977}: the Variational EM algorithm (VEM algorithm) \cite{Wainwright2008}. In the following two sections the both approaches are roughly outlined to give the reader some insight into the Bayesian inference underlying the algorithms.
 
 \subsubsection{Variational EM Algorithm}
 
-In the VEM algorithm for the LDA model is a mean field approach which varies the steps E and M of the EM algorithm in a way such that this algorithm becomes solvable. Note that the main problem of calculating the marginal distribution is, to derive the conditional probability of some hidden variables given some observed values ("evidence"). The variation of the EM algorithms consists mainly in approximating the directly intractable E step.  Rewriting the log of the border density of $\textbf{w}$ as follows in (\ref{marginal2}), results in the fact that the marginal density can be estimated downwards with the aid of Jensen's inequality.
+In the VEM algorithm for the LDA model is a mean field approach which varies the steps E and M of the EM algorithm in a way such that this algorithm becomes solvable. Note that the main problem in calculating marginal distribution lies in deriving the conditional probability of hidden variables in the observed values ('evidence'). Variation in the EM algorithms arises mainly from approximating the directly intractable E step.  Rewriting the log of the border density of $\textbf{w}$ as follows in (\ref{marginal2}), results in a downward estimation of marginal density given Jensen's inequality.
 \begin{align}\label{marginal2}
 \log p(\textbf{w}|\alpha, \beta) &= \log \int \sum_{z} 
 p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)d\theta\\
@@ -126,17 +144,17 @@ q(\theta,\textbf{z})\widehat{=}q(\theta,\textbf{z}|\gamma,\phi)
 =q(\theta|\gamma) \prod_{i=1}^N q(z_i|\phi_i)
 \end{align}
 The right hand side $L(\gamma,\phi,\alpha, \beta):=\mathbb{E}_q[\log p(\theta,\textbf{z},\textbf{w}|\alpha,\beta) ]-
-\mathbb{E}_q[\log q(\theta,\textbf{z})]$ be called "lower bound". It can be shown that $\log p(\textbf{w}|\alpha, \beta) - L(\gamma,\phi,\alpha, \beta)$ is the Kullbak Leibler divergence ($D_{KL}$) of the true posterior and the variational distribution. From equations (\ref{marginal2})-(\ref{KL}) follows that:
+\mathbb{E}_q[\log q(\theta,\textbf{z})]$ is referred to as the 'lower bound'. It can be shown that $\log p(\textbf{w}|\alpha, \beta) - L(\gamma,\phi,\alpha, \beta)$ is the Kullbak Leibler divergence ($D_{KL}$) of the true posterior and the variational distribution. From equations (\ref{marginal2})-(\ref{KL}) follows that:
 \begin{align}\label{equality}
 \log p(\textbf{w}|\alpha, \beta)= D_{KL}(q(\theta,\textbf{z}|\gamma,\phi)||p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)) + L(\gamma,\phi,\alpha, \beta)
 \end{align}
-Since the marginal is fixed, we conclude, that minimizing the KL-divergence is equivalent to maximizing the lower bound (see \cite{Jordan1999} and \cite{Wainwright2008}, for details of the derivation of the lower bound see \cite{Blei2003}).
+Since the marginal distribution is fixed, we conclude that minimizing the KL-divergence is equivalent to maximizing the lower bound (see \cite{Jordan1999} and \cite{Wainwright2008}, for details of the derivation of the lower bound see \cite{Blei2003}).
 \begin{align}
 (\gamma^*, \phi^*) &= \argmin_{\gamma, \phi}D_{KL}(q(\theta,\textbf{z}|\gamma,\phi)||p(\theta,\textbf{z},\textbf{w}|\alpha,\beta))\\
 &= \argmax_{\gamma, \phi} L(\gamma,\phi,\alpha, \beta)
 \end{align}\\
 \\
-The variation of the EM algorithm thus is to use the variational distribution $q(\theta,\textbf{z}|\gamma^*(\textbf{w}), \phi^*(\textbf{w}))$ instead the posterior distribution $p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)$. Now the two steps of the VEM algorithm are:
+The EM algorithm thus is to use the variational distribution $q(\theta,\textbf{z}|\gamma^*(\textbf{w}), \phi^*(\textbf{w}))$ instead the posterior distribution $p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)$. Now the two steps of the VEM algorithm are:
 \begin{itemize}
 	\item [(1)]\textbf{E step} Optimize the variational parameters $\theta$ and $\phi$ for every document in the corpus. This can be done analytically by deriving the derivatives of the KL divergence. And set them to zero.
 	\item [(2)] \textbf{M Step} Maximize the lower bound using the optimized parameter of the E step with respect to $\alpha$ and $\beta$.
@@ -145,7 +163,7 @@ The variation of the EM algorithm thus is to use the variational distribution $q
 
 \subsubsection{Gibbs Sampling}
 
-The second method to approximate the posterior distribution is Gibbs sampling, a so-called monte Carlo method. Instead of calculating the distributions for $\beta$ and $\theta$, the primary task is to find the posterior distribution over $\textbf{z}$ given the document $\textbf{w}$. Gibbs sampling is also known as a Markov Chain Monte Carlo method. The name refers to the simulation process by which a chain of values is simulated whose limiting distribution desirably converges against the true distribution \cite{Griffiths2006}. (\ref{Gibbs}) shows the distribution, which is sampled from iteratively.
+The second method to approximate the posterior distribution is Gibbs sampling, a form of the Monte Carlo method. Instead of calculating the distributions for $\beta$ and $\theta$, the primary task is to find the posterior distribution over $\textbf{z}$ given the document $\textbf{w}$. Gibbs sampling is also known as a Markov Chain Monte Carlo method. The name refers to the simulation process by which a chain of values is simulated whose limiting distribution desirably converges against the true distribution \cite{Griffiths2006}. (\ref{Gibbs}) shows the distribution, which is sampled from iteratively.
 \begin{align}\label{Gibbs}
 p(z_i=j|z_{-i},w)\propto \frac{n_{-i,j}^{(l)}+\delta}{\sum_t n_{-i,j}^{(t)}+V\delta}
 \frac{n_{-i,j}^{(d_i)+\alpha}}{n_{-i}^{(d_i)}+k\alpha}
@@ -157,7 +175,7 @@ p(z_i=j|z_{-i},w)\propto \frac{n_{-i,j}^{(l)}+\delta}{\sum_t n_{-i,j}^{(t)}+V\de
 \makebox[1cm][l]{$d_i$}				... \makebox[4cm][l]{document in the corpus which includes word $i$}\\
 \makebox[1cm][l]{$\delta,\alpha$} 	... \makebox[4cm][l]{parameters of the prior distributions for $\beta$ and $\theta$}\\
 \\
-Usually the word-topic distributions $\beta_{j}^{(l)}$ for the words $l=1,...,V$ and topics $j=1,..,k$ and topic-document distributions $\theta_j^{(d)}$ for the documents $d=1,...,D$ and the topics $j=1,...,k$ will be of interest. (\ref{Gibbs:beta}) and (\ref{Gibbs:theta}) shows the predictive distributions denoted as "estimators". 
+The word-topic distributions $\beta_{j}^{(l)}$ for the words $l=1,...,V$ and topics $j=1,..,k$ and topic-document distributions $\theta_j^{(d)}$ for the documents $d=1,...,D$ and the topics $j=1,...,k$ will be of particular interest. (\ref{Gibbs:beta}) and (\ref{Gibbs:theta}) shows the predictive distributions denoted as "estimators". 
 \begin{align}
 \hat\beta_{j}^{(l)}&=\frac{n_{-i,j}^{(l)}+\delta}{\sum_t n_{-i,j}^{(t)}+V\delta} \label{Gibbs:beta} \\
 \hat\theta_j^{(d)}&= \frac{n_{-i,j}^{(d_i)+\alpha}}{n_{-i}^{(d_i)}+k\alpha} \label{Gibbs:theta}
@@ -166,12 +184,12 @@ For derivation and more details regarding the Gibbs sampling procedure see \cite
 
 \subsubsection{Implementation}
 
-In this thesis, the implementation of the LDA model and its estimation is mainly based on using the package \texttt{topicmodels} of Kurt Hornik. The package \texttt{topicmodels} can apply both the VEM algorithm as well as Gibbs sampling in order to fit the model. In addition, the package \texttt{tidytext} is being used for text structuring and embedding. Whereby there are other packages besides this implementation of the LDA model, \texttt{topicmodels} is particularly convenient, because \texttt{tidytext} was designed by its developers to work perfectly in combination with \texttt{topicmodels} \cite[p. 89]{Silge2017}.
+In this thesis, the implementation of the LDA model and its estimation is mainly based on using the package \texttt{topicmodels} of Kurt Hornik. The package \texttt{topicmodels} can apply both the VEM algorithm as well as Gibbs sampling in order to fit the model. In addition, the package \texttt{tidytext} is used for text structuring and embedding. Whereby there are other packages besides this implementation of the LDA model, \texttt{topicmodels} is particularly convenient, because \texttt{tidytext} was designed by its developers to work perfectly in combination with \texttt{topicmodels} \cite[p. 89]{Silge2017}.
 
 
 \subsection{Artifical Neural Networks}
 
-Artificial neural networks (ANN) are much more versatile than the LDA model. There are not only various forms of artificial neural networks, but also a very large number of application areas. Quite as machine learning procedures in general, also deep learning algorithms are divided into two broad categories: supervised learning, where a superset instance provides the algorithm with the output required to learn, and unsupervised procedures that internally train predefined models to find patterns in the input signals. In this chapter we will focus heavily on the former group of ANNs. Also, this chapter is intended to give the reader an overview of the research on neural networks as well as the background of their development. \\
+Artificial neural networks (ANN) are much more versatile than the LDA model. There are not only various forms of artificial neural networks, but also a very large number of application areas. Much like machine learning procedures in general, also deep learning algorithms are divided into two broad categories: supervised learning, where a superset instance provides the algorithm with the output required to learn, and unsupervised procedures that internally train predefined models to find patterns in the input signals. In this chapter we will focus heavily on the former group of ANNs. Also, this chapter is intended to give the reader an overview of the research on neural networks as well as the background of their development. \\
 \subsubsection{Development} \label{ANN_development}
 Research on ANNs dates back to the 1940s, when \cite{McCulloch1943} introduced the so called “M-P neuron”. Whereby this neuron had only a bivariate input and output, Rosenblatt later extended this idea to a network of M-P neurons, which allowed to set up a simple classification algorithm \cite{Rb1958}. A perceptron in its basic form (single perceptron) is a binary classifier. \\
 \\
@@ -205,7 +223,7 @@ The matrix $X$ is passed vector by vector to the percepron and the output is com
 \ \\
 The algorithm of the simple perceptron is schematically shown in Figure \ref{simple_perceptron}. This diagram corresponds to the common representation in education \cite{Mekherjee2019}, although a horizontal perspective is often chosen.\\
 \\
-If this basic perceptron is used in a clever way, designs can be developed that have variable application possibilities with this approach only. For example, a sigmoid function can be used as an activation function instead of the step function. So the output layer will not project into the $\{0,1\}$ space, but into a probability space. If you add several nodes with the sigmoid activation function rather than a single output, you basically obtain the architecture that is also called multivariate logistic regression \cite{Bahjat2006}. In that case the model can be estimated by an individual calculation of logistic regressions for each node in the output layer. This allows to classify not only two classes, but an arbitrary number (see the network architecture of Figure \ref{adaption_perceptron}). \footnote{Note that in this setting the dependent variable must be one-hot encoded.}\\
+If this basic perceptron is used in a clever way, designs can be developed that have many different application possibilities. For example, a sigmoid function can be used as an activation function instead of the step function. So the output layer will not project into the $\{0,1\}$ space, but into a probability space. If you add several nodes with the sigmoid activation function rather than a single output, you basically obtain the architecture that is also called multivariate logistic regression \cite{Bahjat2006}. In that case the model can be estimated by an individual calculation of logistic regressions for each node in the output layer. This allows to classify not only two classes, but an arbitrary number (see the network architecture of Figure \ref{adaption_perceptron}). \footnote{Note that in this setting the dependent variable must be one-hot encoded.}\\
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{adaption_perceptron2.pdf}
@@ -213,9 +231,9 @@ If this basic perceptron is used in a clever way, designs can be developed that 
 	\label{adaption_perceptron}
 \end{figure}
 \ \\
-Shortly following the publication of these results, which would lay the foundation for later neural networks, ANN research had to suffer a severe setback after Minsky and Papert \cite{Minsky1969} were able to prove that perceptrons cannot provide a suitable solution in certain basic scenarios. It is possible to separate two clusters by a hyperplane with the perceptron, however, if the two groups could not be separated completely, the perceptron failed. For instance, it was impossible to find a solution for data generated with an \textit{x-or} function (also called "exclusive or" function).\\
+Shortly following the publication of these results, which would lay the foundation for later neural networks, ANN research had to suffer a severe setback after Minsky and Papert \cite{Minsky1969} were able to prove that perceptrons cannot provide a suitable solution in certain basic scenarios. It is possible to separate two clusters by a hyperplane with the perceptron. However, if the two groups could not be separated completely, the perceptron fails. For instance, it was impossible to find a solution for data generated with an \textit{x-or} function (also called "exclusive or" function).\\
 \ \\
-Although the researchers Minsky and Papert showed that the perceptron in this form cannot solve the “xor problem”, they argued that extending the simple perceptron to a multi layer perceptron is an approach to solve this problem, if it was feasible to train this model. Instead of just one input layer and one output layer, an MLP may include an arbitrary number of hidden layers in between. Figure \ref{figure:MLP} shows the structure of such an network. However, with the naive optimizing algorithm of the perceptron as it was designed by Rosenblatt, it was not feasible training a model with an architecture of that kind.\\
+Although the researchers Minsky and Papert showed that the perceptron in this form cannot solve the “xor problem”, they argued that extending the simple perceptron to a multi layer perceptron solves this problem, if it was feasible to train this model. Instead of just one input layer and one output layer, an MLP may include an arbitrary number of hidden layers in between. Figure \ref{figure:MLP} shows the structure of such an network. However, training a model using Rosenblatt's naive optimization algorithm of the perceptron would not have been feasible.\\
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{MLP.pdf}
@@ -243,7 +261,7 @@ Thanks to current software, the derivatives no longer have to be calculated for 
 Note: While Rosenblatt for the perceptron was actually inspired by the biological structure of the neurons in the brain, more complex “networks used by engineers are only loosely based upon biology”\cite{Hecht-Nielsen1988}.
 
 \subsubsection{Implementation}
-This work uses the \texttt{Keras R} package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for \texttt{R} by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
+This thesis uses the \texttt{Keras R} package to create neural networks, a deep learning API (Application-Programming-Interfac) to deep learning backend engines, designed for \texttt{R} by Allaire in 2017. Keras is a so called “model-level” library, designed to set up complex neural net architectures using well arranged, high-level building blocks. As backend-engine the users are provided with TensorFlow, Theano and Microsoft Cognitive Toolkit. Using these backend engines computation may be processed seamlessly via CPU or GPU \cite{Chollet2018}.
 
 % ANALYSIS OF TEXTBOOK CHAPTERS
 \section{Analysis of Gutenberg Data}\label{sec:analysis}

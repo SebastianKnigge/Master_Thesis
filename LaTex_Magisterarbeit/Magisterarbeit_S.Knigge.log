@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  2 OCT 2019 16:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  7 OCT 2019 14:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -632,46 +632,61 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 30.
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--31
+Underfull \hbox (badness 10000) in paragraph at lines 28--33
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 28--33
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 38--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 38--53
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 38--53
 
  []
 
 
-Overfull \hbox (26.10622pt too wide) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 38--53
+
+ []
+
+
+Overfull \hbox (26.10622pt too wide) in paragraph at lines 38--53
 \OT1/lmr/m/n/10.95 mod-els can or-ga-nize the col-lec-tion ac-cord-ing to the d
 is-cov-ered themes"[[]].
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 38--53
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--53
 
  []
 
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3]
-Overfull \hbox (3.71193pt too wide) in paragraph at lines 80--81
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 60--64
+
+ []
+
+[3]
+Overfull \hbox (3.71193pt too wide) in paragraph at lines 98--99
 []\OT1/lmr/m/n/10.95 Choose $\OML/lmm/m/it/10.95 w[] \OMS/lmsy/m/n/10.95 ^^X \O
 ML/lmm/m/it/10.95 Mult\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^L[]\OT1/lmr/m/n
 /10.95 )$ This dis-tri-bu-tion will be re-ferred to as $\OML/lmm/m/it/10.95 p\O
@@ -679,259 +694,264 @@ T1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 w[]\OMS/lmsy/m/n/10.95 j\OML/lmm/m/it/10.
 95 z[]; ^^L\OT1/lmr/m/n/10.95 )$ 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 82--84
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 100--102
 
  []
 
-<Graphics/LDA_Plate_Diagram.png, id=122, 572.8602pt x 314.1336pt>
+<Graphics/LDA_Plate_Diagram.png, id=136, 572.8602pt x 314.1336pt>
 File: Graphics/LDA_Plate_Diagram.png Graphic file (type png)
 
 <use Graphics/LDA_Plate_Diagram.png>
-Package pdftex.def Info: Graphics/LDA_Plate_Diagram.png used on input line 88.
+Package pdftex.def Info: Graphics/LDA_Plate_Diagram.png used on input line 106.
+
 (pdftex.def)             Requested size: 180.0pt x 98.70335pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 89.
+(Font)              <10> on input line 107.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 89.
- [4 <./Graphics/LDA_Plate_Diagram.png>]
-[5]
-Overfull \hbox (109.87549pt too wide) in paragraph at lines 132--134
-\OT1/lmr/m/n/10.95 is equiv-a-lent to max-i-miz-ing the lower bound (see [[]] a
-nd [[]],
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 137--140
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 152--161
-
- []
-
+(Font)              <7> on input line 107.
+ [5 <./Graphics/LDA_Plate_Diagram.png>]
 [6]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 169
-.
- (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmtt.fd
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
+Underfull \hbox (badness 10000) in paragraph at lines 155--158
 
  []
 
 
-Overfull \hbox (5.5779pt too wide) in paragraph at lines 176--179
-\OT1/lmr/m/n/10.95 Research on ANNs dates back to the 1940s, when [[]]
+Overfull \hbox (16.97946pt too wide) in paragraph at lines 155--158
+\OT1/lmr/m/n/10.95 The EM al-go-rithm thus is to use the vari-a-tional dis-tri-
+bu-tion $\OML/lmm/m/it/10.95 q\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^R; []\O
+MS/lmsy/m/n/10.95 j\OML/lmm/m/it/10.95 ^^M[]\OT1/lmr/m/n/10.95 ([])\OML/lmm/m/i
+t/10.95 ; ^^^[]\OT1/lmr/m/n/10.95 ([]))$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--179
+Underfull \hbox (badness 10000) in paragraph at lines 170--179
 
  []
 
 [7]
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 187
+.
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 193.
+ []
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 193.
+Overfull \hbox (5.5779pt too wide) in paragraph at lines 194--197
+\OT1/lmr/m/n/10.95 Research on ANNs dates back to the 1940s, when [[]]
+ []
 
-<Graphics/simple_perceptron.pdf, id=192, 628.81825pt x 885.71706pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--197
+
+ []
+
+[8]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 211.
+
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 211.
+
+<Graphics/simple_perceptron.pdf, id=207, 628.81825pt x 885.71706pt>
 File: Graphics/simple_perceptron.pdf Graphic file (type pdf)
 
 <use Graphics/simple_perceptron.pdf>
-Package pdftex.def Info: Graphics/simple_perceptron.pdf used on input line 201.
+Package pdftex.def Info: Graphics/simple_perceptron.pdf used on input line 219.
 
 (pdftex.def)             Requested size: 251.52284pt x 354.28055pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Graphics/adaption_perceptron2.pdf, id=199, 454.72084pt x 304.22658pt>
+<Graphics/adaption_perceptron2.pdf, id=214, 454.72084pt x 304.22658pt>
 File: Graphics/adaption_perceptron2.pdf Graphic file (type pdf)
 
 <use Graphics/adaption_perceptron2.pdf>
 Package pdftex.def Info: Graphics/adaption_perceptron2.pdf used on input line 2
-11.
+29.
 (pdftex.def)             Requested size: 227.35986pt x 152.11292pt.
 
-<Graphics/MLP.pdf, id=202, 316.93808pt x 338.61005pt>
+<Graphics/MLP.pdf, id=217, 316.93808pt x 338.61005pt>
 File: Graphics/MLP.pdf Graphic file (type pdf)
  <use Graphics/MLP.pdf>
-Package pdftex.def Info: Graphics/MLP.pdf used on input line 221.
+Package pdftex.def Info: Graphics/MLP.pdf used on input line 239.
 (pdftex.def)             Requested size: 190.1643pt x 203.16759pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--226
+Underfull \hbox (badness 10000) in paragraph at lines 223--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--226
+Underfull \hbox (badness 10000) in paragraph at lines 223--244
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--226
+Underfull \hbox (badness 10000) in paragraph at lines 223--244
 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8] [9 <./Graphics/simple_perceptron.pdf>] [10 <./Graphics/adaption_perceptron2
-.pdf> <./Graphics/MLP.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 241--244
+[9] [10 <./Graphics/simple_perceptron.pdf>] [11 <./Graphics/adaption_perceptron
+2.pdf> <./Graphics/MLP.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 259--262
 
  []
 
-[11]
-Overfull \hbox (18.15208pt too wide) in paragraph at lines 257--269
+[12]
+Overfull \hbox (18.15208pt too wide) in paragraph at lines 275--287
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 270--299
+Underfull \hbox (badness 10000) in paragraph at lines 288--317
 
  []
 
-[12] [13]
-Overfull \hbox (59.12773pt too wide) in paragraph at lines 316--318
+[13]
+Overfull \hbox (59.12773pt too wide) in paragraph at lines 334--336
 \OT1/lmr/m/n/10.95 tion the-ory ex-perts", \OT1/lmr/m/it/10.95 tf-idf \OT1/lmr/
 m/n/10.95 \has proved use-ful in text min-ing" [[]].
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 323--328
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 323--328
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 341--346
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--337
+Underfull \hbox (badness 10000) in paragraph at lines 341--346
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--355
 [][][][]$\OT1/lmtt/m/n/9 https : / / github . com / SebastianKnigge / Master _ 
 Thesis / tree / master /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--344
+Underfull \hbox (badness 10000) in paragraph at lines 351--362
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--344
+Underfull \hbox (badness 10000) in paragraph at lines 351--362
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--344
+Underfull \hbox (badness 10000) in paragraph at lines 351--362
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--344
+Underfull \hbox (badness 10000) in paragraph at lines 351--362
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--344
+Underfull \hbox (badness 10000) in paragraph at lines 351--362
 
  []
 
-[14] [15] <Graphics/comparison_boxplot.pdf, id=313, 505.89pt x 361.35pt>
+[15] [16] <Graphics/comparison_boxplot.pdf, id=326, 505.89pt x 361.35pt>
 File: Graphics/comparison_boxplot.pdf Graphic file (type pdf)
 
 <use Graphics/comparison_boxplot.pdf>
-Package pdftex.def Info: Graphics/comparison_boxplot.pdf used on input line 346
+Package pdftex.def Info: Graphics/comparison_boxplot.pdf used on input line 364
 .
 (pdftex.def)             Requested size: 360.0pt x 257.14474pt.
- [16 <./Graphics/comparison_boxplot.pdf>]
-<Graphics/network_structure.pdf, id=325, 781.9433pt x 560.77303pt>
+
+<Graphics/network_structure.pdf, id=328, 781.9433pt x 560.77303pt>
 File: Graphics/network_structure.pdf Graphic file (type pdf)
 
 <use Graphics/network_structure.pdf>
-Package pdftex.def Info: Graphics/network_structure.pdf used on input line 359.
+Package pdftex.def Info: Graphics/network_structure.pdf used on input line 377.
 
 (pdftex.def)             Requested size: 360.0pt x 258.17264pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 355--366
+Underfull \hbox (badness 10000) in paragraph at lines 373--384
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 355--366
+Underfull \hbox (badness 10000) in paragraph at lines 373--384
 
  []
 
-[17 <./Graphics/network_structure.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 368--376
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 368--376
+[17 <./Graphics/comparison_boxplot.pdf>] [18 <./Graphics/network_structure.pdf>
+]
+Underfull \hbox (badness 10000) in paragraph at lines 386--394
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 368--376
+Underfull \hbox (badness 10000) in paragraph at lines 386--394
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 368--376
+Underfull \hbox (badness 10000) in paragraph at lines 386--394
 
  []
 
-[18]
-Overfull \hbox (4.57777pt too wide) in paragraph at lines 384--419
+
+Underfull \hbox (badness 10000) in paragraph at lines 386--394
+
+ []
+
+
+Overfull \hbox (4.57777pt too wide) in paragraph at lines 402--437
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 380--424
+Underfull \hbox (badness 10000) in paragraph at lines 398--442
 
  []
 
-[19] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 429--434
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 447--452
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 429--434
+Underfull \hbox (badness 10000) in paragraph at lines 447--452
 
  []
 
-<Graphics/Docs_LDA_adapted.pdf, id=375, page=9, 614.295pt x 794.97pt>
+[20] [21]
+<Graphics/Docs_LDA_adapted.pdf, id=388, page=9, 614.295pt x 794.97pt>
 File: Graphics/Docs_LDA_adapted.pdf Graphic file (type pdf)
 
 <use Graphics/Docs_LDA_adapted.pdf, page 9>
 Package pdftex.def Info: Graphics/Docs_LDA_adapted.pdf, page9 used on input lin
-e 449.
+e 467.
 (pdftex.def)             Requested size: 431.9989pt x 232.98361pt.
 
-Overfull \hbox (71.9989pt too wide) in paragraph at lines 449--450
+Overfull \hbox (71.9989pt too wide) in paragraph at lines 467--468
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 443--458
+Underfull \hbox (badness 10000) in paragraph at lines 461--476
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 443--458
+Underfull \hbox (badness 10000) in paragraph at lines 461--476
 
  []
 
-[21] [22 <./Graphics/Docs_LDA_adapted.pdf>] [23] [24]
-(./Magisterarbeit_S.Knigge.bbl [25]) (./Magisterarbeit_S.Knigge.lof [26])
+[22] [23 <./Graphics/Docs_LDA_adapted.pdf>] [24] [25]
+(./Magisterarbeit_S.Knigge.bbl [26]) (./Magisterarbeit_S.Knigge.lof [27])
 \tf@lof=\write4
 \openout4 = `Magisterarbeit_S.Knigge.lof'.
 
@@ -940,25 +960,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 443--458
 \tf@lot=\write5
 \openout5 = `Magisterarbeit_S.Knigge.lot'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 478.
- [27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 478.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 496.
+ [28]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 496.
  (./Magisterarbeit_S.Knigge.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 478.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 478.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 496.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 496.
 Package rerunfilecheck Info: File `Magisterarbeit_S.Knigge.out' has not changed
 .
 (rerunfilecheck)             Checksum: F1E79F5BCD79B313265B4A342787177B;1214.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 478.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 496.
  ) 
 Here is how much of TeX's memory you used:
- 7926 strings out of 493089
- 117805 string characters out of 6134841
- 215942 words of memory out of 5000000
- 11148 multiletter control sequences out of 15000+600000
+ 7935 strings out of 493089
+ 117899 string characters out of 6134841
+ 218070 words of memory out of 5000000
+ 11151 multiletter control sequences out of 15000+600000
  73311 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,12n,40p,1118b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,12n,40p,1120b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
 texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2015
 /texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/texmf-dis
@@ -981,10 +1001,10 @@ m/lmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtk10.pf
 b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/lo
 cal/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Magisterarbeit_S.Knigge.pdf (27 pages, 627365 bytes).
+Output written on Magisterarbeit_S.Knigge.pdf (28 pages, 629884 bytes).
 PDF statistics:
- 566 PDF objects out of 1000 (max. 8388607)
- 488 compressed objects within 5 object streams
- 125 named destinations out of 1000 (max. 500000)
+ 581 PDF objects out of 1000 (max. 8388607)
+ 501 compressed objects within 6 object streams
+ 131 named destinations out of 1000 (max. 500000)
  178 words of extra memory for PDF output out of 10000 (max. 10000000)
 

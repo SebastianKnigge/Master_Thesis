@@ -174,7 +174,7 @@ by_chapter <- set_up_books(n_books=n_books, seed=222)
 get_titles(by_chapter, n_books)
 ```
 
-The function *set_up_books()* returns a warning that several books seem to consist of only one chapter. In order to get a copus consisting out of $6$ books, the function *append_by_chaper()* is used, which fills up the corpus to the desired number of books.
+The function *set_up_books()* returns a warning that several books seem to consist of only one chapter. In order to get a corpus consisting out of $6$ books, the function *append_by_chaper()* is used, which fills up the corpus to the desired number of books.
 
 ```{r append_by_chapter, chache=TRUE, warning=FALSE}
 appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
@@ -213,14 +213,14 @@ chapters_dtm <- convert_to_dtm(word_counts, minfq=2)
 ncol(chapters_dtm)
 ```
 
-Let us compare it to the case if including all words.
+Let us compare it to the case including all words.
 
 ```{r chapters_dtm_all, chache=TRUE}
 chapters_dtm_all <- convert_to_dtm(word_counts, minfq=0)
 ncol(chapters_dtm_all)
 ```
 
-We also want to compare this to a reduction of the word dictionary by the tfidf. For the sake of comparison, the reduction is made to the same value as used above via *minfreq*=2 (i.e. 8597 words).
+We also want to compare this to a reduction of the word dictionary by the TFIDF. For the sake of comparison, the reduction is made to the same value as used above via *minfreq*=2 (i.e. 8597 words).
 
 ```{r chapters_dtm_tfidf, chache=TRUE, warning=FALSE}
 chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=8597)
@@ -586,7 +586,7 @@ performance_matrix_sec %>%  stargazer(summary=FALSE, header=F, title = "Gibbs se
 
 # Definition of Validation
 
-Since the LDA algorithm just clusters into $k$ topics, it is necessary to evaluate which "topic" refers to which book, in order to calculate a missclassification rate. For each of the books we naively derive a distribution of the assignment to the topics. This is done by accumulating the distributions for each chapter of the book. The most likely assignment of the LDA model is choosen as the "correct" topic. Now calculating the missclassification rate is basically the fraction of those chapters/documents not coinciding with the most likely assignment.
+Since the LDA algorithm just clusters into $k$ topics, it is necessary to evaluate which "topic" refers to which book, in order to calculate a missclassification rate. For each of the books we naively derive a distribution of the assignment to the topics. This is done by accumulating the distributions for each chapter of the book. The most likely assignment of the LDA model is chosen as the "correct" topic. Now calculating the missclassification rate is basically the fraction of those chapters/documents not coinciding with the most likely assignment.
 
 
 
@@ -616,11 +616,11 @@ for (i in 1:n_books){
 
 ```
 
-This does not exclude the fact that two books are assigned to the same topic (in this case e.g. 2 books are assigned to chapter 1 and none to chapter 6). But still, from each of the plots of the "distributions" you can obtain how good the chapters of a single book are classified. The more of the mass of the distribution is on a single topic, the better the chapters of this topic are predicted.
+This procedure does not exclude the fact that two books are assigned to the same topic (in this case e.g. 2 books are assigned to chapter 1 and none to chapter 6). But still, from each of the plots of the "distributions" you can obtain how good the chapters of a single book are classified. The more of the mass of the distribution is on a single topic, the better the chapters of this topic are predicted.
 
 # Example 3 (10 books)
 
-First we will sample the books, the same way as is was done in Example 1.
+First we will sample the books, the same way as is it was done in Example 1.
 
 ```{r Sampling10books, chache=TRUE, warning=FALSE}
 n_books_10 <- 10
@@ -761,7 +761,7 @@ plot_DF2 %>% ggplot(aes(x=Use_Case, y=accuracy, fill=Procedure))+
 
 ## Evaluation
 
-In the first place, we try the in-model-validation procedure, foch each of the 3 embeddings. Table \ref{in-model_val} displays the results of each validation.
+In the first place, we try the in-model-validation procedure, for each of the 3 embeddings. Table \ref{in-model_val} displays the results of each validation.
 
 ```{r chapters_dtm2_Gibbs, cache=TRUE, warning=FALSE, message=FALSE}
 chapters_dtm2 <- convert_to_dtm(word_counts2, minfq=2)
