@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  7 OCT 2019 11:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  11 OCT 2019 11:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -915,81 +915,110 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 350.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 350.
-[4] [5] [6] [7] [8] [9] [10]
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 875
+[4] [5] [6] [7] [8] [9] [10] [11]
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 938
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [11] [12]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-8-1.pdf, id=137, 427.5975pt
- x 279.0425pt>
-File: LDA_Documentation_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (
-type pdf)
-<use LDA_Documentation_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-8-1
-.pdf used on input line 1007.
-(pdftex.def)             Requested size: 427.59645pt x 279.04181pt.
-[13 <./LDA_Documentation_files/figure-latex/unnamed-chunk-8-1.pdf>] [14] [15] [
-16]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf, id=167, 456.70625
-pt x 303.1325pt>
+) [12]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf, id=137, 459.7175p
+t x 313.17pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-10-
-1.pdf used on input line 1271.
-(pdftex.def)             Requested size: 456.71208pt x 303.13638pt.
-
-Overfull \vbox (0.85535pt too high) detected at line 1305
+1.pdf used on input line 1055.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[13]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf, id=143, 459.7175p
+t x 313.17pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file 
+(type pdf)
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-11-
+1.pdf used on input line 1070.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[14 <./LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf>]
+Underfull \vbox (badness 2359) detected at line 1110
  []
 
-[17 <./LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf>] [18]
-<LDA_Documentation_files/figure-latex/Plot-1.pdf, id=185, 412.54124pt x 266.997
-5pt>
-File: LDA_Documentation_files/figure-latex/Plot-1.pdf Graphic file (type pdf)
-<use LDA_Documentation_files/figure-latex/Plot-1.pdf>
-Package pdftex.def Info: LDA_Documentation_files/figure-latex/Plot-1.pdf used o
-n input line 1445.
-(pdftex.def)             Requested size: 412.54652pt x 267.00089pt.
-[19 <./LDA_Documentation_files/figure-latex/Plot-1.pdf>]
-<LDA_Documentation_files/figure-latex/Plot-2.pdf, id=199, 412.54124pt x 266.997
-5pt>
-File: LDA_Documentation_files/figure-latex/Plot-2.pdf Graphic file (type pdf)
-<use LDA_Documentation_files/figure-latex/Plot-2.pdf>
-Package pdftex.def Info: LDA_Documentation_files/figure-latex/Plot-2.pdf used o
-n input line 1456.
-(pdftex.def)             Requested size: 412.54652pt x 267.00089pt.
+[15 <./LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf>]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf, id=173, 459.7175p
+t x 313.17pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file 
+(type pdf)
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-13-
+1.pdf used on input line 1125.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
 
-<LDA_Documentation_files/figure-latex/Plot-3.pdf, id=200, 412.54124pt x 104.39p
-t>
-File: LDA_Documentation_files/figure-latex/Plot-3.pdf Graphic file (type pdf)
-<use LDA_Documentation_files/figure-latex/Plot-3.pdf>
-Package pdftex.def Info: LDA_Documentation_files/figure-latex/Plot-3.pdf used o
-n input line 1465.
-(pdftex.def)             Requested size: 412.54652pt x 104.39131pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1468.
-[20 <./LDA_Documentation_files/figure-latex/Plot-2.pdf> <./LDA_Documentation_fi
-les/figure-latex/Plot-3.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1468.
+<LDA_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf, id=174, 459.7175p
+t x 313.17pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file 
+(type pdf)
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-14-
+1.pdf used on input line 1141.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[16 <./LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf>] [17 <./LDA
+_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf>]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf, id=203, 427.5975p
+t x 279.0425pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file 
+(type pdf)
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-15-
+1.pdf used on input line 1181.
+(pdftex.def)             Requested size: 427.59645pt x 279.04181pt.
+[18 <./LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf>] [19]
+Overfull \vbox (0.28629pt too high) detected at line 1408
+ []
+
+[20]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf, id=227, 456.70625
+pt x 303.1325pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file 
+(type pdf)
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-17-
+1.pdf used on input line 1445.
+(pdftex.def)             Requested size: 456.71208pt x 303.13638pt.
+[21]
+Underfull \vbox (badness 1348) detected at line 1487
+ []
+
+[22 <./LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf>]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf, id=244, 459.7175p
+t x 313.17pt>
+File: LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file 
+(type pdf)
+<use LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf>
+Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-19-
+1.pdf used on input line 1502.
+(pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
+[23 <./LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1600.
+[24]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1600.
 (./LDA_Documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1468.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1468.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1600.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1600.
 
 Package rerunfilecheck Info: File `LDA_Documentation.out' has not changed.
-(rerunfilecheck)             Checksum: BD95473AF57440DA28446B97FA687401;2052.
+(rerunfilecheck)             Checksum: 34A225AFFA67D96449AAD3BA947BFFE1;2114.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1468.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1600.
  ) 
 Here is how much of TeX's memory you used:
- 12823 strings out of 493089
- 187432 string characters out of 6134841
- 304389 words of memory out of 5000000
- 16008 multiletter control sequences out of 15000+600000
+ 12835 strings out of 493089
+ 188141 string characters out of 6134841
+ 305416 words of memory out of 5000000
+ 16016 multiletter control sequences out of 15000+600000
  61482 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,9n,35p,634b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 31i,9n,35p,655b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local
 /texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2015/
 texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dist/fon
@@ -1003,10 +1032,10 @@ t/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
 pe1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
 /lm/lmtk10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10
 .pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on LDA_Documentation.pdf (20 pages, 330512 bytes).
+Output written on LDA_Documentation.pdf (24 pages, 381221 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 226 compressed objects within 3 object streams
- 45 named destinations out of 1000 (max. 500000)
- 14458 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 322 PDF objects out of 1000 (max. 8388607)
+ 261 compressed objects within 3 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 14468 words of extra memory for PDF output out of 17280 (max. 10000000)
 

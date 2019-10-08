@@ -43,7 +43,7 @@ library(keras)
 The Documents had to be preprocessed like for the LDA part.
 This first part - again - focusses on reading in the pdf documents.
 
-```{r, message=FALSE, warning=FALSE, results='asis'}
+```{r input0, message=FALSE, warning=FALSE, results='asis', cache=TRUE}
 # getting the right order
 setwd('..')
 documents <- read.xlsx("Docs_classes.xlsx")[,2]
@@ -53,7 +53,7 @@ documents <- paste0(documents,".pdf")
 
 
 Following functions are used to set up and analyze the pdfs.
-```{r, message=FALSE, warning=FALSE}
+```{r input, message=FALSE, warning=FALSE, cache=TRUE}
 # getting the right directory
 library(here)
 setwd("../")
@@ -192,9 +192,9 @@ sample_cluster_wise <- function(data, test_ratio=0.2, val_ratio=0.2, seed=1234){
 
 The following two functions are setting up the model and evaluate the goodness of fit. 
 
-```{r fitting-function, chache=TRUE}
+```{r, chache=FALSE}
 # The whole model is set up and trained within this function
-set_up_n_fit <- function(split, books_n=n_books){
+set_up_n_fit <- function(split, books_n=n_books, epochs=5, batchsize=2^9){
   # starting with 64 neurons and scaling it down to 46 in the 
   # mid layer turned out to be a well predicting model
   model <- keras_model_sequential() %>%
@@ -213,8 +213,8 @@ set_up_n_fit <- function(split, books_n=n_books){
     split$partial_y_train,
     # from experience the model tends to 
     # overfit for more than 5 epochs
-    epochs=5,
-    batch_size=2^9,
+    epochs=epochs,
+    batch_size=batchsize,
     validation_data=list(split$x_val,split$y_val)
   )
   return(
@@ -225,7 +225,9 @@ set_up_n_fit <- function(split, books_n=n_books){
 
 # making a prediction on the test data and calculating the
 # misspecification rate; we also want to save the true categories and the predicted ones
-evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
+evaluate_model <- function(model_fit, split) {
+  y=split$y_test
+  x=split$x_test
   prediction <- model_fit %>% predict(x)
   pred <- apply(prediction, 1, which.max)
   true_value <- apply(y, 1, which.max)
@@ -238,16 +240,16 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 }
 ```
 
-Now we can start applying the model. Here we use a split of 20\% validation-, 17\% test- and 63\% training-set. All 3 embeddings are evaluated. We use 35 simulations to test each embedding. 
+Now we can start applying the model. Here we use a split of 20\% validation-, 17\% test- and 60\% training-set. All 3 embeddings are evaluated. We use $49$ simulations to test each embedding. 
 
-```{r epply_n_evaluate, cache=TRUE, results='hide'}
+```{r , cache=FALSE, results='hide'}
 tim1 <- Sys.time()
-n <- 35
+n <- 49
 results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(dtm_tensor_2, seed=i*201, test_ratio = 0.17)
   results[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model(split=split) %>% .$misspecified
 }
 tim2 <- Sys.time()
 ```
@@ -256,16 +258,17 @@ tim2 <- Sys.time()
 u_2 <- tim2-tim1
 results_2 <- results
 misc.rate_2 <- results_2 %>% mean
+var_2 <- results_2 %>% var
 ```
 
-```{r epply_n_evaluate_all, cache=TRUE, results='hide'}
+```{r , cache=FALSE, results='hide'}
 tim1 <- Sys.time()
-n <- 35
+n <- 49
 results <- rep(NA,n)
 for(i in 1:n){
-  split <- sample_cluster_wise(dtm_tensor_2, seed=i*201, test_ratio = 0.17)
+  split <- sample_cluster_wise(dtm_tensor_all, seed=i*201, test_ratio = 0.17)
   results[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model(split=split) %>% .$misspecified
 }
 tim2 <- Sys.time()
 ```
@@ -274,16 +277,17 @@ tim2 <- Sys.time()
 u_all <- tim2-tim1
 results_all <- results
 misc.rate_all <- results_all %>% mean
+var_all <- results_all %>% var
 ```
 
-```{r epply_n_evaluate_tfidf, cache=TRUE, results='hide'}
+```{r, cache=FALSE, results='hide'}
 tim1 <- Sys.time()
-n <- 35
+n <- 49
 results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(dtm_tensor_tfidf, seed=i*201, test_ratio = 0.17)
   results[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model(split=split) %>% .$misspecified
 }
 tim2 <- Sys.time()
 ```
@@ -292,14 +296,89 @@ tim2 <- Sys.time()
 u_tfidf <- tim2-tim1
 results_tfidf <- results
 misc.rate_tfidf <- results_tfidf %>% mean
+var_tfidf <- results_tfidf %>% var
+```
+
+```{r results, results='asis', cache=TRUE}
+# overview
+performance_matrix <- data.frame(freq2.embedding=c(misc.rate_2, var_2, u_2), 
+           all.embedding=c(misc.rate_all, var_all, u_all),
+           tfidf=c(misc.rate_tfidf, var_tfidf, u_tfidf))
+rownames(performance_matrix) <- c("missc. rate", "variance", "time")
+performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "ANN for Reg. Docs.")
+```
+
+## Different Architecture
+
+In this section we want to try a different architecture. Using batch size $2^5$ instead of $2^9$ In Table \ref{different_results} the results of this architecture are shown, including the variances of the missclassification rates over all $49$ simulations.
+
+```{r, cache=TRUE, results='hide'}
+n <- 49
+results_2_d <- rep(NA,n)
+for(i in 1:n){
+  split <- sample_cluster_wise(dtm_tensor_2, seed=i*201, test_ratio = 0.17)
+  results_2_d[i] <- set_up_n_fit(split, batchsize = 2^5) %>% .$model %>% 
+    evaluate_model(split=split) %>% .$misspecified
+}
+```
+
+```{r, cache=TRUE, results='hide'}
+n <- 49
+results_all_d <- rep(NA,n)
+for(i in 1:n){
+  split <- sample_cluster_wise(dtm_tensor_all, seed=i*201, test_ratio = 0.17)
+  results_all_d[i] <- set_up_n_fit(split, batchsize = 2^5) %>% .$model %>% 
+    evaluate_model(split=split) %>% .$misspecified
+}
+```
+
+```{r , cache=TRUE, results='hide'}
+n <- 49
+results_tfidf_d <- rep(NA,n)
+for(i in 1:n){
+  split <- sample_cluster_wise(dtm_tensor_tfidf, seed=i*201, test_ratio = 0.17)
+  results_tfidf_d[i] <- set_up_n_fit(split, batchsize = 2^5) %>% .$model %>% 
+    evaluate_model(split=split) %>% .$misspecified
+}
 ```
 
 ```{r, results='asis', cache=FALSE}
 # overview
-performance_matrix <- data.frame(freq2.embedding=c(misc.rate_2, u_2), 
-           all.embedding=c(misc.rate_all, u_all),
-           tfidf=c(misc.rate_tfidf, u_tfidf))
-rownames(performance_matrix) <- c("missc. rate", "time")
-performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "ANN for Reg. Docs.")
+performance_matrix <- data.frame(freq2.embedding=c(results_2_d %>% mean, results_2_d %>% var), 
+           all.embedding=c(results_all_d %>% mean, results_all_d %>% var),
+           tfidf=c(results_tfidf_d %>% mean, results %>% var))
+rownames(performance_matrix) <- c("missc. rate", "variance")
+performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "ANN for Reg. Docs. Different Architecture (7 epochs)", label="different_results")
 ```
 
+# Training of the most Promising Structure
+
+In the course of training and optimizing, many hundret models were fitted. In the following I want to show the training-plot of the most promising approach of the ANN for the regultory documents.
+
+```{r}
+
+split <- sample_cluster_wise(dtm_tensor_2, test_ratio=0)
+hist <- set_up_n_fit(split, batchsize = 2^5) %>% .$history 
+
+plot_df <- hist$metrics %>% do.call("cbind",.) %>% cbind(.,1:5) %>% as.data.frame()
+
+plot_df <- plot_df %>% gather(value, key=measure, acc, loss, val_acc, val_loss)
+
+
+
+ggplot(subset(plot_df, measure %in% c("acc", "val_acc")), aes(V5, value)) +
+  geom_line(aes(color=factor(measure))) +
+  geom_point(aes(color=factor(measure))) +
+  ylim(c(0,1))+
+  xlab("epoch")+
+  ylab("accuracy")+
+  theme(legend.title = element_blank())
+
+ggplot(subset(plot_df, measure %in% c("loss", "val_loss")), aes(V5, value)) +
+  geom_line(aes(color=factor(measure))) +
+  geom_point(aes(color=factor(measure)))+
+  xlab("epoch")+
+  ylab("loss")+
+  theme(legend.title = element_blank())
+
+```

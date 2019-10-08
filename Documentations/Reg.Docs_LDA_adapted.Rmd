@@ -36,6 +36,8 @@ library(RCurl)
 library(XML)
 library(openxlsx)
 library(keras)
+library(foreach)
+library(doParallel)
 ```
 
 # Import data
@@ -277,8 +279,8 @@ Now there are two methods to create the word clouds for the TFIDF measure. Once 
 par(mfrow=c(2,4))
 par(mar=c(1,1,1,1))
 set.seed(123)
-plot_wordcloud(corpus, selection=ind1[,1], i=1, scale=c(1.9,0.005), 
-               max.words = 50)
+plot_wordcloud(corpus, selection=ind1[,1], i=1, scale=c(1.7,0.001), 
+               max.words = 45)
 plot_wordcloud(corpus, selection=ind2[,1], i=2)
 plot_wordcloud(corpus, selection=ind3[,1], i=3, scale=c(1.6,0.005), 
                max.words = 45)
@@ -293,7 +295,7 @@ plot_wordcloud(corpus, selection=ind7[,1], i=7, scale=c(2.1,0.3),
 
 Now using the second approach, when applying the TFIDF measure to the mapped corpus.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
 par(mar=c(1,1,1,1))
 set.seed(123)
@@ -334,19 +336,19 @@ plot_wordcloud(corpus, selection=ind7[,1], i=7, freq="tf", scale=c(2.5,0.2),
 
 ## Embedding via TFIDF
 
-Now it is interesting to see if embedding via TFIDF will cluster other groups or the same. So we will reduce the Document Term Matrix to $0.8*M$ words, which amounts to a reduction by 20\%.
+Now it is interesting to see if embedding via TFIDF will cluster other groups or the same. So we will reduce the Document Term Matrix to $5717$ words, which amounts to a reduction by 50\%.
 
-```{r, cache=TRUE}
-tim1 <- Sys.time()
-dtm_50 <- dtm %>% dtm_remove_tfidf(top=0.8*M)
+```{r, cache=FALSE}
+tim1_tfidf <- Sys.time()
+dtm_50 <- dtm %>% dtm_remove_tfidf(top=(0.5*M))
 set.seed(123)
 documents_lda_2 <- LDA(dtm_50, method="Gibbs",
                     k = 7, control = list(seed = 1234))
-tim2 <- Sys.time()
-u2 <- tim2 - tim1
+tim2_tfidf <- Sys.time()
+u2 <- tim2_tfidf - tim1_tfidf
 ```
 
-```{r, cache=TRUE}
+```{r, cache=FALSE}
 prediction5_2 <- predict(documents_lda_2, newdata=dtm_50, type="topic")
 prediction5_2 <- merge(prediction5_2, classes, by.x="doc_id", by.y="No")
 # compare topic 1 with topic 2, 3, 4 and 5
@@ -394,13 +396,15 @@ This time using the TFIDF embedding for clustering via LDA. The first plot shows
 par(mfrow=c(2,4))
 par(mar=c(1,1,0.5,1))
 set.seed(123)
-plot_wordcloud(corpus, selection=ind1_2[,1], i=1, scale=c(2,0.2))
+plot_wordcloud(corpus, selection=ind1_2[,1], i=1, scale=c(1.7,0.002),
+               max.words = 35)
 plot_wordcloud(corpus, selection=ind2_2[,1], i=2, scale=c(2.5,0.1))
 plot_wordcloud(corpus, selection=ind3_2[,1], i=3, scale=c(1.5,0.001), 
                max.words = 30)
-plot_wordcloud(corpus, selection=ind4_2[,1], i=4, scale=c(2,0.1))
-plot_wordcloud(corpus, selection=ind5_2[,1], i=5, scale=c(2.5,0.1), 
-               max.words = 40) 
+plot_wordcloud(corpus, selection=ind4_2[,1], i=4, scale=c(1.9,0.05), 
+               max.words = 40)
+plot_wordcloud(corpus, selection=ind5_2[,1], i=5, scale=c(2,0.02), 
+               max.words = 35) 
 plot_wordcloud(corpus, selection=ind6_2[,1], i=6, scale=c(2,0.1), 
                max.words = 40)
 plot_wordcloud(corpus, selection=ind7_2[,1], i=7, scale=c(2,0.03), 
@@ -415,11 +419,12 @@ par(mar=c(1,1,1,1))
 set.seed(123)
 plot_wordcloud_topic(corpus, topic_select=1, scale=c(1.9,0.0006), 
                max.words = 40, prediction=prediction5_2)
-plot_wordcloud_topic(corpus, topic_select=2, prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=2, prediction=prediction5_2, 
+                     scale=c(1.9,0.0006))
 plot_wordcloud_topic(corpus, topic_select=3, scale=c(1.6,0.005), 
                max.words = 40, prediction=prediction5_2)
-plot_wordcloud_topic(corpus, topic_select=4, max.words = 50, 
-                     scale=c(2.3, 0.2), prediction=prediction5_2)
+plot_wordcloud_topic(corpus, topic_select=4, max.words = 40, 
+                     scale=c(2.3, 0.02), prediction=prediction5_2)
 plot_wordcloud_topic(corpus, topic_select=5, scale=c(1.8,0.01), 
                max.words = 40, prediction=prediction5_2)
 plot_wordcloud_topic(corpus, topic_select=6, scale=c(2,0.1), 
@@ -445,22 +450,22 @@ validate_LDAclassification <- function(predict_table){
     top_n(1,topic) %>%
     unique()
     
-  predict_table %>% 
-    left_join(conversion, by=c("topic")) %>%
-    filter(Group.x!=Group.y) %>%
-    nrow()/nrow(predict_table)
+  consensus <- predict_table %>% 
+    left_join(conversion, by=c("topic"))
+  consensus %>% filter(Group.x!=Group.y) %>%
+    nrow()/nrow(consensus)
 }
 ```
 
-On both full bag of words and 80\% embedding via TFIDF
-```{r}
+On both full bag of words and 50\% embedding via TFIDF
+```{r, cache=FALSE}
 predict_table <- prediction5 %>% select(doc_id, topic) %>% 
   merge( y=classes, by.x=1, by.y=1)
 
 ( misc.rate_embedding2 <- validate_LDAclassification(predict_table) )
 ```
 
-```{r}
+```{r, cache=FALSE}
 predict_table2 <- prediction5_2 %>% select(doc_id, topic) %>% 
   merge( y=classes, by.x=1, by.y=1)
 
@@ -472,6 +477,110 @@ performance_matrix <- data.frame(freq2.embedding=c(misc.rate_embedding2, u1),
            tfidf.embedding=c(misc.rate_embedding_tfidf, u2))
 rownames(performance_matrix) <- c("missc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via Gibbs Sampling")
+```
+
+# Optimal value of Reduction via tfidf
+
+In this example we want to know if there is a better value for the reduction of tfidf than 50\%. We will examine it using the same approach as for the Gutenberg examples. 
+
+```{r}
+evaluation_for_embedding <- function(word_counts, frac=0.1, M=8254) {
+  # embedding 3
+  chapters_dtm_tfidf <- dtm %>% dtm_remove_tfidf(top=(frac*M))
+  # fitting
+  tim1 <- Sys.time()
+  chapters_lda_tfidf_Gibbs <- LDA(chapters_dtm_tfidf,  method="Gibbs",
+                    k = 7, control = list(seed = 1234))
+  tim2 <- Sys.time()
+  u_tfidf_Gibbs <- tim2-tim1
+  prediction5_2 <- predict(chapters_lda_tfidf_Gibbs, 
+                           newdata=chapters_dtm_tfidf, type="topic")
+  prediction5_2 <- merge(prediction5_2, classes, by.x="doc_id", by.y="No")
+  # calculating missclassification rate
+  predict_table <- prediction5_2 %>% select(doc_id, topic) %>% 
+  merge( y=classes, by.x=1, by.y=1)
+
+  misc.rate_tfidf_Gibbs <-validate_LDAclassification(predict_table)
+   
+  # function returns a vector including the misc. ratio and the fitting time
+  return(c(misc.rate_tfidf_Gibbs, 
+              as.numeric(u_tfidf_Gibbs)))
+}
+```
+
+
+```{r, cache=TRUE}
+# set up the fractions we want to use
+# we use 0.1, 0.2, ..., 1
+fractions <- seq(0.1,1,0.01)
+
+# Use parallelization
+# setting up how many cores to be used
+useable_cores <- parallel::detectCores() - 1
+# registering cluster
+cl <- parallel::makeCluster(useable_cores)
+doParallel::registerDoParallel(cl)
+embedding_performance_matrix <- foreach(i = 1:length(fractions), .combine = 'rbind', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
+  
+  
+  evaluation_for_embedding(dtm, frac=fractions[i]) %>% 
+    c(.,fractions[i])
+  
+  
+}
+parallel::stopCluster(cl)
+
+# adjust the resulting matrix to a data frame for plotting
+colnames(embedding_performance_matrix) <- c("misc.rate","time","fractions")
+embedding_performance_matrix <- as.data.frame(embedding_performance_matrix)
+```
+
+```{r}
+ggplot(data=embedding_performance_matrix, 
+       aes(x=fractions, y=misc.rate)) +
+  geom_line(col="grey") +
+  geom_point() +
+  geom_smooth(col="green3", method="loess", span=0.7) +
+  theme_minimal() +
+  ggtitle("Missclassification rates for different types of tfidf-embeddings") +
+  xlab("fraction")
+```
+
+
+
+
+We can find an optimal value for *fraction* at the value aroung $0.35$, so it might be interesting to campare the results of a fit using this optimized value of fraction to the other embeddings.
+
+```{r, cache=FALSE}
+tim1_tfidf0.85 <- Sys.time()
+dtm_0.85 <- dtm %>% dtm_remove_tfidf(top=(0.35*M))
+set.seed(123)
+documents_lda_0.85 <- LDA(dtm_0.85, method="Gibbs",
+                    k = 7, control = list(seed = 1234))
+tim2_tfidf0.85 <- Sys.time()
+u0.85 <- tim2_tfidf0.85 - tim1_tfidf0.85
+```
+
+```{r, cache=FALSE}
+prediction0.85 <- predict(documents_lda_0.85, newdata=dtm_0.85, type="topic")
+prediction0.85 <- merge(prediction0.85, classes, by.x="doc_id", by.y="No")
+```
+
+```{r, cache=FALSE}
+predict_table0.85 <- prediction0.85 %>% select(doc_id, topic) %>% 
+  merge( y=classes, by.x=1, by.y=1)
+
+( misc.rate_embedding_0.85 <- validate_LDAclassification(predict_table0.85))
+```
+
+In Table \ref{comp0.85} you will find an overview of the performace of the different embedding methods including *tfidf* embedding of fraction $0.35$.
+```{r, results="asis"}
+performance_matrix <- data.frame(freq2.embedding=c(misc.rate_embedding2, u1), 
+           tfidf_0.5.embedding=c(misc.rate_embedding_tfidf, u2),
+           tfidf_0.85.embedding=c(misc.rate_embedding_0.85, u0.85))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix %>%  stargazer(summary=FALSE, header=F, 
+                                  title = "LDA via Gibbs Sampling", label="comp0.85")
 ```
 
 # Coherence Cloud

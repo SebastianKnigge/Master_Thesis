@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref} %inserting urls
 \usepackage{nameref}
+\usepackage{pdfpages}
 \graphicspath{{Graphics/}} %Setting the graphicspath
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -20,34 +21,57 @@
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
 
+% Appendix Chapters show in  TOC
+% End Appendix Chapters show in  TOC
+
+% Fakesubsection for Appendix
+\newcommand{\fakesubsection}[1]{%
+	\par\refstepcounter{subsection}% Increase subsection counter
+	\subsectionmark{#1}% Add subsection mark (header)
+	\addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1}% Add subsection to ToC
+	% Add more content here, if needed.
+}
+% End Fakesubsection for Appendix
+
 \author{Sebastian Knigge}
 \begin{document}
 	
-\section{Motivation and Organization of the Thesis}
+\tableofcontents
 	
-Even if the amount of data increases inexorably due to the permanent collection of online data, and there are always new and better methods to derive good forecasts from big data, it is still difficult for algorithms to extract information from unstructured data. The amount of text data does not increase as quickly as the amount of structured user data. However, it should not be ignored that the written word still has an immensely high -if not the highest - information density for the human mind. Text is the primary and most accurate way to transfer and store complex information. In a nutshell: while a machine and algorithms think in numbers, humans still think in words and text. A major challenge of machine learning will be to extract and link information from unstructured data such as text.\\
+\section{Introduction and Organization of the Thesis}
+	
+Even if the amount of data increases inexorably due to the permanent collection of online data, plus there are always new and better methods to derive good forecasts from big data, it is still difficult for algorithms to extract information from unstructured data. The amount of text data does not increase as quickly as the amount of structured user data. However, it should not be ignored that the written word still has an immensely high -if not the highest - information density for the human mind. Text is the primary and most accurate way to transfer and store complex information. In a nutshell: while machines and algorithms think in numbers, humans still think in words and text. A major challenge of machine learning will be to extract and link information from unstructured data such as text.\\
 \ \\
-A whole field of computer science is already addressing the topic of text data. This is Natural Language processing and Information Retrieval (see chapter \ref{sec:NLP}). In the recent past, especially probabilistic approaches have been considered promising by researchers (see e.g. \cite{Manning1999}). However, the success of methods depends greatly on the text data to which they are applied and on the desired output. It is therefore equally important to address the methods and models used, as well as describing the use case in detail, when conducting research in this area. Winter et al. for example used regulatory documents and guidelines to characterized them via KNN \cite{Winter2017}. In this work, I want to follow Winter's work thematically. I will examine related as well as new, completely different methods and approaches to characterize regulatory documents.\footnote{When comparing the two works, however, note the difference in the topic of the documents analyzed.}\\
+One field of computer science is already addressing the topic of text data. This is Natural Language processing and Information Retrieval (see Chapter \ref{sec:NLP}). In the past, probabilistic approaches have been considered especially promising by researchers (see e.g. \cite{Manning1999}). However, the success of methods depends greatly upon the text data to which they are applied and on the desired output. It is therefore equally important to address the methods and models used, as well as to describe the use case in detail when conducting research in this area. Winter et al. for example characterized regulatory documents and guidelines via KNN \cite{Winter2017}. In this thesis, I would like to follow Winter's work thematically. I will examine related procedures and new, completely different methods and approaches to characterize regulatory documents.\footnote{When comparing the two works, however, note the difference in the topic of the documents analyzed.}\\
 \ \\
-In this work I adhere to the paradigms of Dejong's 1979 work in the field of natural language processing. He was the first researcher in this area to move away from the story-specific approach by testing the accuracy of his program to develop a more robust model \cite{DeJong1979}. I even go one step further and optimize my model on completely different data than those it will be tested on later. By doing so I try to reduce the overfitting of the model to the chosen topic and develop a universal tool for text classification. Specifically, I will train my approach for classifying text documents on a relatively large set of textbook chapters. I will optimize the models and their hyperparameters and test the optimized models with a smaller set of regulatory documents from EUROSTAT.
+In this work I adhere to the paradigms of Dejong's 1979 work in the field of natural language processing. He was the first researcher in this area to move away from the story-specific approach by testing the accuracy of his program to develop a more robust model \cite{DeJong1979}. I will even go a step further by optimizing my model with completely different data than that of what it will later be tested on. By doing so I try to reduce the overfitting of the model to the chosen topic and develop a universal tool for text classification. Specifically, I will train my approach for classifying text documents on a relatively large set of textbook chapters. I will optimize the models and their hyperparameters and test the optimized models with a smaller set of regulatory documents from EUROSTAT.\\
+\ \\
+In \textbf{Chapter \ref{sec:NLP}} I will discuss the evolution of natural language processing. The different approaches and methods will be summarized and the reader will be given a general overview of the context of this work.\\
+\textbf{Chapter \ref{sec:Models}} presents the models used and the form of application is described in detail. The two methods used do not only differ in terms of their underlying models, but also their different tasks. Different methods of fitting and the implementation are covered.\\
+In the following sections of this paper, two examples (respectively in \textbf{Chapter \ref{sec:analysis} and Chapter \ref{sec:example2}}) are presented. First, an introductory example with data from various textbooks is analyzed. In \ref{Example1} an LDA model is adapted to cluster the data. In \ref{sec:ANN.example} a neural network is built up piece by piece, in order to classifiy new books or chapters.\\
+Based on the models in Chapter \ref{sec:analysis}, in \ref{Example2} another LDA model is developed to logically organize a collection of 28 regulatory documents and guidelines. In a second step (section \ref{Example2_ANN}), new documents are to be classified according to these groups.\\
+To conclude, in \textbf{Chapter 6} the results of both examples are summarized and the importance of such a process of clustering and classification is outlined.\\
+In order to give the reader a deeper insight into the examples and results and to ensure reproducibility, the \textbf{Appendix} contains four Documentation-pdfs in which the entire code and all results are presented in an edited form.
+
+
 	
 	
 
-\section{Natural Language Processing and Information Retrival} \label{sec:NLP}
+\section{Natural Language Processing and Information Retrieval} \label{sec:NLP}
 
-The reason for the current relevance of the topic NLP is obvious. But what does the concept of natural language processing actually cover and into which research field is it to be classified? It is worth looking at how NLP has evolved over the years and where it originated, in order to better understand what this area encompasses and what it does not. Since the origins of NLP lie in computer science, especially in Artificial Intelligence, NLP and AI shares the same approaches. For an short review of the motivations of AI, see also Chapter \ref{ANN_development}.  \\
+The reason for the current relevance of the topic NLP is obvious. However	 what does the concept of natural language processing actually cover and into which research field is it to be classified? It is worth looking at how NLP has evolved over the years and where it originated in order to better understand what this area encompasses and what it does not. Since the origins of NLP lie in computer science, especially in Artificial Intelligence, NLP and AI share the same approaches. For a short review of the motivation of AI, see section \ref{ANN_development}.  \\
 \ \\
 “Between about 1960 and 1985, most of linguistics, psychology, artificial intelligence, and natural language processing was completely dominated by a \textbf{\textit{rationalist}} approach” \cite[p. 4]{Manning1999}. In other words, procedures for NLP were completely static, fix-programmed solutions for processing text data. Books like \cite{Noble1988} followed this approach until the late 80s. Whereby the enthusiasm gradually, just like for artificial intelligence itself, decreased and arose cyclical.\\
 \ \\
 The second school of thought mentioned by Manning and Schütz is the \textit{\textbf{empiristic}} approach.
-This is based upon the assumption, that one “can learn the structure of language by specifying a general model and then learning the values of the parameters by applying statistical modeling and machine learning methods to large amount of observed language” \cite[p. 253]{Martinez2010}. What finally led to the breakthrough of NLP in its current form is what Manning defines as statistical NLP. I.e. all quantitative approaches for automatization NLP, which includes probabilistic modeling, as well as information theory, and linear algebra. This thesis will focus on methods from this approach.\\
-Some of this work could even in fact fall a step further. Deep learning (see Chapter \ref{ANN_development}) was indeed invented already in 1999 at the time of the division of the definition Mannings in its basic outlines, but received still far less attention than today. One could therefore call NLP via deep learning a subcategory of the empirical approach in its own right, and possibly even list "deep NLP” alongside Statistical NLP.\\
+This is based upon the assumption, that one “can learn the structure of language by specifying a general model and then learning the values of the parameters by applying statistical modeling and machine learning methods to large amount of observed language” \cite[p. 253]{Martinez2010}. What finally led to the breakthrough of NLP in its current form, is what Manning defines as statistical NLP. I.e. all quantitative approaches for automatization NLP, which includes probabilistic modeling, as well as information theory, and linear algebra. This thesis will focus on methods related to this approach.\\
+Some of this work could even advance a step further. Deep learning (see \ref{ANN_development}) was indeed already invented in 1999 - at the time of the division of the definition Mannings in its basic outlines - but still received far less attention than today. One could therefore call NLP via deep learning a subcategory of the empirical approach in its own right, and possibly even list "deep NLP” alongside Statistical NLP.\\
 \ \\
-Statistical NLP considers recurring patterns and structures always in the context of certain texts and does not examine the whole language as such. This approach is no new invention by NLP researchers, but has been used by linguists even prior to computer science (see \cite{Harris1951}). A collection or body of texts is called \textbf{\textit{corpus}}, which means "body" in Latin. In the course of this work we will also speak of several corpora, which refers to several collections of texts.\\
+Statistical NLP always considers recurring patterns and structures in the context of certain texts and does not examine the whole language as such. This approach is no new invention by NLP researchers, but has been used by linguists even prior to computer science (see \cite{Harris1951}). A collection or body of texts is called a \textbf{\textit{corpus}}, which means "body" in Latin. In the course of this work we will also mention several corpora, which refers to multiple collections of texts.\\
 \ \\
 In this thesis so called topic models are studied and applied. David M. Blei defines topic models “as algorithms for discovering the main themes that pervade a large and otherwise unstructured collection of documents. Topic models can organize the collection according to the discovered themes”\cite{Blei2012}. This definition may therefore apply to both clustering and classification algorithms, even if many authors will refer to clustering algorithms in the context of topicmodels. You will find a brief introduction to clustering and classification models in the use case in Chapter \ref{sec:analysis}.\\
 \ \\
-Another important term in the research area of this thesis is information retrieval (IR). IR means to give access to a subset of documents of a corpus, which are relevant to an user’s query. This field deals with computer-aided searches for complex contents and belongs to the fields of information science, computer science and computational linguistics. According to David Grossmann et al. IR refers to a search that might cover information of any kind, e.g. text data as well as video-, image-, sound data, or even DNA sequences. The field where LDA and IR overlap is document retrieval \cite{Grossmann2004}. Thus, most procedures we are discussing in this thesis might not solely fall into the topic NLP but also IR. This small excursion in this direction is intended to give the reader a better understanding of how linked this topic is and in which intersection it is located. \\
+Another important term in the research area of this thesis is information retrieval (IR). IR means to give access to a subset of documents of a corpus, which are relevant to a user’s query. This deals with computer-aided searches for complex contents and belongs to the fields of information science, computer science and computational linguistics. According to David Grossmann et al. IR refers to a search that might cover information of any kind, e.g. text data as well as video-, image-, sound data, or even DNA sequences. The field where LDA and IR overlap is document retrieval \cite{Grossmann2004}. Thus, most procedures we are discussing in this thesis might not solely fall into the topic NLP but also IR. By veering into this direction, it is intended for the reader to better understand the connection to this topic and at which intersection it is located. \\
 \ \\
 In addition, there is a further differentiation of methods concerning natural language processing. One can also distinguish text interpretation with regard to the tasks one intends to accomplish with it. \cite{Jacobs1993} distinguishes between three common tasks:
 \begin{enumerate}
@@ -57,10 +81,10 @@ In addition, there is a further differentiation of methods concerning natural la
 
 	\item \textit{Text categorization}: Separating documents of a corpus into meaningful groups.
 \end{enumerate}
-The tasks dealt with in this paper can perhaps best be assigned to the last area. On the one hand, I specifically target the task text categorization by dividing a corpus of documents into a predefined number of groups. On the other hand, I try to assign new documents to these groups.\\
+The tasks dealt with in this paper may perhaps be best assigned to the last area. On the one hand, I specifically target the task text categorization by dividing a corpus of documents into a predefined number of groups. On the other hand, I try to assign new documents to these groups.\\
 \ \\
-In Chapter \ref{sec:NLP} I will discuss the evolution of natural language processing. The different approaches and methods will be summarized and the reader will be given a general overview over the context of this work.\\
-Chapter \ref{sec:Models} presents the models used and describes the form of application in detail. The two methods used here do not only differ in terms of their underlying models, but also have different tasks.
+In Chapter \ref{sec:NLP}, I will discuss the evolution of natural language processing. The different approaches and methods will be summarized and the reader will give a general overview regarding the context of this work.\\
+Chapter \ref{sec:Models} presents the models used and describes the form of application in detail. The two methods used here do not only differ in terms of their underlying models, but also by their different tasks.
 
 
 
@@ -77,7 +101,7 @@ Chapter \ref{sec:Models} presents the models used and describes the form of appl
 
 This section will discuss the two Topic modeling approaches which will be studied in this Thesis. The aim of both procedures is to assign one or more topics to different documents. Even if the vocabulary and the notation are similar for both approaches, the notation should be resumed at the beginning of the description of each model. The basic structural notation of the data consists of the following variables.
 
-A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists of $M$ documents $\textbf{w}=(w_1,\dots, w_N)$ which represents each of the $N$ words $w_i$ in the vocabulary. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary.
+A collection of documents is called corpus $D=(\textbf{w}_1,\dots , \textbf{w}_M)$. It consists of $M$ documents $\textbf{w}=(w_1,\dots, w_N)$ which represents each of the $N$ words $w_i$ in the vocabulary. These words are vectors of length $V$. $V$ refers to the length of a vocabulary which holds all the words occurring in the corpus. The vector for a specific word $w_i$ contains all 0 except for index $j\in\{1,...,V\}$ which represents this very one word in the vocabulary. This specific system for storing the corpus is called \textbf{\textit{bag-of-words}} format.
 This notation may be extended through the addition of indices for documents, but this is done neither here nor in the standard literature on topic models due to its unnecessary complexity.
 
 
@@ -104,7 +128,7 @@ You can summarize this setup in a plate diagram as shown in figure \ref{fig:Plat
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{LDA_Plate_Diagram.png}
-	\caption{The well-established plate diagram for the standard LDA model extended by the parameter $\delta$. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite{Blei2003}  for comparisons.}
+	\caption{Well-established plate diagram for the standard LDA model extended by the parameter $\delta$. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite{Blei2003}  for comparisons.}
 	\label{fig:PlateDiagram}
 \end{figure}
 \ \\
@@ -313,7 +337,7 @@ The raw text record is now transformed into the tidy format of tidytext (i.e. on
 	\end{tabular} 
 \end{table} 
 \\
-Both models that are studied in this thesis, use a bag of words data set as input data. This means a matrix with the documents in the $M$ lines and the frequencies of the $V$ used words in the entries of the columns. The dimension - i.e. the number of words in this "dictionary" $V$ - may be reduced for two reasons. For one thing, a dimension reduction can reduce the fitting time of the model, for another thing, the diversity of the documents can be increased by skilfully reducing certain words, which occur equally frequently in all documents. Now this requires a special measure on which we decide which words to exclude. One can call this reduction of the bag of words dimensionality "embedding". In the course of this work 3 different embedding methods were tested. 
+Both models that are studied in this thesis, use a bag-of-words data set as input data. This means a matrix with the documents in the $M$ lines and the frequencies of the $V$ used words in the entries of the columns. The dimension - i.e. the number of words in this "dictionary" $V$ - may be reduced for two reasons. For one thing, a dimension reduction can reduce the fitting time of the model, for another thing, the diversity of the documents can be increased by skilfully reducing certain words, which occur equally frequently in all documents. Now this requires a special measure on which we decide which words to exclude. One can call this reduction of the bag-of-words dimensionality "embedding". In the course of this work 3 different embedding methods were tested. 
 \begin{enumerate}
 	 \item The reduction by the words that occur with a low frequency. 
 	\item No dimension reduction, i.e. use of the full dictionary of all occurring words. 
@@ -344,9 +368,9 @@ As described in Chapter \ref{sec:LDA}, it is possible to calculate the LDA model
 \ \\
 Three fundamentally different approaches should be distinguished for embedding:
 \begin{enumerate}
-	\item the entire dictionary, i.e. all words occurring in the corpus are used for the bag of words.	
-	\item for the bag of words only words are used which occur at least 2 times in the whole corpus. This reduces the number of used words and therefore the dimension of the data by nearly 50\%.
-	\item the bag of words is reduced by the same amount as in case two, but not according to absolute frequency, but according to \textit{tf-idf}.
+	\item the entire dictionary, i.e. all words occurring in the corpus are used for the bag-of-words.	
+	\item for the bag-of-words only words are used which occur at least 2 times in the whole corpus. This reduces the number of used words and therefore the dimension of the data by nearly 50\%.
+	\item the bag-of-words is reduced by 50\% according to \textit{tf-idf}.
 \end{enumerate}
 These approaches are reviewed with regard to the goodness of the fit and the speed of the computation. One intuitively may assume that the calculation takes longer for data with higher dimensionality.\\
 \ \\
@@ -354,43 +378,85 @@ For a clustering model there are two useful methods to evaluate the fit. On the 
 \ \\
 The findings of this study relating to the LDA model are documented in detail. You will find the documentation regarding the LDA model as well as the other models in the appendix. For the sake of clarity, a separate document with the corresponding results was created for each analyzed example and each model respectively. To ensure reproducibility, the entire code is attached to the work by means of these documentations, and will be published on GitHub as well.\footnote{\url{https://github.com/SebastianKnigge/Master_Thesis/tree/master/Documentations} }\\
 \ \\
-The computation of the LDA model via VEM takes a somewhat longer time in the two samples evaluated. In all cases investigated, i.e. across the two samples taken and for both VEM and Gibbs sampling, the calculation for the tf-idf embedding appeared to be the fastest. The calculation time for embedding according to term frequency and full embedding differs less and the calculation of the term frequency embedding is not faster in every case. While a reduction via term frequency only cuts the most rarely used words, a reduction via tf-idf also cuts out frequent words as long as they occur frequently in all documents. Thus the tf-idf reduction has more impact on the distribution within each document compared to the effect of the term frequency reduction, which only affects the tails of the marginal distribution. This supports the assumption that a higher degree of difference in the documents has a positive effect on the calculation speed.\\
+The computation of the LDA model via VEM takes a somewhat longer time in the two samples evaluated. In all cases investigated, i.e. across the two samples taken and for both VEM and Gibbs sampling, the calculation for the \textit{tf-idf} embedding appeared to be the fastest. The calculation time for embedding according to term frequency and full embedding differs less and the calculation of the term frequency embedding is not faster in every case. While a reduction via term frequency only cuts the most rarely used words, a reduction via \textit{tf-idf} also cuts out frequent words as long as they occur frequently in all documents. Thus, \textit{tf-idf} reduction has more impact on the distribution within each document compared to the effect of the term frequency reduction, which only affects the tails of the marginal distribution. This supports the assumption that a higher degree of difference in the documents has a positive effect on the calculation speed. Firgure \ref{fitting_time_tfidf} visualizes how the fitting time changes when reducing the bag-of-words to an arbitrary size via \textit{tf-idf}.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[page=15, trim=70 400 0 0,clip,width=1.1\textwidth]{LDA_Documentation.pdf}
+	\caption{Fitting time of Example 1 (6 Books) depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue smoothed curve is a Loess kernel. The drop in fitting time for the last few values of fraction might result from parallelization reasons.}
+	\label{fitting_time_tfidf}
+\end{figure}
 \ \\
-With regard to the quality of the fit, it is apparent that Gibbs sampling performs much better than models fitted by VEM. The best fit using VEM still shows a higher misclassification rate than the poorest fit using Gibbs sampling in the examples examined. Surprisingly, the models with the tf-idf embedding do not perform significantly better than the other approaches, as one might expect that more differentiated word distributions of the documents not only allow a faster calculation, but also result in a higher accuracy. In fact, frequency 2 embedding provides better accuracy results throughout the studied examples.\\
+With regard to the quality of the fit, it is apparent that Gibbs sampling performs much better than models fitted by VEM. The best fit using VEM still shows a higher misclassification rate than the poorest fit using Gibbs sampling in the examples examined. It is reasonable to focus on Gibbs sampling in further analyses. For this reason we will only consider Gibbs sampling in Chapter \ref{Example2}.\\
+\ \\
+Surprisingly, the models with the \textit{tf-idf} embedding do not perform significantly better than the other approaches, as one might expect that more differentiated word distributions of documents not only allow a faster calculation, but also result in a higher accuracy. In fact, frequency 2 embedding provides better accuracy results throughout the studied examples.\\
+It may be interesting to test embedding via \textit{tf-idf} for different values of reduction. So far, a reduction of 50\% has always been considered. In this case we measure $\textit{fraction}=1-\textit{reduction}$ (i.e. what fraction of the original bag-of-word remains after \textit{tf-idf} embedding). Figure \ref{misc.rate_tfidf} shows the misclassification rate for different values of fraction. We can obtain a general negative trend of the misclassification rate, for bigger values of fraction. This means the accuracy of the model increases with a larger bag-of-words, for the reduction via \textit{tf-idf}. However, there are also values of fraction where the accuracy for both examples improves compared to full embedding (i.e. fraction 1). However, this may also be overfitting of the parameter fraction, if for other samples for this value of fraction the accuracy is worse. This parameter needs to be optimized very carefully, taking into account the underlying documents and the application. In summary, \textit{tf-idf} embedding can achieve very good results if the fraction parameter is tuned. For a generic approach, however, this method is too vulnerable to over-fit and it is recommended to choose a reduction to term frequency $2$ as embedding method, if there is no further information about the data set.\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[page=14, trim=73 405 60 70,clip,width=0.55\textwidth]{LDA_Documentation.pdf}\includegraphics[page=16, trim=85 275 50 200,clip,width=0.55\textwidth]{LDA_Documentation.pdf}
+	\caption{Misclassification rate depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue and red smoothed curves are a Loess kernels.}
+	\label{misc.rate_tfidf}
+\end{figure}
 \ \\
 It was also analyzed how the accuracy will change when using more categories. For this purpose the number of books was increased to 10. The fit via VEM was still much worse than the fit via Gibbs sampling. The model fitted with VEM showed a missclassification rate almost twice as high as the one fitted with Gibbs sampling. For both methods the accuracy deteriorated for more topics used. This sounds intuitive since the clustering algorithm now has to distinguish between more topics. The box plot in Figure \ref{fig:comparison_boxplot} illustrates the LDA algorithm in the different use cases. Here we are comparing the investigated cases. Clearly the difference in the misclassification rate between the examples with 10 and 6 categories becomes apparent. It also illustrates how different the two calculation methods - Gibbs sampling and VEM - are.
 
 \begin{figure}[h]
-	\centering\includegraphics[width=1\textwidth]{comparison_boxplot.pdf}
-	\caption{Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling)}
+	\centering
+	\includegraphics[page=22, trim=70 400 0 0,clip,width=1.2\textwidth]{LDA_Documentation.pdf}
+	\caption{Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling).}
 	\label{fig:comparison_boxplot}
 \end{figure}
 \ \\
-The classical method to evaluate the model is to split the data set into a training set and a test set, in order to fit the model on the training data and to evaluate it on the test data. To calculate valid results 59 random clustered samples were used with splits of 90\% training sample and 10\% test sample applied. The results for those models that were only fitted to a subset of the data are significantly worse than the comparable models that were trained and tested on the entire dataset. However, since here a clustering model is discussed that does not rely on training data, such as a classification model, it is technical correct to evaluate the model using training data.
+Considering the second approach for evaluation mentioned in the beginning of this section, results regarding this procedure should be discussed as well. The classical method to evaluate the model is to split the data set into a training set and a test set, in order to fit the model on the training data and to evaluate it on the test data. To calculate valid results 59 random clustered samples were used with splits of 90\% training sample and 10\% test sample applied. The results for those models that were only fitted to a subset of the data are significantly worse than the comparable models that were trained and tested on the entire dataset. However, since here a clustering model is discussed that does not rely on training data, such as a classification model, it is technical correct to evaluate the model using training data.\\
+But what do these results mean for the LDA model? Since this method aims at evaluating the fit on the basis of classifying new documents, it is basically an evaluation method for classification problems. It follows that the LDA model is a poor classification model for the use case analyzed. For this reason, I use another model to classify new documents, which is a neural network (see following section).
 
 \subsection{ANN applied to Textbook Chapters} \label{sec:ANN.example}
 
-In what context is it now possible to apply an artificial neural network to this data? Obviously neural networks are a very versatile tool, but here we focus on the reproduction of a known classification of the documents (chapters) by a suitable model. With the help of such networks in the sense of a classification algorithm, research question 2 will be addressed in this chapter. Again, for the shake of reproducibility the entire code including outputs of the computations will be found in the documentation in the appendix.\\
+In what context is it now possible to apply an artificial neural network to this data? Obviously neural networks are a very versatile tool, but here we focus on the reproduction of a known classification of the documents (chapters) by a suitable model. With the help of such networks in the sense of a classification algorithm, research question 2 will be addressed in this section. Again, for the shake of reproducibility the entire code including outputs of the computations can be found in the documentation in the appendix.\\
 \ \\
-Primarily the question shall be addressed whether a neural network is suitable as a classification algorithm for NLP with bag of words data. First of all, the architecture of the network used will be explained (see Figure \ref{fig:network_structure} for comparison).
+Primarily the question shall be addressed whether a neural network is suitable as a classification algorithm for NLP with bag-of-words data. First of all, the architecture of the network used will be explained (see Figure \ref{fig:network_structure} for comparison).
 \begin{figure}[h]
 	\centering\includegraphics[width=1\textwidth]{network_structure.pdf}
-	\caption{The network contains 3 layers. The input data is the the bag of words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.}
+	\caption{The network contains 3 layers. The input data is the the bag-of-words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.}
 	\label{fig:network_structure}
 \end{figure}
-The network essentially consists of three layers. The lowest $V$ neurons represent the dimension of the input, i.e. the dimension of the bag of words input vectors rather than an actual layer. The network contains two hidden layers, each containing 64 and 46 neurons. The last output layer contains $k$ neurons, which is the number of topics - in this case books - to classify. Note that the architecture of the network was arbitrarily chosen and that there may be room for improvement.\\
+The used network essentially consists of three layers. The lowest $V$ neurons represent the dimension of the input, i.e. the dimension of the bag-of-words input vectors rather than an actual layer. The network contains two hidden layers, each containing 64 and 46 neurons. The last output layer contains $k$ neurons, which is the number of topics - in this case books - to classify. Note that the architecture of the network was arbitrarily chosen and that there may be room for improvement. Based on experience with this data set, however, this architecture provides good results.\\
 \ \\
-Whether a network is a classification system or e.g. a regression system depends almost exclusively on the activation function in the last so-called output layer. The "softmax function", also known as the "normalized exponential function" \cite[p. 115]{Bishop2006}, is commonly used for a classification network. The softmax function maps to a $(0,1)$ space, where the sum of the vector in the image space corresponds to 1. Thus, the output corresponds to a discrete distribution over the different classes. The classification is made using the maximum probability within this distribution per instance.
+Whether a network is a classification system or e.g. a regression system depends almost exclusively on the activation function in the last so-called output layer. The "softmax function", also known as the "normalized exponential function" \cite[p. 115]{Bishop2006} is commonly used for  classification networks. The softmax function maps to a $(0,1)$ space, where the sum of the vector in the image space equals to 1. Thus, the output corresponds to a discrete distribution over the different classes. The classification is made using the maximum probability within this distribution per instance.
 \begin{align}
 	P(y=i|\textbf{x})=\frac{e^{\textbf{x}^t\textbf{w}_i}}{\sum_{j=1}^ke^{\textbf{x}^t\textbf{w}_j}}
 \end{align}
 Where $\textbf{x}$ is the vector of the output of the second hidden layer, and $\textbf{w}_i$ are the weights of the $i$-th neuron in the output layer.\\
 \ \\
-Considering the computing power of the used machine and the limited computing time combined with overfitting, a training using 5 epochs and a batch size of 512 turned out to be suitable. In contrast to the LDA model, however, this procedure must be fitted using training data and evaluated using test data. For this purpose, a proportion of $10\%$ test data, $70\%$ training data and $20\%$ validation data for learning has been used.\\
-\ \\
 Considering the computing power of the used machine and the required computing time combined with overfitting, a training using 5 epochs and a batch size of 512 turned out to be suitable. In contrast to the LDA model, however, this procedure must be fitted using training data and evaluated using test data. For this purpose, a proportion of $10\%$ test data, $70\%$ training data and $20\%$ validation data for learning has been used. Note that in a deep learning setting a validation set is essential to prevent overfitting during learning. The test set is then used to evaluate the model via repeated sampling with $59$ iterations.\\
+
+\begin{table}[!htbp] \centering 
+	\caption{Example 1 (6 books): Performance for different embeddings} 
+	\label{performancematrix_Ex1} 
+	\begin{tabular}{@{\extracolsep{5pt}} cccc} 
+		\\[-1.8ex]\hline 
+		\hline \\[-1.8ex] 
+		embeding method & \textit{tf}-2 & full bag-of-words & \textit{tfidf} 0.5 \\ 
+		\hline \\[-1.8ex] 
+		missc. rate & $0.022$ & $0.008$ & $0.027$ \\ 
+		time & $3.646$ & $10.289$ & $4.240$ \\ 
+		\hline \\[-1.8ex] 
+	\end{tabular} 
+\end{table} 
+\begin{table}[!htbp] \centering 
+	\caption{Example 2 (6 books): Performance for different embeddings} 
+	\label{performancematrix_Ex2} 
+	\begin{tabular}{@{\extracolsep{5pt}} cccc} 
+		\\[-1.8ex]\hline 
+		\hline \\[-1.8ex] 
+		embeding method & \textit{tf}-2 & full bag-of-words & \textit{tfidf} 0.5 \\ 
+		\hline \\[-1.8ex] 
+		missc. rate & $0.105$ & $0.106$ & $0.119$ \\ 
+		time & $10.135$ & $3.774$ & $9.303$ \\ 
+		\hline \\[-1.8ex] 
+	\end{tabular} 
+\end{table} 
 \ \\
-The results of the repeated sampling show that a large part of the classifications by the ANN exactly match the true values of the test data set. In very few samples the classification was incorrect for 10-20\% of the test sample. Therefore misclassification rate of the investigated samples was in the range of $1$-$2\%$ with a very small variance of $0.1$-$0.2\%$. These results in this rather small sample support the claim that classification via ANN with bag of words data works very well.\\
+The results of the repeated sampling show that a large part of the classifications by the ANN exactly match the true values of the test data set. In very few samples the classification was incorrect for 10-20\% of the test sample (i.e. almost perfect classification). Therefore, misclassification rates over all samples are in the range of $1$-$12\%$. Klassification for Example 1 shows better results. The variances of each simulation amounts to $0.1$-$0.2\%$. These results in this rather small sample support the claim that classification via ANN with bag-of-words data works very well. Tables \ref{performancematrix_Ex1} and \ref{performancematrix_Ex2} show the results of the simulations for each embedding method. According to the differences in accuracy for this embedding method it is not possible to obtain a preferred method. In Example 1 the full embedding shows the lowest misclassification ratio, whereas in Example 2 \textit{tf}-2 embedding appears to be the best method. Considering a classification model, it is possible to choose the optimal embedding procedure for each use case. 
 
 % ANALYSIS OF REGULATORY DOCUMENTS
 \section{Analysis of EUROSTAT Documents}\label{sec:example2}
@@ -438,7 +504,7 @@ In this application, we would like to focus on the classification of technical, 
 \ \\
 This chapter will examine how the two methodologies investigated so far can be efficiently applied to the type of documents described above, in order to gain informational value. The research questions in this case are slightly modified and aim at a more specific problem solving approach in the context of the evaluated data. \textbf{Q3: To what extent can the LDA algorithm support a decision maker in clustering the ESS Vision 2020 ADMIN documents?} Question Q4 builds directly on question Q2, differs however regarding the documents examined. \textbf{Q4: How well may the classification of ESS Vision 2020 ADMIN documents be reproduced using an ANN?} In this case, we particularly focus on the setups of the two methods we already optimized for the application to the Gutenberg text data. This means that the same hyper-parameters and fitting methods are used as those tested and proven in chapter \ref{sec:analysis}, because the aim of that example was to find an optimal generic architecture for problems of this kind.\\
 \ \\
-Only a very small amount of preprocessing was necessary for the documents that were taken directly from the website. Solely for a few documents the table of contents had to be removed, as the same table of contents appeared several times for different documents. The same stop words were excluded as in Chapter \ref{sec:analysis}.\footnote{The stop word dictionaries ”onix”, ”SMART” and ”snow- ball” are used, as they are provided by the \texttt{tm} package \cite{Silge2017}.} Consideration must be given to further circumstances of the regulatory documents. Remember that there are many formulas and technical abbreviations in the documents, so each variable, each estimator, and each index is included as a single word in the bag of words. These terms sometimes have a big influence on the documents, because they are very specific for individual documents and occur quite often. To avoid this, all mixed words which include characters and numeric attributes, and all terms with special characters (e.g. Greek letters) are also excluded.
+Only a very small amount of preprocessing was necessary for the documents that were taken directly from the website. Solely for a few documents the table of contents had to be removed, as the same table of contents appeared several times for different documents. The same stop words were excluded as in Chapter \ref{sec:analysis}.\footnote{The stop word dictionaries ”onix”, ”SMART” and ”snow- ball” are used, as they are provided by the \texttt{tm} package \cite{Silge2017}.} Consideration must be given to further circumstances of the regulatory documents. Remember that there are many formulas and technical abbreviations in the documents, so each variable, each estimator, and each index is included as a single word in the bag-of-words. These terms sometimes have a big influence on the documents, because they are very specific for individual documents and occur quite often. To avoid this, all mixed words which include characters and numeric attributes, and all terms with special characters (e.g. Greek letters) are also excluded.
 
 % SUBSECTION
 % Lda applied on Gutenberg Data
@@ -448,7 +514,7 @@ A fundamental problem when clustering text documents is that for certain corpora
 \ \\
 \textit{Note: The terminology used in this chapter refers to the expert assessment when mentioning \textbf{groups} and to the clusters of the LDA model when discussing \textbf{topics}.}\\
 \ \\
-In this case it is reasonable to consult an expert to get a suitable initial thematic grouping. Univ.-Prof. Dr. Wilfried Grossmann from the Faculty of Computer Science at University of Vienna is an accredited expert in this field and based on his expertise he established a grouping for 7 groups for the documents described here. He proposed the grouping into the following thematic clusters: 
+In this case it is reasonable to consult an expert to get a suitable initial thematic grouping. Univ.-Prof. Dr. Wilfried Grossmann from the Faculty of Computer Science at University of Vienna is an accredited expert in this field and based on his expertise he established a grouping of 7 groups for the documents described here. He proposed the grouping into the following thematic clusters: 
 \begin{enumerate}
 	\item Legal documents
 	\item Methods
@@ -461,22 +527,56 @@ In this case it is reasonable to consult an expert to get a suitable initial the
 \ \\
 The model already known from the example in chapter \ref{Example1} with the same specifications was used. This means that 7 categories were used, and Gibbs sampling was chosen for the fit, after it turned out that the LDA model clustered better when used with the Gutenberg data. Also the embedding via minimum term frequency 2 was used, since in the course of the work for the LDA model it appeared to be a robust method in terms of accuracy. Once again, for clustering, the comparison to a man-made grouping is not trivial, because the algorithm can recognize patterns other than those assigned by humans in a certain context. Instead of evaluating the fit using a very strict measure, such as accuracy or misclassification ratio, a logical comparison of the two classifications seems to be more appropriate.\\
 \ \\
-In a first step, it makes sense to find out according to which aspects the algorithm has clustered, i.e. which topics are dominant in the found clusters. I am using word clouds to illustrate the contents of the individual clusters. In this case I made use of the package wordcloud which automatically renders wordclouds based on a frequency distribution which is passed to the $wordcloud()$ function along with the terms. Analogous to \cite{Winter2017} here the \textit{tfidf} measure is used instead of the absolute term frequency. This is advantageous as the wordclouds do not resemble each other so much when deploying \textit{tfidf}, especially since the documents all originate from the underlying topic statistics.\\
+In a first step, it makes sense to find out according to which aspects the algorithm has clustered, i.e. which topics are dominant in the found clusters. I am using word clouds to illustrate the contents of the individual clusters. In this case I made use of the package wordcloud which automatically renders wordclouds based on a frequency distribution which is passed to the $wordcloud()$ function along with the terms. Analogous to \cite{Winter2017} the \textit{tf-idf} measure is used instead of the absolute term frequency. This is advantageous as the wordclouds do not resemble each other so much when deploying \textit{tf-idf}, especially since the documents all originate from the underlying topic statistics.\\
 \begin{figure}[h]
 	\centering
-	\includegraphics[page=9, trim=68 220 10 284,clip,width=1.2\textwidth]{Docs_LDA_adapted.pdf}
+	\includegraphics[page=10, trim=68 440 10 50,clip,width=1.2\textwidth]{Docs_LDA_adapted.pdf}
 	\caption{Wordclouds for the clustered topics via LDA – using tfidf word proportions}
 	\label{Wordclouds_tfidf}
 \end{figure}
 \ \\
 Some groups can be recognized very well in the clusters detected by the LDA. For example, the group "legal documents" corresponds exactly to one cluster. The group “Frames” can also be identified from the wordclouds as a separate topic. Group 4 is also extracted relatively well, but due to the wordcloud it may rather be viewed as topic “documents on Bayesian statistics”, rather than “Details”. Other groups such as "Quality" and "Tests" are mixed together and divided into two new clusters. Obviously, the model sticks in this case much more to the individual words than to the latent groups as they were assessed by the Expert.\\
 \ \\
-The descriptive results of this example mainly concern embedding. Due to the number of documents (28 documents), the dimension of the bag of words is smaller. It amounts to almost 8,600 words, for the full embedding compared to 15,000 words for the analogous dictionary of the Gutenberg data. However, the pruning of the bag of words by the frequency 2 embedding is less in comparison. While the dimension of the full bag of words to the frequency 2 bag of words decreased by about 40\% for the Gutenberg data, the dimension for the Eurostat data decreased by only 30\%. In this application, I chose embedding via term frequency 2. This is - as mentioned above - because it demonstrated to be the best alternative in combination with the LDA model in the previous analysis. For comparison, however, the tfidf embedding with the same dimensions as the \textit{tf-2} bag of words was also tested. Again, the model fitted slightly faster for the \textit{tfidf} embedding compared to the frequency 2 embedding.\\
-Numerical results regarding the fit may also be given, even if they do not guarantee good comparability due to the very specific application. The accuracy ratio using the same calculation as in chapter \ref{Example1}, was material better for the frequency 2 embedding than for the \textit{tfidf} embedding (misclassification rates: 0.5 compared to 0.79). Still, these results are way worse than what experienced in the Gutenberg data example. It should be noted that the use case differs considerably from the first example, and that there are considerably fewer documents involved.
+The descriptive results of this example mainly concern embedding. Due to the number of documents (28 documents) the dimension of the bag of words is smaller. It amounts to almost 8,600 words, for the full embedding compared to 15,000 words for the analogous dictionary of the Gutenberg data. However, the pruning of the bag of words by the frequency 2 embedding is less in comparison. While the dimension of the full bag of words to the frequency 2 bag of words decreased by about 40\% for the Gutenberg data, the dimension for the Eurostat data decreased by only 30\%.\\
+\ \\
+Even though in the last example \textit{tf}-2 embedding turned out to be the most robust approach in terms of accuracy, in this example we will investigate one more time whether the \textit{tf-idf} method possibly provides better results. Specifically, I applied \textit{tf-idf} embedding, then fitted and evaluated the model for different values of fraction. Fraction is the ratio of the bag-of-word’s dimension remaining when shrinking via \textit{tf-idf} embedding. This is visualized in the plot of Figure \ref{misc.ratio_tfidf}. Considering this plot, fraction $0.5$ is no wise choice for two reasons. The loess estimator indicates a higher misclassification rate in this area in general. And variance appears to be higher in this area as well. One can obtain a range of lower misclassification rates for values of fraction between 0.3 and 0.4. Note, that this choice of the fraction parameter might cause overfitting. Nevertheless, we will now compare the different embedidng methods in the following paragraph.\\
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[page=21, trim=68 400 10 70,clip,width=1.2\textwidth]{Docs_LDA_adapted.pdf}
+	\caption{Fitting LDA via \textit{tf-idf} embeding to EUROSTAT documents. Misclassification rates depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The green smoothed curve is a Loess kernel.}
+	\label{misc.ratio_tfidf}
+\end{figure}
+\ \\
+Comparing the \textit{tf-ifd} embedding method to the frequency 2 embedding, there are several reasons for using the more robust \textit{tf}-2 embedding. Because the LDA model is not repeatedly fitted in general, the fitting time is negligible. Thus, the focus is primarily on the missclassification ratio. Table \ref{comp0.85} shows 3 different embedding methods in comparison. Term frequency 2 embedding, \textit{tf-idf} embedding with fraction 0.5 and \textit{tf-idf} embedding with fraction 0.35. Fitting a LDA model using \textit{tf-idf} 0.35 embedding shows the lowest misclassification ratio. The highest one in this comparison is observed for the fit of the \textit{tf-idf} 0.5 embedding. In between is the accuracy of the model with \textit{tf}-2 embedding. So consistent to the Gutenberg examples \textit{tf}-2 embedding outperforms \textit{tf-idf} embedding with fraction 0.5. Due to the lack of the results of a man-made clustering in a real life example, there is no way to optimize the parameter for every use case. In summary, \textit{tf}-2 embedding remains the better robust alternative in case of a generic problem.
+
+\begin{table}[!htbp] \centering 
+	\caption{LDA via Gibbs Sampling - different embedding methods} 
+	\label{comp0.85} 
+	\begin{tabular}{@{\extracolsep{3pt}} cccc} 
+		\\[-1.8ex]\hline 
+		\hline \\[-1.8ex] 
+		embedding method & \textit{tf}-2 & \textit{tf-idf} 0.50 & \textit{tf-idf} 0.35 \\ 
+		\hline \\[-1.8ex] 
+		missc. rate & $0.342$ & $0.359$ & $0.316$ \\ 
+		time & $41.605$ & $17.702$ & $14.494$ \\ 
+		\hline \\[-1.8ex] 
+	\end{tabular} 
+\end{table} 
+\ \\
+Still, these results are worse than what experienced in the Gutenberg data examples. But note that the use case differs considerably from the first example, and that there are fewer documents analyzed. The fact that fewer documents are used for training has a strong effect on the accuracy of the model, especially if there are more groups. In comparison to the Gutenberg examples, both apply, there are fewer documents and more clusters. It needs to be emphasized that LDA is even less suitable for classification in this case, because there are already fewer documents in general.\\
+\ \\
+It is advisable not to leave the entire clustering process of the corpus to LDA itself, but to find a suitable solution together with the assessment of an expert. This approach requires an expert, simply to determine how many categories are to be distinguished. Usually the user of the model coincides with the expert, but this does not have to be the case. In this case I applied the model to the data and the expert is Prof. Grossmann. He stated, that “a clustering with LDA makes sense and is useful as a reference point for a classification for experts and provides important guidance [for the user]”. I totally agree with this opinion, and recommend to use this clustering model alongside with the assessment of an expert.
 
 
+% SUBSECTION
+% ANN applied to EUROSTAT Documents
+\subsection{ANN applied to EUROSTAT Documents} \label{Example2_ANN}
 
-
+For a generic approach, to group and classify documents it already turned out, that LDA is not the best choice when it comes to the classification part. This is especially true for corpora with few documents, as in the case of EUROSTAT data. This is why I recommend using ANNs for classification. In the examples examining Gutenberg data, I outline a specific net structure, that performed very well for this type of problem. The aim of this section is to evaluate if the net structure performs equally for this type of problem. \\
+\ \\
+In this example the exact same approach is used as in section \ref{sec:ANN.example}. The network contains two hidden layers, each containing 64 and 46 neurons. The output layer contains as many neurons as groups in the training data. The network was trained using 5 epochs and a batch size of $512$. The models were evaluated performing $49$ splits with a proportion of 10\% test data, 70\% training data and 20\% validation data. Obviously, these hyperparameters might be improved with the aid of more computational power. But the aim is to outline that ANN are the primary choice for the classification process. This assumption is supported by the fact that the classification using ANNs provides fairly good results even for a corpus of regulatory documents.\\ 
+\ \\
+The purpose of this paper is to find a generic approach for clustering and classifying documents, which does not preclude tuning the hyperparameters of the ANN. In contrast to clustering, there is already a categorization for the task of classifying. This gives the user the possibility to tune the model for classification (in this case an ANN) as desired. As with any classification model, it must of course be ensured that overfitting is prevented. In this paper I tried to tackle this problem by splitting the data set into training-, validation- and testing data. Due to the limited computational power, it was not possible to try many different net structures and optimize the hyperparameters. However, I recommend this procedure when applying this clustering and classifying approach.
 
 \newpage 
 .
@@ -486,11 +586,17 @@ Numerical results regarding the fit may also be given, even if they do not guara
 	
   \bibliographystyle{apalike}
   \bibliography{MagLibrary}
-
-
 \listoffigures
 \listoftables
 
-	
+
+\fakesubsection{Documentation of LDA - Gutenberg Data}
+\includepdf[pages=-, pagecommand={}]{LDA_Documentation.pdf}	
+\fakesubsection{Documentation of ANN - Gutenberg Data}
+\includepdf[pages=-, pagecommand={}]{NN_Documentation.pdf}
+
+
+
+
 	
 \end{document}

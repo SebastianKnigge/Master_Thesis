@@ -1,4 +1,7 @@
 \select@language {english}
-\contentsline {table}{\numberline {1}{\ignorespaces Example book corpus\relax }}{13}{table.caption.5}
-\contentsline {table}{\numberline {2}{\ignorespaces Example of stop words from tidytext package\relax }}{14}{table.caption.6}
-\contentsline {table}{\numberline {3}{\ignorespaces Entire list of documents\relax }}{21}{table.caption.9}
+\contentsline {table}{\numberline {1}{\ignorespaces Example book corpus\relax }}{14}{table.caption.6}
+\contentsline {table}{\numberline {2}{\ignorespaces Example of stop words from tidytext package\relax }}{15}{table.caption.7}
+\contentsline {table}{\numberline {3}{\ignorespaces Example 1 (6 books): Performance for different embeddings\relax }}{22}{table.caption.12}
+\contentsline {table}{\numberline {4}{\ignorespaces Example 2 (6 books): Performance for different embeddings\relax }}{22}{table.caption.13}
+\contentsline {table}{\numberline {5}{\ignorespaces Entire list of documents\relax }}{24}{table.caption.14}
+\contentsline {table}{\numberline {6}{\ignorespaces LDA via Gibbs Sampling - different embedding methods\relax }}{29}{table.caption.17}

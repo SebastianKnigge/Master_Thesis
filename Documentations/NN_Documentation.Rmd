@@ -34,9 +34,9 @@ library(sampling)
 
 # Example 1 (6 books)
 
-## Get data
+## Get data - Sampling
 
-This is the essential step for setting up the neural net. These functions include the sampling procedure from the *gutenbergr* library 
+This is the essential step for setting up the neural net. These functions include the sampling procedure of the *gutenbergr* library.
 
 ```{r functions, message=FALSE, warning=FALSE, chache=TRUE}
 sampling_books <- function(seed=1234, n=20){
@@ -183,9 +183,7 @@ adjust_tensor_format <- function(x){
 }
 ```
 
-### Sample corpus
-
-Now we can use all these functions to get to the initial corpus sample. In this example $6$ books are choosen.
+Now we can use all these functions to get to the initial corpus sample. the corpus of this example is equivalent to the corpus in Example 1 of the LDA Gutenberg Documentation.
 
 ```{r initial_sample_forNN, chache=TRUE, warning=TRUE}
 n_books <- 6
@@ -193,14 +191,14 @@ by_chapter <- set_up_books(n_books=n_books, seed=222)
 get_titles(by_chapter, n_books)
 ```
 
-The function set_up_books() returns a warning that one book seems to consist of only one chapter. In order to get a copus consisting out of $6$ books, the function append_by_chaper() is used, which fills up the corpus to the desired number of books.
+The function set_up_books() (defined above) returns a warning that one book seems to consist of only one chapter. In order to get a copus consisting out of $6$ books, the function append_by_chaper() is used, which fills up the corpus to the desired number of books.
 
 ```{r append_sample, chache=TRUE, warning=FALSE}
 appended_by_chapter <- append_by_chapter(x=by_chapter, n_books = n_books)
 word_counts <- exclude_stop_words(appended_by_chapter)
 ```
 
-In table \ref{titles:6books} the sampled titles for the book sample with the seed $222$ are displayed. It appears through the function append_by:chapter() one book was added, called "My Novel" — Volume 04".
+In table \ref{titles:6books} the sampled titles for the book sample with the seed $222$ are displayed. It appears through the function append_by_chapter() one book was added, called "My Novel" — Volume 04".
 
 
 ```{r, results="asis"}
@@ -211,33 +209,33 @@ titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize",
 ```
 
 
-### Reduction of the dimensionality
+## Reduction of the dimensionality
 
-In the set up we have another parameter to adjust. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
+As mentioned in the documentation for the LDA using Gutenberg data, also here there are different possible embedding methods. The function *convert_to_dtm* takes the parameter *minfq*, which is used to reduce the "bag of words" (i.e. dimensionality). *minfq* is the minimum frequency for the bag of words dictionary. I will refer to this as "embedding". Let us set it to 2 in this case, meaning that we include a word only if the frequency is 2 or more.
 
 ```{r, chache=TRUE, warning=FALSE}
 chapters_dtm <- convert_to_dtm(word_counts, minfq=2)
 adjusted_format <- adjust_tensor_format((chapters_dtm))
-ncol(chapters_dtm)
+( M2 <- ncol(chapters_dtm) )
 ```
 
 Let us compare it to the case if we include all words.
 
 ```{r, chache=TRUE}
 chapters_dtm_all <- convert_to_dtm(word_counts, minfq=0)
-adjusted_format_all <- adjust_tensor_format((chapters_dtm))
-ncol(chapters_dtm_all)
+adjusted_format_all <- adjust_tensor_format((chapters_dtm_all))
+( M <- ncol(chapters_dtm_all) )
 ```
 
-We also want to compare this to a reduction of the word dictionary by the tfidf. For the sake of comparison the reduction is made to the same value as used above via minfreq=2 (i.e. 10685 words).
+We also want to compare this to a reduction of the word dictionary by tfidf. We reduce to 50\% of the original size of the bag-of-words. 
 
 ```{r, chache=TRUE, warning=FALSE}
-chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=10685)
-adjusted_format_tfidf <- adjust_tensor_format((chapters_dtm))
+chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=(M*0.5))
+adjusted_format_tfidf <- adjust_tensor_format((chapters_dtm_tfidf))
 ncol(chapters_dtm_tfidf)
 ```
 
-### Splitting and Fitting
+## Splitting and Fitting
 
 The following function splits the sample in an manner, such that each cluster is eually to its size represented in the test data and the validation data.
 
@@ -272,7 +270,7 @@ sample_cluster_wise <- function(data, test_ratio=0.1, val_ratio=0.2, seed=1234){
 }
 ```
 
-The following two functions are setting up the model and evaluate the goodness of fit.
+The following two functions are setting up the model in training, validation and testing sets and evaluate the goodness of fit.
 
 ```{r fitting-function, chache=TRUE}
 # The whole model is set up and trained within this function
@@ -320,7 +318,7 @@ evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
 }
 ```
 
-Now we can start applying the model:
+Now we can start applying the model. We will measure the misclassification ratio, the fitting time and store the results for evaluation.
 
 ```{r epply_n_evaluate, cache=TRUE}
 tim1 <- Sys.time()
@@ -334,24 +332,27 @@ for(i in 1:n){
 tim2 <- Sys.time()
 ```
 
+We will present some statistics of the results of the evaluation. We consider the misclassification rate als primary measure to evaluate the fit.
 The results of the misclassification rate over 59 splits and fits of the model are:
 ```{r}
 results %>% summary
 results %>% var
 ```
 
+A histogram might be helpful in visualizing the results.
+
 ```{r hist_results}
 hist(results, breaks = 20)
 ```
 
-... and the time:
+The fitting time might be interesting as well.
 
 ```{r}
 # mfreq=2
 (u1 <- tim2-tim1)
 ```
 
-We now try this procedure using the full bag of words:
+We now apply this very same procedure using the full bag of words:
 
 ```{r apply_n_evaluate_all, cache=TRUE}
 tim1_all <- Sys.time()
@@ -365,7 +366,6 @@ for(i in 1:n){
 tim2_all <- Sys.time()
 ```
 
-The results of the error rate
 ```{r}
 results_all %>% summary
 results_all %>% var
@@ -375,14 +375,12 @@ results_all %>% var
 hist(results_all, breaks = 20)
 ```
 
-and the time:
-
 ```{r}
 # mfreq=2
 (u2 <- tim2_all-(tim1_all))
 ```
 
-Now using the tfidf reduced bag of words:
+In this step we use the embeding via *tfidf* and fit the model. The *tfidf* embedding equals a reduction by 50\%. 
 
 ```{r apply_n_evaluate_tfidf, cache=TRUE}
 tim1_tfidf <- Sys.time()
@@ -396,7 +394,6 @@ for(i in 1:n){
 tim2_tfidf <- Sys.time()
 ```
 
-The results of the error rate
 ```{r}
 results_tfidf %>% summary
 results_tfidf %>% var
@@ -405,14 +402,13 @@ results_tfidf %>% var
 ```{r hist_results_tfidf}
 hist(results_tfidf, breaks = 20)
 ```
-and the time:
 
 ```{r}
 # mfreq=2
 (u3 <- tim2_tfidf-(tim1_tfidf))
 ```
 
-Table \ref{performancematrix} summarises the results.
+Table \ref{performancematrix} summarises the results of all 3 different embeding mthods. 
 
 ```{r, results="asis"}
 performance_matrix <- data.frame(freq2.embedding=c(results%>%mean, u1), 
@@ -426,4 +422,97 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F,
 
 The time for the embedding using more than frequency 2 is very short. Whereas the embedding via tfidf with the same dimensionality takes very long. It certainly makes sense that the missclassification rate is better for embedding with the full vocabulary than for the other two embeddings.
 
+# Example 2 (6 Books)
 
+Also the second example is based on the same sample of Example 2 of the LDA Gutenberg Documentation. This is $seed=101$. We will use the same calculations as done for Example 1. This second example shall halp providing more valid results.
+
+```{r second_example, chache=TRUE, warning=FALSE, results="asis"}
+n_books_sec <- 6
+by_chapter_sec <- set_up_books(n_books=n_books_sec, seed=101)
+appended_by_chapter_sec <- append_by_chapter(x=by_chapter_sec, n_books = n_books_sec)
+word_counts_sec <- exclude_stop_words(appended_by_chapter_sec)
+titles_sec <- get_titles(appended_by_chapter_sec, n_books)
+gbids_sec <- titles_sec$titles$gutenberg_id 
+categories_sec <- gutenberg_works() %>% 
+  filter(gutenberg_id %in% gbids_sec) %>% 
+  select(gutenberg_id, gutenberg_bookshelf)
+```
+Table \ref{titles:6books_sec} displays the sampled books for this example.
+
+```{r, results="asis"}
+titles <- get_titles(appended_by_chapter_sec, n_books)
+titles$titles %>% stargazer(summary=FALSE, font.size = "footnotesize", 
+                            header=FALSE, title="Book-titles for Example 2 (6 Books)", rownames=FALSE,
+                            label="titles:6books_sec")
+```
+
+```{r, chache=TRUE, warning=FALSE}
+chapters_dtm_sec <- convert_to_dtm(word_counts_sec, minfq=2)
+adjusted_format_sec <- adjust_tensor_format((chapters_dtm_sec))
+( M2 <- ncol(chapters_dtm_sec) )
+```
+
+```{r, chache=TRUE}
+chapters_dtm_all_sec <- convert_to_dtm(word_counts_sec, minfq=0)
+adjusted_format_all_sec <- adjust_tensor_format((chapters_dtm_all_sec))
+( M <- ncol(chapters_dtm_all_sec) )
+```
+
+```{r, chache=TRUE, warning=FALSE}
+chapters_dtm_tfidf_sec <- convert_to_dtm_2(word_counts_sec, top=(M*0.5))
+adjusted_format_tfidf_sec <- adjust_tensor_format((chapters_dtm_tfidf_sec))
+ncol(chapters_dtm_tfidf_sec)
+```
+
+```{r evaluate_sec_tf2, cache=TRUE}
+tim1 <- Sys.time()
+n <- 59
+results_sec <- rep(NA,n)
+for(i in 1:n){
+  split <- sample_cluster_wise(adjusted_format_sec, seed=i*2)
+  results_sec[i] <- set_up_n_fit(split) %>% .$model %>% 
+    evaluate_model() %>% .$misspecified
+}
+tim2 <- Sys.time()
+# evaluate fitting time
+(u1_sec <- tim2-tim1)
+```
+
+```{r evaluate_sec_all, cache=TRUE}
+tim1 <- Sys.time()
+n <- 59
+results_all_sec <- rep(NA,n)
+for(i in 1:n){
+  split <- sample_cluster_wise(adjusted_format_all_sec, seed=i*2)
+  results_all_sec[i] <- set_up_n_fit(split) %>% .$model %>% 
+    evaluate_model() %>% .$misspecified
+}
+tim2 <- Sys.time()
+# evaluate fitting time
+(u2_sec <- tim2-tim1)
+```
+
+```{r evaluate_sec_tfidf, cache=TRUE}
+tim1 <- Sys.time()
+n <- 59
+results_tfidf_sec <- rep(NA,n)
+for(i in 1:n){
+  split <- sample_cluster_wise(adjusted_format_tfidf_sec, seed=i*2)
+  results_tfidf_sec[i] <- set_up_n_fit(split) %>% .$model %>% 
+    evaluate_model() %>% .$misspecified
+}
+tim2 <- Sys.time()
+# evaluate fitting time
+(u3_sec <- tim2-tim1)
+```
+
+A overview of the results will be found in Table \ref{tab:sec_results}.
+```{r, results="asis"}
+performance_matrix <- data.frame(freq2.embedding=c(results_sec%>%mean, u1_sec), 
+           all.embedding=c(results_all_sec%>%mean, u2_sec),
+           tfidf=c(results_tfidf_sec%>%mean, u3_sec))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix %>%  stargazer(summary=FALSE, header=F,
+                                  title="Performance of embeddings for Example 2",
+                                 label="tab:sec_results")
+```

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  7 OCT 2019 14:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  11 OCT 2019 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -246,10 +246,60 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count110
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2015/05/11 v0.4x Insert pages of external PDF documents (AM)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count111
+\calc@Bcount=\count112
+\calc@Adimen=\dimen118
+\calc@Bdimen=\dimen119
+\calc@Askip=\skip47
+\calc@Bskip=\skip48
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count113
+\calc@Cskip=\skip49
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2015/04/20 v2.0e eso-pic (RN)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+))
+\AM@pagewidth=\dimen120
+\AM@pageheight=\dimen121
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2015/05/11 v0.4x Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box28
+\AM@toc@title=\toks20
+\c@AM@survey=\count114
+\AM@templatesizebox=\box29
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks20
-\inpenc@posthook=\toks21
+\inpenc@prehook=\toks21
+\inpenc@posthook=\toks22
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2014/09/29 v1.1m UTF-8 support for inputenc
@@ -473,8 +523,8 @@ Language: english 2012/08/20 v3.3p English support from the babel system
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2014/09/25 3.9l Babel common definitions
-\babel@savecnt=\count111
-\U@D=\dimen118
+\babel@savecnt=\count115
+\U@D=\dimen122
 )
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
@@ -521,52 +571,52 @@ Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen119
-\captionmargin@=\dimen120
-\captionwidth=\dimen121
-\caption@tempdima=\dimen122
-\caption@indent=\dimen123
-\caption@parindent=\dimen124
-\caption@hangindent=\dimen125
+\captionmargin=\dimen123
+\captionmargin@=\dimen124
+\captionwidth=\dimen125
+\caption@tempdima=\dimen126
+\caption@indent=\dimen127
+\caption@parindent=\dimen128
+\caption@hangindent=\dimen129
 )
-\c@ContinuedFloat=\count112
+\c@ContinuedFloat=\count116
 Package caption Info: hyperref package is loaded.
 )
 (./Magisterarbeit_S.Knigge.aux)
 \openout1 = `Magisterarbeit_S.Knigge.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 37.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count113
-\scratchdimen=\dimen126
-\scratchbox=\box28
-\nofMPsegments=\count114
-\nofMParguments=\count115
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count116
-\MPscratchDim=\dimen127
-\MPnumerator=\count117
-\makeMPintoPDFobject=\count118
-\everyMPtoPDFconversion=\toks23
+\scratchcounter=\count117
+\scratchdimen=\dimen130
+\scratchbox=\box30
+\nofMPsegments=\count118
+\nofMParguments=\count119
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count120
+\MPscratchDim=\dimen131
+\MPnumerator=\count121
+\makeMPintoPDFobject=\count122
+\everyMPtoPDFconversion=\toks24
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -582,11 +632,11 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 24.
-LaTeX Info: Redefining \ref on input line 24.
-LaTeX Info: Redefining \pageref on input line 24.
-LaTeX Info: Redefining \nameref on input line 24.
+\AtBeginShipoutBox=\box31
+Package hyperref Info: Link coloring OFF on input line 37.
+LaTeX Info: Redefining \ref on input line 37.
+LaTeX Info: Redefining \pageref on input line 37.
+LaTeX Info: Redefining \nameref on input line 37.
 
 (./Magisterarbeit_S.Knigge.out) (./Magisterarbeit_S.Knigge.out)
 \@outlinefile=\write3
@@ -594,86 +644,58 @@ LaTeX Info: Redefining \nameref on input line 24.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 30.
+
+(./Magisterarbeit_S.Knigge.toc
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 30.
-
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 30.
-
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 30.
+(Font)              <10.95> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 30.
+(Font)              <8> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 30.
-LaTeX Font Info:    Try loading font information for U+msa on input line 30.
+(Font)              <6> on input line 5.
+LaTeX Font Info:    Try loading font information for U+msa on input line 5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 30.
+LaTeX Font Info:    Try loading font information for U+msb on input line 5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+))
+\tf@toc=\write4
+\openout4 = `Magisterarbeit_S.Knigge.toc'.
+
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 30.
+(Font)              <9> on input line 45.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 30.
+(Font)              <5> on input line 45.
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--33
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 28--33
+Underfull \hbox (badness 10000) in paragraph at lines 43--55
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--53
+Underfull \hbox (badness 10000) in paragraph at lines 43--55
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--53
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--53
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--53
-
- []
-
-
-Overfull \hbox (26.10622pt too wide) in paragraph at lines 38--53
-\OT1/lmr/m/n/10.95 mod-els can or-ga-nize the col-lec-tion ac-cord-ing to the d
-is-cov-ered themes"[[]].
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--53
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--53
+Underfull \hbox (badness 10000) in paragraph at lines 43--55
 
  []
 
@@ -681,12 +703,48 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--53
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 60--64
+Underfull \hbox (badness 10000) in paragraph at lines 62--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--77
+
+ []
+
+
+Overfull \hbox (26.10622pt too wide) in paragraph at lines 62--77
+\OT1/lmr/m/n/10.95 mod-els can or-ga-nize the col-lec-tion ac-cord-ing to the d
+is-cov-ered themes"[[]].
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--77
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--77
 
  []
 
 [3]
-Overfull \hbox (3.71193pt too wide) in paragraph at lines 98--99
+Underfull \hbox (badness 10000) in paragraph at lines 84--88
+
+ []
+
+[4] [5]
+Overfull \hbox (3.71193pt too wide) in paragraph at lines 122--123
 []\OT1/lmr/m/n/10.95 Choose $\OML/lmm/m/it/10.95 w[] \OMS/lmsy/m/n/10.95 ^^X \O
 ML/lmm/m/it/10.95 Mult\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^L[]\OT1/lmr/m/n
 /10.95 )$ This dis-tri-bu-tion will be re-ferred to as $\OML/lmm/m/it/10.95 p\O
@@ -694,30 +752,30 @@ T1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 w[]\OMS/lmsy/m/n/10.95 j\OML/lmm/m/it/10.
 95 z[]; ^^L\OT1/lmr/m/n/10.95 )$ 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 100--102
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--126
 
  []
 
-<Graphics/LDA_Plate_Diagram.png, id=136, 572.8602pt x 314.1336pt>
+<Graphics/LDA_Plate_Diagram.png, id=183, 572.8602pt x 314.1336pt>
 File: Graphics/LDA_Plate_Diagram.png Graphic file (type png)
 
 <use Graphics/LDA_Plate_Diagram.png>
-Package pdftex.def Info: Graphics/LDA_Plate_Diagram.png used on input line 106.
+Package pdftex.def Info: Graphics/LDA_Plate_Diagram.png used on input line 130.
 
 (pdftex.def)             Requested size: 180.0pt x 98.70335pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 107.
+(Font)              <10> on input line 131.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 107.
- [5 <./Graphics/LDA_Plate_Diagram.png>]
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 155--158
+(Font)              <7> on input line 131.
+ [6 <./Graphics/LDA_Plate_Diagram.png>]
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 179--182
 
  []
 
 
-Overfull \hbox (16.97946pt too wide) in paragraph at lines 155--158
+Overfull \hbox (16.97946pt too wide) in paragraph at lines 179--182
 \OT1/lmr/m/n/10.95 The EM al-go-rithm thus is to use the vari-a-tional dis-tri-
 bu-tion $\OML/lmm/m/it/10.95 q\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^R; []\O
 MS/lmsy/m/n/10.95 j\OML/lmm/m/it/10.95 ^^M[]\OT1/lmr/m/n/10.95 ([])\OML/lmm/m/i
@@ -725,260 +783,1067 @@ t/10.95 ; ^^^[]\OT1/lmr/m/n/10.95 ([]))$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--179
-
- []
-
-[7]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 187
-.
- (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmtt.fd
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
-
- []
-
-
-Overfull \hbox (5.5779pt too wide) in paragraph at lines 194--197
-\OT1/lmr/m/n/10.95 Research on ANNs dates back to the 1940s, when [[]]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 194--197
+Underfull \hbox (badness 10000) in paragraph at lines 194--203
 
  []
 
 [8]
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 211
+.
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 211.
+ []
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 211.
+Overfull \hbox (5.5779pt too wide) in paragraph at lines 218--221
+\OT1/lmr/m/n/10.95 Research on ANNs dates back to the 1940s, when [[]]
+ []
 
-<Graphics/simple_perceptron.pdf, id=207, 628.81825pt x 885.71706pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--221
+
+ []
+
+[9]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 235.
+
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 235.
+
+<Graphics/simple_perceptron.pdf, id=251, 628.81825pt x 885.71706pt>
 File: Graphics/simple_perceptron.pdf Graphic file (type pdf)
 
 <use Graphics/simple_perceptron.pdf>
-Package pdftex.def Info: Graphics/simple_perceptron.pdf used on input line 219.
+Package pdftex.def Info: Graphics/simple_perceptron.pdf used on input line 243.
 
 (pdftex.def)             Requested size: 251.52284pt x 354.28055pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Graphics/adaption_perceptron2.pdf, id=214, 454.72084pt x 304.22658pt>
+<Graphics/adaption_perceptron2.pdf, id=258, 454.72084pt x 304.22658pt>
 File: Graphics/adaption_perceptron2.pdf Graphic file (type pdf)
 
 <use Graphics/adaption_perceptron2.pdf>
 Package pdftex.def Info: Graphics/adaption_perceptron2.pdf used on input line 2
-29.
+53.
 (pdftex.def)             Requested size: 227.35986pt x 152.11292pt.
 
-<Graphics/MLP.pdf, id=217, 316.93808pt x 338.61005pt>
+<Graphics/MLP.pdf, id=261, 316.93808pt x 338.61005pt>
 File: Graphics/MLP.pdf Graphic file (type pdf)
  <use Graphics/MLP.pdf>
-Package pdftex.def Info: Graphics/MLP.pdf used on input line 239.
+Package pdftex.def Info: Graphics/MLP.pdf used on input line 263.
 (pdftex.def)             Requested size: 190.1643pt x 203.16759pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--244
+Underfull \hbox (badness 10000) in paragraph at lines 247--268
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--244
+Underfull \hbox (badness 10000) in paragraph at lines 247--268
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--244
+Underfull \hbox (badness 10000) in paragraph at lines 247--268
+
+ []
+
+[10]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[11 <./Graphics/simple_perceptron.pdf>] [12 <./Graphics/adaption_perceptron2.pd
+f> <./Graphics/MLP.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 283--286
+
+ []
+
+[13]
+Overfull \hbox (18.15208pt too wide) in paragraph at lines 299--311
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--341
+
+ []
+
+[14] [15]
+Overfull \hbox (59.12773pt too wide) in paragraph at lines 358--360
+\OT1/lmr/m/n/10.95 tion the-ory ex-perts", \OT1/lmr/m/it/10.95 tf-idf \OT1/lmr/
+m/n/10.95 \has proved use-ful in text min-ing" [[]].
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 365--370
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 365--370
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--379
+[][][][]$\OT1/lmtt/m/n/9 https : / / github . com / SebastianKnigge / Master _ 
+Thesis / tree / master /
+ []
+
+<Graphics/LDA_Documentation.pdf, id=358, page=15, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 15>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page15 used on input l
+ine 384.
+(pdftex.def)             Requested size: 396.0022pt x 286.41948pt.
+
+Overfull \hbox (36.0022pt too wide) in paragraph at lines 384--385
+ [][] 
+ []
+
+<Graphics/LDA_Documentation.pdf, id=362, page=14, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 14>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page14 used on input l
+ine 395.
+(pdftex.def)             Requested size: 198.0011pt x 131.03552pt.
+
+<Graphics/LDA_Documentation.pdf, id=364, page=16, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 16>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page16 used on input l
+ine 395.
+(pdftex.def)             Requested size: 198.0011pt x 131.58415pt.
+
+Overfull \hbox (36.0022pt too wide) in paragraph at lines 395--396
+ [][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 375--401
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 375--401
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 375--401
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 375--401
+
+ []
+
+[16]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[17] [18 <./Graphics/LDA_Documentation.pdf>]
+<Graphics/LDA_Documentation.pdf, id=423, page=22, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 22>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page22 used on input l
+ine 404.
+(pdftex.def)             Requested size: 431.9989pt x 312.45816pt.
+
+Overfull \hbox (71.9989pt too wide) in paragraph at lines 404--405
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[19 <./Graphics/LDA_Documentation.pdf> <./Graphics/LDA_Documentation.pdf>]
+<Graphics/network_structure.pdf, id=457, 781.9433pt x 560.77303pt>
+File: Graphics/network_structure.pdf Graphic file (type pdf)
+
+<use Graphics/network_structure.pdf>
+Package pdftex.def Info: Graphics/network_structure.pdf used on input line 418.
+
+(pdftex.def)             Requested size: 360.0pt x 258.17264pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 414--425
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 414--425
+
+ []
+
+[20 <./Graphics/LDA_Documentation.pdf>] [21 <./Graphics/network_structure.pdf>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 427--431
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 427--431
+
+ []
+
+[22]
+Overfull \hbox (4.57777pt too wide) in paragraph at lines 468--503
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 464--508
+
+ []
+
+[23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 513--518
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 513--518
+
+ []
+
+[25] <Graphics/Docs_LDA_adapted.pdf, id=539, page=10, 614.295pt x 794.97pt>
+File: Graphics/Docs_LDA_adapted.pdf Graphic file (type pdf)
+
+<use Graphics/Docs_LDA_adapted.pdf, page 10>
+Package pdftex.def Info: Graphics/Docs_LDA_adapted.pdf, page10 used on input li
+ne 533.
+(pdftex.def)             Requested size: 431.9989pt x 244.30928pt.
+
+Overfull \hbox (71.9989pt too wide) in paragraph at lines 533--534
+ [][] 
+ []
+
+<Graphics/Docs_LDA_adapted.pdf, id=542, page=21, 614.295pt x 794.97pt>
+File: Graphics/Docs_LDA_adapted.pdf Graphic file (type pdf)
+
+<use Graphics/Docs_LDA_adapted.pdf, page 21>
+Package pdftex.def Info: Graphics/Docs_LDA_adapted.pdf, page21 used on input li
+ne 545.
+(pdftex.def)             Requested size: 431.9989pt x 260.4888pt.
+
+Overfull \hbox (71.9989pt too wide) in paragraph at lines 545--546
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 527--551
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 527--551
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 527--551
 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[9] [10 <./Graphics/simple_perceptron.pdf>] [11 <./Graphics/adaption_perceptron
-2.pdf> <./Graphics/MLP.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 259--262
-
- []
-
-[12]
-Overfull \hbox (18.15208pt too wide) in paragraph at lines 275--287
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 288--317
-
- []
-
-[13]
-Overfull \hbox (59.12773pt too wide) in paragraph at lines 334--336
-\OT1/lmr/m/n/10.95 tion the-ory ex-perts", \OT1/lmr/m/it/10.95 tf-idf \OT1/lmr/
-m/n/10.95 \has proved use-ful in text min-ing" [[]].
- []
-
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 341--346
+[26] [27 <./Graphics/Docs_LDA_adapted.pdf>] [28 <./Graphics/Docs_LDA_adapted.pd
+f>]
+Underfull \hbox (badness 10000) in paragraph at lines 565--569
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 341--346
+Underfull \hbox (badness 10000) in paragraph at lines 575--580
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 355--355
-[][][][]$\OT1/lmtt/m/n/9 https : / / github . com / SebastianKnigge / Master _ 
-Thesis / tree / master /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 351--362
+Underfull \hbox (badness 10000) in paragraph at lines 575--580
 
  []
 
+[29] [30] [31] (./Magisterarbeit_S.Knigge.bbl [32])
+(./Magisterarbeit_S.Knigge.lof [33])
+\tf@lof=\write5
+\openout5 = `Magisterarbeit_S.Knigge.lof'.
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--362
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 351--362
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 351--362
-
- []
+ (./Magisterarbeit_S.Knigge.lot [34])
+\tf@lot=\write6
+\openout6 = `Magisterarbeit_S.Knigge.lot'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--362
+<Graphics/LDA_Documentation.pdf, id=678, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf used on input line 594.
 
-[15] [16] <Graphics/comparison_boxplot.pdf, id=326, 505.89pt x 361.35pt>
-File: Graphics/comparison_boxplot.pdf Graphic file (type pdf)
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+ <use Graphics/LDA_Documentation.pdf>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf used on input line 594.
 
-<use Graphics/comparison_boxplot.pdf>
-Package pdftex.def Info: Graphics/comparison_boxplot.pdf used on input line 364
-.
-(pdftex.def)             Requested size: 360.0pt x 257.14474pt.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 
-<Graphics/network_structure.pdf, id=328, 781.9433pt x 560.77303pt>
-File: Graphics/network_structure.pdf Graphic file (type pdf)
+<Graphics/LDA_Documentation.pdf, id=681, page=1, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-<use Graphics/network_structure.pdf>
-Package pdftex.def Info: Graphics/network_structure.pdf used on input line 377.
+<use Graphics/LDA_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page1 used on input li
+ne 594.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-(pdftex.def)             Requested size: 360.0pt x 258.17264pt.
+<use Graphics/LDA_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page1 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--384
+<use Graphics/LDA_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page1 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page1 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [35]
+<Graphics/LDA_Documentation.pdf, id=686, page=2, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 2>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page2 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 373--384
+<use Graphics/LDA_Documentation.pdf, page 2>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page2 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page1 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [36 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=72
+8, page=3, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-[17 <./Graphics/comparison_boxplot.pdf>] [18 <./Graphics/network_structure.pdf>
-]
-Underfull \hbox (badness 10000) in paragraph at lines 386--394
+<use Graphics/LDA_Documentation.pdf, page 3>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page3 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 3>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page3 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 2>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page2 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [37 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=73
+4, page=4, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--394
+<use Graphics/LDA_Documentation.pdf, page 4>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page4 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 4>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page4 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 3>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page3 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [38 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=73
+9, page=5, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--394
+<use Graphics/LDA_Documentation.pdf, page 5>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page5 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 5>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page5 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 4>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page4 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [39 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=74
+7, page=6, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--394
+<use Graphics/LDA_Documentation.pdf, page 6>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page6 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 6>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page6 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 5>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page5 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [40 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=75
+7, page=7, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Overfull \hbox (4.57777pt too wide) in paragraph at lines 402--437
- [][] 
- []
+<use Graphics/LDA_Documentation.pdf, page 7>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page7 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 7>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page7 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--442
+<use Graphics/LDA_Documentation.pdf, page 6>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page6 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [41 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=76
+2, page=8, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 8>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page8 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 447--452
+<use Graphics/LDA_Documentation.pdf, page 8>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page8 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 7>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page7 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [42 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=76
+7, page=9, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 9>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page9 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 447--452
+<use Graphics/LDA_Documentation.pdf, page 9>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page9 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 8>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page8 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [43 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=77
+3, page=10, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-[20] [21]
-<Graphics/Docs_LDA_adapted.pdf, id=388, page=9, 614.295pt x 794.97pt>
-File: Graphics/Docs_LDA_adapted.pdf Graphic file (type pdf)
+<use Graphics/LDA_Documentation.pdf, page 10>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page10 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-<use Graphics/Docs_LDA_adapted.pdf, page 9>
-Package pdftex.def Info: Graphics/Docs_LDA_adapted.pdf, page9 used on input lin
-e 467.
-(pdftex.def)             Requested size: 431.9989pt x 232.98361pt.
+<use Graphics/LDA_Documentation.pdf, page 10>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page10 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Overfull \hbox (71.9989pt too wide) in paragraph at lines 467--468
- [][] 
- []
+<use Graphics/LDA_Documentation.pdf, page 9>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page9 used on input li
+ne 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [44 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=77
+8, page=11, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 11>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page11 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 461--476
+<use Graphics/LDA_Documentation.pdf, page 11>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page11 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 10>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page10 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [45 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=78
+3, page=12, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 12>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page12 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 461--476
+<use Graphics/LDA_Documentation.pdf, page 12>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page12 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
- []
+<use Graphics/LDA_Documentation.pdf, page 11>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page11 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [46 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=78
+9, page=13, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-[22] [23 <./Graphics/Docs_LDA_adapted.pdf>] [24] [25]
-(./Magisterarbeit_S.Knigge.bbl [26]) (./Magisterarbeit_S.Knigge.lof [27])
-\tf@lof=\write4
-\openout4 = `Magisterarbeit_S.Knigge.lof'.
+<use Graphics/LDA_Documentation.pdf, page 13>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page13 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
+<use Graphics/LDA_Documentation.pdf, page 13>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page13 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-(./Magisterarbeit_S.Knigge.lot)
-\tf@lot=\write5
-\openout5 = `Magisterarbeit_S.Knigge.lot'.
+<use Graphics/LDA_Documentation.pdf, page 12>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page12 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [47 <./Graphics/LDA_Documentation.pdf>]
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+ <use Graphics/LDA_Documentation.pdf, page 14>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page14 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 496.
- [28]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 496.
+<use Graphics/LDA_Documentation.pdf, page 14>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page14 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 13>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page13 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [48 <./Graphics/LDA_Documentation.pdf>]
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+ <use Graphics/LDA_Documentation.pdf, page 15>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page15 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 15>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page15 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 14>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page14 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [49]
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 16>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page16 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 16>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page16 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 15>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page15 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [50]
+<Graphics/LDA_Documentation.pdf, id=810, page=17, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 17>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page17 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 17>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page17 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 16>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page16 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [51]
+<Graphics/LDA_Documentation.pdf, id=815, page=18, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 18>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page18 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 18>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page18 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 17>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page17 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [52 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=83
+1, page=19, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 19>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page19 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 19>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page19 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 18>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page18 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [53 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=84
+5, page=20, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 20>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page20 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 20>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page20 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 19>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page19 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [54 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=85
+0, page=21, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 21>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page21 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 21>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page21 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 20>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page20 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [55 <./Graphics/LDA_Documentation.pdf>]
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+ <use Graphics/LDA_Documentation.pdf, page 22>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page22 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 22>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page22 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 21>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page21 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [56 <./Graphics/LDA_Documentation.pdf>] <Graphics/LDA_Documentation.pdf, id=86
+0, page=23, 614.295pt x 794.97pt>
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 23>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page23 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 23>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page23 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 22>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page22 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [57]
+File: Graphics/LDA_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/LDA_Documentation.pdf, page 23>
+Package pdftex.def Info: Graphics/LDA_Documentation.pdf, page23 used on input l
+ine 594.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [58 <./Graphics/LDA_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=869
+, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf used on input line 596.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+ <use Graphics/NN_Documentation.pdf>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf used on input line 596.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+<Graphics/NN_Documentation.pdf, id=872, page=1, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page1 used on input lin
+e 596.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page1 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page1 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page1 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+
+<Graphics/NN_Documentation.pdf, id=873, page=2, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 2>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page2 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 2>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page2 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 1>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page1 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [59 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=906,
+ page=3, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 3>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page3 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 3>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page3 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 2>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page2 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [60 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=911,
+ page=4, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 4>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page4 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 4>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page4 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 3>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page3 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [61 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=917,
+ page=5, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 5>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page5 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 5>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page5 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 4>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page4 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [62 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=929,
+ page=6, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 6>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page6 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 6>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page6 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 5>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page5 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [63 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=937,
+ page=7, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 7>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page7 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 7>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page7 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 6>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page6 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [64 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=942,
+ page=8, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 8>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page8 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 8>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page8 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 7>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page7 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [65 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=947,
+ page=9, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 9>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page9 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 9>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page9 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 8>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page8 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [66 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=961,
+ page=10, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 10>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page10 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 10>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page10 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 9>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page9 used on input lin
+e 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [67 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=976,
+ page=11, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 11>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page11 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 11>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page11 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 10>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page10 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [68 <./Graphics/NN_Documentation.pdf>] <Graphics/NN_Documentation.pdf, id=993,
+ page=12, 614.295pt x 794.97pt>
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 12>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page12 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 12>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page12 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+
+<use Graphics/NN_Documentation.pdf, page 11>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page11 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [69 <./Graphics/NN_Documentation.pdf>]
+File: Graphics/NN_Documentation.pdf Graphic file (type pdf)
+ <use Graphics/NN_Documentation.pdf, page 12>
+Package pdftex.def Info: Graphics/NN_Documentation.pdf, page12 used on input li
+ne 596.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [70 <./Graphics/NN_Documentation.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 602.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 602.
  (./Magisterarbeit_S.Knigge.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 496.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 496.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 602.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 602.
 Package rerunfilecheck Info: File `Magisterarbeit_S.Knigge.out' has not changed
 .
-(rerunfilecheck)             Checksum: F1E79F5BCD79B313265B4A342787177B;1214.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 496.
+(rerunfilecheck)             Checksum: 37FC0B4F1D3C80E5BC58CF2B43482A74;1476.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 602.
  ) 
 Here is how much of TeX's memory you used:
- 7935 strings out of 493089
- 117899 string characters out of 6134841
- 218070 words of memory out of 5000000
- 11151 multiletter control sequences out of 15000+600000
- 73311 words of font info for 65 fonts, out of 8000000 for 9000
+ 9238 strings out of 493089
+ 138856 string characters out of 6134841
+ 245011 words of memory out of 5000000
+ 12371 multiletter control sequences out of 15000+600000
+ 77529 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,12n,40p,1120b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,18n,46p,1378b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
 texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2015
 /texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/texmf-dis
@@ -991,20 +1856,23 @@ live/2015/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2015/
 texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015/texmf-dist
 /fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
 1/public/lm/lmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm
-/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr6.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist
-/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/public/lm/lmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/l
-m/lmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtk10.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Magisterarbeit_S.Knigge.pdf (28 pages, 629884 bytes).
+/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015
+/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2015/texmf-dist/
+fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
+1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/l
+m/lmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy6.pf
+b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2015/texm
+f-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2015/texmf-dist/font
+s/type1/public/lm/lmtti10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
+ublic/amsfonts/symbols/msbm10.pfb>
+Output written on Magisterarbeit_S.Knigge.pdf (70 pages, 893615 bytes).
 PDF statistics:
- 581 PDF objects out of 1000 (max. 8388607)
- 501 compressed objects within 6 object streams
- 131 named destinations out of 1000 (max. 500000)
- 178 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1108 PDF objects out of 1200 (max. 8388607)
+ 904 compressed objects within 10 object streams
+ 183 named destinations out of 1000 (max. 500000)
+ 437 words of extra memory for PDF output out of 10000 (max. 10000000)
 

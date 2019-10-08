@@ -210,20 +210,20 @@ In the set up we have another parameter to adjust. The function *convert_to_dtm*
 
 ```{r chapters_dtm, chache=TRUE, warning=FALSE}
 chapters_dtm <- convert_to_dtm(word_counts, minfq=2)
-ncol(chapters_dtm)
+( M_f2 <- ncol(chapters_dtm) )
 ```
 
 Let us compare it to the case including all words.
 
 ```{r chapters_dtm_all, chache=TRUE}
 chapters_dtm_all <- convert_to_dtm(word_counts, minfq=0)
-ncol(chapters_dtm_all)
+( M <- ncol(chapters_dtm_all) )
 ```
 
-We also want to compare this to a reduction of the word dictionary by the TFIDF. For the sake of comparison, the reduction is made to the same value as used above via *minfreq*=2 (i.e. 8597 words).
+We also want to compare this to a reduction of the word dictionary by the TFIDF. We are using a reduction by 50\% of the dimension of the original bag of words.
 
-```{r chapters_dtm_tfidf, chache=TRUE, warning=FALSE}
-chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=8597)
+```{r chapters_dtm_tfidf, chache=FALSE, warning=FALSE}
+chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=(0.1*M))
 ncol(chapters_dtm_tfidf)
 ```
 
@@ -254,7 +254,7 @@ u_all <- tim2-tim1
 
 The third LDA fit builds up on data from the shrinked dictionary/bag of words by TFIDF.
 
-```{r chapters_lda_tfidf, cache=TRUE, warning=FALSE, message=FALSE}
+```{r chapters_lda_tfidf, cache=FALSE, warning=FALSE, message=FALSE}
 tim1 <- Sys.time()
 chapters_lda_tfidf <- LDA(chapters_dtm_tfidf, 
                     k = n_books, control = list(seed = 1234))
@@ -305,11 +305,11 @@ validate_LDAclassification <- function(gamma_matrix){
     transmute(consensus = gutenberg_id, topic)
   
   # check the fraction of missclassification
-  chapter_classifications %>%
-    inner_join(book_topics, by = "topic") %>%
+  Join <- chapter_classifications %>%
+    inner_join(book_topics, by = "topic")
     # missmatches
-    dplyr::filter(gutenberg_id != consensus)%>%
-    nrow()/nrow(chapter_classifications)
+    Join %>% dplyr::filter(gutenberg_id != consensus) %>%
+    nrow()/nrow(Join)
 }
 ```
 
@@ -325,7 +325,7 @@ misc.rate_all <- ext_gamma_matrix(chapters_lda_all) %>%
   validate_LDAclassification()
 ```
 
-```{r misc.rate_tfidf, cache=TRUE}
+```{r misc.rate_tfidf, cache=FALSE}
 misc.rate_tfidf <- ext_gamma_matrix(chapters_lda_tfidf) %>% 
   validate_LDAclassification()
 ```
@@ -355,11 +355,12 @@ categories_sec <- gutenberg_works() %>%
 
 # embedding 1
 chapters_dtm_sec <- convert_to_dtm(word_counts_sec, minfq=2)
-nrow(chapters_dtm_sec)
+ncol(chapters_dtm_sec)
 # embedding 2
 chapters_dtm_all_sec <- convert_to_dtm(word_counts_sec, minfq=0)
+( M2 <- ncol(chapters_dtm_all_sec) )
 # embedding 3
-chapters_dtm_tfidf_sec <- convert_to_dtm_2(word_counts_sec, top=8565)
+chapters_dtm_tfidf_sec <- convert_to_dtm_2(word_counts_sec, top=(M2*0.5))
 
 # embedding 1
 tim1 <- Sys.time()
@@ -403,7 +404,7 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via VEM 
 ```
 
 
-Surprisingly, the run-time to fit the LDA model for the embedding using all words, does not take way longer than the embedding using a lower frequency. The fit of the model with the reduced bag of words via tfidf takes slightly less time.
+Surprisingly, the run-time to fit the LDA model for the embedding using all words, does not take way longer than the embedding using a lower frequency. The fit of the model with the reduced bag of words via tfidf takes considerably less time.
 
 ### Comparison to Fit via Gibbs Sampling
 
@@ -457,6 +458,45 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "LDA via Gibb
 ```
 
 Apparently Gibbs Sampling takes a bit longer than the VEM algorithm, but its results with regards to the correct "classification" (missclassification rate) are way better.
+
+
+Again we try the second sample, using a different seed. Only Gibbs Sampling is evaluated in this section.
+
+```{r Gibbs_overview_sec, results="asis", cache=TRUE}
+tim1 <- Sys.time()
+chapters_lda_Gibbs_sec <- LDA(chapters_dtm_sec, method="Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_1_Gibbs <- tim2-tim1
+
+tim1 <- Sys.time()
+chapters_lda_all_Gibbs_sec <- LDA(chapters_dtm_all_sec, method = "Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_all_Gibbs <- tim2-tim1
+
+tim1 <- Sys.time()
+chapters_lda_tfidf_Gibbs_sec <- LDA(chapters_dtm_tfidf_sec,  method="Gibbs",
+                    k = n_books, control = list(seed = 1234))
+tim2 <- Sys.time()
+u_tfidf_Gibbs <- tim2-tim1
+
+misc.rate_1_Gibbs_sec <- ext_gamma_matrix(chapters_lda_Gibbs_sec) %>% 
+  validate_LDAclassification()
+
+misc.rate_all_Gibbs_sec <- ext_gamma_matrix(chapters_lda_all_Gibbs_sec) %>% 
+  validate_LDAclassification()
+
+misc.rate_tfidf_Gibbs_sec <- ext_gamma_matrix(chapters_lda_tfidf_Gibbs_sec) %>% 
+  validate_LDAclassification()
+
+# performance matrix
+performance_matrix_sec <- data.frame(freq2.embedding=c(misc.rate_1_Gibbs_sec, u_1_Gibbs), 
+           all.embedding=c(misc.rate_all_Gibbs_sec, u_all_Gibbs),
+           tfidf=c(misc.rate_tfidf_Gibbs_sec, u_tfidf_Gibbs))
+rownames(performance_matrix) <- c("missc. rate", "time")
+performance_matrix_sec %>%  stargazer(summary=FALSE, header=F, title = "Gibbs second sample")
+```
 
 ## Evaluate Model on Test Set 
 
@@ -515,7 +555,7 @@ fit_n_evaluate <- function(split, k=n_books){
 }
 ```
 
-We now can evaluate several fits of a model for different splits. Here is a parallelization for the individual for loops applied. In this case only embeding via TF2 is used.
+We now can evaluate several fits of a model for different splits. Here is a parallelization for the individual for loops applied. In this case only embeding via TFIDF is used.
 
 ```{r parallel_fitting_1, cache=TRUE, message=FALSE, warnings=FALSE}
 # setting up how many cores to be used
@@ -527,7 +567,7 @@ n <- 59
 results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
   
   
-  chapters_dtm %>% 
+  chapters_dtm_tfidf %>% 
     split_for_fit(seed=12*i) %>% 
     fit_n_evaluate()
   
@@ -542,47 +582,121 @@ This is the output of the simulation over 59 splits and fits. The mean is the fi
 results %>% summary
 ```
 
-# Example 2 (6 Books)
+# Optimal TFIDF reduction
 
-Again we try a second sample, using a different seed. 
+We want to visualize what the best values for a reduction of the original bag-of-words via tfidf is. I.e. by what \% should the bag-of-words be reduced for the best results (lowest misclassification ratio).
 
-```{r Gibbs_overview_sec, results="asis", cache=TRUE}
-tim1 <- Sys.time()
-chapters_lda_Gibbs_sec <- LDA(chapters_dtm_sec, method="Gibbs",
+```{r}
+evaluation_for_embedding <- function(word_counts, frac=0.5) {
+  # embedding 3
+  chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=(M2*frac))
+  # fitting
+  tim1 <- Sys.time()
+  chapters_lda_tfidf_Gibbs <- LDA(chapters_dtm_tfidf,  method="Gibbs",
                     k = n_books, control = list(seed = 1234))
-tim2 <- Sys.time()
-u_1_Gibbs <- tim2-tim1
-
-tim1 <- Sys.time()
-chapters_lda_all_Gibbs_sec <- LDA(chapters_dtm_all_sec, method = "Gibbs",
-                    k = n_books, control = list(seed = 1234))
-tim2 <- Sys.time()
-u_all_Gibbs <- tim2-tim1
-
-tim1 <- Sys.time()
-chapters_lda_tfidf_Gibbs_sec <- LDA(chapters_dtm_tfidf_sec,  method="Gibbs",
-                    k = n_books, control = list(seed = 1234))
-tim2 <- Sys.time()
-u_tfidf_Gibbs <- tim2-tim1
-
-misc.rate_1_Gibbs_sec <- ext_gamma_matrix(chapters_lda_Gibbs_sec) %>% 
-  validate_LDAclassification()
-
-misc.rate_all_Gibbs_sec <- ext_gamma_matrix(chapters_lda_all_Gibbs_sec) %>% 
-  validate_LDAclassification()
-
-misc.rate_tfidf_Gibbs_sec <- ext_gamma_matrix(chapters_lda_tfidf_Gibbs_sec) %>% 
-  validate_LDAclassification()
-
-# performance matrix
-performance_matrix_sec <- data.frame(freq2.embedding=c(misc.rate_1_Gibbs_sec, u_1_Gibbs), 
-           all.embedding=c(misc.rate_all_Gibbs_sec, u_all_Gibbs),
-           tfidf=c(misc.rate_tfidf_Gibbs_sec, u_tfidf_Gibbs))
-rownames(performance_matrix) <- c("missc. rate", "time")
-performance_matrix_sec %>%  stargazer(summary=FALSE, header=F, title = "Gibbs second sample")
+  tim2 <- Sys.time()
+  u_tfidf_Gibbs <- tim2-tim1
+  # calculating missclassification rate
+  misc.rate_tfidf_Gibbs <- ext_gamma_matrix(chapters_lda_tfidf_Gibbs) %>% 
+    validate_LDAclassification()
+  # function returns a vector including the misc. ratio and the fitting time
+  return(c(misc.rate_tfidf_Gibbs, 
+              as.numeric(u_tfidf_Gibbs)))
+}
 ```
 
+```{r, cache=TRUE}
+# set up the fractions we want to use
+# we use 0.1, 0.2, ..., 1
+fractions <- seq(0.1,1,0.01)
 
+# Use parallelization
+# registering cluster
+cl <- parallel::makeCluster(useable_cores)
+doParallel::registerDoParallel(cl)
+embedding_performance_matrix <- foreach(i = 1:length(fractions), .combine = 'rbind', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
+  
+  
+  evaluation_for_embedding(word_counts, frac=fractions[i]) %>% 
+    c(.,fractions[i])
+  
+  
+}
+parallel::stopCluster(cl)
+
+# adjust the resulting matrix to a data frame for plotting
+colnames(embedding_performance_matrix) <- c("misc.rate","time","fractions")
+embedding_performance_matrix <- as.data.frame(embedding_performance_matrix)
+```
+
+```{r}
+ggplot(data=embedding_performance_matrix, 
+       aes(x=fractions, y=misc.rate)) +
+  geom_line(col="grey") +
+  geom_point() +
+  geom_smooth(col="blue", method="loess", span=0.7) +
+  theme_minimal() +
+  ggtitle("Missclassification rates for different types of tfidf-embeddings \n Example 1 (6 Books)") +
+  xlab("fraction")
+```
+```{r}
+ggplot(data=embedding_performance_matrix, 
+       aes(x=fractions, y=time)) +
+  geom_line(col="grey") +
+  geom_point() +
+  geom_smooth(col="blue", method="loess", span=0.7) +
+  theme_minimal() +
+  ggtitle("Fitting time for different types of tfidf-embeddings \n Example 1 (6 Books)")+
+  xlab("fraction")
+```
+
+Now let us study Example 2.
+
+```{r}
+# set up the fractions we want to use
+# we use 0.1, 0.2, ..., 1
+fractions <- seq(0.1,1,0.01)
+
+# Use parallelization
+# registering cluster
+cl <- parallel::makeCluster(useable_cores)
+doParallel::registerDoParallel(cl)
+embedding_performance_matrix_sec <- foreach(i = 1:length(fractions), .combine = 'rbind', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
+  
+  
+  evaluation_for_embedding(word_counts_sec, frac=fractions[i]) %>% 
+    c(.,fractions[i])
+  
+  
+}
+parallel::stopCluster(cl)
+
+# adjust the resulting matrix to a data frame for plotting
+colnames(embedding_performance_matrix_sec) <- c("misc.rate","time","fractions")
+embedding_performance_matrix_sec <- as.data.frame(embedding_performance_matrix_sec)
+```
+
+```{r}
+ggplot(data=embedding_performance_matrix_sec, 
+       aes(x=fractions, y=misc.rate)) +
+  geom_line(col="grey") +
+  geom_point() +
+  geom_smooth(col="red", method="loess", span=0.7) +
+  theme_minimal() +
+  ggtitle("Missclassification rates for different types of tfidf-embeddings \n Example 2 (6 Books)")+
+  xlab("fraction")
+```
+```{r}
+ggplot(data=embedding_performance_matrix_sec, 
+       aes(x=fractions, y=time)) +
+  geom_line(col="grey") +
+  geom_point() +
+  geom_smooth(col="red", method="loess", span=0.7) +
+  theme_minimal() +
+  ggtitle("Fitting time for different types of tfidf-embeddings \n Example 2 (6 Books)")+
+  xlab("fraction")+
+  xlab("fraction")
+```
 
 # Definition of Validation
 
@@ -591,7 +705,7 @@ Since the LDA algorithm just clusters into $k$ topics, it is necessary to evalua
 
 
 ```{r, chache=TRUE}
-LDA_model <- LDA(chapters_dtm_all, method="Gibbs",
+LDA_model <- LDA(chapters_dtm_tfidf, method="Gibbs",
                             k = n_books, control = list(seed = 1234))
 # get gamma matrix for chapter probabilities
 chapters_gamma <- tidy(LDA_model, matrix = "gamma") %>%
@@ -613,7 +727,6 @@ for (i in 1:n_books){
   vec <- plotm[i,2:n_books] %>% unlist() 
   barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))
 }
-
 ```
 
 This procedure does not exclude the fact that two books are assigned to the same topic (in this case e.g. 2 books are assigned to chapter 1 and none to chapter 6). But still, from each of the plots of the "distributions" you can obtain how good the chapters of a single book are classified. The more of the mass of the distribution is on a single topic, the better the chapters of this topic are predicted.
@@ -651,12 +764,12 @@ categories %>% stargazer(summary=FALSE, font.size = "footnotesize",
 ```{r 10_books_example, chache=TRUE, warning=FALSE, results="asis"}
 # embedding 1
 chapters_dtm_10 <- convert_to_dtm(word_counts10, minfq=2)
-ncol(chapters_dtm_10)
+( M3_f2 <- ncol(chapters_dtm_10) )
 # embedding 2
 chapters_dtm_all_10 <- convert_to_dtm(word_counts10, minfq=0)
-ncol(chapters_dtm_all_10)
+( M3 <- ncol(chapters_dtm_all_10) )
 # embedding 3
-chapters_dtm_tfidf_10 <- convert_to_dtm_2(word_counts10, top=17742)
+chapters_dtm_tfidf_10 <- convert_to_dtm_2(word_counts10, top=(0.5*M3))
 
 # embedding 1
 tim1 <- Sys.time()
@@ -759,12 +872,49 @@ plot_DF2 %>% ggplot(aes(x=Use_Case, y=accuracy, fill=Procedure))+
       geom_boxplot() + xlab("") + ylab("missclassification rate")
 ```
 
-## Evaluation
+For this example we can study one more time the optimal value of "fraction". I.e. which fraction should remain after *tfidf* embedding.
+
+```{r}
+# set up the fractions we want to use
+# we use 0.1, 0.2, ..., 1
+fractions <- seq(0.1,1,0.01)
+
+# Use parallelization
+# registering cluster
+cl <- parallel::makeCluster(useable_cores)
+doParallel::registerDoParallel(cl)
+embedding_performance_matrix_10 <- foreach(i = 1:length(fractions), .combine = 'rbind', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
+  
+  
+  evaluation_for_embedding(word_counts10, frac=fractions[i]) %>% 
+    c(.,fractions[i])
+  
+  
+}
+parallel::stopCluster(cl)
+
+# adjust the resulting matrix to a data frame for plotting
+colnames(embedding_performance_matrix_sec) <- c("misc.rate","time","fractions")
+embedding_performance_matrix_sec <- as.data.frame(embedding_performance_matrix_sec)
+```
+
+```{r}
+ggplot(data=embedding_performance_matrix_sec, 
+       aes(x=fractions, y=misc.rate)) +
+  geom_line(col="grey") +
+  geom_point() +
+  geom_smooth(col="magenta4", method="loess", span=0.7) +
+  theme_minimal() +
+  ggtitle("Missclassification rates for different types of tfidf-embeddings \n Example 3 (10 Books)")+
+  xlab("fraction")
+```
+
+## In Model Evaluation 
 
 In the first place, we try the in-model-validation procedure, for each of the 3 embeddings. Table \ref{in-model_val} displays the results of each validation.
 
 ```{r chapters_dtm2_Gibbs, cache=TRUE, warning=FALSE, message=FALSE}
-chapters_dtm2 <- convert_to_dtm(word_counts2, minfq=2)
+chapters_dtm2 <- convert_to_dtm(word_counts, minfq=2)
 tim1 <- Sys.time()
 chapters_lda_Gibbs2 <- LDA(chapters_dtm2, method="Gibbs",
                     k = n_books, control = list(seed = 1234))
@@ -774,17 +924,17 @@ ncol(chapters_dtm2)
 ```
 
 ```{r chapters_lda_all_Gibbs2, cache=TRUE, warning=FALSE, message=FALSE}
-chapters_dtm_all2 <- convert_to_dtm(word_counts2, minfq=0)
+chapters_dtm_all2 <- convert_to_dtm(word_counts, minfq=0)
 tim1 <- Sys.time()
 chapters_lda_all_Gibbs2 <- LDA(chapters_dtm_all2, method = "Gibbs",
                     k = n_books, control = list(seed = 1234))
 tim2 <- Sys.time()
 u_all_Gibbs2 <- tim2-tim1
-ncol(chapters_dtm_all2 )
+M2 <- ncol(chapters_dtm_all2 )
 ```
 
 ```{r chapters_lda_tfidf_Gibbs2, cache=TRUE, warning=FALSE, message=FALSE}
-chapters_dtm_tfidf2 <- convert_to_dtm_2(word_counts2, top=16415)
+chapters_dtm_tfidf2 <- convert_to_dtm_2(word_counts, top=0.5*M2)
 tim1 <- Sys.time()
 chapters_lda_tfidf_Gibbs2 <- LDA(chapters_dtm_tfidf2,  method="Gibbs",
                     k = n_books, control = list(seed = 1234))
@@ -818,59 +968,5 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title="In-Model-Valid
 
 
 
-The same code as for Example 1 is used to evaluate the model. 
 
-```{r parallel_fitting_2, cache=TRUE, message=FALSE, warnings=FALSE}
-# registering cluster
-cl <- parallel::makeCluster(useable_cores)
-doParallel::registerDoParallel(cl)
-n <- 59
-results <- foreach(i = 1:n, .combine = 'c', .export = ls(.GlobalEnv), .packages = c("dplyr", "udpipe", "topicmodels", "tidyr", "tidytext")) %dopar% {
-  
-  
-  chapters_dtm_all2 %>% 
-    split_for_fit(seed=12*i) %>% 
-    fit_n_evaluate()
-  
-  
-}
-parallel::stopCluster(cl)
-```
-
-This is the output of the simulation over 59 splits and fits. Consider the mean as the final result:
-
-```{r}
-results %>% summary
-```
-
-```{r Plot, cache=TRUE}
-LDA_model2 <- LDA(chapters_dtm_all2, method="Gibbs",
-                            k = n_books, control = list(seed = 1234))
-  # get "consensus" via maximum likelihood
-  # first extract the gamma matrix of the model fitted on the training
-  # data
-chapters_gamma <- ext_gamma_matrix(LDA_model2)
-spreaded_gamma <- chapters_gamma  %>% spread(topic, gamma)
-  # get pdfs
-plotm <- spreaded_gamma %>%
-    group_by(gutenberg_id) %>%
-    # note: pdfs are unnormalized
-    summarise_at(2:(titles$len+1), sum)
-topic_link <- plotm %>% 
-    apply(1, function(x) which.max(x[2:length(x)])) %>% 
-    cbind(plotm$gutenberg_id) %>%
-    as.data.frame()
-  
-par(mfrow=c(2,2))
-for (i in 1:4){
-  vec <- plotm[i,2:n_books] %>% unlist() 
-  barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))
-}
-for (i in 5:9){
-  vec <- plotm[i,2:n_books] %>% unlist() 
-  barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[i,1]))
-}
-  vec <- plotm[10,2:n_books] %>% unlist() 
-  barplot(vec/sum(vec), main=paste("Gutenberg ID", plotm[10,1]))
-```
 

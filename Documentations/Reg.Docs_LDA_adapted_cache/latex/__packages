@@ -19,3 +19,6 @@ XML
 here
 openxlsx
 keras
+foreach
+iterators
+doParallel

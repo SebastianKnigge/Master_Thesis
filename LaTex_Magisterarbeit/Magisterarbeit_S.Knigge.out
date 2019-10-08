@@ -1,5 +1,5 @@
-\BOOKMARK [1][-]{section.1}{Motivation and Organization of the Thesis}{}% 1
-\BOOKMARK [1][-]{section.2}{Natural Language Processing and Information Retrival}{}% 2
+\BOOKMARK [1][-]{section.1}{Introduction and Organization of the Thesis}{}% 1
+\BOOKMARK [1][-]{section.2}{Natural Language Processing and Information Retrieval}{}% 2
 \BOOKMARK [1][-]{section.3}{Discussed Models}{}% 3
 \BOOKMARK [2][-]{subsection.3.1}{LDA Model}{section.3}% 4
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Variational EM Algorithm}{subsection.3.1}% 5
@@ -14,4 +14,7 @@
 \BOOKMARK [2][-]{subsection.4.2}{ANN applied to Textbook Chapters}{section.4}% 14
 \BOOKMARK [1][-]{section.5}{Analysis of EUROSTAT Documents}{}% 15
 \BOOKMARK [2][-]{subsection.5.1}{LDA applied to EUROSTAT Documents}{section.5}% 16
-\BOOKMARK [1][-]{appendix.A}{Appendix}{}% 17
+\BOOKMARK [2][-]{subsection.5.2}{ANN applied to EUROSTAT Documents}{section.5}% 17
+\BOOKMARK [1][-]{appendix.A}{Appendix}{}% 18
+\BOOKMARK [2][-]{subsection.A.1}{Documentation of LDA - Gutenberg Data}{appendix.A}% 19
+\BOOKMARK [2][-]{subsection.A.2}{Documentation of ANN - Gutenberg Data}{appendix.A}% 20
