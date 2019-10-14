@@ -6,7 +6,7 @@ output:
   pdf_document:
     number_sections: true
 ---
-
+\pagenumbering{gobble}
 \tableofcontents
 
 # Setup
@@ -99,7 +99,7 @@ plot_most_freq_words <- function(pdf, n=7){
 
 Now we can read in all documents in a for loop:
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, cache=TRUE}
 # inital set up for the corpus
 pdf1 <- read_pdf_clean(documents[1])
 corpus <- tibble(document=1, word=pdf1$word)
@@ -112,7 +112,7 @@ for (i in 2:length(documents)){
 
 # Apply ANN
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, cache=TRUE}
 dtm <- corpus %>% count(document, word, sort = TRUE) %>%
   select(doc_id=document, term=word, freq=n) %>%
   document_term_matrix()
@@ -132,7 +132,7 @@ dtm_embedding_all <- dtm %>%
 dtm_embedding_all <- dtm_embedding_all[order(as.numeric(rownames(dtm_embedding_all))),]
 
 dtm_embedding_tfidf <- dtm %>%
-  dtm_remove_tfidf(top=M*0.8)
+  dtm_remove_tfidf(top=M*0.5)
 # ordering
 dtm_embedding_tfidf <- dtm_embedding_tfidf[order(as.numeric(rownames(dtm_embedding_tfidf))),]
 ```
@@ -242,7 +242,7 @@ evaluate_model <- function(model_fit, split) {
 
 Now we can start applying the model. Here we use a split of 20\% validation-, 17\% test- and 60\% training-set. All 3 embeddings are evaluated. We use $49$ simulations to test each embedding. 
 
-```{r , cache=FALSE, results='hide'}
+```{r , cache=TRUE, results='hide'}
 tim1 <- Sys.time()
 n <- 49
 results <- rep(NA,n)
@@ -261,7 +261,7 @@ misc.rate_2 <- results_2 %>% mean
 var_2 <- results_2 %>% var
 ```
 
-```{r , cache=FALSE, results='hide'}
+```{r , cache=TRUE, results='hide'}
 tim1 <- Sys.time()
 n <- 49
 results <- rep(NA,n)
@@ -280,7 +280,7 @@ misc.rate_all <- results_all %>% mean
 var_all <- results_all %>% var
 ```
 
-```{r, cache=FALSE, results='hide'}
+```{r, cache=TRUE, results='hide'}
 tim1 <- Sys.time()
 n <- 49
 results <- rep(NA,n)
@@ -355,15 +355,18 @@ performance_matrix %>%  stargazer(summary=FALSE, header=F, title = "ANN for Reg.
 
 In the course of training and optimizing, many hundret models were fitted. In the following I want to show the training-plot of the most promising approach of the ANN for the regultory documents.
 
-```{r}
-
+```{r, cache=TRUE, results='hide'}
+{
+set.seed(1234)
+  
 split <- sample_cluster_wise(dtm_tensor_2, test_ratio=0)
-hist <- set_up_n_fit(split, batchsize = 2^5) %>% .$history 
+hist <- set_up_n_fit(split, batchsize = 2^9) %>% .$history 
 
 plot_df <- hist$metrics %>% do.call("cbind",.) %>% cbind(.,1:5) %>% as.data.frame()
 
 plot_df <- plot_df %>% gather(value, key=measure, acc, loss, val_acc, val_loss)
 
+}
 
 
 ggplot(subset(plot_df, measure %in% c("acc", "val_acc")), aes(V5, value)) +

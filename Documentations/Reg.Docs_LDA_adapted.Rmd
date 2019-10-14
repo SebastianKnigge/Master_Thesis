@@ -6,7 +6,7 @@ output:
   pdf_document:
     number_sections: true
 ---
-
+\pagenumbering{gobble}
 \tableofcontents
 
 # Setup
@@ -202,7 +202,7 @@ for (i in 1:7){
 
 ## Wordclouds
 
-To check what topics tackle which context, we produce wordclouds using the TFIDF and the TF itself.
+To check what topics tackle which context, we produce wordclouds using the *tf-idf* and the *tf* itself.
 
 ```{r, message=FALSE, warning=FALSE}
 plot_wordcloud <- function(corpus, selection="ALL", 
@@ -238,7 +238,7 @@ plot_wordcloud <- function(corpus, selection="ALL",
 }
 ```
 
-A second possibility is to extract the TFIDFs of the words linked to the topics directly. First you have to map the topics to the documents within the tidytext format. This is the only way the tfidf_tf matrix can be set up for the individual topics.
+A second possibility is to extract the *tf-idf*s of the words linked to the topics directly. First you have to map the topics to the documents within the tidytext format. This is the only way the tfidf_tf matrix can be set up for the individual topics.
 
 ```{r, message=FALSE, warning=FALSE}
 plot_wordcloud_topic <- function(corpus, topic_select=1, prediction=prediction5,
@@ -270,10 +270,10 @@ plot_wordcloud_topic <- function(corpus, topic_select=1, prediction=prediction5,
 
 
 
-### Wordclouds using TFIDF
+### Wordclouds using *tf-idf*
 
-For getting specific and more individual words for each cloud, we use the TFIDF in the first step.
-Now there are two methods to create the word clouds for the TFIDF measure. Once by aggregating the individual TFIDFs of the documents, as it is done in the following. 
+For getting specific and more individual words for each cloud, we use the *tf-idf* in the first step.
+Now there are two methods to create the word clouds for the *tf-idf* measure. Once by aggregating the individual *tf-idf*s of the documents, as it is done in the following. 
 
 ```{r wordcloud_tfidf, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
@@ -293,7 +293,7 @@ plot_wordcloud(corpus, selection=ind7[,1], i=7, scale=c(2.1,0.3),
                max.words = 45) 
 ```
 
-Now using the second approach, when applying the TFIDF measure to the mapped corpus.
+Now using the second approach, when applying the *tf-idf* measure to the mapped corpus.
 
 ```{r, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
@@ -313,9 +313,9 @@ plot_wordcloud_topic(corpus, topic_select=7, scale=c(2.5,0.5),
                max.words = 50) 
 ```
 
-Although the second procedure, using TFIDF distributions for the individual topics, seems to be more intuitive, the two figures are surprisingly similar. 
+Although the second procedure, using *tf-idf* distributions for the individual topics, seems to be more intuitive, the two figures are surprisingly similar. 
 
-### Wordclouds using TF
+### Wordclouds using *tf*
 
 The same can be done using the regular term frequency.
 
@@ -334,9 +334,9 @@ plot_wordcloud(corpus, selection=ind7[,1], i=7, freq="tf", scale=c(2.5,0.2),
                max.words = 45)  
 ```
 
-## Embedding via TFIDF
+## Embedding via *tf-idf*
 
-Now it is interesting to see if embedding via TFIDF will cluster other groups or the same. So we will reduce the Document Term Matrix to $5717$ words, which amounts to a reduction by 50\%.
+Now it is interesting to see if embedding via *tf-idf* will cluster other groups or the same. So we will reduce the Document Term Matrix to $5717$ words, which amounts to a reduction by 50\%.
 
 ```{r, cache=FALSE}
 tim1_tfidf <- Sys.time()
@@ -378,7 +378,7 @@ ext_gamma_matrix(documents_lda_2) %>%
             label="extract2")
 ```
 
-We want to give an overview over the clustered documents using the TFIDF embedding.
+We want to give an overview over the clustered documents using the *tf-idf* embedding.
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
 for (i in 1:7){
@@ -390,7 +390,7 @@ for (i in 1:7){
 ```
 
 We want to produce wordclouds again.
-This time using the TFIDF embedding for clustering via LDA. The first plot shows the aggregated TFIDFs.
+This time using the *tf-idf* embedding for clustering via LDA. The first plot shows the aggregated *tf-idf*s.
 
 ```{r wordcloud_tfidf2, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
@@ -411,7 +411,7 @@ plot_wordcloud(corpus, selection=ind7_2[,1], i=7, scale=c(2,0.03),
                max.words = 35) 
 ```
 
-The second plot shows the TFIDFs for each individual topic.
+The second plot shows the *tf-idf*s for each individual topic.
 
 ```{r, message=FALSE, warning=FALSE}
 par(mfrow=c(2,4))
@@ -457,7 +457,7 @@ validate_LDAclassification <- function(predict_table){
 }
 ```
 
-On both full bag of words and 50\% embedding via TFIDF
+On both full bag of words and 50\% embedding via *tf-idf*
 ```{r, cache=FALSE}
 predict_table <- prediction5 %>% select(doc_id, topic) %>% 
   merge( y=classes, by.x=1, by.y=1)

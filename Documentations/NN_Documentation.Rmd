@@ -6,7 +6,7 @@ output:
   pdf_document:
     number_sections: true
 ---
-
+\pagenumbering{gobble}
 \tableofcontents
 
 # Setup
@@ -227,7 +227,7 @@ adjusted_format_all <- adjust_tensor_format((chapters_dtm_all))
 ( M <- ncol(chapters_dtm_all) )
 ```
 
-We also want to compare this to a reduction of the word dictionary by tfidf. We reduce to 50\% of the original size of the bag-of-words. 
+We also want to compare this to a reduction of the word dictionary by *tf-idf*. We reduce to 50\% of the original size of the bag-of-words. 
 
 ```{r, chache=TRUE, warning=FALSE}
 chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=(M*0.5))
@@ -304,13 +304,13 @@ set_up_n_fit <- function(split, books_n=n_books){
 
 
 # making a prediction on the test data and calculating the
-# misspecification rate; we also want to save the true categories and the predicted ones
+# mispecification rate; we also want to save the true categories and the predicted ones
 evaluate_model <- function(model_fit, y=split$y_test, x=split$x_test) {
   prediction <- model_fit %>% predict(x)
   pred <- apply(prediction, 1, which.max)
   true_value <- apply(y, 1, which.max)
-  misspecified <- sum(!pred==true_value)/length(pred)
-  ret <- list(misspecified=misspecified,
+  mispecified <- sum(!pred==true_value)/length(pred)
+  ret <- list(mispecified=mispecified,
               # the function also dicloses the true and the predicted
               # values for exact evaluation, if needed
               pred=pred, true_value=true_value)
@@ -327,7 +327,7 @@ results <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format, seed=i*2)
   results[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model() %>% .$mispecified
 }
 tim2 <- Sys.time()
 ```
@@ -361,7 +361,7 @@ results_all <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format_all, seed=i*2)
   results_all[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model() %>% .$mispecified
 }
 tim2_all <- Sys.time()
 ```
@@ -380,7 +380,7 @@ hist(results_all, breaks = 20)
 (u2 <- tim2_all-(tim1_all))
 ```
 
-In this step we use the embeding via *tfidf* and fit the model. The *tfidf* embedding equals a reduction by 50\%. 
+In this step we use the embeding via *tf-idf* and fit the model. The *tf-idf* embedding equals a reduction by 50\%. 
 
 ```{r apply_n_evaluate_tfidf, cache=TRUE}
 tim1_tfidf <- Sys.time()
@@ -389,7 +389,7 @@ results_tfidf <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format_tfidf, seed=i*2)
   results_tfidf[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model() %>% .$mispecified
 }
 tim2_tfidf <- Sys.time()
 ```
@@ -414,13 +414,13 @@ Table \ref{performancematrix} summarises the results of all 3 different embeding
 performance_matrix <- data.frame(freq2.embedding=c(results%>%mean, u1), 
            all.embedding=c(results_all%>%mean, u2),
            tfidf=c(results_tfidf%>%mean, u3))
-rownames(performance_matrix) <- c("missc. rate", "time")
+rownames(performance_matrix) <- c("misc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F,
                                   title="Performance of embeddings",
                                   label="performancematrix")
 ```
 
-The time for the embedding using more than frequency 2 is very short. Whereas the embedding via tfidf with the same dimensionality takes very long. It certainly makes sense that the missclassification rate is better for embedding with the full vocabulary than for the other two embeddings.
+The time for the embedding using more than frequency 2 is very short. Whereas the embedding via *tf-idf* with the same dimensionality takes very long. It certainly makes sense that the mislcassification rate is better for embedding with the full vocabulary than for the other two embeddings.
 
 # Example 2 (6 Books)
 
@@ -471,7 +471,7 @@ results_sec <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format_sec, seed=i*2)
   results_sec[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model() %>% .$mispecified
 }
 tim2 <- Sys.time()
 # evaluate fitting time
@@ -485,7 +485,7 @@ results_all_sec <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format_all_sec, seed=i*2)
   results_all_sec[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model() %>% .$mispecified
 }
 tim2 <- Sys.time()
 # evaluate fitting time
@@ -499,7 +499,7 @@ results_tfidf_sec <- rep(NA,n)
 for(i in 1:n){
   split <- sample_cluster_wise(adjusted_format_tfidf_sec, seed=i*2)
   results_tfidf_sec[i] <- set_up_n_fit(split) %>% .$model %>% 
-    evaluate_model() %>% .$misspecified
+    evaluate_model() %>% .$mispecified
 }
 tim2 <- Sys.time()
 # evaluate fitting time
@@ -511,7 +511,7 @@ A overview of the results will be found in Table \ref{tab:sec_results}.
 performance_matrix <- data.frame(freq2.embedding=c(results_sec%>%mean, u1_sec), 
            all.embedding=c(results_all_sec%>%mean, u2_sec),
            tfidf=c(results_tfidf_sec%>%mean, u3_sec))
-rownames(performance_matrix) <- c("missc. rate", "time")
+rownames(performance_matrix) <- c("misc. rate", "time")
 performance_matrix %>%  stargazer(summary=FALSE, header=F,
                                   title="Performance of embeddings for Example 2",
                                  label="tab:sec_results")

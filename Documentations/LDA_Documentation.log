@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  11 OCT 2019 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.19)  21 OCT 2019 19:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -902,7 +902,12 @@ Underfull \vbox (badness 10000) detected at line 288
 Underfull \vbox (badness 10000) detected at line 288
  []
 
-[2]
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.288 \end{Shaded}
+                   [2]
 Underfull \vbox (badness 10000) detected at line 288
  []
 
@@ -910,132 +915,250 @@ Underfull \vbox (badness 10000) detected at line 288
 Underfull \vbox (badness 10000) detected at line 288
  []
 
-[3]
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.288 \end{Shaded}
+                   [3]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 350.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 350.
-[4] [5] [6] [7] [8] [9] [10] [11]
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.379 \end{Shaded}
+                   [4]pdfTeX warning (ext4): destination with the same identifi
+er (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.461 \begin{Shaded}
+                     [5]pdfTeX warning (ext4): destination with the same identi
+fier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.552 \end{Shaded}
+                   [6]pdfTeX warning (ext4): destination with the same identifi
+er (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.616 \begin{Shaded}
+                     [7]pdfTeX warning (ext4): destination with the same identi
+fier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.700 \end{Shaded}
+                   [8]pdfTeX warning (ext4): destination with the same identifi
+er (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.778 \begin{Shaded}
+                     [9]pdfTeX warning (ext4): destination with the same identi
+fier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.866 \begin{Shaded}
+                     [10]pdfTeX warning (ext4): destination with the same ident
+ifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.924 \end{Shaded}
+                   [11]
 LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 938
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [12]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf, id=137, 459.7175p
+)pdfTeX warning (ext4): destination with the same identifier (name{page.}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1003 \end{Shaded}
+                    [12]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf, id=127, 459.7175p
 t x 313.17pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-10-
-1.pdf used on input line 1055.
+1.pdf used on input line 1056.
 (pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
-[13]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf, id=143, 459.7175p
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1058 \begin{Shaded}
+                      [13]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf, id=132, 459.7175p
 t x 313.17pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-11-
-1.pdf used on input line 1070.
+1.pdf used on input line 1071.
 (pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
-[14 <./LDA_Documentation_files/figure-latex/unnamed-chunk-10-1.pdf>]
-Underfull \vbox (badness 2359) detected at line 1110
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1073 N
+        ow let us study Example 2. [14 <./LDA_Documentation_files/figure-latex/
+unnamed-chunk-10-1.pdf>]
+Underfull \vbox (badness 2359) detected at line 1111
  []
 
-[15 <./LDA_Documentation_files/figure-latex/unnamed-chunk-11-1.pdf>]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf, id=173, 459.7175p
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1111 \end{Shaded}
+                    [15 <./LDA_Documentation_files/figure-latex/unnamed-chunk-1
+1-1.pdf>]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf, id=160, 459.7175p
 t x 313.17pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-13-
-1.pdf used on input line 1125.
+1.pdf used on input line 1126.
 (pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
 
-<LDA_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf, id=174, 459.7175p
+<LDA_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf, id=161, 459.7175p
 t x 313.17pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-14-
-1.pdf used on input line 1141.
+1.pdf used on input line 1142.
 (pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
-[16 <./LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf>] [17 <./LDA
-_Documentation_files/figure-latex/unnamed-chunk-14-1.pdf>]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf, id=203, 427.5975p
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1144 \section
+               {Definition of Validation}\label{definition-of-validation} [16 <
+./LDA_Documentation_files/figure-latex/unnamed-chunk-13-1.pdf>]pdfTeX warning (
+ext4): destination with the same identifier (name{page.}) has been already used
+, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1180 \end{Shaded}
+                    [17 <./LDA_Documentation_files/figure-latex/unnamed-chunk-1
+4-1.pdf>]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf, id=188, 427.5975p
 t x 279.0425pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-15-
-1.pdf used on input line 1181.
+1.pdf used on input line 1182.
 (pdftex.def)             Requested size: 427.59645pt x 279.04181pt.
-[18 <./LDA_Documentation_files/figure-latex/unnamed-chunk-15-1.pdf>] [19]
-Overfull \vbox (0.28629pt too high) detected at line 1408
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1251 \begin{Shaded}
+                      [18 <./LDA_Documentation_files/figure-latex/unnamed-chunk
+-15-1.pdf>]pdfTeX warning (ext4): destination with the same identifier (name{pa
+ge.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1351 \end{Shaded}
+                    [19]
+Overfull \vbox (0.28629pt too high) detected at line 1409
  []
 
-[20]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf, id=227, 456.70625
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1409 \end{Shaded}
+                    [20]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf, id=209, 456.70625
 pt x 303.1325pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-17-
-1.pdf used on input line 1445.
+1.pdf used on input line 1446.
 (pdftex.def)             Requested size: 456.71208pt x 303.13638pt.
-[21]
-Underfull \vbox (badness 1348) detected at line 1487
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1448 F
+        or this example we can study one more time the optimal value of [21]
+Underfull \vbox (badness 1348) detected at line 1488
  []
 
-[22 <./LDA_Documentation_files/figure-latex/unnamed-chunk-17-1.pdf>]
-<LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf, id=244, 459.7175p
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1488 \end{Shaded}
+                    [22 <./LDA_Documentation_files/figure-latex/unnamed-chunk-1
+7-1.pdf>]
+<LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf, id=224, 459.7175p
 t x 313.17pt>
 File: LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file 
 (type pdf)
 <use LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf>
 Package pdftex.def Info: LDA_Documentation_files/figure-latex/unnamed-chunk-19-
-1.pdf used on input line 1502.
+1.pdf used on input line 1503.
 (pdftex.def)             Requested size: 459.7304pt x 313.17877pt.
-[23 <./LDA_Documentation_files/figure-latex/unnamed-chunk-19-1.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1600.
-[24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1600.
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1527 \begin{Shaded}
+                      [23 <./LDA_Documentation_files/figure-latex/unnamed-chunk
+-19-1.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1601.
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1601 \end{document}
+                      [24]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1601.
 (./LDA_Documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1600.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1600.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1601.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1601.
 
 Package rerunfilecheck Info: File `LDA_Documentation.out' has not changed.
-(rerunfilecheck)             Checksum: 34A225AFFA67D96449AAD3BA947BFFE1;2114.
+(rerunfilecheck)             Checksum: 65F8219A38E1BD277BF4DC1145C8DD0F;2119.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1600.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1601.
  ) 
 Here is how much of TeX's memory you used:
- 12835 strings out of 493089
- 188141 string characters out of 6134841
- 305416 words of memory out of 5000000
- 16016 multiletter control sequences out of 15000+600000
- 61482 words of font info for 88 fonts, out of 8000000 for 9000
+ 12816 strings out of 493089
+ 188071 string characters out of 6134841
+ 304389 words of memory out of 5000000
+ 16021 multiletter control sequences out of 15000+600000
+ 69941 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,9n,35p,655b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 31i,9n,35p,655b,377s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local
 /texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2015/
 texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dist/fon
 ts/enc/dvips/lm/lm-mathit.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/p
 ublic/lm/lmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/l
-mbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi10.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015/texmf-dis
-t/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
-pe1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/lm/lmtk10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10
-.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on LDA_Documentation.pdf (24 pages, 381221 bytes).
+mbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
+ype1/public/lm/lmri10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publi
+c/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtk1
+0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on LDA_Documentation.pdf (24 pages, 393147 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 261 compressed objects within 3 object streams
- 49 named destinations out of 1000 (max. 500000)
+ 297 PDF objects out of 1000 (max. 8388607)
+ 235 compressed objects within 3 object streams
+ 26 named destinations out of 1000 (max. 500000)
  14468 words of extra memory for PDF output out of 17280 (max. 10000000)
 

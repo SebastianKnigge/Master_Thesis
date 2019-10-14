@@ -16,14 +16,31 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\citation{Manning1999}
-\citation{Winter2017}
-\citation{DeJong1979}
+\AC@reset@newl@bel
 \select@language{english}
 \@writefile{toc}{\select@language{english}}
 \@writefile{lof}{\select@language{english}}
 \@writefile{lot}{\select@language{english}}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction and Organization of the Thesis}{1}{section.1}}
+\newacro{ANN}[\AC@hyperlink{ANN}{ANN}]{Artificial Neural Net}
+\newacro{API}[\AC@hyperlink{API}{API}]{Application-Programming-Interface}
+\newacro{CPU}[\AC@hyperlink{CPU}{CPU}]{Central Processing Unit }
+\newacro{DNA}[\AC@hyperlink{DNA}{DNA}]{Deoxyribonucleic Acid}
+\newacro{EM algorithm}[\AC@hyperlink{EM algorithm}{EM algorithm}]{Expectation\IeC {\textendash }Maximization algorithm}
+\newacro{ESS}[\AC@hyperlink{ESS}{ESS}]{European Statistical System}
+\newacro{EUROSTAT}[\AC@hyperlink{EUROSTAT}{EUROSTAT}]{European Statistical Office}
+\newacro{GPU}[\AC@hyperlink{GPU}{GPU}]{Graphics Processing Unit}
+\newacro{IR}[\AC@hyperlink{IR}{IR}]{Information Retrieval}
+\newacro{KL divergence}[\AC@hyperlink{KL divergence}{KL divergence}]{Kullback\IeC {\textendash }Leibler divergence}
+\newacro{LDA}[\AC@hyperlink{LDA}{LDA}]{Latent Dirichlet Allocation}
+\newacro{M-P neuron}[\AC@hyperlink{M-P neuron}{M-P neuron}]{McCulloch-Pitts neuron}
+\newacro{NLP}[\AC@hyperlink{NLP}{NLP}]{Natural Language Processing}
+\newacro{tf}[\AC@hyperlink{tf}{tf}]{term frewuency}
+\newacro{tf-idf}[\AC@hyperlink{tf-idf}{tf-idf}]{term frequency inverse document frequency}
+\newacro{VEM algorithm}[\AC@hyperlink{VEM algorithm}{VEM algorithm}]{Variational Expectation\IeC {\textendash }Maximization algorithm}
+\citation{Manning1999}
+\citation{Winter2017}
+\citation{DeJong1979}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction and Organization of the Thesis}{4}{section.1}}
 \citation{Manning1999}
 \citation{Noble1988}
 \citation{Martinez2010}
@@ -31,107 +48,117 @@
 \citation{Blei2012}
 \citation{Grossmann2004}
 \citation{Jacobs1993}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Natural Language Processing and Information Retrieval}{3}{section.2}}
-\newlabel{sec:NLP}{{2}{3}{Natural Language Processing and Information Retrieval}{section.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Natural Language Processing and Information Retrieval}{5}{section.2}}
+\newlabel{sec:NLP}{{2}{5}{Natural Language Processing and Information Retrieval}{section.2}{}}
 \citation{Gelman2014}
 \citation{Blei2003}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Discussed Models}{5}{section.3}}
-\newlabel{sec:Models}{{3}{5}{Discussed Models}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}LDA Model}{5}{subsection.3.1}}
-\newlabel{sec:LDA}{{3.1}{5}{LDA Model}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Discussed Models}{7}{section.3}}
+\newlabel{sec:Models}{{3}{7}{Discussed Models}{section.3}{}}
 \citation{Hornik2011}
 \citation{Blei2003}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Well-established plate diagram for the standard LDA model extended by the parameter $\delta $. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite  {Blei2003} for comparisons.\relax }}{6}{figure.caption.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}LDA Model}{8}{subsection.3.1}}
+\newlabel{sec:LDA}{{3.1}{8}{LDA Model}{subsection.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Well-established plate diagram for the standard LDA model extended by the parameter $\delta $. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also ``smoothed LDA model" in \cite  {Blei2003} for comparisons.\relax }}{8}{figure.caption.4}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:PlateDiagram}{{1}{6}{Well-established plate diagram for the standard LDA model extended by the parameter $\delta $. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also "smoothed LDA model" in \cite {Blei2003} for comparisons.\relax }{figure.caption.2}{}}
-\newlabel{posterior}{{1}{6}{LDA Model}{equation.3.1}{}}
+\newlabel{fig:PlateDiagram}{{1}{8}{Well-established plate diagram for the standard LDA model extended by the parameter $\delta $. The slightly bigger box represents the generative model of the corporis $M$ documents. The smaller plate represents the iterative generation process of the $N$ words of each document with the aid of the topics. See also ``smoothed LDA model" in \cite {Blei2003} for comparisons.\relax }{figure.caption.4}{}}
 \citation{Blei2012}
 \citation{Powieser2012}
 \citation{Dempster1977}
 \citation{Wainwright2008}
-\newlabel{joint}{{2}{7}{LDA Model}{equation.3.2}{}}
-\newlabel{marginal}{{3}{7}{LDA Model}{equation.3.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Variational EM Algorithm}{7}{subsubsection.3.1.1}}
-\newlabel{marginal2}{{4}{7}{Variational EM Algorithm}{equation.3.4}{}}
-\newlabel{KL}{{7}{7}{Variational EM Algorithm}{equation.3.7}{}}
+\newlabel{posterior}{{1}{9}{LDA Model}{equation.3.1}{}}
+\newlabel{joint}{{2}{9}{LDA Model}{equation.3.2}{}}
+\newlabel{marginal}{{3}{9}{LDA Model}{equation.3.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Variational EM Algorithm}{9}{subsubsection.3.1.1}}
 \citation{Jordan1999}
 \citation{Wainwright2008}
 \citation{Blei2003}
 \citation{Griffiths2006}
-\newlabel{equality}{{9}{8}{Variational EM Algorithm}{equation.3.9}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Gibbs Sampling}{8}{subsubsection.3.1.2}}
-\newlabel{Gibbs}{{12}{8}{Gibbs Sampling}{equation.3.12}{}}
+\newlabel{marginal2}{{4}{10}{Variational EM Algorithm}{equation.3.4}{}}
+\newlabel{KL}{{7}{10}{Variational EM Algorithm}{equation.3.7}{}}
+\newlabel{equality}{{9}{10}{Variational EM Algorithm}{equation.3.9}{}}
 \citation{Griffiths2006}
 \citation{Silge2017}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Gibbs Sampling}{11}{subsubsection.3.1.2}}
+\newlabel{Gibbs}{{12}{11}{Gibbs Sampling}{equation.3.12}{}}
+\newlabel{Gibbs:beta}{{13}{11}{Gibbs Sampling}{equation.3.13}{}}
+\newlabel{Gibbs:theta}{{14}{11}{Gibbs Sampling}{equation.3.14}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Implementation}{11}{subsubsection.3.1.3}}
 \citation{McCulloch1943}
 \citation{Rb1958}
-\newlabel{Gibbs:beta}{{13}{9}{Gibbs Sampling}{equation.3.13}{}}
-\newlabel{Gibbs:theta}{{14}{9}{Gibbs Sampling}{equation.3.14}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Implementation}{9}{subsubsection.3.1.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Artifical Neural Networks}{9}{subsection.3.2}}
 \citation{Rb1958}
 \citation{Mekherjee2019}
 \citation{Bahjat2006}
 \citation{Minsky1969}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Development}{10}{subsubsection.3.2.1}}
-\newlabel{ANN_development}{{3.2.1}{10}{Development}{subsubsection.3.2.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Schematic diagram of a simple perceptron by \cite  {Rb1958}\relax }}{11}{figure.caption.3}}
-\newlabel{simple_perceptron}{{2}{11}{Schematic diagram of a simple perceptron by \cite {Rb1958}\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Artifical Neural Networks}{12}{subsection.3.2}}
+\newlabel{ANN_chapter}{{3.2}{12}{Artifical Neural Networks}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Development}{12}{subsubsection.3.2.1}}
+\newlabel{ANN_development}{{3.2.1}{12}{Development}{subsubsection.3.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Schematic diagram of a simple perceptron by \cite  {Rb1958}\relax }}{13}{figure.caption.5}}
+\newlabel{simple_perceptron}{{2}{13}{Schematic diagram of a simple perceptron by \cite {Rb1958}\relax }{figure.caption.5}{}}
 \citation{Werbos1974}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Schematic diagram of an adapted Rosenblatt-perceptron network\relax }}{12}{figure.caption.4}}
-\newlabel{adaption_perceptron}{{3}{12}{Schematic diagram of an adapted Rosenblatt-perceptron network\relax }{figure.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Schematic diagram of an multi layer perceptron (MLP)\relax }}{12}{figure.caption.5}}
-\newlabel{figure:MLP}{{4}{12}{Schematic diagram of an multi layer perceptron (MLP)\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Schematic diagram of an adapted Rosenblatt-perceptron network\relax }}{14}{figure.caption.6}}
+\newlabel{adaption_perceptron}{{3}{14}{Schematic diagram of an adapted Rosenblatt-perceptron network\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Backpropagation}{14}{subsubsection.3.2.2}}
 \citation{Chollet2018}
 \citation{Hecht-Nielsen1988}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Schematic diagram of an multi layer perceptron (MLP)\relax }}{15}{figure.caption.7}}
+\newlabel{figure:MLP}{{4}{15}{Schematic diagram of an multi layer perceptron (MLP)\relax }{figure.caption.7}{}}
+\newlabel{network_chain}{{15}{15}{Backpropagation}{equation.3.15}{}}
 \citation{Chollet2018}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Backpropagation}{13}{subsubsection.3.2.2}}
-\newlabel{network_chain}{{15}{13}{Backpropagation}{equation.3.15}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Implementation}{13}{subsubsection.3.2.3}}
 \citation{ProjectGutenberg}
 \citation{gutenbergr}
 \citation{tidytext}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Analysis of Gutenberg Data}{14}{section.4}}
-\newlabel{sec:analysis}{{4}{14}{Analysis of Gutenberg Data}{section.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Example book corpus\relax }}{14}{table.caption.6}}
-\newlabel{titles:5books}{{1}{14}{Example book corpus\relax }{table.caption.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Example of stop words from tidytext package\relax }}{15}{table.caption.7}}
-\newlabel{stopwords}{{2}{15}{Example of stop words from tidytext package\relax }{table.caption.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Implementation}{16}{subsubsection.3.2.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Analysis of Gutenberg Data}{16}{section.4}}
+\newlabel{sec:analysis}{{4}{16}{Analysis of Gutenberg Data}{section.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Example book corpus\relax }}{16}{table.caption.8}}
+\newlabel{titles:5books}{{1}{16}{Example book corpus\relax }{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Example of stop words from tidytext package\relax }}{17}{table.caption.9}}
+\newlabel{stopwords}{{2}{17}{Example of stop words from tidytext package\relax }{table.caption.9}{}}
 \citation{Silge2017}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}LDA applied to Textbook Chapters}{16}{subsection.4.1}}
-\newlabel{Example1}{{4.1}{16}{LDA applied to Textbook Chapters}{subsection.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Fitting time of Example 1 (6 Books) depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue smoothed curve is a Loess kernel. The drop in fitting time for the last few values of fraction might result from parallelization reasons.\relax }}{18}{figure.caption.8}}
-\newlabel{fitting_time_tfidf}{{5}{18}{Fitting time of Example 1 (6 Books) depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue smoothed curve is a Loess kernel. The drop in fitting time for the last few values of fraction might result from parallelization reasons.\relax }{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Misclassification rate depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue and red smoothed curves are a Loess kernels.\relax }}{19}{figure.caption.9}}
-\newlabel{misc.rate_tfidf}{{6}{19}{Misclassification rate depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue and red smoothed curves are a Loess kernels.\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}LDA applied to Textbook Chapters}{18}{subsection.4.1}}
+\newlabel{Example1}{{4.1}{18}{LDA applied to Textbook Chapters}{subsection.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Fitting time of Example 1 (6 Books) depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue smoothed curve is a Loess kernel. The drop in fitting time for the last few values of fraction might result from parallelization reasons.\relax }}{20}{figure.caption.10}}
+\newlabel{fitting_time_tfidf}{{5}{20}{Fitting time of Example 1 (6 Books) depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The blue smoothed curve is a Loess kernel. The drop in fitting time for the last few values of fraction might result from parallelization reasons.\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Misclassification rate depending on the reduction of the bag-of-words. Examples 1 and 2 with 6 books each are considered here. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The colored smoothed curves are a Loess kernels.\relax }}{22}{figure.caption.11}}
+\newlabel{misc.rate_tfidf}{{6}{22}{Misclassification rate depending on the reduction of the bag-of-words. Examples 1 and 2 with 6 books each are considered here. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The colored smoothed curves are a Loess kernels.\relax }{figure.caption.11}{}}
 \citation{Bishop2006}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling).\relax }}{20}{figure.caption.10}}
-\newlabel{fig:comparison_boxplot}{{7}{20}{Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling).\relax }{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}ANN applied to Textbook Chapters}{20}{subsection.4.2}}
-\newlabel{sec:ANN.example}{{4.2}{20}{ANN applied to Textbook Chapters}{subsection.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The network contains 3 layers. The input data is the the bag-of-words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.\relax }}{21}{figure.caption.11}}
-\newlabel{fig:network_structure}{{8}{21}{The network contains 3 layers. The input data is the the bag-of-words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.\relax }{figure.caption.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Example 1 (6 books): Performance for different embeddings\relax }}{22}{table.caption.12}}
-\newlabel{performancematrix_Ex1}{{3}{22}{Example 1 (6 books): Performance for different embeddings\relax }{table.caption.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Example 2 (6 books): Performance for different embeddings\relax }}{22}{table.caption.13}}
-\newlabel{performancematrix_Ex2}{{4}{22}{Example 2 (6 books): Performance for different embeddings\relax }{table.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling).\relax }}{23}{figure.caption.12}}
+\newlabel{fig:comparison_boxplot}{{7}{23}{Boxplot of the all examples analyzed. Split for the number of categories (books) as well as for the calculation procedures (VEM algorithm and Gibbs sampling).\relax }{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}ANN applied to Textbook Chapters}{23}{subsection.4.2}}
+\newlabel{sec:ANN.example}{{4.2}{23}{ANN applied to Textbook Chapters}{subsection.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Misclassification rate depending on the reduction of the bag-of-words. Example 3 using 10 books is considered here. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The violet smoothed curve is a Loess kernel. Nothe, that the local minumum in the misclasfication rate will be referred to as ``low-dimension embedding anomaly"\relax }}{24}{figure.caption.13}}
+\newlabel{misc.rate_10_tfidf}{{8}{24}{Misclassification rate depending on the reduction of the bag-of-words. Example 3 using 10 books is considered here. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The violet smoothed curve is a Loess kernel. Nothe, that the local minumum in the misclasfication rate will be referred to as ``low-dimension embedding anomaly"\relax }{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The network contains 3 layers. The input data is the the bag-of-words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.\relax }}{25}{figure.caption.14}}
+\newlabel{fig:network_structure}{{9}{25}{The network contains 3 layers. The input data is the the bag-of-words, which has dimension $V$. The first two layers are hidden, containing 64 and 46 neurons respectively. The last layer leads to the $k$ classes (here the number of topics or books). The activation function is softmax.\relax }{figure.caption.14}{}}
 \citation{ESSVision2020}
 \citation{Silge2017}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Analysis of EUROSTAT Documents}{23}{section.5}}
-\newlabel{sec:example2}{{5}{23}{Analysis of EUROSTAT Documents}{section.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Entire list of documents\relax }}{24}{table.caption.14}}
-\newlabel{document_list}{{5}{24}{Entire list of documents\relax }{table.caption.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}LDA applied to EUROSTAT Documents}{25}{subsection.5.1}}
-\newlabel{Example2}{{5.1}{25}{LDA applied to EUROSTAT Documents}{subsection.5.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Example 1 (6 books): Performance for different embeddings\relax }}{26}{table.caption.15}}
+\newlabel{performancematrix_Ex1}{{3}{26}{Example 1 (6 books): Performance for different embeddings\relax }{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Example 2 (6 books): Performance for different embeddings\relax }}{26}{table.caption.16}}
+\newlabel{performancematrix_Ex2}{{4}{26}{Example 2 (6 books): Performance for different embeddings\relax }{table.caption.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Analysis of EUROSTAT Documents}{26}{section.5}}
+\newlabel{sec:example2}{{5}{26}{Analysis of EUROSTAT Documents}{section.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Entire list of documents\relax }}{27}{table.caption.17}}
+\newlabel{document_list}{{5}{27}{Entire list of documents\relax }{table.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}LDA applied to EUROSTAT Documents}{28}{subsection.5.1}}
+\newlabel{Example2}{{5.1}{28}{LDA applied to EUROSTAT Documents}{subsection.5.1}{}}
 \citation{Winter2017}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Wordclouds for the clustered topics via LDA \IeC {\textendash } using tfidf word proportions\relax }}{27}{figure.caption.15}}
-\newlabel{Wordclouds_tfidf}{{9}{27}{Wordclouds for the clustered topics via LDA – using tfidf word proportions\relax }{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Fitting LDA via \textit  {tf-idf} embeding to EUROSTAT documents. Misclassification rates depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The green smoothed curve is a Loess kernel.\relax }}{28}{figure.caption.16}}
-\newlabel{misc.ratio_tfidf}{{10}{28}{Fitting LDA via \textit {tf-idf} embeding to EUROSTAT documents. Misclassification rates depending on the reduction of the bag-of-words. A big number of fraction stands for a bigger bag-of-words, i.e. less reduction. The green smoothed curve is a Loess kernel.\relax }{figure.caption.16}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces LDA via Gibbs Sampling - different embedding methods\relax }}{29}{table.caption.17}}
-\newlabel{comp0.85}{{6}{29}{LDA via Gibbs Sampling - different embedding methods\relax }{table.caption.17}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}ANN applied to EUROSTAT Documents}{29}{subsection.5.2}}
-\newlabel{Example2_ANN}{{5.2}{29}{ANN applied to EUROSTAT Documents}{subsection.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Wordclouds for the clustered topics via LDA \IeC {\textendash } using tfidf word proportions\relax }}{30}{figure.caption.18}}
+\newlabel{Wordclouds_tfidf}{{10}{30}{Wordclouds for the clustered topics via LDA – using tfidf word proportions\relax }{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Fitting LDA via \textit  {tf-idf} embeding to EUROSTAT documents. Misclassification rates depending on the reduction of the bag-of-words. A big number of fraction stands for a larger bag-of-words, i.e. less reduction. The green smoothed curve is a Loess kernel.\relax }}{31}{figure.caption.19}}
+\newlabel{misc.ratio_tfidf}{{11}{31}{Fitting LDA via \textit {tf-idf} embeding to EUROSTAT documents. Misclassification rates depending on the reduction of the bag-of-words. A big number of fraction stands for a larger bag-of-words, i.e. less reduction. The green smoothed curve is a Loess kernel.\relax }{figure.caption.19}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces LDA via Gibbs Sampling - different embedding methods\relax }}{32}{table.caption.20}}
+\newlabel{comp0.85}{{6}{32}{LDA via Gibbs Sampling - different embedding methods\relax }{table.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}ANN applied to EUROSTAT Documents}{32}{subsection.5.2}}
+\newlabel{Example2_ANN}{{5.2}{32}{ANN applied to EUROSTAT Documents}{subsection.5.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces ANN for EUROSTAT documents - different embedding methods\relax }}{33}{table.caption.21}}
+\newlabel{ANN_results}{{7}{33}{ANN for EUROSTAT documents - different embedding methods\relax }{table.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Plot of the learning process for the used neural network to classify the EUROSTAT documents.\relax }}{34}{figure.caption.22}}
+\newlabel{learning:plot}{{12}{34}{Plot of the learning process for the used neural network to classify the EUROSTAT documents.\relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{35}{section.6}}
+\newlabel{sec:conclusions}{{6}{35}{Conclusions}{section.6}{}}
+\citation{Winter2017}
 \bibstyle{apalike}
 \bibdata{MagLibrary}
 \bibcite{Gelman2014}{A.~Gelman, 2014}
@@ -151,7 +178,7 @@
 \bibcite{Jacobs1993}{Jacobs, 1993}
 \bibcite{Jordan1999}{Jordan, 1999}
 \bibcite{Griffiths2006}{M.~Steyvers, 2006}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Appendix}{32}{appendix.A}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Appendix}{37}{appendix.A}}
 \bibcite{Manning1999}{Manning, 1999}
 \bibcite{Martinez2010}{Martinez, 2010}
 \bibcite{McCulloch1943}{McCulloch and Pitts, 1943}
@@ -168,5 +195,7 @@
 \bibcite{Winter2017}{Winter, 2017}
 \citation{Blei2003}
 \citation{Rb1958}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Documentation of LDA - Gutenberg Data}{35}{subsection.A.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Documentation of ANN - Gutenberg Data}{59}{subsection.A.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Documentation of LDA - Gutenberg Data Examples}{40}{subsection.A.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Documentation of ANN - Gutenberg Data Examples}{65}{subsection.A.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Documentation of LDA - EUROSTAT Documents Example}{77}{subsection.A.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Documentation of ANN - EUROSTAT Documents Example}{99}{subsection.A.4}}
