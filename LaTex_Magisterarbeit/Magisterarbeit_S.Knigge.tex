@@ -36,15 +36,20 @@
 
 \author{Sebastian Knigge}
 \begin{document}
-	
-\section*{Zusammenfassung/Abstract}
-	
-Im Forschungsfeld Natural Language Processing überschneiden sich viele wissenschaftliche Disziplinen. Diese Arbeit beleuchtet statistische Herangehensweisen des Natural Language Processing. Untersucht werden die beiden Modelle Latent Dirichlet Allocation und Künstliche Neuronale Netze. Dem Leser wird eine Einführung in die Theorie gegeben und anhand zweier unterschiedlicher Beispiele sollen die Modelle und deren Einsatz veranschaulicht werden. \\
-\ \\
-Ziel der Arbeit ist die Entwicklung und Evaluierung einer generischen Methodik zum Clustern und effektiven Klassifizieren von Dokumenten. Dazu verwende ich in einem grundliegenden Schritt Textbücher als Dokumente, um die beiden Modelle anzupassen. Diese Dokumente sind bereits durch die Initiatoren der freien Online-Bibliothek Project Gutenberg kategorisiert. Somit ist es möglich den Clustering Algorithmus an einem menschgemachten Gruppierungsprinzip zu evaluieren. Die so entwickelten Modelle werden im zweiten Schritt an regulatorischen Dokumenten und Anleitungen der EUROSTAT (einer Behörde der EU) letztlich getestet und ebenfalls mit einer bereits existierenden Einteilung abgeglichen. \\
-\ \\
-Bei der verwendeten Open Source Software handelt es sich um R. Alle verwendeten Codes sind im Anhang dieser Arbeit zu finden und vollständig reproduzierbar.
 
+\pagestyle{empty}	
+\includepdf[pages=-, pagecommand={}]{Deckblatt.pdf}	
+	
+\section*{Abstract}
+Many scientific disciplines overlap in the field of Natural Language Processing. This paper examines statistical approaches to Natural Language Processing. It analyses the statistical models Latent Dirichlet Allocation and Artificial Neural Networks. A theoretical introduction will be given to the reader and two different examples will be used to illustrate the models and their use.\\
+\ \\
+This thesis aims at developing and evaluating a generic methodology for clustering and effectively classifying documents. In the first step I use textbooks as documents to adapt two models. These documents are already categorized by the initiators of the free online library Project Gutenberg. Thus it is possible to evaluate the clustering algorithm on a man-made grouping principle. As second step, the models developed in this manner will be tested on regulatory documents and guidelines of EUROSTAT (an authority of the EU) and compared with an already existing grouping.\\
+\ \\
+The open source software used is R. All codes used can be found in the appendix of this paper and are entirely reproducible.
+
+	
+
+\newpage
 
 	
 \section*{Acknowledgement}
@@ -58,7 +63,7 @@ After all, my deepest gratitude goes to my parents, who always supported me in a
 
 
 \newpage
-	
+\pagestyle{plain}
 \tableofcontents
 \newpage
 
@@ -78,7 +83,7 @@ After all, my deepest gratitude goes to my parents, who always supported me in a
 	\acro{LDA}{Latent Dirichlet Allocation}
 	\acro{M-P neuron}{McCulloch-Pitts neuron}
 	\acro{NLP}{Natural Language Processing}
-	\acro{tf}{term frewuency}
+	\acro{tf}{term frequency}
 	\acro{tf-idf}{term frequency inverse document frequency}
 	\acro{VEM algorithm}{Variational Expectation–Maximization algorithm}
 \end{acronym}
@@ -700,6 +705,13 @@ Further research in this field is required to improve this approach in the futur
 \fakesubsection{Documentation of ANN - EUROSTAT Documents Example}
 \includepdf[pages=-, pagecommand={}]{ANN_RegDocs.pdf}
 
-
+	
+	\section{Zusammenfassung}
+	
+	Im Forschungsfeld Natural Language Processing überschneiden sich viele wissenschaftliche Disziplinen. Diese Arbeit beleuchtet statistische Herangehensweisen des Natural Language Processing. Untersucht werden die beiden Modelle Latent Dirichlet Allocation und Künstliche Neuronale Netze. Dem Leser wird eine Einführung in die Theorie gegeben und anhand zweier unterschiedlicher Beispiele sollen die Modelle und deren Einsatz veranschaulicht werden. \\
+	\ \\
+	Ziel der Arbeit ist die Entwicklung und Evaluierung einer generischen Methodik zum Clustern und effektiven Klassifizieren von Dokumenten. Dazu verwende ich in einem grundliegenden Schritt Textbücher als Dokumente, um die beiden Modelle anzupassen. Diese Dokumente sind bereits durch die Initiatoren der freien Online-Bibliothek Project Gutenberg kategorisiert. Somit ist es möglich den Clustering Algorithmus an einem menschgemachten Gruppierungsprinzip zu evaluieren. Die so entwickelten Modelle werden im zweiten Schritt an regulatorischen Dokumenten und Anleitungen der EUROSTAT (einer Behörde der EU) letztlich getestet und ebenfalls mit einer bereits existierenden Einteilung abgeglichen. \\
+	\ \\
+	Bei der verwendeten Open Source Software handelt es sich um R. Alle verwendeten Codes sind im Anhang dieser Arbeit zu finden und vollständig reproduzierbar.
 	
 \end{document}
