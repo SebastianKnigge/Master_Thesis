@@ -1,8 +1,8 @@
 \select@language {english}
-\contentsline {table}{\numberline {1}{\ignorespaces Example book corpus\relax }}{18}{table.caption.8}
-\contentsline {table}{\numberline {2}{\ignorespaces Example of stop words from tidytext package\relax }}{19}{table.caption.9}
-\contentsline {table}{\numberline {3}{\ignorespaces Example 1 (6 books): Performance for different embeddings\relax }}{28}{table.caption.15}
-\contentsline {table}{\numberline {4}{\ignorespaces Example 2 (6 books): Performance for different embeddings\relax }}{28}{table.caption.16}
-\contentsline {table}{\numberline {5}{\ignorespaces Entire list of documents\relax }}{29}{table.caption.17}
-\contentsline {table}{\numberline {6}{\ignorespaces LDA via Gibbs Sampling - different embedding methods\relax }}{34}{table.caption.20}
-\contentsline {table}{\numberline {7}{\ignorespaces ANN for EUROSTAT documents - different embedding methods\relax }}{35}{table.caption.21}
+\contentsline {table}{\numberline {1}{\ignorespaces Example book corpus\relax }}{19}{table.caption.8}
+\contentsline {table}{\numberline {2}{\ignorespaces Example of stop words from tidytext package\relax }}{20}{table.caption.9}
+\contentsline {table}{\numberline {3}{\ignorespaces Example 1 (6 books): Performance for different embeddings\relax }}{29}{table.caption.15}
+\contentsline {table}{\numberline {4}{\ignorespaces Example 2 (6 books): Performance for different embeddings\relax }}{29}{table.caption.16}
+\contentsline {table}{\numberline {5}{\ignorespaces Entire list of documents\relax }}{31}{table.caption.17}
+\contentsline {table}{\numberline {6}{\ignorespaces LDA via Gibbs Sampling - different embedding methods\relax }}{35}{table.caption.20}
+\contentsline {table}{\numberline {7}{\ignorespaces ANN for EUROSTAT documents - different embedding methods\relax }}{37}{table.caption.21}

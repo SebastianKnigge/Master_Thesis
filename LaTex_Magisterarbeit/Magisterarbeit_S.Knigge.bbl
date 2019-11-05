@@ -119,6 +119,11 @@ Powieser, M. (2012).
 \newblock Latent dirichlet allocation in r.
 \newblock Master's thesis, Vienna University of Economics and Business.
 
+\bibitem[Raiffa and Schlaifer, 1961]{Raiffa1961}
+Raiffa, H. and Schlaifer, R. (1961).
+\newblock {\em Applied Statistical Decision Theory}.
+\newblock Harvard University Press.
+
 \bibitem[Robinson, 2018]{gutenbergr}
 Robinson, D. (2018).
 \newblock {\em Package 'gutenbergr'}.

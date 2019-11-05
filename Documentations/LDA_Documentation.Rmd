@@ -211,6 +211,8 @@ In the set up we have another parameter to adjust. The function *convert_to_dtm*
 ```{r chapters_dtm, chache=TRUE, warning=FALSE}
 chapters_dtm <- convert_to_dtm(word_counts, minfq=2)
 ( M_f2 <- ncol(chapters_dtm) )
+# number of documents
+nrow(chapters_dtm)
 ```
 
 Let us compare it to the case including all words.
@@ -223,7 +225,7 @@ chapters_dtm_all <- convert_to_dtm(word_counts, minfq=0)
 We also want to compare this to a reduction of the word dictionary by the *tf-idf*. We are using a reduction by 50\% of the dimension of the original bag of words.
 
 ```{r chapters_dtm_tfidf, chache=FALSE, warning=FALSE}
-chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=(0.1*M))
+chapters_dtm_tfidf <- convert_to_dtm_2(word_counts, top=(0.5*M))
 ncol(chapters_dtm_tfidf)
 ```
 
@@ -356,12 +358,14 @@ categories_sec <- gutenberg_works() %>%
 # embedding 1
 chapters_dtm_sec <- convert_to_dtm(word_counts_sec, minfq=2)
 ncol(chapters_dtm_sec)
+# number of documents
+nrow(chapters_dtm_sec)
 # embedding 2
 chapters_dtm_all_sec <- convert_to_dtm(word_counts_sec, minfq=0)
 ( M2 <- ncol(chapters_dtm_all_sec) )
 # embedding 3
 chapters_dtm_tfidf_sec <- convert_to_dtm_2(word_counts_sec, top=(M2*0.5))
-
+ncol(chapters_dtm_tfidf_sec)
 # embedding 1
 tim1 <- Sys.time()
 chapters_lda_sec <- LDA(chapters_dtm_sec, 
@@ -765,12 +769,14 @@ categories %>% stargazer(summary=FALSE, font.size = "footnotesize",
 # embedding 1
 chapters_dtm_10 <- convert_to_dtm(word_counts10, minfq=2)
 ( M3_f2 <- ncol(chapters_dtm_10) )
+# number of documents
+nrow(chapters_dtm_10)
 # embedding 2
 chapters_dtm_all_10 <- convert_to_dtm(word_counts10, minfq=0)
 ( M3 <- ncol(chapters_dtm_all_10) )
 # embedding 3
 chapters_dtm_tfidf_10 <- convert_to_dtm_2(word_counts10, top=(0.5*M3))
-
+ncol(chapters_dtm_tfidf_10 )
 # embedding 1
 tim1 <- Sys.time()
 chapters_lda_10 <- LDA(chapters_dtm_10,  method="Gibbs", 

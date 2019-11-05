@@ -4,9 +4,9 @@ The top-level auxiliary file: Magisterarbeit_S.Knigge.aux
 The style file: apalike.bst
 Database file #1: MagLibrary.bib
 Warning--entry type for "ESSVision2020" isn't style-file defined
---line 97 of file MagLibrary.bib
+--line 105 of file MagLibrary.bib
 Warning--entry type for "ProjectGutenberg" isn't style-file defined
---line 144 of file MagLibrary.bib
+--line 152 of file MagLibrary.bib
 Too many commas in name 1 of "Manning, C., Sch{\"u}tze, H." for entry Manning1999
 while executing---line 1023 of file apalike.bst
 Too many commas in name 1 of "Manning, C., Sch{\"u}tze, H." for entry Manning1999
@@ -104,45 +104,45 @@ Too many commas in name 1 of "Winter, K., Rinderle-Ma, S., Grossmann, W., Feienr
 while executing---line 1098 of file apalike.bst
 Too many commas in name 1 of "Winter, K., Rinderle-Ma, S., Grossmann, W., Feienrer, I., Ma, W." for entry Winter2017
 while executing---line 1098 of file apalike.bst
-You've used 31 entries,
+You've used 32 entries,
             1935 wiz_defined-function locations,
-            656 strings with 7175 characters,
-and the built_in function-call counts, 9093 in all, are:
-= -- 883
-> -- 241
-< -- 31
-+ -- 76
-- -- 70
-* -- 642
-:= -- 1687
-add.period$ -- 89
-call.type$ -- 31
-change.case$ -- 180
-chr.to.int$ -- 31
-cite$ -- 32
-duplicate$ -- 406
-empty$ -- 694
-format.name$ -- 109
-if$ -- 1747
+            662 strings with 7292 characters,
+and the built_in function-call counts, 9409 in all, are:
+= -- 912
+> -- 254
+< -- 32
++ -- 80
+- -- 74
+* -- 665
+:= -- 1744
+add.period$ -- 92
+call.type$ -- 32
+change.case$ -- 186
+chr.to.int$ -- 32
+cite$ -- 33
+duplicate$ -- 420
+empty$ -- 717
+format.name$ -- 116
+if$ -- 1809
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 32
-newline$ -- 154
-num.names$ -- 93
-pop$ -- 157
+missing$ -- 34
+newline$ -- 159
+num.names$ -- 96
+pop$ -- 166
 preamble$ -- 1
-purify$ -- 190
+purify$ -- 197
 quote$ -- 0
-skip$ -- 327
+skip$ -- 337
 stack$ -- 0
-substring$ -- 537
-swap$ -- 29
+substring$ -- 549
+swap$ -- 30
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 170
+type$ -- 174
 warning$ -- 1
-while$ -- 73
+while$ -- 75
 width$ -- 0
-write$ -- 379
+write$ -- 391
 (There were 48 error messages)
